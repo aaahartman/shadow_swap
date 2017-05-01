@@ -108,5 +108,9 @@ class Player extends FlxSprite
 			jump_duration = -1.0;
 		}
 	}
+
+	public function isShadow():Bool{
+		return _is_shadow;
+	}
 	
 }

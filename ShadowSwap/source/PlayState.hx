@@ -130,6 +130,7 @@ class PlayState extends FlxState
 
 	private function unlockDoor(P:FlxObject, D:FlxObject):Void 
 	{
-		_got_key.text = "You win!";
+		if (Reg.gotKey)
+			_got_key.text = "You win!";
 	}
 }

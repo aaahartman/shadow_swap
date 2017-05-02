@@ -25,20 +25,10 @@ class PlayState extends FlxState
 	private var _glass:FlxTypedGroup<Glass>;
 	private var _got_key:FlxText;
 
+	private var _hud:HUD;
 
-
-	override public function create():Void
-	{
+	override public function create():Void {
 		
-		_map = new FlxOgmoLoader(AssetPaths.room_001__oel);
- 		_mWalls = _map.loadTilemap(AssetPaths.tiles__png, 16, 16, "walls");
-		_mWalls.follow();
-		_mWalls.setTileProperties(1, FlxObject.NONE);
-	 	_mWalls.setTileProperties(2, FlxObject.ANY);
- 		add(_mWalls);
-
- 		/* TODO: Change the x, y initial parameters back to 0. and 
- 		set starting location using Tile map. */
 		_player1 = new Player(0, 0, false);  //player
 		_player2 = new Player(0, 0, true);  //shadow
 		_glass = new FlxTypedGroup<Glass>();
@@ -48,10 +38,10 @@ class PlayState extends FlxState
  		_map.loadEntities(placeEntities, "entities");
 		
 		Reg.gotKey = false;
-		
-		_got_key = new FlxText(0, 0, FlxG.width);
-		_got_key.setFormat(null, 16, FlxColor.YELLOW, CENTER, OUTLINE, 0x131c1b);
-		_got_key.scrollFactor.set(0, 0);
+
+		//_got_key = new FlxText(0, 0, FlxG.width);
+		//_got_key.setFormat(null, 16, FlxColor.YELLOW, CENTER, OUTLINE, 0x131c1b);
+		//_got_key.scrollFactor.set(0, 0);
 		
 		add(_got_key);
 		add(_glass);
@@ -107,11 +97,11 @@ class PlayState extends FlxState
 
 		super.update(elapsed);
 
-		if (Reg.gotKey) {
-			_got_key.text = 'You got the key!';
-		} else {
-			_got_key.text = 'Go get the key!';
-		}
+		//if (Reg.gotKey) {
+		//	_got_key.text = 'You got the key!';
+		//} else {
+		//	_got_key.text = 'Go get the key!';
+		//}
 
 		FlxG.collide(_player1, _mWalls);
 		FlxG.collide(_player2, _mWalls);
@@ -130,12 +120,14 @@ class PlayState extends FlxState
 
 	private function collectKey(P:FlxObject, K:FlxObject):Void 
 	{
+		_hud.updateHUD();
 		K.kill();
 	}
 
 	private function unlockDoor(P:FlxObject, D:FlxObject):Void 
 	{
 		if (Reg.gotKey)
-			_got_key.text = "You win!";
+			//_got_key.text = "You win!";
+			add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
 	}
 }

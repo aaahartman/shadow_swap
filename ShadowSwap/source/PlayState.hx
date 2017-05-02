@@ -53,7 +53,6 @@ class PlayState extends FlxState
 		_got_key.setFormat(null, 16, FlxColor.YELLOW, CENTER, OUTLINE, 0x131c1b);
 		_got_key.scrollFactor.set(0, 0);
 		
-
 		add(_got_key);
 		add(_glass);
 		add(_key);
@@ -101,7 +100,13 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
+
+		// restart the game
+		if (FlxG.keys.justPressed.R)
+			FlxG.switchState(new PlayState());
+
 		super.update(elapsed);
+
 		if (Reg.gotKey) {
 			_got_key.text = 'You got the key!';
 		} else {

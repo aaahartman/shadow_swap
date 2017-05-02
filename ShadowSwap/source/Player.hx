@@ -5,14 +5,16 @@ import flixel.system.FlxAssets;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.FlxObject;
 
 class Player extends FlxSprite
 {
 	private var _is_shadow:Bool = false;
-	public var speed:Float = 200;
-	public var gravity:Float = 200;
+	public var speed:Float = 80;
+	public var gravity:Float = 500;
 	public var jump_speed:Float = 200;
 	private var jump_duration:Float = -1;
+	private var in_air:Bool = false;
 
     public function new(?X:Float=0, ?Y:Float=0, ?is_shadow:Bool)
     {
@@ -25,13 +27,14 @@ class Player extends FlxSprite
         	makeGraphic(8, 14, FlxColor.RED);
         
         drag.x = drag.y = 1600;
+        acceleration.y = gravity;
     }
 
 	override public function update(elapsed:Float):Void
 	{
 		// Swap between player and shadow if "S" is pressed
 		var _swap:Bool = false;
-		_swap = FlxG.keys.justReleased.S;
+		_swap = FlxG.keys.justPressed.S;
 		if (_swap) {
 			_is_shadow = !_is_shadow;
 
@@ -43,7 +46,6 @@ class Player extends FlxSprite
         }
 
         acceleration.x = 0;
-        acceleration.y = gravity;
 
         // move player only
 		if (!_is_shadow)
@@ -57,27 +59,22 @@ class Player extends FlxSprite
  		var _left:Bool = false;
  		var _right:Bool = false;
 
- 		_jump = FlxG.keys.anyPressed([UP, W]);
+ 		_jump = FlxG.keys.anyJustPressed([UP, W]);
  		_left = FlxG.keys.anyPressed([LEFT, A]);
  		_right = FlxG.keys.anyPressed([RIGHT, D]);
 
  		acceleration.x = 0;
+ 		in_air = !isTouching(FlxObject.FLOOR);
 
+ 		// negate if both left and right are pressed
  		if (_left && _right) {
       		_left = _right = false;
  		}
 
-
-		//var mA:Float = 0;
 		if (_jump) {
 			jump(elapsed);
 		}
-		    //mA = -90;
-		    //if (_left)
-		    //    mA -= 45;
-		    //else if (_right)
-		    //    mA += 45;
-		//}
+
 		if (_left) {
 		    velocity.x = -speed;
 		    acceleration.x = -drag.x;
@@ -85,28 +82,16 @@ class Player extends FlxSprite
 			velocity.x = speed;
 			acceleration.x = drag.x;
 		}
-		//velocity.set(speed, 0);
-		//velocity.rotate(FlxPoint.weak(0, 0), mA);
 	}
 
 	private function jump(elapsed:Float):Void {
-		// Allow jump if player is on the ground
-		//if ( velocity.y == 0) {
-			jump_duration = 0;
-		//}
-
-		if (jump_duration >= 0) {
-			jump_duration += elapsed;
-
-			// Max time in air in 0.25 seconds
-			if (jump_duration > 0.25)
-				jump_duration = -1;
-			else 
-				velocity.y = -0.98 * jump_speed;
-
-		} else {
-			jump_duration = -1.0;
+		if (!in_air) {
+			velocity.y = -jump_speed;
 		}
+	}
+
+	public function isShadow():Bool{
+		return _is_shadow;
 	}
 	
 }

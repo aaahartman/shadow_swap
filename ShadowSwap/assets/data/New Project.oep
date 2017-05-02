@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <OgmoVersion>2.1.0.6</OgmoVersion>
-  <Name>ShadowSwap</Name>
+  <Name>New Project</Name>
   <BackgroundColor A="255" R="125" G="160" B="255" />
   <GridColor A="255" R="255" G="240" B="90" />
   <LevelDefaultSize>
@@ -55,7 +55,7 @@
   <Tilesets>
     <Tileset>
       <Name>tiles</Name>
-      <FilePath>tiles.png</FilePath>
+      <FilePath>color-tiles.png</FilePath>
       <TileSize>
         <Width>16</Width>
         <Height>16</Height>

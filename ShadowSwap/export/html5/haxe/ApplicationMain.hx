@@ -30,7 +30,15 @@ class ApplicationMain {
 		var types = [];
 		
 		
+		urls.push ("assets/data/colortiles.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/data/data-goes-here.txt");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/jumptest.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -43,10 +51,6 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/data/tiles.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("assets/data/tiles_spritesheet.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -147,7 +151,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "19",
+			build: "53",
 			company: "HaxeFlixel",
 			file: "ShadowSwap",
 			fps: 60,

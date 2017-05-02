@@ -3,16 +3,20 @@ package;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.ui.FlxButton;
+import flixel.text.FlxText;
 
-class MenuState extends FlxState
+class SplashScreenState extends FlxState
 {
 	private var _btnPlay:FlxButton;
+	private var _text:FlxText;
 
 	override public function create():Void
 	{
+		_text = new FlxText(20, 20, "Shadow Swap", 32);
 		_btnPlay = new FlxButton(0, 0, "Play", clickPlay);
 		_btnPlay.screenCenter();
  		add(_btnPlay);
+ 		add(_text);
 		super.create();
 	}
 
@@ -23,6 +27,6 @@ class MenuState extends FlxState
 
 	private function clickPlay():Void
 	{
-	    FlxG.switchState(new PlayState());
+	    FlxG.switchState(new LevelSelectState());
 	}	
 }

@@ -27,6 +27,8 @@ class PlayState extends FlxState
 	private var timerCount:Float;
 	private var maxTimerCounter:Float;
 	private var restoring:Bool;
+	private var openTime:Float;
+
 
 	override public function create():Void 
 	{
@@ -64,6 +66,8 @@ class PlayState extends FlxState
  		add(_buttons);
  		add(_fans);
  		add(_switches);
+		FlxG.overlap(_player, _buttons, buttonHandler);
+		openTime = 0;
 		super.create();
 	}
 
@@ -141,16 +145,12 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
-		FlxG.overlap(_player, _buttons, buttonHandler);
-		if (FlxG.overlap(_player, _buttons))
-		{
-
-		} else {
-			if (!restoring) {
-				haxe.Timer.delay(restoreGates, 3000);
-				restoring = true;
-			}
+		if (!FlxG.overlap(_player, _buttons, buttonHandler) && Date.now().getTime() - openTime > 1000) {
+			restoreGates()
 		}
+
+
+
 		if (FlxG.keys.justPressed.R)
 		{
 			FlxG.switchState(new PlayState());
@@ -181,22 +181,24 @@ class PlayState extends FlxState
 
 	private function toggleGate(button:Button):Void 
 	{
-		trace("2");
 		for (i in button.get_y()...(button.get_y() + button.get_h()))
 		{
 			_mWalls.setTile(button.get_x(), i, 0);
 		}
+		openTime = Date.now().getTime();
 	}
 
 	private function restoreGates():Void {
-		trace("1");
-		for (button in _buttons)
-		{	
-			for (i in button.get_y()...(button.get_y() + button.get_h()))
+		if (_buttons.length > 0) 
+		{
+			for (button in _buttons)
 			{
-				_mWalls.setTile(button.get_x(), i, 4);
+				for (i in button.get_y()...(button.get_y() + button.get_h()))
+				{
+					_mWalls.setTile(button.get_x(), i, 4);
+				}
 			}
 		}
-		restoring = false;
 	}
+
 }

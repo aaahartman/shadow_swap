@@ -15,6 +15,7 @@ class Button extends FlxSprite
     private var __y:Int;
     private var __h:Int;
     private var __w:Int;
+    private var rest:Bool;
 
     public function new(?X:Float=0, ?Y:Float=0, _x:Int, _y:Int, _h:Int, _w:Int)
     {
@@ -23,6 +24,7 @@ class Button extends FlxSprite
         __y = _y;
         __h = _h;
         __w = _w;
+        rest = false;
         makeGraphic(16, 8, FlxColor.GREEN);
     }
 
@@ -45,6 +47,11 @@ class Button extends FlxSprite
     public function get_w():Int
     {
         return __w;
+    }
+
+    public function getRest():Bool 
+    {
+        return rest;
     }
 
 	override public function update(elapsed:Float):Void

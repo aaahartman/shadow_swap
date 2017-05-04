@@ -13,8 +13,8 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 
 class PlayState extends FlxState
 {
-	private var _player1:Player;
-	private var _player2:Player;	
+	private var _player:Player;
+	private var _shadow:Shadow;	
 	
 	private var _key:Key;
 	private var _entrance:Door;
@@ -23,14 +23,28 @@ class PlayState extends FlxState
 	private var _map:FlxOgmoLoader;
 	private var _mWalls:FlxTilemap;
 	private var _glass:FlxTypedGroup<Glass>;
+	private var _buttons:FlxTypedGroup<Button>;
+	private var _fans:FlxTypedGroup<Fan>;
+	private var _switches:FlxTypedGroup<Switch>;
 	private var _got_key:FlxText;
 
 	private var _hud:HUD;
 
-	override public function create():Void {
-		
-		_player1 = new Player(0, 0, false);  //player
-		_player2 = new Player(0, 0, true);  //shadow
+	override public function create():Void 
+	{
+		FlxG.log.redirectTraces = true;
+		var _levelName:String = LevelSelectState.getLevelName();
+		_map = new FlxOgmoLoader(_levelName);
+ 		_mWalls = _map.loadTilemap(AssetPaths.colortiles__png, 16, 16, "walls");
+		_mWalls.follow();
+		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
+		_mWalls.setTileProperties(4, FlxObject.ANY); // gate
+		_mWalls.setTileProperties(10, FlxObject.ANY); // terrain
+
+ 		add(_mWalls);
+
+		_player = new Player();  //player
+		_shadow = new Shadow();  //shadow
 		_glass = new FlxTypedGroup<Glass>();
 		_key = new Key();
 		_entrance = new Door(0, 0, false);
@@ -48,8 +62,8 @@ class PlayState extends FlxState
 		add(_key);
 		add(_entrance);
 		add(_exit);
- 		add(_player1);
- 		add(_player2);
+ 		add(_player);
+ 		add(_shadow);
 		super.create();
 	}
 
@@ -59,13 +73,13 @@ class PlayState extends FlxState
 	    var y:Int = Std.parseInt(entityData.get("y"));
 	    if (entityName == "player")
 	    {
-	        _player1.x = x;
-	        _player1.y = y;
+	        _player.x = x;
+	        _player.y = y;
 	    }
 		if (entityName == "shadow")
 	    {
-	        _player2.x = x;
-	        _player2.y = y;
+	        _shadow.x = x;
+	        _shadow.y = y;
 	    }
 		if (entityName == "glass")
 		{
@@ -93,7 +107,24 @@ class PlayState extends FlxState
 
 		// restart the game
 		if (FlxG.keys.justPressed.R)
+		{
 			FlxG.switchState(new PlayState());
+		}
+
+		if (FlxG.keys.justPressed.H)
+		{
+			FlxG.switchState(new LevelSelectState());
+		}
+
+		if (FlxG.keys.justPressed.S)
+		{
+			var temp:Float = _player.x;
+			_player.x = _shadow.x;
+			_shadow.x = temp;
+			temp = _player.y;
+			_player.y = _shadow.y;
+			_shadow.y = temp;
+		}
 
 		super.update(elapsed);
 
@@ -103,31 +134,27 @@ class PlayState extends FlxState
 		//	_got_key.text = 'Go get the key!';
 		//}
 
-		FlxG.collide(_player1, _mWalls);
-		FlxG.collide(_player2, _mWalls);
-		if (_player2.isShadow()) {
-			FlxG.collide(_player1, _glass);
-			FlxG.overlap(_player1, _key, collectKey);
-			FlxG.overlap(_player1, _exit, unlockDoor);
-		} else
-		{
-			FlxG.collide(_player2, _glass);
-			FlxG.overlap(_player2, _key, collectKey);
-			FlxG.overlap(_player2, _exit, unlockDoor);
-		}
-		
+		FlxG.collide(_player, _mWalls);
+		FlxG.collide(_shadow, _mWalls);
+		FlxG.collide(_player, _glass);
+		FlxG.overlap(_player, _key, collectKey);
+		FlxG.overlap(_player, _exit, unlockDoor);
 	}
 
 	private function collectKey(P:FlxObject, K:FlxObject):Void 
 	{
-		_hud.updateHUD();
+		//_hud.updateHUD();
 		K.kill();
 	}
 
 	private function unlockDoor(P:FlxObject, D:FlxObject):Void 
 	{
 		if (Reg.gotKey)
+		{
+
 			//_got_key.text = "You win!";
 			add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
+			haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 300);
+		}
 	}
 }

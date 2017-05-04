@@ -28,13 +28,23 @@ class PlayState extends FlxState
 	private var _switches:FlxTypedGroup<Switch>;
 	private var _got_key:FlxText;
 
+	private var _levels:Array<Dynamic>;
+
+
 	private var _hud:HUD;
 
 	override public function create():Void 
 	{
+		_levels = new Array();
+
+		_levels[0] = AssetPaths.level0__oel;
+		_levels[1] = AssetPaths.level1__oel;
+		_levels[2] = AssetPaths.level2__oel;
+		_levels[3] = AssetPaths.level3__oel;
+		_levels[4] = AssetPaths.level4__oel;
+		
 		FlxG.log.redirectTraces = true;
-		var _levelName:String = LevelSelectState.getLevelName();
-		_map = new FlxOgmoLoader(_levelName);
+		_map = new FlxOgmoLoader(_levels[LevelSelectState.getLevelNumber()]);
  		_mWalls = _map.loadTilemap(AssetPaths.colortiles__png, 16, 16, "walls");
 		_mWalls.follow();
 		_mWalls.setTileProperties(1, FlxObject.ANY); // ground

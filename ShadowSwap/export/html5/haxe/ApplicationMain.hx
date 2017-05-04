@@ -34,24 +34,28 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("assets/data/data-goes-here.txt");
+		urls.push ("assets/data/Levels/level0.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("assets/data/jumptest.oel");
+		urls.push ("assets/data/Levels/level1.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/Levels/level2.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/Levels/level3.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/Levels/level4.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
 		urls.push ("assets/data/New Project.oep");
 		types.push (lime.Assets.AssetType.TEXT);
-		
-		
-		urls.push ("assets/data/room-001.oel");
-		types.push (lime.Assets.AssetType.TEXT);
-		
-		
-		urls.push ("assets/data/tiles.png");
-		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("assets/images/images-go-here.txt");
@@ -151,7 +155,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "53",
+			build: "91",
 			company: "HaxeFlixel",
 			file: "ShadowSwap",
 			fps: 60,

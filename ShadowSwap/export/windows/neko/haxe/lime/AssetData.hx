@@ -18,16 +18,16 @@ class AssetData {
 			
 			path.set ("assets/data/colortiles.png", "assets/data/colortiles.png");
 			type.set ("assets/data/colortiles.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/data/levels/level0.oel", "assets/data/levels/level0.oel");
-			type.set ("assets/data/levels/level0.oel", Reflect.field (AssetType, "text".toUpperCase ()));
-			path.set ("assets/data/levels/level1.oel", "assets/data/levels/level1.oel");
-			type.set ("assets/data/levels/level1.oel", Reflect.field (AssetType, "text".toUpperCase ()));
-			path.set ("assets/data/levels/level2.oel", "assets/data/levels/level2.oel");
-			type.set ("assets/data/levels/level2.oel", Reflect.field (AssetType, "text".toUpperCase ()));
-			path.set ("assets/data/levels/level3.oel", "assets/data/levels/level3.oel");
-			type.set ("assets/data/levels/level3.oel", Reflect.field (AssetType, "text".toUpperCase ()));
-			path.set ("assets/data/levels/level4.oel", "assets/data/levels/level4.oel");
-			type.set ("assets/data/levels/level4.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/Levels/level0.oel", "assets/data/Levels/level0.oel");
+			type.set ("assets/data/Levels/level0.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/Levels/level1.oel", "assets/data/Levels/level1.oel");
+			type.set ("assets/data/Levels/level1.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/Levels/level2.oel", "assets/data/Levels/level2.oel");
+			type.set ("assets/data/Levels/level2.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/Levels/level3.oel", "assets/data/Levels/level3.oel");
+			type.set ("assets/data/Levels/level3.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/Levels/level4.oel", "assets/data/Levels/level4.oel");
+			type.set ("assets/data/Levels/level4.oel", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/New Project.oep", "assets/data/New Project.oep");
 			type.set ("assets/data/New Project.oep", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");

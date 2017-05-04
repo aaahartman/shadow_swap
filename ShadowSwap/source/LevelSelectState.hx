@@ -4,7 +4,6 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.ui.FlxButton;
 import flixel.text.FlxText;
-import sys.FileSystem;
 
 class LevelSelectState extends FlxState
 {
@@ -16,25 +15,27 @@ class LevelSelectState extends FlxState
 
 	private var _text:FlxText;
 
-	private var _levels:Array<String>;
+	private static var _levels:Array<String>;
 
 	private static var _levelName:String;
+	private static var _levelNum:Int;
 
 	override public function create():Void
 	{
 		
-		_levels = FileSystem.readDirectory("assets/data/levels");
+		//_levels = FileSystem.readDirectory("assets/data/levels");
+		FlxG.log.redirectTraces = true;
+
+		_levels = new Array();
+
+		for (i in 0...5) {
+			_levels[i] = "level" + i + ".oel";
+			var _btn = new FlxButton(FlxG.width / 2 - 50, 50 + 25 * i, _levels[i]);
+			_btn.onDown.callback = clickPlay.bind(i);
+			add(_btn);
+		}
 
 		_text = new FlxText(20, 20, FlxG.width, "Select the Desired Level:", 16);
-
-		var _counter:Int = 0;
-		for (_level in _levels)
-		{
-			var _btn = new FlxButton(FlxG.width / 2 - 50, 50 + 25 * _counter, _level);
-			_btn.onDown.callback = clickPlay.bind(_level);
-			add(_btn);
-			_counter++;
-		}
 
  		add(_text);
 		super.create();
@@ -45,14 +46,20 @@ class LevelSelectState extends FlxState
 		super.update(elapsed);
 	}
 
-	private function clickPlay(_level:String):Void
+	private function clickPlay(_level:Int):Void
 	{
-		_levelName = _level;
+		_levelNum = _level;
+
 	    FlxG.switchState(new PlayState());
 	}	
 
 	public static function getLevelName():String 
 	{
-		return "assets/data/levels/" + _levelName;
+		return "assets/data/levels/" + _levels[_levelNum];
+	}
+
+	public static function getLevelNumber():Int
+	{
+		return _levelNum;
 	}
 }

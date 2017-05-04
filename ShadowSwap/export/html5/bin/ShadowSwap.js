@@ -26,16 +26,18 @@ ApplicationMain.create = function() {
 	var types = [];
 	urls.push("assets/data/colortiles.png");
 	types.push("IMAGE");
-	urls.push("assets/data/data-goes-here.txt");
+	urls.push("assets/data/Levels/level0.oel");
 	types.push("TEXT");
-	urls.push("assets/data/jumptest.oel");
+	urls.push("assets/data/Levels/level1.oel");
+	types.push("TEXT");
+	urls.push("assets/data/Levels/level2.oel");
+	types.push("TEXT");
+	urls.push("assets/data/Levels/level3.oel");
+	types.push("TEXT");
+	urls.push("assets/data/Levels/level4.oel");
 	types.push("TEXT");
 	urls.push("assets/data/New Project.oep");
 	types.push("TEXT");
-	urls.push("assets/data/room-001.oel");
-	types.push("TEXT");
-	urls.push("assets/data/tiles.png");
-	types.push("IMAGE");
 	urls.push("assets/images/images-go-here.txt");
 	types.push("TEXT");
 	urls.push("assets/music/music-goes-here.txt");
@@ -82,7 +84,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "53", company : "HaxeFlixel", file : "ShadowSwap", fps : 60, name : "ShadowSwap", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 480, parameters : "{}", resizable : false, stencilBuffer : true, title : "ShadowSwap", vsync : true, width : 640, x : null, y : null}]};
+	ApplicationMain.config = { build : "91", company : "HaxeFlixel", file : "ShadowSwap", fps : 60, name : "ShadowSwap", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 480, parameters : "{}", resizable : false, stencilBuffer : true, title : "ShadowSwap", vsync : true, width : 640, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -2028,7 +2030,7 @@ openfl_display_Sprite.prototype = $extend(openfl_display_DisplayObjectContainer.
 });
 var Main = function() {
 	openfl_display_Sprite.call(this);
-	this.addChild(new flixel_FlxGame(320,240,SplashScreenState));
+	this.addChild(new flixel_FlxGame(640,480,SplashScreenState));
 };
 $hxClasses["Main"] = Main;
 Main.__name__ = ["Main"];
@@ -2050,642 +2052,6 @@ DocumentClass.prototype = $extend(Main.prototype,{
 var AssetPaths = function() { };
 $hxClasses["AssetPaths"] = AssetPaths;
 AssetPaths.__name__ = ["AssetPaths"];
-var lime_AssetLibrary = function() {
-	this.onChange = new lime_app_Event_$Void_$Void();
-};
-$hxClasses["lime.AssetLibrary"] = lime_AssetLibrary;
-lime_AssetLibrary.__name__ = ["lime","AssetLibrary"];
-lime_AssetLibrary.prototype = {
-	exists: function(id,type) {
-		return false;
-	}
-	,getAudioBuffer: function(id) {
-		return null;
-	}
-	,getBytes: function(id) {
-		return null;
-	}
-	,getFont: function(id) {
-		return null;
-	}
-	,getImage: function(id) {
-		return null;
-	}
-	,getPath: function(id) {
-		return null;
-	}
-	,getText: function(id) {
-		var bytes = this.getBytes(id);
-		if(bytes == null) {
-			return null;
-		} else {
-			return bytes.getString(0,bytes.length);
-		}
-	}
-	,isLocal: function(id,type) {
-		return true;
-	}
-	,list: function(type) {
-		return null;
-	}
-	,load: function() {
-		var _gthis = this;
-		return new lime_app_Future(function() {
-			return _gthis;
-		});
-	}
-	,loadAudioBuffer: function(id) {
-		var _gthis = this;
-		return new lime_app_Future(function() {
-			return _gthis.getAudioBuffer(id);
-		});
-	}
-	,loadBytes: function(id) {
-		var _gthis = this;
-		return new lime_app_Future(function() {
-			return _gthis.getBytes(id);
-		});
-	}
-	,loadFont: function(id) {
-		var _gthis = this;
-		return new lime_app_Future(function() {
-			return _gthis.getFont(id);
-		});
-	}
-	,loadImage: function(id) {
-		var _gthis = this;
-		return new lime_app_Future(function() {
-			return _gthis.getImage(id);
-		});
-	}
-	,loadText: function(id) {
-		return this.loadBytes(id).then(function(bytes) {
-			return new lime_app_Future(function() {
-				if(bytes == null) {
-					return null;
-				} else {
-					return bytes.getString(0,bytes.length);
-				}
-			});
-		});
-	}
-	,unload: function() {
-	}
-	,__class__: lime_AssetLibrary
-};
-var DefaultAssetLibrary = function() {
-	this.type = new haxe_ds_StringMap();
-	this.path = new haxe_ds_StringMap();
-	this.className = new haxe_ds_StringMap();
-	lime_AssetLibrary.call(this);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf);
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf);
-	var id = "assets/data/colortiles.png";
-	var _this = this.path;
-	if(__map_reserved[id] != null) {
-		_this.setReserved(id,id);
-	} else {
-		_this.h[id] = id;
-	}
-	var _this1 = this.type;
-	var value = "IMAGE";
-	if(__map_reserved[id] != null) {
-		_this1.setReserved(id,value);
-	} else {
-		_this1.h[id] = value;
-	}
-	id = "assets/data/data-goes-here.txt";
-	var _this2 = this.path;
-	if(__map_reserved[id] != null) {
-		_this2.setReserved(id,id);
-	} else {
-		_this2.h[id] = id;
-	}
-	var _this3 = this.type;
-	var value1 = "TEXT";
-	if(__map_reserved[id] != null) {
-		_this3.setReserved(id,value1);
-	} else {
-		_this3.h[id] = value1;
-	}
-	id = "assets/data/jumptest.oel";
-	var _this4 = this.path;
-	if(__map_reserved[id] != null) {
-		_this4.setReserved(id,id);
-	} else {
-		_this4.h[id] = id;
-	}
-	var _this5 = this.type;
-	var value2 = "TEXT";
-	if(__map_reserved[id] != null) {
-		_this5.setReserved(id,value2);
-	} else {
-		_this5.h[id] = value2;
-	}
-	id = "assets/data/New Project.oep";
-	var _this6 = this.path;
-	if(__map_reserved[id] != null) {
-		_this6.setReserved(id,id);
-	} else {
-		_this6.h[id] = id;
-	}
-	var _this7 = this.type;
-	var value3 = "TEXT";
-	if(__map_reserved[id] != null) {
-		_this7.setReserved(id,value3);
-	} else {
-		_this7.h[id] = value3;
-	}
-	id = "assets/data/room-001.oel";
-	var _this8 = this.path;
-	if(__map_reserved[id] != null) {
-		_this8.setReserved(id,id);
-	} else {
-		_this8.h[id] = id;
-	}
-	var _this9 = this.type;
-	var value4 = "TEXT";
-	if(__map_reserved[id] != null) {
-		_this9.setReserved(id,value4);
-	} else {
-		_this9.h[id] = value4;
-	}
-	id = "assets/data/tiles.png";
-	var _this10 = this.path;
-	if(__map_reserved[id] != null) {
-		_this10.setReserved(id,id);
-	} else {
-		_this10.h[id] = id;
-	}
-	var _this11 = this.type;
-	var value5 = "IMAGE";
-	if(__map_reserved[id] != null) {
-		_this11.setReserved(id,value5);
-	} else {
-		_this11.h[id] = value5;
-	}
-	id = "assets/images/images-go-here.txt";
-	var _this12 = this.path;
-	if(__map_reserved[id] != null) {
-		_this12.setReserved(id,id);
-	} else {
-		_this12.h[id] = id;
-	}
-	var _this13 = this.type;
-	var value6 = "TEXT";
-	if(__map_reserved[id] != null) {
-		_this13.setReserved(id,value6);
-	} else {
-		_this13.h[id] = value6;
-	}
-	id = "assets/music/music-goes-here.txt";
-	var _this14 = this.path;
-	if(__map_reserved[id] != null) {
-		_this14.setReserved(id,id);
-	} else {
-		_this14.h[id] = id;
-	}
-	var _this15 = this.type;
-	var value7 = "TEXT";
-	if(__map_reserved[id] != null) {
-		_this15.setReserved(id,value7);
-	} else {
-		_this15.h[id] = value7;
-	}
-	id = "assets/sounds/sounds-go-here.txt";
-	var _this16 = this.path;
-	if(__map_reserved[id] != null) {
-		_this16.setReserved(id,id);
-	} else {
-		_this16.h[id] = id;
-	}
-	var _this17 = this.type;
-	var value8 = "TEXT";
-	if(__map_reserved[id] != null) {
-		_this17.setReserved(id,value8);
-	} else {
-		_this17.h[id] = value8;
-	}
-	id = "flixel/sounds/beep.ogg";
-	var _this18 = this.path;
-	if(__map_reserved[id] != null) {
-		_this18.setReserved(id,id);
-	} else {
-		_this18.h[id] = id;
-	}
-	var _this19 = this.type;
-	var value9 = "SOUND";
-	if(__map_reserved[id] != null) {
-		_this19.setReserved(id,value9);
-	} else {
-		_this19.h[id] = value9;
-	}
-	id = "flixel/sounds/flixel.ogg";
-	var _this20 = this.path;
-	if(__map_reserved[id] != null) {
-		_this20.setReserved(id,id);
-	} else {
-		_this20.h[id] = id;
-	}
-	var _this21 = this.type;
-	var value10 = "SOUND";
-	if(__map_reserved[id] != null) {
-		_this21.setReserved(id,value10);
-	} else {
-		_this21.h[id] = value10;
-	}
-	id = "flixel/fonts/nokiafc22.ttf";
-	var _this22 = this.className;
-	var value11 = _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf;
-	if(__map_reserved[id] != null) {
-		_this22.setReserved(id,value11);
-	} else {
-		_this22.h[id] = value11;
-	}
-	var _this23 = this.type;
-	var value12 = "FONT";
-	if(__map_reserved[id] != null) {
-		_this23.setReserved(id,value12);
-	} else {
-		_this23.h[id] = value12;
-	}
-	id = "flixel/fonts/monsterrat.ttf";
-	var _this24 = this.className;
-	var value13 = _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf;
-	if(__map_reserved[id] != null) {
-		_this24.setReserved(id,value13);
-	} else {
-		_this24.h[id] = value13;
-	}
-	var _this25 = this.type;
-	var value14 = "FONT";
-	if(__map_reserved[id] != null) {
-		_this25.setReserved(id,value14);
-	} else {
-		_this25.h[id] = value14;
-	}
-	id = "flixel/images/ui/button.png";
-	var _this26 = this.path;
-	if(__map_reserved[id] != null) {
-		_this26.setReserved(id,id);
-	} else {
-		_this26.h[id] = id;
-	}
-	var _this27 = this.type;
-	var value15 = "IMAGE";
-	if(__map_reserved[id] != null) {
-		_this27.setReserved(id,value15);
-	} else {
-		_this27.h[id] = value15;
-	}
-	id = "flixel/images/logo/default.png";
-	var _this28 = this.path;
-	if(__map_reserved[id] != null) {
-		_this28.setReserved(id,id);
-	} else {
-		_this28.h[id] = id;
-	}
-	var _this29 = this.type;
-	var value16 = "IMAGE";
-	if(__map_reserved[id] != null) {
-		_this29.setReserved(id,value16);
-	} else {
-		_this29.h[id] = value16;
-	}
-	var assetsPrefix = null;
-	if(ApplicationMain.config != null && Object.prototype.hasOwnProperty.call(ApplicationMain.config,"assetsPrefix")) {
-		assetsPrefix = ApplicationMain.config.assetsPrefix;
-	}
-	if(assetsPrefix != null) {
-		var k = this.path.keys();
-		while(k.hasNext()) {
-			var k1 = k.next();
-			var this1 = this.path;
-			var _this30 = this.path;
-			var value17 = assetsPrefix + (__map_reserved[k1] != null ? _this30.getReserved(k1) : _this30.h[k1]);
-			var _this31 = this1;
-			if(__map_reserved[k1] != null) {
-				_this31.setReserved(k1,value17);
-			} else {
-				_this31.h[k1] = value17;
-			}
-		}
-	}
-};
-$hxClasses["DefaultAssetLibrary"] = DefaultAssetLibrary;
-DefaultAssetLibrary.__name__ = ["DefaultAssetLibrary"];
-DefaultAssetLibrary.__super__ = lime_AssetLibrary;
-DefaultAssetLibrary.prototype = $extend(lime_AssetLibrary.prototype,{
-	exists: function(id,type) {
-		var requestedType = type != null ? js_Boot.__cast(type , String) : null;
-		var _this = this.type;
-		var assetType = __map_reserved[id] != null ? _this.getReserved(id) : _this.h[id];
-		if(assetType != null) {
-			if(assetType == requestedType || (requestedType == "SOUND" || requestedType == "MUSIC") && (assetType == "MUSIC" || assetType == "SOUND")) {
-				return true;
-			}
-			if(requestedType == "BINARY" || requestedType == null || assetType == "BINARY" && requestedType == "TEXT") {
-				return true;
-			}
-		}
-		return false;
-	}
-	,getAudioBuffer: function(id) {
-		return null;
-	}
-	,getBytes: function(id) {
-		var this1 = lime_app_Preloader.loaders;
-		var _this = this.path;
-		var key = __map_reserved[id] != null ? _this.getReserved(id) : _this.h[id];
-		var _this1 = this1;
-		var loader = __map_reserved[key] != null ? _this1.getReserved(key) : _this1.h[key];
-		if(loader == null) {
-			return null;
-		}
-		var bytes = loader.bytes;
-		if(bytes != null) {
-			return bytes;
-		} else {
-			return null;
-		}
-	}
-	,getFont: function(id) {
-		var _this = this.className;
-		return js_Boot.__cast(Type.createInstance(__map_reserved[id] != null ? _this.getReserved(id) : _this.h[id],[]) , lime_text_Font);
-	}
-	,getImage: function(id) {
-		var this1 = lime_app_Preloader.images;
-		var _this = this.path;
-		var key = __map_reserved[id] != null ? _this.getReserved(id) : _this.h[id];
-		var _this1 = this1;
-		return lime_graphics_Image.fromImageElement(__map_reserved[key] != null ? _this1.getReserved(key) : _this1.h[key]);
-	}
-	,getPath: function(id) {
-		var _this = this.path;
-		if(__map_reserved[id] != null) {
-			return _this.getReserved(id);
-		} else {
-			return _this.h[id];
-		}
-	}
-	,getText: function(id) {
-		var this1 = lime_app_Preloader.loaders;
-		var _this = this.path;
-		var key = __map_reserved[id] != null ? _this.getReserved(id) : _this.h[id];
-		var _this1 = this1;
-		var loader = __map_reserved[key] != null ? _this1.getReserved(key) : _this1.h[key];
-		if(loader == null) {
-			return null;
-		}
-		var bytes = loader.bytes;
-		if(bytes != null) {
-			return bytes.getString(0,bytes.length);
-		} else {
-			return null;
-		}
-	}
-	,isLocal: function(id,type) {
-		var requestedType = type != null ? js_Boot.__cast(type , String) : null;
-		return true;
-	}
-	,list: function(type) {
-		var requestedType = type != null ? js_Boot.__cast(type , String) : null;
-		var items = [];
-		var id = this.type.keys();
-		while(id.hasNext()) {
-			var id1 = id.next();
-			if(requestedType == null || this.exists(id1,type)) {
-				items.push(id1);
-			}
-		}
-		return items;
-	}
-	,loadAudioBuffer: function(id) {
-		var _gthis = this;
-		var promise = new lime_app_Promise();
-		promise.completeWith(new lime_app_Future(function() {
-			return _gthis.getAudioBuffer(id);
-		}));
-		return promise.future;
-	}
-	,loadBytes: function(id) {
-		var promise = new lime_app_Promise();
-		var _this = this.path;
-		if(__map_reserved[id] != null ? _this.existsReserved(id) : _this.h.hasOwnProperty(id)) {
-			var request = new lime_net_HTTPRequest();
-			var _this1 = this.path;
-			promise.completeWith(request.load((__map_reserved[id] != null ? _this1.getReserved(id) : _this1.h[id]) + "?" + lime_Assets.cache.version));
-		} else {
-			promise.complete(this.getBytes(id));
-		}
-		return promise.future;
-	}
-	,loadImage: function(id) {
-		var promise = new lime_app_Promise();
-		var _this = this.path;
-		if(__map_reserved[id] != null ? _this.existsReserved(id) : _this.h.hasOwnProperty(id)) {
-			var image = new Image();
-			image.onload = function(_) {
-				var tmp = lime_graphics_Image.fromImageElement(image);
-				promise.complete(tmp);
-			};
-			image.onerror = $bind(promise,promise.error);
-			var _this1 = this.path;
-			var tmp1 = __map_reserved[id] != null ? _this1.getReserved(id) : _this1.h[id];
-			image.src = tmp1 + "?" + lime_Assets.cache.version;
-		} else {
-			var tmp2 = this.getImage(id);
-			promise.complete(tmp2);
-		}
-		return promise.future;
-	}
-	,loadText: function(id) {
-		var promise = new lime_app_Promise();
-		var _this = this.path;
-		if(__map_reserved[id] != null ? _this.existsReserved(id) : _this.h.hasOwnProperty(id)) {
-			var request = new lime_net_HTTPRequest();
-			var _this1 = this.path;
-			var future = request.load((__map_reserved[id] != null ? _this1.getReserved(id) : _this1.h[id]) + "?" + lime_Assets.cache.version);
-			future.onProgress(function(progress) {
-				promise.progress(progress);
-			});
-			future.onError(function(msg) {
-				promise.error(msg);
-			});
-			future.onComplete(function(bytes) {
-				var tmp = bytes.getString(0,bytes.length);
-				promise.complete(tmp);
-			});
-		} else {
-			var tmp1 = this.getText(id);
-			promise.complete(tmp1);
-		}
-		return promise.future;
-	}
-	,__class__: DefaultAssetLibrary
-});
-var lime_text_Font = function(name) {
-	if(name != null) {
-		this.name = name;
-	}
-	if(this.__fontPath != null) {
-		this.__fromFile(this.__fontPath);
-	}
-};
-$hxClasses["lime.text.Font"] = lime_text_Font;
-lime_text_Font.__name__ = ["lime","text","Font"];
-lime_text_Font.fromBytes = function(bytes) {
-	var font = new lime_text_Font();
-	font.__fromBytes(bytes);
-	return font;
-};
-lime_text_Font.fromFile = function(path) {
-	var font = new lime_text_Font();
-	font.__fromFile(path);
-	return font;
-};
-lime_text_Font.prototype = {
-	decompose: function() {
-		return null;
-	}
-	,getGlyph: function(character) {
-		return -1;
-	}
-	,getGlyphs: function(characters) {
-		if(characters == null) {
-			characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^`'\"/\\&*()[]{}<>|:;_-+=?,. ";
-		}
-		return null;
-	}
-	,getGlyphMetrics: function(glyph) {
-		return null;
-	}
-	,renderGlyph: function(glyph,fontSize) {
-		return null;
-	}
-	,renderGlyphs: function(glyphs,fontSize) {
-		return null;
-	}
-	,__fromBytes: function(bytes) {
-		this.__fontPath = null;
-	}
-	,__fromFile: function(path) {
-		this.__fontPath = path;
-	}
-	,__setSize: function(size) {
-	}
-	,get_ascender: function() {
-		return 0;
-	}
-	,get_descender: function() {
-		return 0;
-	}
-	,get_height: function() {
-		return 0;
-	}
-	,get_numGlyphs: function() {
-		return 0;
-	}
-	,get_underlinePosition: function() {
-		return 0;
-	}
-	,get_underlineThickness: function() {
-		return 0;
-	}
-	,get_unitsPerEM: function() {
-		return 0;
-	}
-	,__class__: lime_text_Font
-	,__properties__: {get_unitsPerEM:"get_unitsPerEM",get_underlineThickness:"get_underlineThickness",get_underlinePosition:"get_underlinePosition",get_numGlyphs:"get_numGlyphs",get_height:"get_height",get_descender:"get_descender",get_ascender:"get_ascender"}
-};
-var _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf = function() {
-	lime_text_Font.call(this);
-	this.name = "Nokia Cellphone FC Small";
-};
-$hxClasses["__ASSET__flixel_fonts_nokiafc22_ttf"] = _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf;
-_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.__name__ = ["__ASSET__flixel_fonts_nokiafc22_ttf"];
-_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf
-});
-var _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf = function() {
-	lime_text_Font.call(this);
-	this.name = "Monsterrat";
-};
-$hxClasses["__ASSET__flixel_fonts_monsterrat_ttf"] = _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf;
-_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.__name__ = ["__ASSET__flixel_fonts_monsterrat_ttf"];
-_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.__super__ = lime_text_Font;
-_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf
-});
-var openfl_text_Font = function(name) {
-	lime_text_Font.call(this,name);
-};
-$hxClasses["openfl.text.Font"] = openfl_text_Font;
-openfl_text_Font.__name__ = ["openfl","text","Font"];
-openfl_text_Font.enumerateFonts = function(enumerateDeviceFonts) {
-	if(enumerateDeviceFonts == null) {
-		enumerateDeviceFonts = false;
-	}
-	return openfl_text_Font.__registeredFonts;
-};
-openfl_text_Font.fromBytes = function(bytes) {
-	var font = new openfl_text_Font();
-	font.__fromBytes(openfl_utils__$ByteArray_ByteArray_$Impl_$.toBytes(bytes));
-	return font;
-};
-openfl_text_Font.fromFile = function(path) {
-	var font = new openfl_text_Font();
-	font.__fromFile(path);
-	return font;
-};
-openfl_text_Font.registerFont = function(font) {
-	var instance = js_Boot.__cast(Type.createInstance(font,[]) , openfl_text_Font);
-	if(instance != null) {
-		openfl_text_Font.__registeredFonts.push(instance);
-	}
-};
-openfl_text_Font.__fromLimeFont = function(value) {
-	var font = new openfl_text_Font();
-	font.name = value.name;
-	font.src = value.src;
-	return font;
-};
-openfl_text_Font.__super__ = lime_text_Font;
-openfl_text_Font.prototype = $extend(lime_text_Font.prototype,{
-	get_fontName: function() {
-		return this.name;
-	}
-	,set_fontName: function(value) {
-		return this.name = value;
-	}
-	,__class__: openfl_text_Font
-	,__properties__: $extend(lime_text_Font.prototype.__properties__,{set_fontName:"set_fontName",get_fontName:"get_fontName"})
-});
-var _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf = function() {
-	var font = new _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf();
-	this.src = font.src;
-	this.name = font.name;
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"] = _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf;
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.__name__ = ["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"];
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf
-});
-var _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf = function() {
-	var font = new _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf();
-	this.src = font.src;
-	this.name = font.name;
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__flixel_fonts_monsterrat_ttf"] = _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf;
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.__name__ = ["__ASSET__OPENFL__flixel_fonts_monsterrat_ttf"];
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf
-});
 var flixel_util_IFlxDestroyable = function() { };
 $hxClasses["flixel.util.IFlxDestroyable"] = flixel_util_IFlxDestroyable;
 flixel_util_IFlxDestroyable.__name__ = ["flixel","util","IFlxDestroyable"];
@@ -4845,6 +4211,676 @@ flixel_FlxSprite.prototype = $extend(flixel_FlxObject.prototype,{
 	,__class__: flixel_FlxSprite
 	,__properties__: $extend(flixel_FlxObject.prototype.__properties__,{set_clipRect:"set_clipRect",set_color:"set_color",set_blend:"set_blend",set_flipY:"set_flipY",set_flipX:"set_flipX",set_facing:"set_facing",set_alpha:"set_alpha",set_graphic:"set_graphic",set_frames:"set_frames",set_frame:"set_frame",set_pixels:"set_pixels",get_pixels:"get_pixels",set_antialiasing:"set_antialiasing",set_useFramePixels:"set_useFramePixels"})
 });
+var Button = function(X,Y,locked) {
+	if(locked == null) {
+		locked = true;
+	}
+	if(Y == null) {
+		Y = 0;
+	}
+	if(X == null) {
+		X = 0;
+	}
+	flixel_FlxSprite.call(this,X,Y);
+	this.makeGraphic(16,16,-23296);
+	this.set_immovable(true);
+};
+$hxClasses["Button"] = Button;
+Button.__name__ = ["Button"];
+Button.__super__ = flixel_FlxSprite;
+Button.prototype = $extend(flixel_FlxSprite.prototype,{
+	__class__: Button
+});
+var lime_AssetLibrary = function() {
+	this.onChange = new lime_app_Event_$Void_$Void();
+};
+$hxClasses["lime.AssetLibrary"] = lime_AssetLibrary;
+lime_AssetLibrary.__name__ = ["lime","AssetLibrary"];
+lime_AssetLibrary.prototype = {
+	exists: function(id,type) {
+		return false;
+	}
+	,getAudioBuffer: function(id) {
+		return null;
+	}
+	,getBytes: function(id) {
+		return null;
+	}
+	,getFont: function(id) {
+		return null;
+	}
+	,getImage: function(id) {
+		return null;
+	}
+	,getPath: function(id) {
+		return null;
+	}
+	,getText: function(id) {
+		var bytes = this.getBytes(id);
+		if(bytes == null) {
+			return null;
+		} else {
+			return bytes.getString(0,bytes.length);
+		}
+	}
+	,isLocal: function(id,type) {
+		return true;
+	}
+	,list: function(type) {
+		return null;
+	}
+	,load: function() {
+		var _gthis = this;
+		return new lime_app_Future(function() {
+			return _gthis;
+		});
+	}
+	,loadAudioBuffer: function(id) {
+		var _gthis = this;
+		return new lime_app_Future(function() {
+			return _gthis.getAudioBuffer(id);
+		});
+	}
+	,loadBytes: function(id) {
+		var _gthis = this;
+		return new lime_app_Future(function() {
+			return _gthis.getBytes(id);
+		});
+	}
+	,loadFont: function(id) {
+		var _gthis = this;
+		return new lime_app_Future(function() {
+			return _gthis.getFont(id);
+		});
+	}
+	,loadImage: function(id) {
+		var _gthis = this;
+		return new lime_app_Future(function() {
+			return _gthis.getImage(id);
+		});
+	}
+	,loadText: function(id) {
+		return this.loadBytes(id).then(function(bytes) {
+			return new lime_app_Future(function() {
+				if(bytes == null) {
+					return null;
+				} else {
+					return bytes.getString(0,bytes.length);
+				}
+			});
+		});
+	}
+	,unload: function() {
+	}
+	,__class__: lime_AssetLibrary
+};
+var DefaultAssetLibrary = function() {
+	this.type = new haxe_ds_StringMap();
+	this.path = new haxe_ds_StringMap();
+	this.className = new haxe_ds_StringMap();
+	lime_AssetLibrary.call(this);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf);
+	var id = "assets/data/colortiles.png";
+	var _this = this.path;
+	if(__map_reserved[id] != null) {
+		_this.setReserved(id,id);
+	} else {
+		_this.h[id] = id;
+	}
+	var _this1 = this.type;
+	var value = "IMAGE";
+	if(__map_reserved[id] != null) {
+		_this1.setReserved(id,value);
+	} else {
+		_this1.h[id] = value;
+	}
+	id = "assets/data/Levels/level0.oel";
+	var _this2 = this.path;
+	if(__map_reserved[id] != null) {
+		_this2.setReserved(id,id);
+	} else {
+		_this2.h[id] = id;
+	}
+	var _this3 = this.type;
+	var value1 = "TEXT";
+	if(__map_reserved[id] != null) {
+		_this3.setReserved(id,value1);
+	} else {
+		_this3.h[id] = value1;
+	}
+	id = "assets/data/Levels/level1.oel";
+	var _this4 = this.path;
+	if(__map_reserved[id] != null) {
+		_this4.setReserved(id,id);
+	} else {
+		_this4.h[id] = id;
+	}
+	var _this5 = this.type;
+	var value2 = "TEXT";
+	if(__map_reserved[id] != null) {
+		_this5.setReserved(id,value2);
+	} else {
+		_this5.h[id] = value2;
+	}
+	id = "assets/data/Levels/level2.oel";
+	var _this6 = this.path;
+	if(__map_reserved[id] != null) {
+		_this6.setReserved(id,id);
+	} else {
+		_this6.h[id] = id;
+	}
+	var _this7 = this.type;
+	var value3 = "TEXT";
+	if(__map_reserved[id] != null) {
+		_this7.setReserved(id,value3);
+	} else {
+		_this7.h[id] = value3;
+	}
+	id = "assets/data/Levels/level3.oel";
+	var _this8 = this.path;
+	if(__map_reserved[id] != null) {
+		_this8.setReserved(id,id);
+	} else {
+		_this8.h[id] = id;
+	}
+	var _this9 = this.type;
+	var value4 = "TEXT";
+	if(__map_reserved[id] != null) {
+		_this9.setReserved(id,value4);
+	} else {
+		_this9.h[id] = value4;
+	}
+	id = "assets/data/Levels/level4.oel";
+	var _this10 = this.path;
+	if(__map_reserved[id] != null) {
+		_this10.setReserved(id,id);
+	} else {
+		_this10.h[id] = id;
+	}
+	var _this11 = this.type;
+	var value5 = "TEXT";
+	if(__map_reserved[id] != null) {
+		_this11.setReserved(id,value5);
+	} else {
+		_this11.h[id] = value5;
+	}
+	id = "assets/data/New Project.oep";
+	var _this12 = this.path;
+	if(__map_reserved[id] != null) {
+		_this12.setReserved(id,id);
+	} else {
+		_this12.h[id] = id;
+	}
+	var _this13 = this.type;
+	var value6 = "TEXT";
+	if(__map_reserved[id] != null) {
+		_this13.setReserved(id,value6);
+	} else {
+		_this13.h[id] = value6;
+	}
+	id = "assets/images/images-go-here.txt";
+	var _this14 = this.path;
+	if(__map_reserved[id] != null) {
+		_this14.setReserved(id,id);
+	} else {
+		_this14.h[id] = id;
+	}
+	var _this15 = this.type;
+	var value7 = "TEXT";
+	if(__map_reserved[id] != null) {
+		_this15.setReserved(id,value7);
+	} else {
+		_this15.h[id] = value7;
+	}
+	id = "assets/music/music-goes-here.txt";
+	var _this16 = this.path;
+	if(__map_reserved[id] != null) {
+		_this16.setReserved(id,id);
+	} else {
+		_this16.h[id] = id;
+	}
+	var _this17 = this.type;
+	var value8 = "TEXT";
+	if(__map_reserved[id] != null) {
+		_this17.setReserved(id,value8);
+	} else {
+		_this17.h[id] = value8;
+	}
+	id = "assets/sounds/sounds-go-here.txt";
+	var _this18 = this.path;
+	if(__map_reserved[id] != null) {
+		_this18.setReserved(id,id);
+	} else {
+		_this18.h[id] = id;
+	}
+	var _this19 = this.type;
+	var value9 = "TEXT";
+	if(__map_reserved[id] != null) {
+		_this19.setReserved(id,value9);
+	} else {
+		_this19.h[id] = value9;
+	}
+	id = "flixel/sounds/beep.ogg";
+	var _this20 = this.path;
+	if(__map_reserved[id] != null) {
+		_this20.setReserved(id,id);
+	} else {
+		_this20.h[id] = id;
+	}
+	var _this21 = this.type;
+	var value10 = "SOUND";
+	if(__map_reserved[id] != null) {
+		_this21.setReserved(id,value10);
+	} else {
+		_this21.h[id] = value10;
+	}
+	id = "flixel/sounds/flixel.ogg";
+	var _this22 = this.path;
+	if(__map_reserved[id] != null) {
+		_this22.setReserved(id,id);
+	} else {
+		_this22.h[id] = id;
+	}
+	var _this23 = this.type;
+	var value11 = "SOUND";
+	if(__map_reserved[id] != null) {
+		_this23.setReserved(id,value11);
+	} else {
+		_this23.h[id] = value11;
+	}
+	id = "flixel/fonts/nokiafc22.ttf";
+	var _this24 = this.className;
+	var value12 = _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf;
+	if(__map_reserved[id] != null) {
+		_this24.setReserved(id,value12);
+	} else {
+		_this24.h[id] = value12;
+	}
+	var _this25 = this.type;
+	var value13 = "FONT";
+	if(__map_reserved[id] != null) {
+		_this25.setReserved(id,value13);
+	} else {
+		_this25.h[id] = value13;
+	}
+	id = "flixel/fonts/monsterrat.ttf";
+	var _this26 = this.className;
+	var value14 = _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf;
+	if(__map_reserved[id] != null) {
+		_this26.setReserved(id,value14);
+	} else {
+		_this26.h[id] = value14;
+	}
+	var _this27 = this.type;
+	var value15 = "FONT";
+	if(__map_reserved[id] != null) {
+		_this27.setReserved(id,value15);
+	} else {
+		_this27.h[id] = value15;
+	}
+	id = "flixel/images/ui/button.png";
+	var _this28 = this.path;
+	if(__map_reserved[id] != null) {
+		_this28.setReserved(id,id);
+	} else {
+		_this28.h[id] = id;
+	}
+	var _this29 = this.type;
+	var value16 = "IMAGE";
+	if(__map_reserved[id] != null) {
+		_this29.setReserved(id,value16);
+	} else {
+		_this29.h[id] = value16;
+	}
+	id = "flixel/images/logo/default.png";
+	var _this30 = this.path;
+	if(__map_reserved[id] != null) {
+		_this30.setReserved(id,id);
+	} else {
+		_this30.h[id] = id;
+	}
+	var _this31 = this.type;
+	var value17 = "IMAGE";
+	if(__map_reserved[id] != null) {
+		_this31.setReserved(id,value17);
+	} else {
+		_this31.h[id] = value17;
+	}
+	var assetsPrefix = null;
+	if(ApplicationMain.config != null && Object.prototype.hasOwnProperty.call(ApplicationMain.config,"assetsPrefix")) {
+		assetsPrefix = ApplicationMain.config.assetsPrefix;
+	}
+	if(assetsPrefix != null) {
+		var k = this.path.keys();
+		while(k.hasNext()) {
+			var k1 = k.next();
+			var this1 = this.path;
+			var _this32 = this.path;
+			var value18 = assetsPrefix + (__map_reserved[k1] != null ? _this32.getReserved(k1) : _this32.h[k1]);
+			var _this33 = this1;
+			if(__map_reserved[k1] != null) {
+				_this33.setReserved(k1,value18);
+			} else {
+				_this33.h[k1] = value18;
+			}
+		}
+	}
+};
+$hxClasses["DefaultAssetLibrary"] = DefaultAssetLibrary;
+DefaultAssetLibrary.__name__ = ["DefaultAssetLibrary"];
+DefaultAssetLibrary.__super__ = lime_AssetLibrary;
+DefaultAssetLibrary.prototype = $extend(lime_AssetLibrary.prototype,{
+	exists: function(id,type) {
+		var requestedType = type != null ? js_Boot.__cast(type , String) : null;
+		var _this = this.type;
+		var assetType = __map_reserved[id] != null ? _this.getReserved(id) : _this.h[id];
+		if(assetType != null) {
+			if(assetType == requestedType || (requestedType == "SOUND" || requestedType == "MUSIC") && (assetType == "MUSIC" || assetType == "SOUND")) {
+				return true;
+			}
+			if(requestedType == "BINARY" || requestedType == null || assetType == "BINARY" && requestedType == "TEXT") {
+				return true;
+			}
+		}
+		return false;
+	}
+	,getAudioBuffer: function(id) {
+		return null;
+	}
+	,getBytes: function(id) {
+		var this1 = lime_app_Preloader.loaders;
+		var _this = this.path;
+		var key = __map_reserved[id] != null ? _this.getReserved(id) : _this.h[id];
+		var _this1 = this1;
+		var loader = __map_reserved[key] != null ? _this1.getReserved(key) : _this1.h[key];
+		if(loader == null) {
+			return null;
+		}
+		var bytes = loader.bytes;
+		if(bytes != null) {
+			return bytes;
+		} else {
+			return null;
+		}
+	}
+	,getFont: function(id) {
+		var _this = this.className;
+		return js_Boot.__cast(Type.createInstance(__map_reserved[id] != null ? _this.getReserved(id) : _this.h[id],[]) , lime_text_Font);
+	}
+	,getImage: function(id) {
+		var this1 = lime_app_Preloader.images;
+		var _this = this.path;
+		var key = __map_reserved[id] != null ? _this.getReserved(id) : _this.h[id];
+		var _this1 = this1;
+		return lime_graphics_Image.fromImageElement(__map_reserved[key] != null ? _this1.getReserved(key) : _this1.h[key]);
+	}
+	,getPath: function(id) {
+		var _this = this.path;
+		if(__map_reserved[id] != null) {
+			return _this.getReserved(id);
+		} else {
+			return _this.h[id];
+		}
+	}
+	,getText: function(id) {
+		var this1 = lime_app_Preloader.loaders;
+		var _this = this.path;
+		var key = __map_reserved[id] != null ? _this.getReserved(id) : _this.h[id];
+		var _this1 = this1;
+		var loader = __map_reserved[key] != null ? _this1.getReserved(key) : _this1.h[key];
+		if(loader == null) {
+			return null;
+		}
+		var bytes = loader.bytes;
+		if(bytes != null) {
+			return bytes.getString(0,bytes.length);
+		} else {
+			return null;
+		}
+	}
+	,isLocal: function(id,type) {
+		var requestedType = type != null ? js_Boot.__cast(type , String) : null;
+		return true;
+	}
+	,list: function(type) {
+		var requestedType = type != null ? js_Boot.__cast(type , String) : null;
+		var items = [];
+		var id = this.type.keys();
+		while(id.hasNext()) {
+			var id1 = id.next();
+			if(requestedType == null || this.exists(id1,type)) {
+				items.push(id1);
+			}
+		}
+		return items;
+	}
+	,loadAudioBuffer: function(id) {
+		var _gthis = this;
+		var promise = new lime_app_Promise();
+		promise.completeWith(new lime_app_Future(function() {
+			return _gthis.getAudioBuffer(id);
+		}));
+		return promise.future;
+	}
+	,loadBytes: function(id) {
+		var promise = new lime_app_Promise();
+		var _this = this.path;
+		if(__map_reserved[id] != null ? _this.existsReserved(id) : _this.h.hasOwnProperty(id)) {
+			var request = new lime_net_HTTPRequest();
+			var _this1 = this.path;
+			promise.completeWith(request.load((__map_reserved[id] != null ? _this1.getReserved(id) : _this1.h[id]) + "?" + lime_Assets.cache.version));
+		} else {
+			promise.complete(this.getBytes(id));
+		}
+		return promise.future;
+	}
+	,loadImage: function(id) {
+		var promise = new lime_app_Promise();
+		var _this = this.path;
+		if(__map_reserved[id] != null ? _this.existsReserved(id) : _this.h.hasOwnProperty(id)) {
+			var image = new Image();
+			image.onload = function(_) {
+				var tmp = lime_graphics_Image.fromImageElement(image);
+				promise.complete(tmp);
+			};
+			image.onerror = $bind(promise,promise.error);
+			var _this1 = this.path;
+			var tmp1 = __map_reserved[id] != null ? _this1.getReserved(id) : _this1.h[id];
+			image.src = tmp1 + "?" + lime_Assets.cache.version;
+		} else {
+			var tmp2 = this.getImage(id);
+			promise.complete(tmp2);
+		}
+		return promise.future;
+	}
+	,loadText: function(id) {
+		var promise = new lime_app_Promise();
+		var _this = this.path;
+		if(__map_reserved[id] != null ? _this.existsReserved(id) : _this.h.hasOwnProperty(id)) {
+			var request = new lime_net_HTTPRequest();
+			var _this1 = this.path;
+			var future = request.load((__map_reserved[id] != null ? _this1.getReserved(id) : _this1.h[id]) + "?" + lime_Assets.cache.version);
+			future.onProgress(function(progress) {
+				promise.progress(progress);
+			});
+			future.onError(function(msg) {
+				promise.error(msg);
+			});
+			future.onComplete(function(bytes) {
+				var tmp = bytes.getString(0,bytes.length);
+				promise.complete(tmp);
+			});
+		} else {
+			var tmp1 = this.getText(id);
+			promise.complete(tmp1);
+		}
+		return promise.future;
+	}
+	,__class__: DefaultAssetLibrary
+});
+var lime_text_Font = function(name) {
+	if(name != null) {
+		this.name = name;
+	}
+	if(this.__fontPath != null) {
+		this.__fromFile(this.__fontPath);
+	}
+};
+$hxClasses["lime.text.Font"] = lime_text_Font;
+lime_text_Font.__name__ = ["lime","text","Font"];
+lime_text_Font.fromBytes = function(bytes) {
+	var font = new lime_text_Font();
+	font.__fromBytes(bytes);
+	return font;
+};
+lime_text_Font.fromFile = function(path) {
+	var font = new lime_text_Font();
+	font.__fromFile(path);
+	return font;
+};
+lime_text_Font.prototype = {
+	decompose: function() {
+		return null;
+	}
+	,getGlyph: function(character) {
+		return -1;
+	}
+	,getGlyphs: function(characters) {
+		if(characters == null) {
+			characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^`'\"/\\&*()[]{}<>|:;_-+=?,. ";
+		}
+		return null;
+	}
+	,getGlyphMetrics: function(glyph) {
+		return null;
+	}
+	,renderGlyph: function(glyph,fontSize) {
+		return null;
+	}
+	,renderGlyphs: function(glyphs,fontSize) {
+		return null;
+	}
+	,__fromBytes: function(bytes) {
+		this.__fontPath = null;
+	}
+	,__fromFile: function(path) {
+		this.__fontPath = path;
+	}
+	,__setSize: function(size) {
+	}
+	,get_ascender: function() {
+		return 0;
+	}
+	,get_descender: function() {
+		return 0;
+	}
+	,get_height: function() {
+		return 0;
+	}
+	,get_numGlyphs: function() {
+		return 0;
+	}
+	,get_underlinePosition: function() {
+		return 0;
+	}
+	,get_underlineThickness: function() {
+		return 0;
+	}
+	,get_unitsPerEM: function() {
+		return 0;
+	}
+	,__class__: lime_text_Font
+	,__properties__: {get_unitsPerEM:"get_unitsPerEM",get_underlineThickness:"get_underlineThickness",get_underlinePosition:"get_underlinePosition",get_numGlyphs:"get_numGlyphs",get_height:"get_height",get_descender:"get_descender",get_ascender:"get_ascender"}
+};
+var _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf = function() {
+	lime_text_Font.call(this);
+	this.name = "Nokia Cellphone FC Small";
+};
+$hxClasses["__ASSET__flixel_fonts_nokiafc22_ttf"] = _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf;
+_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.__name__ = ["__ASSET__flixel_fonts_nokiafc22_ttf"];
+_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf
+});
+var _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf = function() {
+	lime_text_Font.call(this);
+	this.name = "Monsterrat";
+};
+$hxClasses["__ASSET__flixel_fonts_monsterrat_ttf"] = _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf;
+_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.__name__ = ["__ASSET__flixel_fonts_monsterrat_ttf"];
+_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.__super__ = lime_text_Font;
+_$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf
+});
+var openfl_text_Font = function(name) {
+	lime_text_Font.call(this,name);
+};
+$hxClasses["openfl.text.Font"] = openfl_text_Font;
+openfl_text_Font.__name__ = ["openfl","text","Font"];
+openfl_text_Font.enumerateFonts = function(enumerateDeviceFonts) {
+	if(enumerateDeviceFonts == null) {
+		enumerateDeviceFonts = false;
+	}
+	return openfl_text_Font.__registeredFonts;
+};
+openfl_text_Font.fromBytes = function(bytes) {
+	var font = new openfl_text_Font();
+	font.__fromBytes(openfl_utils__$ByteArray_ByteArray_$Impl_$.toBytes(bytes));
+	return font;
+};
+openfl_text_Font.fromFile = function(path) {
+	var font = new openfl_text_Font();
+	font.__fromFile(path);
+	return font;
+};
+openfl_text_Font.registerFont = function(font) {
+	var instance = js_Boot.__cast(Type.createInstance(font,[]) , openfl_text_Font);
+	if(instance != null) {
+		openfl_text_Font.__registeredFonts.push(instance);
+	}
+};
+openfl_text_Font.__fromLimeFont = function(value) {
+	var font = new openfl_text_Font();
+	font.name = value.name;
+	font.src = value.src;
+	return font;
+};
+openfl_text_Font.__super__ = lime_text_Font;
+openfl_text_Font.prototype = $extend(lime_text_Font.prototype,{
+	get_fontName: function() {
+		return this.name;
+	}
+	,set_fontName: function(value) {
+		return this.name = value;
+	}
+	,__class__: openfl_text_Font
+	,__properties__: $extend(lime_text_Font.prototype.__properties__,{set_fontName:"set_fontName",get_fontName:"get_fontName"})
+});
+var _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf = function() {
+	var font = new _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf();
+	this.src = font.src;
+	this.name = font.name;
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"] = _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf;
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.__name__ = ["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"];
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf = function() {
+	var font = new _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf();
+	this.src = font.src;
+	this.name = font.name;
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__flixel_fonts_monsterrat_ttf"] = _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf;
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.__name__ = ["__ASSET__OPENFL__flixel_fonts_monsterrat_ttf"];
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf
+});
 var Door = function(X,Y,locked) {
 	if(locked == null) {
 		locked = true;
@@ -4896,6 +4932,23 @@ EReg.prototype = {
 	}
 	,__class__: EReg
 };
+var Fan = function(X,Y) {
+	if(Y == null) {
+		Y = 0;
+	}
+	if(X == null) {
+		X = 0;
+	}
+	flixel_FlxSprite.call(this,X,Y);
+	this.makeGraphic(16,16,-23296);
+	this.set_immovable(true);
+};
+$hxClasses["Fan"] = Fan;
+Fan.__name__ = ["Fan"];
+Fan.__super__ = flixel_FlxSprite;
+Fan.prototype = $extend(flixel_FlxSprite.prototype,{
+	__class__: Fan
+});
 var Glass = function(X,Y) {
 	if(Y == null) {
 		Y = 0;
@@ -4920,99 +4973,6 @@ Glass.prototype = $extend(flixel_FlxSprite.prototype,{
 	}
 	,__class__: Glass
 });
-var HxOverrides = function() { };
-$hxClasses["HxOverrides"] = HxOverrides;
-HxOverrides.__name__ = ["HxOverrides"];
-HxOverrides.strDate = function(s) {
-	var _g = s.length;
-	switch(_g) {
-	case 8:
-		var k = s.split(":");
-		var d = new Date();
-		d["setTime"](0);
-		d["setUTCHours"](k[0]);
-		d["setUTCMinutes"](k[1]);
-		d["setUTCSeconds"](k[2]);
-		return d;
-	case 10:
-		var k1 = s.split("-");
-		return new Date(k1[0],k1[1] - 1,k1[2],0,0,0);
-	case 19:
-		var k2 = s.split(" ");
-		var y = k2[0].split("-");
-		var t = k2[1].split(":");
-		return new Date(y[0],y[1] - 1,y[2],t[0],t[1],t[2]);
-	default:
-		throw new js__$Boot_HaxeError("Invalid date format : " + s);
-	}
-};
-HxOverrides.cca = function(s,index) {
-	var x = s.charCodeAt(index);
-	if(x != x) {
-		return undefined;
-	}
-	return x;
-};
-HxOverrides.substr = function(s,pos,len) {
-	if(len == null) {
-		len = s.length;
-	} else if(len < 0) {
-		if(pos == 0) {
-			len = s.length + len;
-		} else {
-			return "";
-		}
-	}
-	return s.substr(pos,len);
-};
-HxOverrides.remove = function(a,obj) {
-	var i = a.indexOf(obj);
-	if(i == -1) {
-		return false;
-	}
-	a.splice(i,1);
-	return true;
-};
-HxOverrides.iter = function(a) {
-	return { cur : 0, arr : a, hasNext : function() {
-		return this.cur < this.arr.length;
-	}, next : function() {
-		return this.arr[this.cur++];
-	}};
-};
-var Key = function(X,Y) {
-	if(Y == null) {
-		Y = 0;
-	}
-	if(X == null) {
-		X = 0;
-	}
-	flixel_FlxSprite.call(this,X,Y);
-	this.makeGraphic(16,16,-256);
-	this.set_immovable(true);
-};
-$hxClasses["Key"] = Key;
-Key.__name__ = ["Key"];
-Key.__super__ = flixel_FlxSprite;
-Key.prototype = $extend(flixel_FlxSprite.prototype,{
-	kill: function() {
-		flixel_FlxSprite.prototype.kill.call(this);
-		Reg.gotKey = true;
-	}
-	,__class__: Key
-});
-var Lambda = function() { };
-$hxClasses["Lambda"] = Lambda;
-Lambda.__name__ = ["Lambda"];
-Lambda.array = function(it) {
-	var a = [];
-	var i = $iterator(it)();
-	while(i.hasNext()) {
-		var i1 = i.next();
-		a.push(i1);
-	}
-	return a;
-};
 var flixel_group_FlxTypedGroup = function(MaxSize) {
 	if(MaxSize == null) {
 		MaxSize = 0;
@@ -5487,6 +5447,143 @@ flixel_group_FlxTypedGroup.prototype = $extend(flixel_FlxBasic.prototype,{
 	,__class__: flixel_group_FlxTypedGroup
 	,__properties__: $extend(flixel_FlxBasic.prototype.__properties__,{set_maxSize:"set_maxSize"})
 });
+var HUD = function(lv,key) {
+	flixel_group_FlxTypedGroup.call(this);
+	this.background = new flixel_FlxSprite().makeGraphic(flixel_FlxG.width,20,-16777216);
+	flixel_util_FlxSpriteUtil.drawRect(this.background,0,19,flixel_FlxG.width,1,-1);
+	this.textLevel = new flixel_text_FlxText(0,2,0,"LV " + lv,8);
+	var _this = this.textLevel;
+	_this.set_borderStyle(flixel_text_FlxTextBorderStyle.SHADOW);
+	_this.set_borderColor(-8355712);
+	_this.set_borderSize(1);
+	_this.set_borderQuality(1);
+	this.textKey = new flixel_text_FlxText(this.textLevel.get_width() + 20,2,0,"Key",8);
+	this.keySlot = new flixel_FlxSprite(this.textLevel.get_width() + 20 + this.textKey.get_width() + 5,5);
+	if(key) {
+		this.keySlot.makeGraphic(8,8,-8355712);
+	} else {
+		this.keySlot.makeGraphic(8,8,-16777216);
+	}
+	this.reset = new flixel_ui_FlxButton(flixel_FlxG.width - 70,0,"Reset (R)",$bind(this,this.resetState));
+	this.reset.scale.set_x(0.7);
+	this.reset.scale.set_y(0.7);
+	this.add(this.background);
+	this.add(this.textLevel);
+	this.add(this.textKey);
+	this.add(this.keySlot);
+	this.add(this.reset);
+	this.forEach(function(spr) {
+		spr.scrollFactor.set(0,0);
+	});
+};
+$hxClasses["HUD"] = HUD;
+HUD.__name__ = ["HUD"];
+HUD.__super__ = flixel_group_FlxTypedGroup;
+HUD.prototype = $extend(flixel_group_FlxTypedGroup.prototype,{
+	updateHUD: function() {
+		this.keySlot.makeGraphic(8,8,-256);
+	}
+	,resetState: function() {
+		var nextState = new PlayState();
+		if(flixel_FlxG.game._state.switchTo(nextState)) {
+			flixel_FlxG.game._requestedState = nextState;
+		}
+	}
+	,__class__: HUD
+});
+var HxOverrides = function() { };
+$hxClasses["HxOverrides"] = HxOverrides;
+HxOverrides.__name__ = ["HxOverrides"];
+HxOverrides.strDate = function(s) {
+	var _g = s.length;
+	switch(_g) {
+	case 8:
+		var k = s.split(":");
+		var d = new Date();
+		d["setTime"](0);
+		d["setUTCHours"](k[0]);
+		d["setUTCMinutes"](k[1]);
+		d["setUTCSeconds"](k[2]);
+		return d;
+	case 10:
+		var k1 = s.split("-");
+		return new Date(k1[0],k1[1] - 1,k1[2],0,0,0);
+	case 19:
+		var k2 = s.split(" ");
+		var y = k2[0].split("-");
+		var t = k2[1].split(":");
+		return new Date(y[0],y[1] - 1,y[2],t[0],t[1],t[2]);
+	default:
+		throw new js__$Boot_HaxeError("Invalid date format : " + s);
+	}
+};
+HxOverrides.cca = function(s,index) {
+	var x = s.charCodeAt(index);
+	if(x != x) {
+		return undefined;
+	}
+	return x;
+};
+HxOverrides.substr = function(s,pos,len) {
+	if(len == null) {
+		len = s.length;
+	} else if(len < 0) {
+		if(pos == 0) {
+			len = s.length + len;
+		} else {
+			return "";
+		}
+	}
+	return s.substr(pos,len);
+};
+HxOverrides.remove = function(a,obj) {
+	var i = a.indexOf(obj);
+	if(i == -1) {
+		return false;
+	}
+	a.splice(i,1);
+	return true;
+};
+HxOverrides.iter = function(a) {
+	return { cur : 0, arr : a, hasNext : function() {
+		return this.cur < this.arr.length;
+	}, next : function() {
+		return this.arr[this.cur++];
+	}};
+};
+var Key = function(X,Y) {
+	if(Y == null) {
+		Y = 0;
+	}
+	if(X == null) {
+		X = 0;
+	}
+	flixel_FlxSprite.call(this,X,Y);
+	this.makeGraphic(16,16,-256);
+	this.set_immovable(true);
+};
+$hxClasses["Key"] = Key;
+Key.__name__ = ["Key"];
+Key.__super__ = flixel_FlxSprite;
+Key.prototype = $extend(flixel_FlxSprite.prototype,{
+	kill: function() {
+		flixel_FlxSprite.prototype.kill.call(this);
+		Reg.gotKey = true;
+	}
+	,__class__: Key
+});
+var Lambda = function() { };
+$hxClasses["Lambda"] = Lambda;
+Lambda.__name__ = ["Lambda"];
+Lambda.array = function(it) {
+	var a = [];
+	var i = $iterator(it)();
+	while(i.hasNext()) {
+		var i1 = i.next();
+		a.push(i1);
+	}
+	return a;
+};
 var flixel_FlxState = function(MaxSize) {
 	this._requestSubStateReset = false;
 	this.destroySubStates = true;
@@ -5578,20 +5675,44 @@ var LevelSelectState = function(MaxSize) {
 };
 $hxClasses["LevelSelectState"] = LevelSelectState;
 LevelSelectState.__name__ = ["LevelSelectState"];
+LevelSelectState._levels = null;
+LevelSelectState._levelName = null;
+LevelSelectState._levelNum = null;
+LevelSelectState.getLevelName = function() {
+	return "assets/data/levels/" + LevelSelectState._levels[LevelSelectState._levelNum];
+};
+LevelSelectState.getLevelNumber = function() {
+	return LevelSelectState._levelNum;
+};
 LevelSelectState.__super__ = flixel_FlxState;
 LevelSelectState.prototype = $extend(flixel_FlxState.prototype,{
 	create: function() {
-		this._text = new flixel_text_FlxText(20,20,null,"Select the Desired Level:",16);
-		this._btnPlay = new flixel_ui_FlxButton(0,0,"Level 1",$bind(this,this.clickPlay));
-		this._btnPlay.screenCenter();
-		this.add(this._btnPlay);
+		var _this = flixel_FlxG.log;
+		haxe_Log.trace = $bind(_this,_this.processTraceData);
+		_this.redirectTraces = true;
+		LevelSelectState._levels = [];
+		var _g = 0;
+		while(_g < 5) {
+			var i = _g++;
+			LevelSelectState._levels[i] = "level" + i + ".oel";
+			var _btn = new flixel_ui_FlxButton(flixel_FlxG.width / 2 - 50,50 + 25 * i,LevelSelectState._levels[i]);
+			var tmp = (function(a1,f) {
+				return function() {
+					f[0](a1[0]);
+				};
+			})([i],[$bind(this,this.clickPlay)]);
+			_btn.onDown.callback = tmp;
+			this.add(_btn);
+		}
+		this._text = new flixel_text_FlxText(20,20,flixel_FlxG.width,"Select the Desired Level:",16);
 		this.add(this._text);
 		flixel_FlxState.prototype.create.call(this);
 	}
 	,update: function(elapsed) {
 		flixel_FlxState.prototype.update.call(this,elapsed);
 	}
-	,clickPlay: function() {
+	,clickPlay: function(_level) {
+		LevelSelectState._levelNum = _level;
 		var nextState = new PlayState();
 		if(flixel_FlxG.game._state.switchTo(nextState)) {
 			flixel_FlxG.game._requestedState = nextState;
@@ -5733,42 +5854,49 @@ PlayState.__name__ = ["PlayState"];
 PlayState.__super__ = flixel_FlxState;
 PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	create: function() {
-		this._map = new flixel_addons_editors_ogmo_FlxOgmoLoader("assets/data/room-001.oel");
-		this._mWalls = this._map.loadTilemap("assets/data/tiles.png",16,16,"walls");
+		this._levels = [];
+		this._levels[0] = "assets/data/Levels/level0.oel";
+		this._levels[1] = "assets/data/Levels/level1.oel";
+		this._levels[2] = "assets/data/Levels/level2.oel";
+		this._levels[3] = "assets/data/Levels/level3.oel";
+		this._levels[4] = "assets/data/Levels/level4.oel";
+		var _this = flixel_FlxG.log;
+		haxe_Log.trace = $bind(_this,_this.processTraceData);
+		_this.redirectTraces = true;
+		this._map = new flixel_addons_editors_ogmo_FlxOgmoLoader(this._levels[LevelSelectState.getLevelNumber()]);
+		this._mWalls = this._map.loadTilemap("assets/data/colortiles.png",16,16,"walls");
 		this._mWalls.follow();
-		this._mWalls.setTileProperties(1,0);
-		this._mWalls.setTileProperties(2,4369);
+		this._mWalls.setTileProperties(1,4369);
+		this._mWalls.setTileProperties(4,4369);
+		this._mWalls.setTileProperties(10,4369);
 		this.add(this._mWalls);
-		this._player1 = new Player(0,0,false);
-		this._player2 = new Player(0,0,true);
+		this._player = new Player();
+		this._shadow = new Shadow();
 		this._glass = new flixel_group_FlxTypedGroup();
 		this._key = new Key();
 		this._entrance = new Door(0,0,false);
 		this._exit = new Door(0,0,true);
 		this._map.loadEntities($bind(this,this.placeEntities),"entities");
 		Reg.gotKey = false;
-		this._got_key = new flixel_text_FlxText(0,0,flixel_FlxG.width);
-		this._got_key.setFormat(null,16,-256,"center",flixel_text_FlxTextBorderStyle.OUTLINE,1252379);
-		this._got_key.scrollFactor.set(0,0);
 		this.add(this._got_key);
 		this.add(this._glass);
 		this.add(this._key);
 		this.add(this._entrance);
 		this.add(this._exit);
-		this.add(this._player1);
-		this.add(this._player2);
+		this.add(this._player);
+		this.add(this._shadow);
 		flixel_FlxState.prototype.create.call(this);
 	}
 	,placeEntities: function(entityName,entityData) {
 		var x = Std.parseInt(entityData.get("x"));
 		var y = Std.parseInt(entityData.get("y"));
 		if(entityName == "player") {
-			this._player1.set_x(x);
-			this._player1.set_y(y);
+			this._player.set_x(x);
+			this._player.set_y(y);
 		}
 		if(entityName == "shadow") {
-			this._player2.set_x(x);
-			this._player2.set_y(y);
+			this._shadow.set_x(x);
+			this._shadow.set_y(y);
 		}
 		if(entityName == "glass") {
 			this._glass.add(new Glass(x,y));
@@ -5794,35 +5922,44 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 				flixel_FlxG.game._requestedState = nextState;
 			}
 		}
+		var _this1 = flixel_FlxG.keys.justPressed;
+		if(_this1.keyManager.checkStatus(72,_this1.status)) {
+			var nextState1 = new LevelSelectState();
+			if(flixel_FlxG.game._state.switchTo(nextState1)) {
+				flixel_FlxG.game._requestedState = nextState1;
+			}
+		}
+		var _this2 = flixel_FlxG.keys.justPressed;
+		if(_this2.keyManager.checkStatus(83,_this2.status)) {
+			var temp = this._player.x;
+			this._player.set_x(this._shadow.x);
+			this._shadow.set_x(temp);
+			temp = this._player.y;
+			this._player.set_y(this._shadow.y);
+			this._shadow.set_y(temp);
+		}
 		flixel_FlxState.prototype.update.call(this,elapsed);
-		if(Reg.gotKey) {
-			this._got_key.set_text("You got the key!");
-		} else {
-			this._got_key.set_text("Go get the key!");
-		}
-		flixel_FlxG.overlap(this._player1,this._mWalls,null,flixel_FlxObject.separate);
-		flixel_FlxG.overlap(this._player2,this._mWalls,null,flixel_FlxObject.separate);
-		if(this._player2.isShadow()) {
-			flixel_FlxG.overlap(this._player1,this._glass,null,flixel_FlxObject.separate);
-			flixel_FlxG.overlap(this._player1,this._key,$bind(this,this.collectKey));
-			flixel_FlxG.overlap(this._player1,this._exit,$bind(this,this.unlockDoor));
-		} else {
-			flixel_FlxG.overlap(this._player2,this._glass,null,flixel_FlxObject.separate);
-			flixel_FlxG.overlap(this._player2,this._key,$bind(this,this.collectKey));
-			flixel_FlxG.overlap(this._player2,this._exit,$bind(this,this.unlockDoor));
-		}
+		flixel_FlxG.overlap(this._player,this._mWalls,null,flixel_FlxObject.separate);
+		flixel_FlxG.overlap(this._shadow,this._mWalls,null,flixel_FlxObject.separate);
+		flixel_FlxG.overlap(this._player,this._glass,null,flixel_FlxObject.separate);
+		flixel_FlxG.overlap(this._player,this._key,$bind(this,this.collectKey));
+		flixel_FlxG.overlap(this._player,this._exit,$bind(this,this.unlockDoor));
 	}
 	,collectKey: function(P,K) {
 		K.kill();
 	}
 	,unlockDoor: function(P,D) {
 		if(Reg.gotKey) {
-			this._got_key.set_text("You win!");
+			this.add(new flixel_text_FlxText(0,0,flixel_FlxG.width,"YOU WIN!",16).screenCenter());
+			var a1 = new LevelSelectState();
+			haxe_Timer.delay(function() {
+				flixel_FlxG.switchState(a1);
+			},300);
 		}
 	}
 	,__class__: PlayState
 });
-var Player = function(X,Y,is_shadow) {
+var Player = function(X,Y) {
 	if(Y == null) {
 		Y = 0;
 	}
@@ -5831,18 +5968,11 @@ var Player = function(X,Y,is_shadow) {
 	}
 	this.in_air = false;
 	this.jump_duration = -1;
-	this.jump_speed = 200;
-	this.gravity = 500;
-	this.speed = 80;
-	this._is_shadow = false;
-	this._is_shadow = is_shadow;
+	this.jump_speed = 300;
+	this.gravity = 800;
+	this.speed = 120;
 	flixel_FlxSprite.call(this,X,Y);
-	if(this._is_shadow) {
-		this.makeGraphic(8,14,-16776961);
-	} else {
-		this.makeGraphic(8,14,-65536);
-	}
-	this.drag.set_x(this.drag.set_y(1600));
+	this.makeGraphic(16,16,-65536);
 	this.acceleration.set_y(this.gravity);
 };
 $hxClasses["Player"] = Player;
@@ -5850,24 +5980,7 @@ Player.__name__ = ["Player"];
 Player.__super__ = flixel_FlxSprite;
 Player.prototype = $extend(flixel_FlxSprite.prototype,{
 	update: function(elapsed) {
-		var _swap = false;
-		var _this = flixel_FlxG.keys.justPressed;
-		_swap = _this.keyManager.checkStatus(83,_this.status);
-		if(_swap) {
-			this._is_shadow = !this._is_shadow;
-			if(this._is_shadow) {
-				this.makeGraphic(8,14,-16776961);
-			} else {
-				this.makeGraphic(8,14,-65536);
-			}
-		}
 		this.acceleration.set_x(0);
-		if(!this._is_shadow) {
-			this.movement(elapsed);
-		}
-		flixel_FlxSprite.prototype.update.call(this,elapsed);
-	}
-	,movement: function(elapsed) {
 		var _jump = false;
 		var _left = false;
 		var _right = false;
@@ -5881,23 +5994,18 @@ Player.prototype = $extend(flixel_FlxSprite.prototype,{
 			_left = _right;
 		}
 		if(_jump) {
-			this.jump(elapsed);
+			if(!this.in_air) {
+				this.velocity.set_y(-this.jump_speed);
+			}
 		}
+		this.velocity.set_x(0);
 		if(_left) {
 			this.velocity.set_x(-this.speed);
-			this.acceleration.set_x(-this.drag.x);
-		} else if(_right) {
+		}
+		if(_right) {
 			this.velocity.set_x(this.speed);
-			this.acceleration.set_x(this.drag.x);
 		}
-	}
-	,jump: function(elapsed) {
-		if(!this.in_air) {
-			this.velocity.set_y(-this.jump_speed);
-		}
-	}
-	,isShadow: function() {
-		return this._is_shadow;
+		flixel_FlxSprite.prototype.update.call(this,elapsed);
 	}
 	,__class__: Player
 });
@@ -6025,6 +6133,28 @@ Reflect.makeVarArgs = function(f) {
 var Reg = function() { };
 $hxClasses["Reg"] = Reg;
 Reg.__name__ = ["Reg"];
+var Shadow = function(X,Y) {
+	if(Y == null) {
+		Y = 0;
+	}
+	if(X == null) {
+		X = 0;
+	}
+	flixel_FlxSprite.call(this,X,Y);
+	this.makeGraphic(16,16,-16776961);
+	this.acceleration.set_y(800);
+};
+$hxClasses["Shadow"] = Shadow;
+Shadow.__name__ = ["Shadow"];
+Shadow.__super__ = flixel_FlxSprite;
+Shadow.prototype = $extend(flixel_FlxSprite.prototype,{
+	update: function(elapsed) {
+		this.acceleration.set_x(0);
+		this.velocity.set_x(0);
+		flixel_FlxSprite.prototype.update.call(this,elapsed);
+	}
+	,__class__: Shadow
+});
 var SplashScreenState = function(MaxSize) {
 	flixel_FlxState.call(this,MaxSize);
 };
@@ -6033,7 +6163,7 @@ SplashScreenState.__name__ = ["SplashScreenState"];
 SplashScreenState.__super__ = flixel_FlxState;
 SplashScreenState.prototype = $extend(flixel_FlxState.prototype,{
 	create: function() {
-		this._text = new flixel_text_FlxText(20,20,null,"Shadow Swap",32);
+		this._text = new flixel_text_FlxText(20,20,flixel_FlxG.width,"Shadow Swap",32);
 		this._btnPlay = new flixel_ui_FlxButton(0,0,"Play",$bind(this,this.clickPlay));
 		this._btnPlay.screenCenter();
 		this.add(this._btnPlay);
@@ -6143,6 +6273,23 @@ StringTools.hex = function(n,digits) {
 	}
 	return s;
 };
+var Switch = function(X,Y) {
+	if(Y == null) {
+		Y = 0;
+	}
+	if(X == null) {
+		X = 0;
+	}
+	flixel_FlxSprite.call(this,X,Y);
+	this.makeGraphic(16,16,-7650029);
+	this.set_immovable(true);
+};
+$hxClasses["Switch"] = Switch;
+Switch.__name__ = ["Switch"];
+Switch.__super__ = flixel_FlxSprite;
+Switch.prototype = $extend(flixel_FlxSprite.prototype,{
+	__class__: Switch
+});
 var ValueType = $hxClasses["ValueType"] = { __ename__ : ["ValueType"], __constructs__ : ["TNull","TInt","TFloat","TBool","TObject","TFunction","TClass","TEnum","TUnknown"] };
 ValueType.TNull = ["TNull",0];
 ValueType.TNull.toString = $estr;
@@ -76026,15 +76173,15 @@ openfl_display_DisplayObject.__worldRenderDirty = 0;
 openfl_display_DisplayObject.__worldTransformDirty = 0;
 openfl_display_DisplayObject.__cacheAsBitmapMode = false;
 AssetPaths.colortiles__png = "assets/data/colortiles.png";
-AssetPaths.data_goes_here__txt = "assets/data/data-goes-here.txt";
-AssetPaths.jumptest__oel = "assets/data/jumptest.oel";
+AssetPaths.level0__oel = "assets/data/Levels/level0.oel";
+AssetPaths.level1__oel = "assets/data/Levels/level1.oel";
+AssetPaths.level2__oel = "assets/data/Levels/level2.oel";
+AssetPaths.level3__oel = "assets/data/Levels/level3.oel";
+AssetPaths.level4__oel = "assets/data/Levels/level4.oel";
 AssetPaths["New Project__oep"] = "assets/data/New Project.oep";
-AssetPaths.room_001__oel = "assets/data/room-001.oel";
-AssetPaths.tiles__png = "assets/data/tiles.png";
 AssetPaths.images_go_here__txt = "assets/images/images-go-here.txt";
 AssetPaths.music_goes_here__txt = "assets/music/music-goes-here.txt";
 AssetPaths.sounds_go_here__txt = "assets/sounds/sounds-go-here.txt";
-openfl_text_Font.__registeredFonts = [];
 flixel_math_FlxRect._pool = new flixel_util_FlxPool_$flixel_$math_$FlxRect(flixel_math_FlxRect);
 flixel_FlxObject.defaultPixelPerfectPosition = false;
 flixel_FlxObject.SEPARATE_BIAS = 4;
@@ -76071,6 +76218,7 @@ flixel_FlxObject._secondSeparateFlxRect = (function($this) {
 	$r = rect;
 	return $r;
 }(this));
+openfl_text_Font.__registeredFonts = [];
 Reg.gotKey = false;
 Xml.Element = 0;
 Xml.PCData = 1;

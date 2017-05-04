@@ -30,15 +30,27 @@ class ApplicationMain {
 		var types = [];
 		
 		
-		urls.push ("assets/data/colortiles.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
-		urls.push ("assets/data/data-goes-here.txt");
+		urls.push ("assets/data/levels/level0.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("assets/data/jumptest.oel");
+		urls.push ("assets/data/levels/level1.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/levels/level2.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/levels/level3.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/levels/level4.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/levels/level5.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -46,24 +58,16 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("assets/data/room-001.oel");
-		types.push (lime.Assets.AssetType.TEXT);
-		
-		
-		urls.push ("assets/data/tiles.png");
+		urls.push ("assets/images/bettertiles.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("assets/images/images-go-here.txt");
-		types.push (lime.Assets.AssetType.TEXT);
+		urls.push ("assets/images/evenbettertiles.png");
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("assets/music/music-goes-here.txt");
-		types.push (lime.Assets.AssetType.TEXT);
-		
-		
-		urls.push ("assets/sounds/sounds-go-here.txt");
-		types.push (lime.Assets.AssetType.TEXT);
+		urls.push ("assets/images/tiles.png");
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("flixel/sounds/beep.ogg");
@@ -151,7 +155,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "53",
+			build: "116",
 			company: "HaxeFlixel",
 			file: "ShadowSwap",
 			fps: 60,

@@ -2,5 +2,5 @@ package;
 
 class Reg
 {
-	public static var gotKey:Bool = false;
+	public static var _keysCollected:Int = 0;
 }

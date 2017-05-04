@@ -36,8 +36,12 @@ ApplicationMain.create = function() {
 	types.push("TEXT");
 	urls.push("assets/data/Levels/level4.oel");
 	types.push("TEXT");
+	urls.push("assets/data/Levels/level5.oel");
+	types.push("TEXT");
 	urls.push("assets/data/New Project.oep");
 	types.push("TEXT");
+	urls.push("assets/data/newtiles.png");
+	types.push("IMAGE");
 	urls.push("assets/images/images-go-here.txt");
 	types.push("TEXT");
 	urls.push("assets/music/music-goes-here.txt");
@@ -84,7 +88,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "106", company : "HaxeFlixel", file : "ShadowSwap", fps : 60, name : "ShadowSwap", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 480, parameters : "{}", resizable : false, stencilBuffer : true, title : "ShadowSwap", vsync : true, width : 640, x : null, y : null}]};
+	ApplicationMain.config = { build : "111", company : "HaxeFlixel", file : "ShadowSwap", fps : 60, name : "ShadowSwap", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 480, parameters : "{}", resizable : false, stencilBuffer : true, title : "ShadowSwap", vsync : true, width : 640, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -4405,7 +4409,7 @@ var DefaultAssetLibrary = function() {
 	} else {
 		_this11.h[id] = value5;
 	}
-	id = "assets/data/New Project.oep";
+	id = "assets/data/Levels/level5.oel";
 	var _this12 = this.path;
 	if(__map_reserved[id] != null) {
 		_this12.setReserved(id,id);
@@ -4419,7 +4423,7 @@ var DefaultAssetLibrary = function() {
 	} else {
 		_this13.h[id] = value6;
 	}
-	id = "assets/images/images-go-here.txt";
+	id = "assets/data/New Project.oep";
 	var _this14 = this.path;
 	if(__map_reserved[id] != null) {
 		_this14.setReserved(id,id);
@@ -4433,7 +4437,7 @@ var DefaultAssetLibrary = function() {
 	} else {
 		_this15.h[id] = value7;
 	}
-	id = "assets/music/music-goes-here.txt";
+	id = "assets/data/newtiles.png";
 	var _this16 = this.path;
 	if(__map_reserved[id] != null) {
 		_this16.setReserved(id,id);
@@ -4441,13 +4445,13 @@ var DefaultAssetLibrary = function() {
 		_this16.h[id] = id;
 	}
 	var _this17 = this.type;
-	var value8 = "TEXT";
+	var value8 = "IMAGE";
 	if(__map_reserved[id] != null) {
 		_this17.setReserved(id,value8);
 	} else {
 		_this17.h[id] = value8;
 	}
-	id = "assets/sounds/sounds-go-here.txt";
+	id = "assets/images/images-go-here.txt";
 	var _this18 = this.path;
 	if(__map_reserved[id] != null) {
 		_this18.setReserved(id,id);
@@ -4461,7 +4465,7 @@ var DefaultAssetLibrary = function() {
 	} else {
 		_this19.h[id] = value9;
 	}
-	id = "flixel/sounds/beep.ogg";
+	id = "assets/music/music-goes-here.txt";
 	var _this20 = this.path;
 	if(__map_reserved[id] != null) {
 		_this20.setReserved(id,id);
@@ -4469,13 +4473,13 @@ var DefaultAssetLibrary = function() {
 		_this20.h[id] = id;
 	}
 	var _this21 = this.type;
-	var value10 = "SOUND";
+	var value10 = "TEXT";
 	if(__map_reserved[id] != null) {
 		_this21.setReserved(id,value10);
 	} else {
 		_this21.h[id] = value10;
 	}
-	id = "flixel/sounds/flixel.ogg";
+	id = "assets/sounds/sounds-go-here.txt";
 	var _this22 = this.path;
 	if(__map_reserved[id] != null) {
 		_this22.setReserved(id,id);
@@ -4483,69 +4487,97 @@ var DefaultAssetLibrary = function() {
 		_this22.h[id] = id;
 	}
 	var _this23 = this.type;
-	var value11 = "SOUND";
+	var value11 = "TEXT";
 	if(__map_reserved[id] != null) {
 		_this23.setReserved(id,value11);
 	} else {
 		_this23.h[id] = value11;
 	}
-	id = "flixel/fonts/nokiafc22.ttf";
-	var _this24 = this.className;
-	var value12 = _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf;
+	id = "flixel/sounds/beep.ogg";
+	var _this24 = this.path;
 	if(__map_reserved[id] != null) {
-		_this24.setReserved(id,value12);
+		_this24.setReserved(id,id);
 	} else {
-		_this24.h[id] = value12;
+		_this24.h[id] = id;
 	}
 	var _this25 = this.type;
-	var value13 = "FONT";
+	var value12 = "SOUND";
 	if(__map_reserved[id] != null) {
-		_this25.setReserved(id,value13);
+		_this25.setReserved(id,value12);
 	} else {
-		_this25.h[id] = value13;
+		_this25.h[id] = value12;
 	}
-	id = "flixel/fonts/monsterrat.ttf";
-	var _this26 = this.className;
-	var value14 = _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf;
+	id = "flixel/sounds/flixel.ogg";
+	var _this26 = this.path;
 	if(__map_reserved[id] != null) {
-		_this26.setReserved(id,value14);
+		_this26.setReserved(id,id);
 	} else {
-		_this26.h[id] = value14;
+		_this26.h[id] = id;
 	}
 	var _this27 = this.type;
-	var value15 = "FONT";
+	var value13 = "SOUND";
 	if(__map_reserved[id] != null) {
-		_this27.setReserved(id,value15);
+		_this27.setReserved(id,value13);
 	} else {
-		_this27.h[id] = value15;
+		_this27.h[id] = value13;
 	}
-	id = "flixel/images/ui/button.png";
-	var _this28 = this.path;
+	id = "flixel/fonts/nokiafc22.ttf";
+	var _this28 = this.className;
+	var value14 = _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf;
 	if(__map_reserved[id] != null) {
-		_this28.setReserved(id,id);
+		_this28.setReserved(id,value14);
 	} else {
-		_this28.h[id] = id;
+		_this28.h[id] = value14;
 	}
 	var _this29 = this.type;
-	var value16 = "IMAGE";
+	var value15 = "FONT";
 	if(__map_reserved[id] != null) {
-		_this29.setReserved(id,value16);
+		_this29.setReserved(id,value15);
 	} else {
-		_this29.h[id] = value16;
+		_this29.h[id] = value15;
 	}
-	id = "flixel/images/logo/default.png";
-	var _this30 = this.path;
+	id = "flixel/fonts/monsterrat.ttf";
+	var _this30 = this.className;
+	var value16 = _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf;
 	if(__map_reserved[id] != null) {
-		_this30.setReserved(id,id);
+		_this30.setReserved(id,value16);
 	} else {
-		_this30.h[id] = id;
+		_this30.h[id] = value16;
 	}
 	var _this31 = this.type;
-	var value17 = "IMAGE";
+	var value17 = "FONT";
 	if(__map_reserved[id] != null) {
 		_this31.setReserved(id,value17);
 	} else {
 		_this31.h[id] = value17;
+	}
+	id = "flixel/images/ui/button.png";
+	var _this32 = this.path;
+	if(__map_reserved[id] != null) {
+		_this32.setReserved(id,id);
+	} else {
+		_this32.h[id] = id;
+	}
+	var _this33 = this.type;
+	var value18 = "IMAGE";
+	if(__map_reserved[id] != null) {
+		_this33.setReserved(id,value18);
+	} else {
+		_this33.h[id] = value18;
+	}
+	id = "flixel/images/logo/default.png";
+	var _this34 = this.path;
+	if(__map_reserved[id] != null) {
+		_this34.setReserved(id,id);
+	} else {
+		_this34.h[id] = id;
+	}
+	var _this35 = this.type;
+	var value19 = "IMAGE";
+	if(__map_reserved[id] != null) {
+		_this35.setReserved(id,value19);
+	} else {
+		_this35.h[id] = value19;
 	}
 	var assetsPrefix = null;
 	if(ApplicationMain.config != null && Object.prototype.hasOwnProperty.call(ApplicationMain.config,"assetsPrefix")) {
@@ -4556,13 +4588,13 @@ var DefaultAssetLibrary = function() {
 		while(k.hasNext()) {
 			var k1 = k.next();
 			var this1 = this.path;
-			var _this32 = this.path;
-			var value18 = assetsPrefix + (__map_reserved[k1] != null ? _this32.getReserved(k1) : _this32.h[k1]);
-			var _this33 = this1;
+			var _this36 = this.path;
+			var value20 = assetsPrefix + (__map_reserved[k1] != null ? _this36.getReserved(k1) : _this36.h[k1]);
+			var _this37 = this1;
 			if(__map_reserved[k1] != null) {
-				_this33.setReserved(k1,value18);
+				_this37.setReserved(k1,value20);
 			} else {
-				_this33.h[k1] = value18;
+				_this37.h[k1] = value20;
 			}
 		}
 	}
@@ -76207,7 +76239,9 @@ AssetPaths.level1__oel = "assets/data/Levels/level1.oel";
 AssetPaths.level2__oel = "assets/data/Levels/level2.oel";
 AssetPaths.level3__oel = "assets/data/Levels/level3.oel";
 AssetPaths.level4__oel = "assets/data/Levels/level4.oel";
+AssetPaths.level5__oel = "assets/data/Levels/level5.oel";
 AssetPaths["New Project__oep"] = "assets/data/New Project.oep";
+AssetPaths.newtiles__png = "assets/data/newtiles.png";
 AssetPaths.images_go_here__txt = "assets/images/images-go-here.txt";
 AssetPaths.music_goes_here__txt = "assets/music/music-goes-here.txt";
 AssetPaths.sounds_go_here__txt = "assets/sounds/sounds-go-here.txt";

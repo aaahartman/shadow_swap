@@ -58,6 +58,7 @@ class PlayState extends FlxState
 		_glass = new FlxTypedGroup<Glass>();
 		_gates = new FlxTypedGroup<Gate>();
 		_buttons = new FlxTypedGroup<Button>();
+		_switches = new FlxTypedGroup<Switch>();
 		_key = new Key();
 		_entrance = new Door(0, 0, false);
 		_exit = new Door(0, 0, true);
@@ -77,6 +78,7 @@ class PlayState extends FlxState
 		add(_gates);
 		add(_buttons);
  		add(_player);
+ 		add(_switches);
  		add(_shadow);
 		super.create();
 	}
@@ -121,6 +123,10 @@ class PlayState extends FlxState
 		if (entityName == "button")
 		{
 			_buttons.add(new Button(x, y));
+		}
+		if (entityName == "switch")
+		{
+			_switches.add(new Switch(x, y));
 		}
 	}
 

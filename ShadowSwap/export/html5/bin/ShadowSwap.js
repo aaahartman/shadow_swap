@@ -84,7 +84,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "105", company : "HaxeFlixel", file : "ShadowSwap", fps : 60, name : "ShadowSwap", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 480, parameters : "{}", resizable : false, stencilBuffer : true, title : "ShadowSwap", vsync : true, width : 640, x : null, y : null}]};
+	ApplicationMain.config = { build : "106", company : "HaxeFlixel", file : "ShadowSwap", fps : 60, name : "ShadowSwap", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 480, parameters : "{}", resizable : false, stencilBuffer : true, title : "ShadowSwap", vsync : true, width : 640, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -5889,6 +5889,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this._glass = new flixel_group_FlxTypedGroup();
 		this._gates = new flixel_group_FlxTypedGroup();
 		this._buttons = new flixel_group_FlxTypedGroup();
+		this._switches = new flixel_group_FlxTypedGroup();
 		this._key = new Key();
 		this._entrance = new Door(0,0,false);
 		this._exit = new Door(0,0,true);
@@ -5902,6 +5903,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.add(this._gates);
 		this.add(this._buttons);
 		this.add(this._player);
+		this.add(this._switches);
 		this.add(this._shadow);
 		flixel_FlxState.prototype.create.call(this);
 	}
@@ -5936,6 +5938,9 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		}
 		if(entityName == "button") {
 			this._buttons.add(new Button(x,y));
+		}
+		if(entityName == "switch") {
+			this._switches.add(new Switch(x,y));
 		}
 	}
 	,update: function(elapsed) {

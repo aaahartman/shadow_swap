@@ -84,7 +84,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "91", company : "HaxeFlixel", file : "ShadowSwap", fps : 60, name : "ShadowSwap", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 480, parameters : "{}", resizable : false, stencilBuffer : true, title : "ShadowSwap", vsync : true, width : 640, x : null, y : null}]};
+	ApplicationMain.config = { build : "105", company : "HaxeFlixel", file : "ShadowSwap", fps : 60, name : "ShadowSwap", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 480, parameters : "{}", resizable : false, stencilBuffer : true, title : "ShadowSwap", vsync : true, width : 640, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -4949,6 +4949,23 @@ Fan.__super__ = flixel_FlxSprite;
 Fan.prototype = $extend(flixel_FlxSprite.prototype,{
 	__class__: Fan
 });
+var Gate = function(X,Y) {
+	if(Y == null) {
+		Y = 0;
+	}
+	if(X == null) {
+		X = 0;
+	}
+	flixel_FlxSprite.call(this,X,Y);
+	this.makeGraphic(16,16,-16744448);
+	this.set_immovable(true);
+};
+$hxClasses["Gate"] = Gate;
+Gate.__name__ = ["Gate"];
+Gate.__super__ = flixel_FlxSprite;
+Gate.prototype = $extend(flixel_FlxSprite.prototype,{
+	__class__: Gate
+});
 var Glass = function(X,Y) {
 	if(Y == null) {
 		Y = 0;
@@ -5860,9 +5877,6 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this._levels[2] = "assets/data/Levels/level2.oel";
 		this._levels[3] = "assets/data/Levels/level3.oel";
 		this._levels[4] = "assets/data/Levels/level4.oel";
-		var _this = flixel_FlxG.log;
-		haxe_Log.trace = $bind(_this,_this.processTraceData);
-		_this.redirectTraces = true;
 		this._map = new flixel_addons_editors_ogmo_FlxOgmoLoader(this._levels[LevelSelectState.getLevelNumber()]);
 		this._mWalls = this._map.loadTilemap("assets/data/colortiles.png",16,16,"walls");
 		this._mWalls.follow();
@@ -5873,6 +5887,8 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this._player = new Player();
 		this._shadow = new Shadow();
 		this._glass = new flixel_group_FlxTypedGroup();
+		this._gates = new flixel_group_FlxTypedGroup();
+		this._buttons = new flixel_group_FlxTypedGroup();
 		this._key = new Key();
 		this._entrance = new Door(0,0,false);
 		this._exit = new Door(0,0,true);
@@ -5883,6 +5899,8 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.add(this._key);
 		this.add(this._entrance);
 		this.add(this._exit);
+		this.add(this._gates);
+		this.add(this._buttons);
 		this.add(this._player);
 		this.add(this._shadow);
 		flixel_FlxState.prototype.create.call(this);
@@ -5901,6 +5919,9 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		if(entityName == "glass") {
 			this._glass.add(new Glass(x,y));
 		}
+		if(entityName == "gate") {
+			this._gates.add(new Gate(x,y));
+		}
 		if(entityName == "key") {
 			this._key.set_x(x);
 			this._key.set_y(y);
@@ -5912,6 +5933,9 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		if(entityName == "exit") {
 			this._exit.set_x(x);
 			this._exit.set_y(y);
+		}
+		if(entityName == "button") {
+			this._buttons.add(new Button(x,y));
 		}
 	}
 	,update: function(elapsed) {

@@ -23,6 +23,7 @@ class PlayState extends FlxState
 	private var _map:FlxOgmoLoader;
 	private var _mWalls:FlxTilemap;
 	private var _glass:FlxTypedGroup<Glass>;
+	private var _gates:FlxTypedGroup<Gate>;
 	private var _buttons:FlxTypedGroup<Button>;
 	private var _fans:FlxTypedGroup<Fan>;
 	private var _switches:FlxTypedGroup<Switch>;
@@ -43,7 +44,6 @@ class PlayState extends FlxState
 		_levels[3] = AssetPaths.level3__oel;
 		_levels[4] = AssetPaths.level4__oel;
 		
-		FlxG.log.redirectTraces = true;
 		_map = new FlxOgmoLoader(_levels[LevelSelectState.getLevelNumber()]);
  		_mWalls = _map.loadTilemap(AssetPaths.colortiles__png, 16, 16, "walls");
 		_mWalls.follow();
@@ -56,6 +56,8 @@ class PlayState extends FlxState
 		_player = new Player();  //player
 		_shadow = new Shadow();  //shadow
 		_glass = new FlxTypedGroup<Glass>();
+		_gates = new FlxTypedGroup<Gate>();
+		_buttons = new FlxTypedGroup<Button>();
 		_key = new Key();
 		_entrance = new Door(0, 0, false);
 		_exit = new Door(0, 0, true);
@@ -72,6 +74,8 @@ class PlayState extends FlxState
 		add(_key);
 		add(_entrance);
 		add(_exit);
+		add(_gates);
+		add(_buttons);
  		add(_player);
  		add(_shadow);
 		super.create();
@@ -95,6 +99,10 @@ class PlayState extends FlxState
 		{
 			_glass.add(new Glass(x, y));
 		}
+		if (entityName == "gate")
+		{
+			_gates.add(new Gate(x, y));
+		}
 		if (entityName == "key")
 		{
 			_key.x = x;
@@ -109,6 +117,10 @@ class PlayState extends FlxState
 		{
 			_exit.x = x;
 			_exit.y = y;
+		}
+		if (entityName == "button")
+		{
+			_buttons.add(new Button(x, y));
 		}
 	}
 

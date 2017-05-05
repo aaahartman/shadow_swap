@@ -21,6 +21,11 @@ class Gate extends FlxSprite
 		return _id;
 	}
 
+	public function isRaised():Bool
+	{
+		return raised;
+	}
+	
 	public function raiseGate():Void
 	{
 		if (!raised)

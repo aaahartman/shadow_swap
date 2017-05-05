@@ -31,7 +31,7 @@ class PlayState extends FlxState
 	private var _got_key:FlxText;
 
 	private var _levels:Array<Dynamic>;
-
+	private var _timers:Map<Int, FlxTimer>;
 
 	private var _hud:HUD;
 
@@ -45,6 +45,8 @@ class PlayState extends FlxState
 		_levels[3] = AssetPaths.level3__oel;
 		_levels[4] = AssetPaths.level4__oel;
 		
+		_timers = new Map<Int, FlxTimer>();
+
 		_map = new FlxOgmoLoader(_levels[LevelSelectState.getLevelNumber()]);
  		_mWalls = _map.loadTilemap(AssetPaths.colortiles__png, 16, 16, "walls");
 		_mWalls.follow();
@@ -192,18 +194,24 @@ class PlayState extends FlxState
 
 	private function raiseGate(B:FlxObject, P:FlxObject):Void 
 	{
-		var b:Button = cast B;
-		var id:Int = b.getId();
+		var id:Int = (cast B).getId();
 		var itr:FlxTypedGroupIterator<Gate> = _gates.iterator();
+		var curGate:Gate = new Gate();
 		while(itr.hasNext()) {
-			var curGate:Gate = itr.next();
+			curGate = itr.next();
 			if (curGate.getId() == id)
-			{
-				curGate.raiseGate();
-				Reg.currentGates.add(curGate);
-			}
+				break;
 		}
-		new FlxTimer().start(1.0, dropGate, 1);
+		if (curGate.isRaised()) 
+		{
+			_timers.get(id).reset();
+		}
+		else
+		{
+			curGate.raiseGate();
+			Reg.currentGates.add(curGate);
+			_timers.set(id, new FlxTimer().start(0.8, dropGate, 1));
+		}
 	}
 
 	private function dropGate(Timer:FlxTimer):Void 

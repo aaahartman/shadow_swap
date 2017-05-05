@@ -7,6 +7,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.text.FlxText;
 import flixel.group.FlxGroup;
+import flixel.util.FlxTimer;
 
 
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
@@ -58,6 +59,7 @@ class PlayState extends FlxState
 		_glass = new FlxTypedGroup<Glass>();
 		_gates = new FlxTypedGroup<Gate>();
 		_buttons = new FlxTypedGroup<Button>();
+		_fans = new FlxTypedGroup<Fan>();
 		_switches = new FlxTypedGroup<Switch>();
 		_key = new Key();
 		_entrance = new Door(0, 0, false);
@@ -65,10 +67,6 @@ class PlayState extends FlxState
  		_map.loadEntities(placeEntities, "entities");
 		
 		Reg.gotKey = false;
-
-		//_got_key = new FlxText(0, 0, FlxG.width);
-		//_got_key.setFormat(null, 16, FlxColor.YELLOW, CENTER, OUTLINE, 0x131c1b);
-		//_got_key.scrollFactor.set(0, 0);
 		
 		add(_got_key);
 		add(_glass);
@@ -77,6 +75,7 @@ class PlayState extends FlxState
 		add(_exit);
 		add(_gates);
 		add(_buttons);
+		add(_fans);
  		add(_player);
  		add(_switches);
  		add(_shadow);
@@ -92,42 +91,52 @@ class PlayState extends FlxState
 	        _player.x = x;
 	        _player.y = y;
 	    }
-		if (entityName == "shadow")
+		else if (entityName == "shadow")
 	    {
 	        _shadow.x = x;
 	        _shadow.y = y;
 	    }
-		if (entityName == "glass")
-		{
-			_glass.add(new Glass(x, y));
-		}
-		if (entityName == "gate")
-		{
-			_gates.add(new Gate(x, y));
-		}
-		if (entityName == "key")
+		else if (entityName == "key")
 		{
 			_key.x = x;
 			_key.y = y;
 		}
-		if (entityName == "entrance")
+		else if (entityName == "entrance")
 		{
 			_entrance.x = x;
 			_entrance.y = y;
 		}
-		if (entityName == "exit")
+		else if (entityName == "exit")
 		{
 			_exit.x = x;
 			_exit.y = y;
 		}
-		if (entityName == "button")
-		{
-			_buttons.add(new Button(x, y));
+		else {
+			var id:Int = Std.parseInt(entityData.get("_id"));
+			if (entityName == "glass")
+			{
+				_glass.add(new Glass(x, y, id));
+			}
+			if (entityName == "gate")
+			{
+				_gates.add(new Gate(x, y, id));
+			}
+			if (entityName == "button")
+			{
+				_buttons.add(new Button(x, y, id));
+			}
+			if (entityName == "switch")
+			{
+				_switches.add(new Switch(x, y, id));
+			}
+
+			if (entityName == "fan")
+			{
+	 			var dir:Int = Std.parseInt(entityData.get("dir"));
+				_fans.add(new Fan(x, y, id, dir));
+			}
 		}
-		if (entityName == "switch")
-		{
-			_switches.add(new Switch(x, y));
-		}
+
 	}
 
 	override public function update(elapsed:Float):Void
@@ -156,17 +165,14 @@ class PlayState extends FlxState
 
 		super.update(elapsed);
 
-		//if (Reg.gotKey) {
-		//	_got_key.text = 'You got the key!';
-		//} else {
-		//	_got_key.text = 'Go get the key!';
-		//}
-
 		FlxG.collide(_player, _mWalls);
 		FlxG.collide(_shadow, _mWalls);
 		FlxG.collide(_player, _glass);
+		FlxG.collide(_player, _gates);
+		FlxG.collide(_shadow, _gates);
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _exit, unlockDoor);
+		FlxG.overlap(_buttons, _player, raiseGate);
 	}
 
 	private function collectKey(P:FlxObject, K:FlxObject):Void 
@@ -179,10 +185,29 @@ class PlayState extends FlxState
 	{
 		if (Reg.gotKey)
 		{
-
-			//_got_key.text = "You win!";
 			add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
 			haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 300);
 		}
+	}
+
+	private function raiseGate(B:FlxObject, P:FlxObject):Void 
+	{
+		var b:Button = cast B;
+		var id:Int = b.getId();
+		var itr:FlxTypedGroupIterator<Gate> = _gates.iterator();
+		while(itr.hasNext()) {
+			var curGate:Gate = itr.next();
+			if (curGate.getId() == id)
+			{
+				curGate.raiseGate();
+				Reg.currentGates.add(curGate);
+			}
+		}
+		new FlxTimer().start(1.0, dropGate, 1);
+	}
+
+	private function dropGate(Timer:FlxTimer):Void 
+	{
+		Reg.currentGates.pop().dropGate();
 	}
 }

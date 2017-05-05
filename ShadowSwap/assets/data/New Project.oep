@@ -16,7 +16,7 @@
     <Width>640</Width>
     <Height>480</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\Andrew Hartman\shadow_swap\ShadowSwap\assets\data\New Project.oep</Filename>
+  <Filename>C:\Users\cchen\Documents\HaxeFlixel\assets\data\New Project.oep</Filename>
   <AngleMode>Degrees</AngleMode>
   <CameraEnabled>false</CameraEnabled>
   <CameraSize>
@@ -217,7 +217,7 @@
     <EntityDefinition Name="gate" Limit="100" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
       <Size>
         <Width>16</Width>
-        <Height>16</Height>
+        <Height>64</Height>
       </Size>
       <Origin>
         <X>0</X>
@@ -226,7 +226,9 @@
       <ImageDefinition DrawMode="Rectangle" ImagePath="" Tiled="false">
         <RectColor A="255" R="0" G="64" B="64" />
       </ImageDefinition>
-      <ValueDefinitions />
+      <ValueDefinitions>
+        <ValueDefinition xsi:type="IntValueDefinition" Name="_id" Default="0" Min="0" Max="100" ShowSlider="false" />
+      </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>
     <EntityDefinition Name="water" Limit="100" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">

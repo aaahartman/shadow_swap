@@ -165,6 +165,7 @@
       <ValueDefinitions>
         <ValueDefinition xsi:type="IntValueDefinition" Name="_id" Default="0" Min="0" Max="100" ShowSlider="false" />
         <ValueDefinition xsi:type="IntValueDefinition" Name="controlFan" Default="0" Min="0" Max="1" ShowSlider="false" />
+        <ValueDefinition xsi:type="IntValueDefinition" Name="on" Default="0" Min="0" Max="1" ShowSlider="false" />
       </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>

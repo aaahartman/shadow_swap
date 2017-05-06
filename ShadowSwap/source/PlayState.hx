@@ -24,6 +24,7 @@ class PlayState extends FlxState
 
 	private var _map:FlxOgmoLoader;
 	private var _mWalls:FlxTilemap;
+	private var _background:FlxTilemap;
 	private var _glass:FlxTypedGroup<Glass>;
 	private var _glassWithSwitch:FlxTypedGroup<Glass>;
 	private var _gates:FlxTypedGroup<Gate>;
@@ -55,9 +56,13 @@ class PlayState extends FlxState
 		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
 		_mWalls.setTileProperties(4, FlxObject.ANY); // gate
 		_mWalls.setTileProperties(10, FlxObject.ANY); // terrain
-		_mWalls.setTileProperties(3, FlxObject.NONE); // terrain
+
+		_background = _map.loadTilemap(AssetPaths.colortiles__png, 16, 16, "background");
+		_background.follow();
+		_background.setTileProperties(1, FlxObject.NONE);
 
  		add(_mWalls);
+		add(_background);
 
 		_player = new Player();  //player
 		_shadow = new Shadow();  //shadow

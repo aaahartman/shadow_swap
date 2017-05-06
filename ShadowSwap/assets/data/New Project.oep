@@ -16,7 +16,7 @@
     <Width>640</Width>
     <Height>480</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\cchen\Documents\HaxeFlixel\assets\data\New Project.oep</Filename>
+  <Filename>C:\Users\Andrew Hartman\shadow_swap\ShadowSwap\assets\data\New Project.oep</Filename>
   <AngleMode>Degrees</AngleMode>
   <CameraEnabled>false</CameraEnabled>
   <CameraSize>
@@ -147,6 +147,7 @@
       <ValueDefinitions>
         <ValueDefinition xsi:type="IntValueDefinition" Name="dir" Default="0" Min="0" Max="3" ShowSlider="false" />
         <ValueDefinition xsi:type="IntValueDefinition" Name="_id" Default="0" Min="0" Max="100" ShowSlider="false" />
+        <ValueDefinition xsi:type="IntValueDefinition" Name="on" Default="0" Min="0" Max="1" ShowSlider="false" />
       </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>
@@ -198,6 +199,7 @@
       </ImageDefinition>
       <ValueDefinitions>
         <ValueDefinition xsi:type="IntValueDefinition" Name="_id" Default="-1" Min="-1" Max="100" ShowSlider="false" />
+        <ValueDefinition xsi:type="IntValueDefinition" Name="on" Default="0" Min="0" Max="1" ShowSlider="false" />
       </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>

@@ -30,7 +30,6 @@ class PlayState extends FlxState
 	private var _buttons:FlxTypedGroup<Button>;
 	private var _fans:FlxTypedGroup<Fan>;
 	private var _switches:FlxTypedGroup<Switch>;
-	private var _counter:FlxText;
 
 	private var _levels:Array<Dynamic>;
 	private var _timers:Map<Int, FlxTimer>;
@@ -74,7 +73,6 @@ class PlayState extends FlxState
  		_map.loadEntities(placeEntities, "entities");
 		
 		Reg.gotKey = false;
-		_counter = new FlxText(0, 0, FlxG.width, Reg.counter + "", 16);
 		add(_glass);
 		add(_glassWithSwitch);
 		add(_key);
@@ -86,7 +84,6 @@ class PlayState extends FlxState
  		add(_player);
  		add(_switches);
  		add(_shadow);
-		add(_counter);
 		super.create();
 	}
 
@@ -249,8 +246,6 @@ class PlayState extends FlxState
 		if (s.isPressed()) {
 			return;
 		}
-		_counter.text = Reg.counter + "";
-		Reg.counter++;
 
 		s.stepOn();
 		var id:Int = s.getId();

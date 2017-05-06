@@ -64,6 +64,8 @@ class PlayState extends FlxState
  		add(_mWalls);
 		add(_background);
 
+		_hud = new HUD(LevelSelectState.getLevelNumber());
+
 		_player = new Player();  //player
 		_shadow = new Shadow();  //shadow
 		_glass = new FlxTypedGroup<Glass>();
@@ -90,6 +92,7 @@ class PlayState extends FlxState
  		add(_player);
  		add(_switches);
  		add(_shadow);
+ 		add(_hud);
 		super.create();
 	}
 
@@ -111,6 +114,7 @@ class PlayState extends FlxState
 		{
 			_key.x = x;
 			_key.y = y;
+			_hud.setKey();
 		}
 		else if (entityName == "entrance")
 		{
@@ -169,14 +173,16 @@ class PlayState extends FlxState
 	{
 		// restart the game
 		if (FlxG.keys.justPressed.R)
-		{
 			FlxG.switchState(new PlayState());
-		}
 
-		if (FlxG.keys.justPressed.H)
-		{
+		// return to level selection menu
+		if (FlxG.keys.justPressed.L)
 			FlxG.switchState(new LevelSelectState());
-		}
+
+		// return to home menu
+		if (FlxG.keys.justPressed.H)
+			FlxG.switchState(new SplashScreenState());
+
 
 		if (FlxG.keys.justPressed.S)
 		{

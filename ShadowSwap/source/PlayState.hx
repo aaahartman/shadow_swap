@@ -30,7 +30,7 @@ class PlayState extends FlxState
 	private var _buttons:FlxTypedGroup<Button>;
 	private var _fans:FlxTypedGroup<Fan>;
 	private var _switches:FlxTypedGroup<Switch>;
-	private var _got_key:FlxText;
+	private var _counter:FlxText;
 
 	private var _levels:Array<Dynamic>;
 	private var _timers:Map<Int, FlxTimer>;
@@ -74,8 +74,7 @@ class PlayState extends FlxState
  		_map.loadEntities(placeEntities, "entities");
 		
 		Reg.gotKey = false;
-		
-		add(_got_key);
+		_counter = new FlxText(0, 0, FlxG.width, Reg.counter + "", 16);
 		add(_glass);
 		add(_glassWithSwitch);
 		add(_key);
@@ -87,6 +86,7 @@ class PlayState extends FlxState
  		add(_player);
  		add(_switches);
  		add(_shadow);
+		add(_counter);
 		super.create();
 	}
 
@@ -121,31 +121,42 @@ class PlayState extends FlxState
 		}
 		else {
 			var id:Int = Std.parseInt(entityData.get("_id"));
-			if (entityName == "glass")
-			{
-				if (id == -1)
-					_glass.add(new Glass(x, y, id));
-				else
-					_glassWithSwitch.add(new Glass(x, y, id));
-			}
 			if (entityName == "gate")
 			{
 				_gates.add(new Gate(x, y, id));
 			}
-			if (entityName == "button")
+			else if (entityName == "button")
 			{
 				_buttons.add(new Button(x, y, id));
 			}
-			if (entityName == "switch")
-			{
-				var controlFan:Int = Std.parseInt(entityData.get("controlFan"));
+			else {
 				var on:Int = Std.parseInt(entityData.get("on"));
-				_switches.add(new Switch(x, y, id, controlFan, on));
-			}
-			if (entityName == "fan")
-			{
-	 			var dir:Int = Std.parseInt(entityData.get("dir"));
-				_fans.add(new Fan(x, y, id, dir));
+				if (entityName == "glass")
+				{
+					if (id == -1)
+						_glass.add(new Glass(x, y, id));
+					else
+					{
+						if (on == 1)
+							_glassWithSwitch.add(new Glass(x, y, id));
+						else
+						{
+							var newGlass:Glass = new Glass(x, y, id);
+							newGlass.setAlpha(0);
+							_glassWithSwitch.add(newGlass);
+						}
+					}
+				}
+				if (entityName == "switch")
+				{
+					var controlFan:Int = Std.parseInt(entityData.get("controlFan"));
+					_switches.add(new Switch(x, y, id, controlFan, on));
+				}
+				if (entityName == "fan")
+				{
+	 				var dir:Int = Std.parseInt(entityData.get("dir"));
+					_fans.add(new Fan(x, y, id, dir));
+				}
 			}
 		}
 
@@ -175,7 +186,8 @@ class PlayState extends FlxState
 		}
 
 		super.update(elapsed);
-
+		
+		updateSwitches();
 		FlxG.collide(_player, _mWalls);
 		FlxG.collide(_shadow, _mWalls);
 		FlxG.collide(_player, _glass);
@@ -185,7 +197,7 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _exit, unlockDoor);
 		FlxG.overlap(_buttons, _player, raiseGate);
-		FlxG.overlap(_switches, _player, onSwitch);
+		// FlxG.overlap(_switches, _player, onSwitch);
 	}
 
 	private function collectKey(P:FlxObject, K:FlxObject):Void 
@@ -237,6 +249,9 @@ class PlayState extends FlxState
 		if (s.isPressed()) {
 			return;
 		}
+		_counter.text = Reg.counter + "";
+		Reg.counter++;
+
 		s.stepOn();
 		var id:Int = s.getId();
 		if (s.controlFan())
@@ -246,11 +261,11 @@ class PlayState extends FlxState
 		else
 		{
 			var itr:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
+			s.toggleSwitch();
 			while(itr.hasNext()) {
 				var curGlass:Glass = itr.next();
 				if (curGlass.getId() == id)
 				{
-					s.toggleSwitch();
 					 var x:Int = Std.int(curGlass.x);
 					 var y:Int = Std.int(curGlass.y);
 					if (s.on())
@@ -271,21 +286,17 @@ class PlayState extends FlxState
 	}
 
 	// check if player stepped off a switch
-	private function updateSwitch():Void
+	private function updateSwitches():Void
 	{
 		var itr:FlxTypedGroupIterator<Switch> = _switches.iterator();
 		while(itr.hasNext()) {
 			var curSwitch:Switch = itr.next();
 			if (curSwitch.isPressed()) {
-				var x1:Float = curSwitch.x;
-				var y1:Float = curSwitch.y;
-				var x2:Float = _player.x;
-				var y2:Float = _player.y;
-
-				var bbox1:FlxRect = new FlxRect(x1, y1, 16, 16);
-				var bbox2:FlxRect = new FlxRect(x2, y2, 16, 16);
-				if (!bbox1.overlaps(bbox2))
+				if (!_player.overlaps(curSwitch))
 					curSwitch.stepOff();
+			} else {
+				if (_player.overlaps(curSwitch))
+					onSwitch(curSwitch, _player);
 			}
 		}
 	}

@@ -55,6 +55,7 @@ class PlayState extends FlxState
 		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
 		_mWalls.setTileProperties(4, FlxObject.ANY); // gate
 		_mWalls.setTileProperties(10, FlxObject.ANY); // terrain
+		_mWalls.setTileProperties(3, FlxObject.NONE); // terrain
 
  		add(_mWalls);
 
@@ -131,14 +132,14 @@ class PlayState extends FlxState
 				if (entityName == "glass")
 				{
 					if (id == -1)
-						_glass.add(new Glass(x, y, id));
+						_glass.add(new Glass(x, y, id, on));
 					else
 					{
 						if (on == 1)
-							_glassWithSwitch.add(new Glass(x, y, id));
+							_glassWithSwitch.add(new Glass(x, y, id, on));
 						else
 						{
-							var newGlass:Glass = new Glass(x, y, id);
+							var newGlass:Glass = new Glass(x, y, id, on);
 							newGlass.setAlpha(0);
 							_glassWithSwitch.add(newGlass);
 						}
@@ -194,7 +195,14 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _exit, unlockDoor);
 		FlxG.overlap(_buttons, _player, raiseGate);
-		// FlxG.overlap(_switches, _player, onSwitch);
+		
+		var iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
+		while (iter.hasNext()) {
+			var curGlass:Glass = iter.next();
+			if (!curGlass.isOn()) {
+				FlxG.collide(curGlass, _shadow);
+			}
+		}
 	}
 
 	private function collectKey(P:FlxObject, K:FlxObject):Void 
@@ -261,19 +269,17 @@ class PlayState extends FlxState
 				var curGlass:Glass = itr.next();
 				if (curGlass.getId() == id)
 				{
-					 var x:Int = Std.int(curGlass.x);
-					 var y:Int = Std.int(curGlass.y);
 					if (s.on())
 					{
 						// show glass, set tile to -1
+						curGlass.toggle();
 						curGlass.setAlpha(1);
-						_mWalls.setTile(x, y, -1,true);
 					}
 					else
 					{
 						// hide glass, set tile to ground 
+						curGlass.toggle();
 						curGlass.setAlpha(0);
-						_mWalls.setTile(x, y, 1,true);
 					}
 				}
 			}

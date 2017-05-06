@@ -8,6 +8,7 @@ import flixel.FlxObject;
 import flixel.text.FlxText;
 import flixel.group.FlxGroup;
 import flixel.util.FlxTimer;
+import flixel.math.FlxRect;
 
 
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
@@ -23,12 +24,13 @@ class PlayState extends FlxState
 
 	private var _map:FlxOgmoLoader;
 	private var _mWalls:FlxTilemap;
+	private var _background:FlxTilemap;
 	private var _glass:FlxTypedGroup<Glass>;
+	private var _glassWithSwitch:FlxTypedGroup<Glass>;
 	private var _gates:FlxTypedGroup<Gate>;
 	private var _buttons:FlxTypedGroup<Button>;
 	private var _fans:FlxTypedGroup<Fan>;
 	private var _switches:FlxTypedGroup<Switch>;
-	private var _got_key:FlxText;
 
 	private var _levels:Array<Dynamic>;
 	private var _timers:Map<Int, FlxTimer>;
@@ -44,6 +46,7 @@ class PlayState extends FlxState
 		_levels[2] = AssetPaths.level2__oel;
 		_levels[3] = AssetPaths.level3__oel;
 		_levels[4] = AssetPaths.level4__oel;
+		_levels[5] = AssetPaths.level6__oel;
 		
 		_timers = new Map<Int, FlxTimer>();
 
@@ -54,11 +57,18 @@ class PlayState extends FlxState
 		_mWalls.setTileProperties(4, FlxObject.ANY); // gate
 		_mWalls.setTileProperties(10, FlxObject.ANY); // terrain
 
+		_background = _map.loadTilemap(AssetPaths.colortiles__png, 16, 16, "background");
+		_background.follow();
+		_background.setTileProperties(1, FlxObject.NONE);
+
  		add(_mWalls);
+		add(_background);
 
 		_player = new Player();  //player
 		_shadow = new Shadow();  //shadow
 		_glass = new FlxTypedGroup<Glass>();
+		_glassWithSwitch = new FlxTypedGroup<Glass>();
+
 		_gates = new FlxTypedGroup<Gate>();
 		_buttons = new FlxTypedGroup<Button>();
 		_fans = new FlxTypedGroup<Fan>();
@@ -69,9 +79,8 @@ class PlayState extends FlxState
  		_map.loadEntities(placeEntities, "entities");
 		
 		Reg.gotKey = false;
-		
-		add(_got_key);
 		add(_glass);
+		add(_glassWithSwitch);
 		add(_key);
 		add(_entrance);
 		add(_exit);
@@ -115,27 +124,42 @@ class PlayState extends FlxState
 		}
 		else {
 			var id:Int = Std.parseInt(entityData.get("_id"));
-			if (entityName == "glass")
-			{
-				_glass.add(new Glass(x, y, id));
-			}
 			if (entityName == "gate")
 			{
 				_gates.add(new Gate(x, y, id));
 			}
-			if (entityName == "button")
+			else if (entityName == "button")
 			{
 				_buttons.add(new Button(x, y, id));
 			}
-			if (entityName == "switch")
-			{
-				_switches.add(new Switch(x, y, id));
-			}
-
-			if (entityName == "fan")
-			{
-	 			var dir:Int = Std.parseInt(entityData.get("dir"));
-				_fans.add(new Fan(x, y, id, dir));
+			else {
+				var on:Int = Std.parseInt(entityData.get("on"));
+				if (entityName == "glass")
+				{
+					if (id == -1)
+						_glass.add(new Glass(x, y, id, on));
+					else
+					{
+						if (on == 1)
+							_glassWithSwitch.add(new Glass(x, y, id, on));
+						else
+						{
+							var newGlass:Glass = new Glass(x, y, id, on);
+							newGlass.setAlpha(0);
+							_glassWithSwitch.add(newGlass);
+						}
+					}
+				}
+				if (entityName == "switch")
+				{
+					var controlFan:Int = Std.parseInt(entityData.get("controlFan"));
+					_switches.add(new Switch(x, y, id, controlFan, on));
+				}
+				if (entityName == "fan")
+				{
+	 				var dir:Int = Std.parseInt(entityData.get("dir"));
+					_fans.add(new Fan(x, y, id, dir));
+				}
 			}
 		}
 
@@ -143,7 +167,6 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
-
 		// restart the game
 		if (FlxG.keys.justPressed.R)
 		{
@@ -166,15 +189,25 @@ class PlayState extends FlxState
 		}
 
 		super.update(elapsed);
-
+		
+		updateSwitches();
 		FlxG.collide(_player, _mWalls);
 		FlxG.collide(_shadow, _mWalls);
 		FlxG.collide(_player, _glass);
+		FlxG.collide(_player, _glassWithSwitch);
 		FlxG.collide(_player, _gates);
 		FlxG.collide(_shadow, _gates);
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _exit, unlockDoor);
 		FlxG.overlap(_buttons, _player, raiseGate);
+		
+		var iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
+		while (iter.hasNext()) {
+			var curGlass:Glass = iter.next();
+			if (!curGlass.isOn()) {
+				FlxG.collide(curGlass, _shadow);
+			}
+		}
 	}
 
 	private function collectKey(P:FlxObject, K:FlxObject):Void 
@@ -217,5 +250,60 @@ class PlayState extends FlxState
 	private function dropGate(Timer:FlxTimer):Void 
 	{
 		Reg.currentGates.pop().dropGate();
+	}
+
+	private function onSwitch(S:FlxObject, P:FlxObject):Void 
+	{
+		var s:Switch = cast S;
+		// if player is already on the switch, do nothing
+		if (s.isPressed()) {
+			return;
+		}
+
+		s.stepOn();
+		var id:Int = s.getId();
+		if (s.controlFan())
+		{
+			var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
+		}
+		else
+		{
+			var itr:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
+			s.toggleSwitch();
+			while(itr.hasNext()) {
+				var curGlass:Glass = itr.next();
+				if (curGlass.getId() == id)
+				{
+					if (s.on())
+					{
+						// show glass, set tile to -1
+						curGlass.toggle();
+						curGlass.setAlpha(1);
+					}
+					else
+					{
+						// hide glass, set tile to ground 
+						curGlass.toggle();
+						curGlass.setAlpha(0);
+					}
+				}
+			}
+		}
+	}
+
+	// check if player stepped off a switch
+	private function updateSwitches():Void
+	{
+		var itr:FlxTypedGroupIterator<Switch> = _switches.iterator();
+		while(itr.hasNext()) {
+			var curSwitch:Switch = itr.next();
+			if (curSwitch.isPressed()) {
+				if (!_player.overlaps(curSwitch))
+					curSwitch.stepOff();
+			} else {
+				if (_player.overlaps(curSwitch))
+					onSwitch(curSwitch, _player);
+			}
+		}
 	}
 }

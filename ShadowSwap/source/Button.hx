@@ -10,7 +10,9 @@ class Button extends FlxSprite
 	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0)
 	{
 		super(X, Y);
-		makeGraphic(16, 16, FlxColor.ORANGE);
+		//makeGraphic(16, 16, FlxColor.ORANGE);
+		loadGraphic(AssetPaths.Button__png, false, 32, 32);
+		height = 16;
 		immovable = true;
 		_id = id;
 	}

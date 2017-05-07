@@ -11,7 +11,7 @@ class Gate extends FlxSprite
 	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0)
 	{
 		super(X, Y);
-		makeGraphic(16, 64, FlxColor.GREEN);
+		makeGraphic(16, 64, FlxColor.RED);
 		immovable = true;
 		_id = id;
 	}
@@ -30,7 +30,7 @@ class Gate extends FlxSprite
 	{
 		if (!raised)
 		{
-			this.y -= 16;
+			this.alpha = 0;
 			raised = true;
 		}
 	}
@@ -39,7 +39,7 @@ class Gate extends FlxSprite
 	{
 		if (raised)
 		{
-			this.y += 16;
+			this.alpha = 100;
 			raised = false;
 		}
 	}

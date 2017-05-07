@@ -11,7 +11,8 @@ class Glass extends FlxSprite
 	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?on:Int = 0)
 	{
 		super(X, Y);
-		makeGraphic(16, 16, FlxColor.CYAN);
+		//makeGraphic(16, 16, FlxColor.CYAN);
+		loadGraphic(AssetPaths.Glass__png, false, 32, 32);
 		immovable = true;
 		alpha = 1;
 		_id = id;

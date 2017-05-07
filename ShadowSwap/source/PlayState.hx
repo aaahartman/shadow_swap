@@ -52,12 +52,14 @@ class PlayState extends FlxState
 		_timers = new Map<Int, FlxTimer>();
 
 		_map = new FlxOgmoLoader(_levels[LevelSelectState.getLevelNumber()]);
- 		_mWalls = _map.loadTilemap(AssetPaths.t32__png, 32, 32, "walls");
+  		// _mWalls = _map.loadTilemap(AssetPaths.colortiles__png, 16, 16, "walls");
+		_mWalls = _map.loadTilemap(AssetPaths.t32__png, 32, 32, "l32");
 		_mWalls.follow();
-		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
-		_mWalls.setTileProperties(1, FlxObject.ANY); // gate
-		_mWalls.setTileProperties(1, FlxObject.ANY); // terrain
+  		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
+  		// _mWalls.setTileProperties(4, FlxObject.ANY); // gate
+  		// _mWalls.setTileProperties(10, FlxObject.ANY); // terrain
 
+		// _background = _map.loadTilemap(AssetPaths.colortiles__png, 32, 32, "background");
 		_background = _map.loadTilemap(AssetPaths.t32__png, 32, 32, "background");
 		_background.follow();
 		_background.setTileProperties(0, FlxObject.NONE);

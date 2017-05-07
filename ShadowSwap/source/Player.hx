@@ -18,7 +18,14 @@ class Player extends FlxSprite
     public function new(?X:Float=0, ?Y:Float=0)
     {
         super(X, Y);
-        makeGraphic(16, 16, FlxColor.RED);
+        //makeGraphic(16, 16, FlxColor.RED);
+        loadGraphic(AssetPaths.White_spritesheet2__png, true, 32, 32);
+        setFacingFlip(FlxObject.LEFT, true, false);
+        setFacingFlip(FlxObject.RIGHT, false, false);
+        animation.add("move", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 14, true);
+        animation.add("jump", [4, 5, 6, 7, 8], 4, false);
+        animation.add("idle", [0], 0, false);
+
         acceleration.y = gravity;
     }
 
@@ -37,28 +44,40 @@ class Player extends FlxSprite
  		acceleration.x = 0;
  		in_air = !isTouching(FlxObject.FLOOR);
 
- 		if (_left && _right) 
- 		{
+ 		if (_left && _right) {
       		_left = _right = false;
  		}
 
-		if (_jump) 
-		{		
-			if (!in_air) 
-			{
-				velocity.y = -jump_speed;
-			}
+		if (_jump && !in_air) {		
+			velocity.y = -jump_speed;
 		}
+
+		if (!in_air)
+			facing = FlxObject.DOWN;
 
 		velocity.x = 0;
 		if (_left) 
 		{
 		    velocity.x = -speed;
+		    facing = FlxObject.LEFT;
 		}
-
-		if (_right) 
+ 		
+ 		if (_right) 
 		{
 			velocity.x = speed;
+			facing = FlxObject.RIGHT;
+		}
+
+		if (in_air)
+			facing = FlxObject.UP;
+
+		switch (facing) {
+			case FlxObject.UP:
+				animation.play("jump");
+			case FlxObject.LEFT, FlxObject.RIGHT:
+				animation.play("move");
+			case FlxObject.DOWN:
+				animation.play("move");
 		}
 
 	    super.update(elapsed);

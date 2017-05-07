@@ -41,25 +41,26 @@ class PlayState extends FlxState
 	{
 		_levels = new Array();
 
-		_levels[0] = AssetPaths.level0__oel;
+		_levels[0] = AssetPaths.l32__oel;
 		_levels[1] = AssetPaths.level1__oel;
 		_levels[2] = AssetPaths.level2__oel;
 		_levels[3] = AssetPaths.level3__oel;
 		_levels[4] = AssetPaths.level4__oel;
 		_levels[5] = AssetPaths.level6__oel;
+
 		
 		_timers = new Map<Int, FlxTimer>();
 
 		_map = new FlxOgmoLoader(_levels[LevelSelectState.getLevelNumber()]);
- 		_mWalls = _map.loadTilemap(AssetPaths.colortiles__png, 16, 16, "walls");
+ 		_mWalls = _map.loadTilemap(AssetPaths.t32__png, 32, 32, "walls");
 		_mWalls.follow();
 		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
-		_mWalls.setTileProperties(4, FlxObject.ANY); // gate
-		_mWalls.setTileProperties(10, FlxObject.ANY); // terrain
+		_mWalls.setTileProperties(1, FlxObject.ANY); // gate
+		_mWalls.setTileProperties(1, FlxObject.ANY); // terrain
 
-		_background = _map.loadTilemap(AssetPaths.colortiles__png, 16, 16, "background");
+		_background = _map.loadTilemap(AssetPaths.t32__png, 32, 32, "background");
 		_background.follow();
-		_background.setTileProperties(1, FlxObject.NONE);
+		_background.setTileProperties(0, FlxObject.NONE);
 
  		add(_mWalls);
 		add(_background);
@@ -218,7 +219,7 @@ class PlayState extends FlxState
 
 	private function collectKey(P:FlxObject, K:FlxObject):Void 
 	{
-		//_hud.updateHUD();
+		_hud.updateHUD();
 		K.kill();
 	}
 

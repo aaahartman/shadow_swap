@@ -29,7 +29,7 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 		
 		// Default setting: level does not have key.
 		textKey = new FlxText(textLevel.width + 20, 2, 0, "Key", 8);
-		keySlot = new FlxSprite(textLevel.width + 20 + textKey.width + 5, 5);
+		keySlot = new FlxSprite(textLevel.width + 20 + textKey.width, 2);
 		keySlot.makeGraphic(8, 8, FlxColor.BLACK);
 
 		// Reset Button
@@ -61,10 +61,6 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 		});
 	}
 
-	public function updateHUD():Void {
-		keySlot.makeGraphic(8, 8, FlxColor.YELLOW);
-	}
-
 	private function resetState():Void {
 		FlxG.switchState(new PlayState());
 	}
@@ -78,6 +74,11 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 	}
 
 	public function setKey():Void {
-		keySlot.makeGraphic(8, 8, FlxColor.GRAY);
+		//keySlot.makeGraphic(8, 8, FlxColor.GRAY);
+		keySlot.loadGraphic(AssetPaths.Key_slot__png, false, 32, 14);
+	}
+
+	public function updateHUD():Void {
+		keySlot.loadGraphic(AssetPaths.Key_slot_filled__png, false, 32, 14);
 	}
 }

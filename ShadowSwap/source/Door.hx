@@ -10,6 +10,7 @@ class Door extends FlxSprite
 		super(X, Y);
 		if (locked)
 			makeGraphic(16, 16, FlxColor.BROWN);
+			//loadGraphic(AssetPaths.Door__png, false, 32, 56);
 		else
 			makeGraphic(16, 16, FlxColor.ORANGE);
 		immovable = true;

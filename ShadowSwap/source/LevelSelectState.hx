@@ -28,7 +28,7 @@ class LevelSelectState extends FlxState
 
 		_levels = new Array();
 
-		for (i in 0...6) {
+		for (i in 0...7) {
 			_levels[i] = "level" + i + ".oel";
 			var _btn = new FlxButton(FlxG.width / 2 - 50, 50 + 25 * i, _levels[i]);
 			_btn.onDown.callback = clickPlay.bind(i);

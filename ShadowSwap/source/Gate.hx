@@ -30,7 +30,7 @@ class Gate extends FlxSprite
 	{
 		if (!raised)
 		{
-			this.y -= 16;
+			this.y -= this.width;
 			raised = true;
 		}
 	}
@@ -39,7 +39,7 @@ class Gate extends FlxSprite
 	{
 		if (raised)
 		{
-			this.y += 16;
+			this.y += this.width;
 			raised = false;
 		}
 	}

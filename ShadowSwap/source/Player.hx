@@ -9,6 +9,7 @@ import flixel.FlxObject;
 
 class Player extends FlxSprite
 {
+	public var default_speed:Float = 0;
 	public var speed:Float = 120;
 	public var gravity:Float = 800;
 	public var jump_speed:Float = 300;
@@ -22,9 +23,14 @@ class Player extends FlxSprite
         acceleration.y = gravity;
     }
 
+	public function setDefaultSpeed(?speed:Float = 0)
+	{
+		default_speed = speed;
+	}
+
 	override public function update(elapsed:Float):Void
 	{
-        acceleration.x = 0;
+        // acceleration.x = 0;
 
         var _jump:Bool = false;
  		var _left:Bool = false;
@@ -34,7 +40,7 @@ class Player extends FlxSprite
  		_left = FlxG.keys.anyPressed([LEFT, A]);
  		_right = FlxG.keys.anyPressed([RIGHT, D]);
 
- 		acceleration.x = 0;
+ 		// acceleration.x = 0;
  		in_air = !isTouching(FlxObject.FLOOR);
 
  		if (_left && _right) 
@@ -50,7 +56,7 @@ class Player extends FlxSprite
 			}
 		}
 
-		velocity.x = 0;
+		velocity.x = default_speed;
 		if (_left) 
 		{
 		    velocity.x = -speed;

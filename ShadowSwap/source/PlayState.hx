@@ -47,6 +47,7 @@ class PlayState extends FlxState
 		_levels[3] = AssetPaths.level3__oel;
 		_levels[4] = AssetPaths.level4__oel;
 		_levels[5] = AssetPaths.level6__oel;
+		_levels[6] = AssetPaths.level7__oel;
 		
 		_timers = new Map<Int, FlxTimer>();
 
@@ -158,7 +159,7 @@ class PlayState extends FlxState
 				if (entityName == "fan")
 				{
 	 				var dir:Int = Std.parseInt(entityData.get("dir"));
-					_fans.add(new Fan(x, y, id, dir));
+					_fans.add(new Fan(x, y, id, dir, on));
 				}
 			}
 		}
@@ -191,6 +192,7 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		
 		updateSwitches();
+		updateFans();
 		FlxG.collide(_player, _mWalls);
 		FlxG.collide(_shadow, _mWalls);
 		FlxG.collide(_player, _glass);
@@ -265,6 +267,12 @@ class PlayState extends FlxState
 		if (s.controlFan())
 		{
 			var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
+			s.toggleSwitch();
+			while(itr.hasNext()) {
+				var curFan:Fan = itr.next();
+				if (curFan.getId() == id)
+					curFan.toggle();
+			}
 		}
 		else
 		{
@@ -274,18 +282,13 @@ class PlayState extends FlxState
 				var curGlass:Glass = itr.next();
 				if (curGlass.getId() == id)
 				{
+					curGlass.toggle();
 					if (s.on())
-					{
 						// show glass, set tile to -1
-						curGlass.toggle();
 						curGlass.setAlpha(1);
-					}
 					else
-					{
 						// hide glass, set tile to ground 
-						curGlass.toggle();
 						curGlass.setAlpha(0);
-					}
 				}
 			}
 		}
@@ -306,4 +309,61 @@ class PlayState extends FlxState
 			}
 		}
 	}
+
+	private function setPlayerSpeed(Timer:FlxTimer):Void 
+	{
+		_player.setDefaultSpeed(0);
+		_player.velocity.y = 0;
+	}
+
+	private function updateFans():Void
+	{
+		var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
+		while(itr.hasNext()) {
+			var curFan:Fan = itr.next();
+			if (curFan.isOn()) {
+				var size:Float = curFan.width;
+				var numBlocks:Float = 5;
+				switch (curFan.getDir()){
+                    // up
+                    case 0:
+                        if (_player.x > curFan.x - size && _player.x < curFan.x + size
+                        && _player.y <= curFan.y
+                        && _player.y >= curFan.y - numBlocks * size)
+                            _player.velocity.y = -200;
+                        break;
+                    // right
+                    case 1:
+                        if (_player.y > curFan.y - size && _player.y < curFan.y + size
+                        && _player.x >= curFan.x
+                        && _player.x <= curFan.x + numBlocks * size)
+							_player.setDefaultSpeed(200);
+						else
+							_player.setDefaultSpeed(0);
+                        break;
+                    // down
+                    case 2:
+                        if (_player.x > curFan.x - size && _player.x < curFan.x + size
+                        && _player.y >= curFan.y
+                        && _player.y <= curFan.y + numBlocks * size)
+                            _player.velocity.y = 200;
+                        break;
+                    // left
+                    case 3:
+                        if (_player.y > curFan.y - size && _player.y < curFan.y + size
+                        && _player.x <= curFan.x
+                        && _player.x >= curFan.x - numBlocks * size)
+                        {
+							_player.setDefaultSpeed(-200);
+                        }
+						else
+							_player.setDefaultSpeed(0);
+                        break;
+                    default:
+                        break;
+                }
+			}
+		}
+	}
+
 }

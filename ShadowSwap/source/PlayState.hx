@@ -151,14 +151,14 @@ class PlayState extends FlxState
 				_buttons.add(new Button(x, y, id));
 			}
 			else {
-				var on:Int = Std.parseInt(entityData.get("on"));
+				var on:Bool = entityData.get("on") == "true";
 				if (entityName == "glass")
 				{
 					if (id == -1)
 						_glass.add(new Glass(x, y, id, on));
 					else
 					{
-						if (on == 1)
+						if (on)
 							_glassWithSwitch.add(new Glass(x, y, id, on));
 						else
 						{

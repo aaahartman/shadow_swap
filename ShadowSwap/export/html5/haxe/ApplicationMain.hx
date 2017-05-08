@@ -30,10 +30,6 @@ class ApplicationMain {
 		var types = [];
 		
 		
-		urls.push ("assets/data/colortiles.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
 		urls.push ("assets/data/Levels/l32.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
@@ -90,27 +86,39 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("assets/data/New Project.oep");
-		types.push (lime.Assets.AssetType.TEXT);
-		
-		
-		urls.push ("assets/data/newtiles.png");
-		types.push (lime.Assets.AssetType.IMAGE);
-		
-		
 		urls.push ("assets/data/Shadow Swap.oep");
 		types.push (lime.Assets.AssetType.TEXT);
-		
-		
-		urls.push ("assets/data/t32.png");
-		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("assets/data/tiles.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/images/Button.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/ButtonBackdrop.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/ButtonBackdrop2.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/ButtonBackdrop3.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/images/Door.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Glass.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Ground.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -131,6 +139,10 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/images/Shadow2.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Switch.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -235,7 +247,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "133",
+			build: "156",
 			company: "HaxeFlixel",
 			file: "ShadowSwap",
 			fps: 60,
@@ -253,13 +265,13 @@ class ApplicationMain {
 					display: 0,
 					fullscreen: false,
 					hardware: false,
-					height: 480,
+					height: 720,
 					parameters: "{}",
 					resizable: false,
 					stencilBuffer: true,
 					title: "ShadowSwap",
 					vsync: true,
-					width: 640,
+					width: 1280,
 					x: null,
 					y: null
 				},
@@ -277,7 +289,7 @@ class ApplicationMain {
 		
 		#if (js && html5)
 		#if (munit || utest)
-		openfl.Lib.embed (null, 640, 480, "000000");
+		openfl.Lib.embed (null, 1280, 720, "000000");
 		#end
 		#else
 		create ();

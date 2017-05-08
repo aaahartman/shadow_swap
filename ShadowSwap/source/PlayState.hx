@@ -37,6 +37,12 @@ class PlayState extends FlxState
 
 	private var _hud:HUD;
 
+	private var _counter1:FlxText;
+	private var _counter2:FlxText;
+	private var _counter3:FlxText;
+
+	private var _fanQueue:List<Int>;
+
 	override public function create():Void 
 	{
 		_levels = new Array();
@@ -92,6 +98,15 @@ class PlayState extends FlxState
  		add(_switches);
  		add(_shadow);
 		super.create();
+		
+		_counter1 = new FlxText(0, 0, FlxG.width, "" + Reg.counter1, 16);
+		_counter2 = new FlxText(64, 0, FlxG.width, "" + Reg.counter2, 16);
+		_counter3 = new FlxText(128, 0, FlxG.width, "" + Reg.counter3, 16);
+
+		_fanQueue = new List<Int>();
+		add(_counter1);
+		add(_counter2);
+		add(_counter3);
 	}
 
 	private function placeEntities(entityName:String, entityData:Xml):Void
@@ -310,12 +325,6 @@ class PlayState extends FlxState
 		}
 	}
 
-	private function setPlayerSpeed(Timer:FlxTimer):Void 
-	{
-		_player.setDefaultSpeed(0);
-		_player.velocity.y = 0;
-	}
-
 	private function updateFans():Void
 	{
 		var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
@@ -327,40 +336,33 @@ class PlayState extends FlxState
 				switch (curFan.getDir()){
                     // up
                     case 0:
+						_counter1.text = "" + Reg.counter1++;
                         if (_player.x > curFan.x - size && _player.x < curFan.x + size
                         && _player.y <= curFan.y
                         && _player.y >= curFan.y - numBlocks * size)
                             _player.velocity.y = -200;
-                        break;
                     // right
                     case 1:
+						_counter2.text = "" + Reg.counter2++;
                         if (_player.y > curFan.y - size && _player.y < curFan.y + size
                         && _player.x >= curFan.x
                         && _player.x <= curFan.x + numBlocks * size)
 							_player.setDefaultSpeed(200);
-						else
-							_player.setDefaultSpeed(0);
-                        break;
                     // down
                     case 2:
                         if (_player.x > curFan.x - size && _player.x < curFan.x + size
                         && _player.y >= curFan.y
                         && _player.y <= curFan.y + numBlocks * size)
                             _player.velocity.y = 200;
-                        break;
                     // left
                     case 3:
+						_counter3.text = "" + Reg.counter3++;
                         if (_player.y > curFan.y - size && _player.y < curFan.y + size
                         && _player.x <= curFan.x
                         && _player.x >= curFan.x - numBlocks * size)
                         {
 							_player.setDefaultSpeed(-200);
                         }
-						else
-							_player.setDefaultSpeed(0);
-                        break;
-                    default:
-                        break;
                 }
 			}
 		}

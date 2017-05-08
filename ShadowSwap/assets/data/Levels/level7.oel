@@ -63,8 +63,8 @@
     <shadow id="1" x="32" y="96" />
     <player id="2" x="16" y="96" />
     <switch id="0" x="144" y="96" _id="0" controlFan="1" on="0" />
-    <switch id="5" x="192" y="96" _id="1" controlFan="1" on="1" />
-    <switch id="6" x="336" y="96" _id="2" controlFan="1" on="0" />
+    <switch id="5" x="192" y="96" _id="1" controlFan="1" on="0" />
+    <switch id="6" x="496" y="96" _id="2" controlFan="1" on="0" />
     <key id="9" x="544" y="96" />
     <exit id="8" x="592" y="96" />
     <fan id="12" x="80" y="96" _id="0" dir="0" on="0" />    

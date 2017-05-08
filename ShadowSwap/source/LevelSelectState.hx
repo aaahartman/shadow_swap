@@ -68,6 +68,7 @@ class LevelSelectState extends FlxState
 
 	private function clickPlay(_level:Int):Void {
 		_levelNum = _level;
+		//Main.LOGGER.logActionWithNoLevel(LoggingActions.CLICK_START);
 	    FlxG.switchState(new PlayState());
 	}	
 

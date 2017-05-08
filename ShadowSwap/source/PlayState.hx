@@ -69,6 +69,11 @@ class PlayState extends FlxState
   		_mWalls.setTileProperties(3, FlxObject.NONE); // ground
 
  		add(_mWalls);
+		
+		_background = _map.loadTilemap(AssetPaths.tiles__png, 32, 32, "background");
+		_background.follow();
+		_background.setTileProperties(1, FlxObject.NONE);
+		add(_background);
 
 		_hud = new HUD(LevelSelectState.getLevelNumber());
 

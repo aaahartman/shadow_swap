@@ -16,7 +16,7 @@
     <Width>1280</Width>
     <Height>720</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\andre\shadow_swap\ShadowSwap\assets\data\Shadow Swap.oep</Filename>
+  <Filename>C:\Users\cchen\Documents\HaxeFlixel\assets\data\Shadow Swap.oep</Filename>
   <AngleMode>Degrees</AngleMode>
   <CameraEnabled>false</CameraEnabled>
   <CameraSize>
@@ -48,6 +48,18 @@
         <X>1</X>
         <Y>1</Y>
       </ScrollFactor>
+    </LayerDefinition>
+    <LayerDefinition xsi:type="TileLayerDefinition">
+      <Name>background</Name>
+      <Grid>
+        <Width>32</Width>
+        <Height>32</Height>
+      </Grid>
+      <ScrollFactor>
+        <X>1</X>
+        <Y>1</Y>
+      </ScrollFactor>
+      <ExportMode>CSV</ExportMode>
     </LayerDefinition>
   </LayerDefinitions>
   <Tilesets>

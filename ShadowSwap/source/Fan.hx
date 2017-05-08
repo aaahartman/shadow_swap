@@ -3,39 +3,35 @@ package;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.FlxObject;
+import flixel.math.FlxRect;
 
 class Fan extends FlxSprite
 {
 	private var _id:Int = 0;
 	private var _dir:Int = 0;
 	private var _on:Bool = false;
+	private var _bbox:FlxRect;
+	private var _numBlocks:Int = 5;
+	private var _size:Int = 16;
 
-	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Int = 0)
+	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Bool = false)
 	{
 		super(X, Y);
-		makeGraphic(16, 48, FlxColor.ORANGE);
-        setFacingFlip(FlxObject.LEFT, true, true);
-        setFacingFlip(FlxObject.RIGHT, true, true);
-        setFacingFlip(FlxObject.UP, true, true);
-        setFacingFlip(FlxObject.DOWN, true, true);
+		makeGraphic(_size, _size, FlxColor.ORANGE);
 		switch(dir) {
 			case 0:
-				angle = 0;
-				facing = FlxObject.UP;
+				_bbox = new FlxRect(X, Y - _size * _numBlocks, _size, _size * _numBlocks);
 			case 1:
-				angle = 90;
-				facing = FlxObject.RIGHT;
+				_bbox = new FlxRect(X, Y, _size * _numBlocks, _size);
 			case 2:
-				angle = 180;
-	   			facing = FlxObject.DOWN;
+				_bbox = new FlxRect(X, Y, _size, _size * _numBlocks);
 			case 3:
-				angle = 270;
-				facing = FlxObject.LEFT;
+				_bbox = new FlxRect(X - _size * _numBlocks, Y, _size * _numBlocks, _size);
 		}
 		immovable = true;
 		_id = id;
 		_dir = dir;
-		_on = (on == 1);
+		_on = on;
 	}
 
 	public function getId():Int
@@ -56,5 +52,10 @@ class Fan extends FlxSprite
 	public function toggle():Void
 	{
 		_on = !_on;
+	}
+	
+	public function bbox():FlxRect
+	{
+		return _bbox;
 	}
 }

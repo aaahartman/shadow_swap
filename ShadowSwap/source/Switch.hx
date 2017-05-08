@@ -10,14 +10,14 @@ class Switch extends FlxSprite
 	private var _controlFan:Bool = false;
 	private var _on:Bool = false;
 
-	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?controlFan:Int = 0, ?on:Int = 0)
+	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?controlFan:Int = 0, ?on:Bool = false)
 	{
 		super(X, Y);
 		makeGraphic(16, 16, FlxColor.WHITE);
 		immovable = true;
 		_id = id;
 		_controlFan = (controlFan == 1);
-		_on = (on == 1);
+		_on = on;
 	}
 
 	public function getId():Int

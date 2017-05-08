@@ -5,6 +5,7 @@ import flixel.system.FlxAssets;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
 import flixel.FlxObject;
 
 class Player extends FlxSprite
@@ -23,7 +24,12 @@ class Player extends FlxSprite
         acceleration.y = gravity;
     }
 
-	public function setDefaultSpeed(?speed:Float = 0)
+	public function bbox():FlxRect
+	{
+		return new FlxRect(Std.int(this.x), Std.int(this.y), 16, 16);
+	}
+
+	public function setDefaultSpeed(?speed:Float = 0):Void
 	{
 		default_speed = speed;
 	}
@@ -59,12 +65,12 @@ class Player extends FlxSprite
 		velocity.x = default_speed;
 		if (_left) 
 		{
-		    velocity.x = -speed;
+		    velocity.x -= speed;
 		}
 
 		if (_right) 
 		{
-			velocity.x = speed;
+			velocity.x += speed;
 		}
 
 	    super.update(elapsed);

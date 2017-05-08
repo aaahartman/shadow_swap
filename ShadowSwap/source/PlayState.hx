@@ -41,7 +41,7 @@ class PlayState extends FlxState
 	private var _counter2:FlxText;
 	private var _counter3:FlxText;
 
-	private var _fanQueue:List<Int>;
+	private var _fanBoxes = new Array<FlxRect>();
 
 	override public function create():Void 
 	{
@@ -103,7 +103,7 @@ class PlayState extends FlxState
 		_counter2 = new FlxText(64, 0, FlxG.width, "" + Reg.counter2, 16);
 		_counter3 = new FlxText(128, 0, FlxG.width, "" + Reg.counter3, 16);
 
-		_fanQueue = new List<Int>();
+		
 		add(_counter1);
 		add(_counter2);
 		add(_counter3);
@@ -149,14 +149,14 @@ class PlayState extends FlxState
 				_buttons.add(new Button(x, y, id));
 			}
 			else {
-				var on:Int = Std.parseInt(entityData.get("on"));
+				var on:Bool = (entityData.get("on") == "true");
 				if (entityName == "glass")
 				{
 					if (id == -1)
 						_glass.add(new Glass(x, y, id, on));
 					else
 					{
-						if (on == 1)
+						if (on)
 							_glassWithSwitch.add(new Glass(x, y, id, on));
 						else
 						{
@@ -174,7 +174,9 @@ class PlayState extends FlxState
 				if (entityName == "fan")
 				{
 	 				var dir:Int = Std.parseInt(entityData.get("dir"));
-					_fans.add(new Fan(x, y, id, dir, on));
+					var fan:Fan = new Fan(x, y, id, dir, on);
+					_fanBoxes.push(fan.bbox());
+					_fans.add(fan);
 				}
 			}
 		}
@@ -325,6 +327,19 @@ class PlayState extends FlxState
 		}
 	}
 
+	private function overlapsWithAnyFan(bbox:FlxRect):Bool
+	{
+		var iter:Iterator<FlxRect> = _fanBoxes.iterator();
+		while(iter.hasNext())
+		{
+			if (iter.next().overlaps(bbox))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private function updateFans():Void
 	{
 		var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
@@ -333,36 +348,33 @@ class PlayState extends FlxState
 			if (curFan.isOn()) {
 				var size:Float = curFan.width;
 				var numBlocks:Float = 5;
+					// _counter1.text = ""+curFan.bbox().right;
+					// _counter2.text = ""+curFan.bbox().left;
+					// _counter3.text = ""+curFan.bbox().y;
 				switch (curFan.getDir()){
                     // up
                     case 0:
-						_counter1.text = "" + Reg.counter1++;
-                        if (_player.x > curFan.x - size && _player.x < curFan.x + size
-                        && _player.y <= curFan.y
-                        && _player.y >= curFan.y - numBlocks * size)
+						//_counter1.text = "" + Reg.counter1++;
+						if (_player.bbox().overlaps(curFan.bbox()))
                             _player.velocity.y = -200;
                     // right
                     case 1:
-						_counter2.text = "" + Reg.counter2++;
-                        if (_player.y > curFan.y - size && _player.y < curFan.y + size
-                        && _player.x >= curFan.x
-                        && _player.x <= curFan.x + numBlocks * size)
-							_player.setDefaultSpeed(200);
+						//_counter2.text = "" + Reg.counter2++;
+                        if (!overlapsWithAnyFan(_player.bbox()))
+							_player.setDefaultSpeed(0);
+                        else if (_player.bbox().overlaps(curFan.bbox()))
+							_player.setDefaultSpeed(100);
                     // down
                     case 2:
-                        if (_player.x > curFan.x - size && _player.x < curFan.x + size
-                        && _player.y >= curFan.y
-                        && _player.y <= curFan.y + numBlocks * size)
+                        if (_player.bbox().overlaps(curFan.bbox()))
                             _player.velocity.y = 200;
                     // left
                     case 3:
-						_counter3.text = "" + Reg.counter3++;
-                        if (_player.y > curFan.y - size && _player.y < curFan.y + size
-                        && _player.x <= curFan.x
-                        && _player.x >= curFan.x - numBlocks * size)
-                        {
-							_player.setDefaultSpeed(-200);
-                        }
+						//_counter3.text = "" + Reg.counter3++;
+                        if (!overlapsWithAnyFan(_player.bbox()))
+							_player.setDefaultSpeed(0);
+                        else if (_player.bbox().overlaps(curFan.bbox()))
+							_player.setDefaultSpeed(-100);
                 }
 			}
 		}

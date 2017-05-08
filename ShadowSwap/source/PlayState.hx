@@ -37,10 +37,6 @@ class PlayState extends FlxState
 
 	private var _hud:HUD;
 
-	private var _counter1:FlxText;
-	private var _counter2:FlxText;
-	private var _counter3:FlxText;
-
 	private var _fanBoxes = new Array<FlxRect>();
 
 	override public function create():Void 
@@ -98,15 +94,6 @@ class PlayState extends FlxState
  		add(_switches);
  		add(_shadow);
 		super.create();
-		
-		_counter1 = new FlxText(0, 0, FlxG.width, "" + Reg.counter1, 16);
-		_counter2 = new FlxText(64, 0, FlxG.width, "" + Reg.counter2, 16);
-		_counter3 = new FlxText(128, 0, FlxG.width, "" + Reg.counter3, 16);
-
-		
-		add(_counter1);
-		add(_counter2);
-		add(_counter3);
 	}
 
 	private function placeEntities(entityName:String, entityData:Xml):Void
@@ -348,18 +335,13 @@ class PlayState extends FlxState
 			if (curFan.isOn()) {
 				var size:Float = curFan.width;
 				var numBlocks:Float = 5;
-					// _counter1.text = ""+curFan.bbox().right;
-					// _counter2.text = ""+curFan.bbox().left;
-					// _counter3.text = ""+curFan.bbox().y;
 				switch (curFan.getDir()){
                     // up
                     case 0:
-						//_counter1.text = "" + Reg.counter1++;
 						if (_player.bbox().overlaps(curFan.bbox()))
                             _player.velocity.y = -200;
                     // right
                     case 1:
-						//_counter2.text = "" + Reg.counter2++;
                         if (!overlapsWithAnyFan(_player.bbox()))
 							_player.setDefaultSpeed(0);
                         else if (_player.bbox().overlaps(curFan.bbox()))
@@ -370,7 +352,6 @@ class PlayState extends FlxState
                             _player.velocity.y = 200;
                     // left
                     case 3:
-						//_counter3.text = "" + Reg.counter3++;
                         if (!overlapsWithAnyFan(_player.bbox()))
 							_player.setDefaultSpeed(0);
                         else if (_player.bbox().overlaps(curFan.bbox()))

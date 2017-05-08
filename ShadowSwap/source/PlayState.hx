@@ -263,7 +263,7 @@ class PlayState extends FlxState
 		{
 			curGate.raiseGate();
 			Reg.currentGates.add(curGate);
-			_timers.set(id, new FlxTimer().start(0.8, dropGate, 1));
+			_timers.set(id, new FlxTimer().start(0.5, dropGate, 1));
 		}
 	}
 

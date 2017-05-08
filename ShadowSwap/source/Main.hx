@@ -35,5 +35,6 @@ class Main extends Sprite
 
 	private function onSessionReady(sessionRecieved:Bool):Void {
 		addChild(new FlxGame(640, 480, SplashScreenState));
+		//addChild(new FlxGame(1280, 720, SplashScreenState));
 	}
 }

@@ -9,7 +9,7 @@ import flixel.FlxObject;
 
 class Player extends FlxSprite
 {
-	public var speed:Float = 120;
+	public var speed:Float = 160;
 	public var gravity:Float = 800;
 	public var jump_speed:Float = 340;
 	private var jump_duration:Float = -1;

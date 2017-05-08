@@ -19,8 +19,7 @@ class PlayState extends FlxState
 	private var _shadow:Shadow;	
 	
 	private var _key:Key;
-	private var _entrance:Door;
-	private var _exit:Door;
+	private var _door:Door;
 
 	private var _map:FlxOgmoLoader;
 	private var _mWalls:FlxTilemap;
@@ -42,11 +41,11 @@ class PlayState extends FlxState
 		_levels = new Array();
 
 		// Initialize level tilemap paths
-		_levels[0] = AssetPaths.l32__oel;
-		_levels[1] = AssetPaths.level1__oel;
-		_levels[2] = AssetPaths.level2__oel;
-		_levels[3] = AssetPaths.level3__oel;
-		_levels[4] = AssetPaths.level4__oel;
+		_levels[0] = AssetPaths._l1__oel;
+		_levels[1] = AssetPaths._l2__oel;
+		_levels[2] = AssetPaths._l3__oel;
+		_levels[3] = AssetPaths._l5__oel;
+		_levels[4] = AssetPaths._l6__oel;
 		_levels[5] = AssetPaths.level6__oel;
 		_levels[6] = AssetPaths.level6__oel;
 		_levels[7] = AssetPaths.level6__oel;
@@ -63,20 +62,13 @@ class PlayState extends FlxState
 		_timers = new Map<Int, FlxTimer>();
 
 		_map = new FlxOgmoLoader(_levels[LevelSelectState.getLevelNumber()]);
-  		// _mWalls = _map.loadTilemap(AssetPaths.colortiles__png, 16, 16, "walls");
-		_mWalls = _map.loadTilemap(AssetPaths.t32_test__png, 32, 32, "walls");
+		_mWalls = _map.loadTilemap(AssetPaths.tiles__png, 32, 32, "walls");
 		_mWalls.follow();
   		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
-  		// _mWalls.setTileProperties(4, FlxObject.ANY); // gate
-  		// _mWalls.setTileProperties(10, FlxObject.ANY); // terrain
-
-		// _background = _map.loadTilemap(AssetPaths.colortiles__png, 32, 32, "background");
-		_background = _map.loadTilemap(AssetPaths.t32_test__png, 32, 32, "background");
-		_background.follow();
-		_background.setTileProperties(0, FlxObject.NONE);
+  		_mWalls.setTileProperties(2, FlxObject.ANY); // ground
+  		_mWalls.setTileProperties(3, FlxObject.NONE); // ground
 
  		add(_mWalls);
-		add(_background);
 
 		_hud = new HUD(LevelSelectState.getLevelNumber());
 
@@ -90,16 +82,14 @@ class PlayState extends FlxState
 		_fans = new FlxTypedGroup<Fan>();
 		_switches = new FlxTypedGroup<Switch>();
 		_key = new Key();
-		_entrance = new Door(0, 0, false);
-		_exit = new Door(0, 0, true);
+		_door = new Door(0, 0, true);
  		_map.loadEntities(placeEntities, "entities");
 		
 		Reg.gotKey = false;
 		add(_glass);
 		add(_glassWithSwitch);
 		add(_key);
-		add(_entrance);
-		add(_exit);
+		add(_door);
 		add(_gates);
 		add(_buttons);
 		add(_fans);
@@ -130,15 +120,10 @@ class PlayState extends FlxState
 			_key.y = y;
 			_hud.setKey();
 		}
-		else if (entityName == "entrance")
+		else if (entityName == "door")
 		{
-			_entrance.x = x;
-			_entrance.y = y;
-		}
-		else if (entityName == "exit")
-		{
-			_exit.x = x;
-			_exit.y = y;
+			_door.x = x;
+			_door.y = y;
 		}
 		else {
 			var id:Int = Std.parseInt(entityData.get("_id"));
@@ -151,14 +136,14 @@ class PlayState extends FlxState
 				_buttons.add(new Button(x, y, id));
 			}
 			else {
-				var on:Int = Std.parseInt(entityData.get("on"));
+				var on:Bool = entityData.get("_on") == "true";
 				if (entityName == "glass")
 				{
-					if (id == -1)
+					if (id == 0)
 						_glass.add(new Glass(x, y, id, on));
 					else
 					{
-						if (on == 1)
+						if (on)
 							_glassWithSwitch.add(new Glass(x, y, id, on));
 						else
 						{
@@ -218,7 +203,7 @@ class PlayState extends FlxState
 		FlxG.collide(_player, _gates);
 		FlxG.collide(_shadow, _gates);
 		FlxG.overlap(_player, _key, collectKey);
-		FlxG.overlap(_player, _exit, unlockDoor);
+		FlxG.overlap(_player, _door, unlockDoor);
 		FlxG.overlap(_buttons, _player, raiseGate);
 		
 		var iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
@@ -263,7 +248,7 @@ class PlayState extends FlxState
 		{
 			curGate.raiseGate();
 			Reg.currentGates.add(curGate);
-			_timers.set(id, new FlxTimer().start(0.8, dropGate, 1));
+			_timers.set(id, new FlxTimer().start(0.5, dropGate, 1));
 		}
 	}
 

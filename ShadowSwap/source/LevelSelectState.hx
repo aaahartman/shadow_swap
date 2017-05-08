@@ -33,24 +33,24 @@ class LevelSelectState extends FlxState
 		_canvas.drawRect(FlxG.width / 2 + 90, 90, 100, 250, 0xff937566);
 
 		// Stage 1 buttons
-		for (i in 1...6) {
-			var _btn = new FlxButton(FlxG.width / 2 - 200, 50 + 50 * i, "Level " + i);
+		for (i in 0...5) {
+			var _btn = new FlxButton(FlxG.width / 2 - 200, 50 + 50 * (i + 1), "Level " + i);
 			_btn.onDown.callback = clickPlay.bind(i);
 			_btn.loadGraphic("assets/images/ButtonBackdrop.png", true, 75, 27);
 			add(_btn);
 		}
 
 		// Stage 2 buttons
-		for (i in 6...11) {
-			var _btn = new FlxButton(FlxG.width / 2 - 50, 50 + 50 * (i - 5), "Level " + i);
+		for (i in 5...10) {
+			var _btn = new FlxButton(FlxG.width / 2 - 50, 50 + 50 * (i - 4), "Level " + i);
 			_btn.onDown.callback = clickPlay.bind(i);
 			_btn.loadGraphic("assets/images/ButtonBackdrop2.png", true, 75, 27);
 			add(_btn);
 		}
 
 		// Stage 3 buttons
-		for (i in 11...16) {
-			var _btn = new FlxButton(FlxG.width / 2 + 100, 50 + 50 * (i - 10), "Level " + i);
+		for (i in 10...15) {
+			var _btn = new FlxButton(FlxG.width / 2 + 100, 50 + 50 * (i - 9), "Level " + i);
 			_btn.onDown.callback = clickPlay.bind(i);
 			_btn.loadGraphic("assets/images/ButtonBackdrop3.png", true, 75, 27);
 			add(_btn);

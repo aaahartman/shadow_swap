@@ -11,7 +11,7 @@ class Player extends FlxSprite
 {
 	public var speed:Float = 120;
 	public var gravity:Float = 800;
-	public var jump_speed:Float = 300;
+	public var jump_speed:Float = 340;
 	private var jump_duration:Float = -1;
 	private var in_air:Bool = false;
 
@@ -23,13 +23,13 @@ class Player extends FlxSprite
         setFacingFlip(FlxObject.LEFT, true, false);
         setFacingFlip(FlxObject.RIGHT, false, false);
         animation.add("move", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 14, true);
-        animation.add("jump", [4, 5, 6, 7, 8], 4, false);
+        animation.add("jump", [4, 5, 6, 7, 8], 6, false);
         animation.add("idle", [0], 0, false);
 
         acceleration.y = gravity;
     }
 
-	override public function update(elapsed:Float):Void
+	override public function update(elapsed:Float):Void 
 	{
         acceleration.x = 0;
 
@@ -79,6 +79,7 @@ class Player extends FlxSprite
 			case FlxObject.DOWN:
 				animation.play("move");
 		}
+		
 
 	    super.update(elapsed);
 	}

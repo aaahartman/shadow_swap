@@ -41,12 +41,23 @@ class PlayState extends FlxState
 	{
 		_levels = new Array();
 
+		// Initialize level tilemap paths
 		_levels[0] = AssetPaths.l32__oel;
 		_levels[1] = AssetPaths.level1__oel;
 		_levels[2] = AssetPaths.level2__oel;
 		_levels[3] = AssetPaths.level3__oel;
 		_levels[4] = AssetPaths.level4__oel;
 		_levels[5] = AssetPaths.level6__oel;
+		_levels[6] = AssetPaths.level6__oel;
+		_levels[7] = AssetPaths.level6__oel;
+		_levels[8] = AssetPaths.level6__oel;
+		_levels[9] = AssetPaths.level6__oel;
+		_levels[10] = AssetPaths.level6__oel;
+		_levels[11] = AssetPaths.level6__oel;
+		_levels[12] = AssetPaths.level6__oel;
+		_levels[13] = AssetPaths.level6__oel;
+		_levels[14] = AssetPaths.level6__oel;
+		_levels[15] = AssetPaths.level6__oel;
 
 		
 		_timers = new Map<Int, FlxTimer>();

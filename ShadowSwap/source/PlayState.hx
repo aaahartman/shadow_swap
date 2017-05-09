@@ -36,6 +36,8 @@ class PlayState extends FlxState
 
 	private var _hud:HUD;
 
+	private var _fanBoxes = new Array<FlxRect>();
+
 	override public function create():Void 
 	{
 		_levels = new Array();
@@ -58,7 +60,6 @@ class PlayState extends FlxState
 		_levels[14] = AssetPaths.level6__oel;
 		_levels[15] = AssetPaths.level6__oel;
 
-		
 		_timers = new Map<Int, FlxTimer>();
 
 		_map = new FlxOgmoLoader(_levels[LevelSelectState.getLevelNumber()]);
@@ -166,7 +167,9 @@ class PlayState extends FlxState
 				if (entityName == "fan")
 				{
 	 				var dir:Int = Std.parseInt(entityData.get("dir"));
-					_fans.add(new Fan(x, y, id, dir));
+					var fan:Fan = new Fan(x, y, id, dir, on);
+					_fanBoxes.push(fan.bbox());
+					_fans.add(fan);
 				}
 			}
 		}
@@ -201,6 +204,7 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		
 		updateSwitches();
+		updateFans();
 		FlxG.collide(_player, _mWalls);
 		FlxG.collide(_shadow, _mWalls);
 		FlxG.collide(_player, _glass);
@@ -275,6 +279,12 @@ class PlayState extends FlxState
 		if (s.controlFan())
 		{
 			var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
+			s.toggleSwitch();
+			while(itr.hasNext()) {
+				var curFan:Fan = itr.next();
+				if (curFan.getId() == id)
+					curFan.toggle();
+			}
 		}
 		else
 		{
@@ -284,18 +294,13 @@ class PlayState extends FlxState
 				var curGlass:Glass = itr.next();
 				if (curGlass.getId() == id)
 				{
+					curGlass.toggle();
 					if (s.on())
-					{
 						// show glass, set tile to -1
-						curGlass.toggle();
 						curGlass.setAlpha(1);
-					}
 					else
-					{
 						// hide glass, set tile to ground 
-						curGlass.toggle();
 						curGlass.setAlpha(0);
-					}
 				}
 			}
 		}
@@ -316,4 +321,52 @@ class PlayState extends FlxState
 			}
 		}
 	}
+
+	private function overlapsWithAnyFan(bbox:FlxRect):Bool
+	{
+		var iter:Iterator<FlxRect> = _fanBoxes.iterator();
+		while(iter.hasNext())
+		{
+			if (iter.next().overlaps(bbox))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private function updateFans():Void
+	{
+		var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
+		while(itr.hasNext()) {
+			var curFan:Fan = itr.next();
+			if (curFan.isOn()) {
+				var size:Float = curFan.width;
+				var numBlocks:Float = 5;
+				switch (curFan.getDir()){
+                    // up
+                    case 0:
+						if (_player.bbox().overlaps(curFan.bbox()))
+                            _player.velocity.y = -200;
+                    // right
+                    case 1:
+                        if (!overlapsWithAnyFan(_player.bbox()))
+							_player.setDefaultSpeed(0);
+                        else if (_player.bbox().overlaps(curFan.bbox()))
+							_player.setDefaultSpeed(100);
+                    // down
+                    case 2:
+                        if (_player.bbox().overlaps(curFan.bbox()))
+                            _player.velocity.y = 200;
+                    // left
+                    case 3:
+                        if (!overlapsWithAnyFan(_player.bbox()))
+							_player.setDefaultSpeed(0);
+                        else if (_player.bbox().overlaps(curFan.bbox()))
+							_player.setDefaultSpeed(-100);
+                }
+			}
+		}
+	}
+
 }

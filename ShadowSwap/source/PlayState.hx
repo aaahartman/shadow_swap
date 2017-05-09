@@ -382,8 +382,15 @@ class PlayState extends FlxState
 				switch (curFan.getDir()){
                     // up
                     case 0:
-						if (_player.bbox().overlaps(curFan.bbox()))
+					 	if (!overlapsWithAnyFan(_player.bbox()))
+						{
+							_player.acceleration.y = _player.gravity;
+						}
+						else if (_player.bbox().overlaps(curFan.bbox()))
+						{
                             _player.velocity.y = -200;
+							_player.acceleration.y = 0;
+						}
                     // right
                     case 1:
                         if (!overlapsWithAnyFan(_player.bbox()))
@@ -397,8 +404,15 @@ class PlayState extends FlxState
 						}
                     // down
                     case 2:
-                        if (_player.bbox().overlaps(curFan.bbox()))
+					 	if (!overlapsWithAnyFan(_player.bbox()))
+						{
+							_player.acceleration.y = _player.gravity;
+						}
+                        else if (_player.bbox().overlaps(curFan.bbox()))
+						{
                             _player.velocity.y = 200;
+							_player.acceleration.y = 0;
+						}
                     // left
                     case 3:
                         if (!overlapsWithAnyFan(_player.bbox()))

@@ -143,6 +143,10 @@ class PlayState extends FlxState
 			{
 				_buttons.add(new Button(x, y, id));
 			}
+			else if (entityName == "water")
+			{
+				// do something
+			}
 			else {
 				var on:Bool = entityData.get("_on").toLowerCase() == "true";
 				if (entityName == "glass")

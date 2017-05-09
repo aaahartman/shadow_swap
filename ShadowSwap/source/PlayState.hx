@@ -34,6 +34,7 @@ class PlayState extends FlxState
 	private var _levels:Array<Dynamic>;
 	private var _levelNum:Int;
 	private var _timers:Map<Int, FlxTimer>;
+	private var _hint:Hint;
 
 	private var _hud:HUD;
 
@@ -90,6 +91,7 @@ class PlayState extends FlxState
 		_key = new Key();
 		_door = new Door(0, 0, true);
  		_map.loadEntities(placeEntities, "entities");
+
 		
 		Reg.gotKey = false;
 		add(_glass);
@@ -103,6 +105,7 @@ class PlayState extends FlxState
  		add(_switches);
  		add(_shadow);
  		add(_hud);
+ 		add(_hint);
 		super.create();
 
 
@@ -147,6 +150,10 @@ class PlayState extends FlxState
 			else if (entityName == "water")
 			{
 				// do something
+			}
+			else if (entityName == "hint") 
+			{
+				_hint = new Hint(x, y, id);
 			}
 			else {
 				var on:Bool = entityData.get("_on").toLowerCase() == "true";

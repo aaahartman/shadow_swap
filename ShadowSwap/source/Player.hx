@@ -93,8 +93,11 @@ class Player extends FlxSprite
 			case FlxObject.DOWN:
 				animation.play("move");
 		}
-		
-
 	    super.update(elapsed);
 	}
+
+	public function isInAir():Bool {
+		return in_air;
+	}
+
 }

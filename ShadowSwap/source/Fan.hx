@@ -12,7 +12,7 @@ class Fan extends FlxSprite
 	private var _on:Bool = false;
 	private var _bbox:FlxRect;
 	private var _rotation:Bool = false;
-	private var _numBlocks:Int = 5;
+	private var _numBlocks:Int = 7;
 	private var _size:Int = 32;
 
 	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Bool = false, ?rotation:Bool = false)

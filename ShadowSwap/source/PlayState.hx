@@ -222,8 +222,6 @@ class PlayState extends FlxState
 		FlxG.collide(_shadow, _mWalls);
 		FlxG.collide(_player, _glass);
 		FlxG.collide(_player, _glassWithSwitch);
-		FlxG.collide(_player, _gates);
-		FlxG.collide(_shadow, _gates);
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _door, unlockDoor);
 		FlxG.overlap(_buttons, _player, raiseGate);
@@ -234,11 +232,20 @@ class PlayState extends FlxState
 			Reg.currentButton.pop().buttonReleased();
 
 		
-		var iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
-		while (iter.hasNext()) {
-			var curGlass:Glass = iter.next();
+		var glass_iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
+		while (glass_iter.hasNext()) {
+			var curGlass:Glass = glass_iter.next();
 			if (!curGlass.isOn()) {
 				FlxG.collide(curGlass, _shadow);
+			}
+		}
+
+		var gate_iter:FlxTypedGroupIterator<Gate> = _gates.iterator();
+		while (gate_iter.hasNext()) {
+			var curGate:Gate = gate_iter.next();
+			if (!curGate.isRaised()) {
+				FlxG.collide(_player, curGate);
+				FlxG.collide(_shadow, curGate);
 			}
 		}
 	}
@@ -271,19 +278,20 @@ class PlayState extends FlxState
 		while(itr.hasNext()) {
 			curGate = itr.next();
 			if (curGate.getId() == id)
-				break;
-		}
-		if (curGate.isRaised()) 
-		{
-			_timers.get(id).reset();
-			Reg.currentButton.add(button);
-		}
-		else
-		{
-			curGate.raiseGate();
-			Reg.currentGates.add(curGate);
-			Reg.currentButton.add(button);
-			_timers.set(id, new FlxTimer().start(0.5, dropGate, 1));
+			{
+				if (curGate.isRaised()) 
+				{
+					_timers.get(id).reset();
+					Reg.currentButton.add(button);
+				}
+				else
+				{
+					curGate.raiseGate();
+					Reg.currentGates.add(curGate);
+					Reg.currentButton.add(button);
+					_timers.set(id, new FlxTimer().start(1.0, dropGate, 1));
+				}
+			}
 		}
 	}
 

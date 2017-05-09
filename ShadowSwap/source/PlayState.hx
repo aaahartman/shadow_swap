@@ -142,7 +142,7 @@ class PlayState extends FlxState
 				_buttons.add(new Button(x, y, id));
 			}
 			else {
-				var on:Bool = entityData.get("_on") == "true";
+				var on:Bool = entityData.get("_on").toLowerCase() == "true";
 				if (entityName == "glass")
 				{
 					if (id == 0)
@@ -161,12 +161,12 @@ class PlayState extends FlxState
 				}
 				if (entityName == "switch")
 				{
-					var controlFan:Int = Std.parseInt(entityData.get("controlFan"));
-					_switches.add(new Switch(x, y, id, controlFan, on));
+					var fan:Bool = entityData.get("_fan").toLowerCase() == "true";
+					_switches.add(new Switch(x, y, id, fan, on));
 				}
 				if (entityName == "fan")
 				{
-	 				var dir:Int = Std.parseInt(entityData.get("dir"));
+	 				var dir:Int = Std.parseInt(entityData.get("_dir"));
 					var fan:Fan = new Fan(x, y, id, dir, on);
 					_fanBoxes.push(fan.bbox());
 					_fans.add(fan);
@@ -276,8 +276,10 @@ class PlayState extends FlxState
 
 		s.stepOn();
 		var id:Int = s.getId();
+		
 		if (s.controlFan())
 		{
+			
 			var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
 			s.toggleSwitch();
 			while(itr.hasNext()) {
@@ -350,11 +352,15 @@ class PlayState extends FlxState
                             _player.velocity.y = -200;
                     // right
                     case 1:
-						add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
                         if (!overlapsWithAnyFan(_player.bbox()))
+						{
 							_player.setDefaultSpeed(0);
-                        else if (_player.bbox().overlaps(curFan.bbox()))
+						}
+                        else if(_player.bbox().overlaps(curFan.bbox()))
+						{
 							_player.setDefaultSpeed(100);
+							_player.velocity.y = 0;
+						}
                     // down
                     case 2:
                         if (_player.bbox().overlaps(curFan.bbox()))
@@ -362,10 +368,16 @@ class PlayState extends FlxState
                     // left
                     case 3:
                         if (!overlapsWithAnyFan(_player.bbox()))
+						{
 							_player.setDefaultSpeed(0);
+						}
                         else if (_player.bbox().overlaps(curFan.bbox()))
+						{
 							_player.setDefaultSpeed(-100);
-                }
+							_player.velocity.y = 0;
+						}
+				}
+
 			}
 		}
 	}

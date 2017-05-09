@@ -30,9 +30,8 @@
     <glass id="23" x="384" y="128" _id="0" _on="True" />
     <glass id="24" x="416" y="128" _id="0" _on="True" />
     <glass id="25" x="448" y="128" _id="0" _on="True" />
-    <switch id="26" x="128" y="192" _id="0" _on="False" />
-    <fan id="27" x="128" y="288" _dir="1" _id="0" _on="False" />
-    <fan id="28" x="128" y="320" _dir="1" _id="0" _on="False" />
+    <switch id="26" x="128" y="192" _id="0" _on="False" _fan="True"/>
+    <fan id="28" x="160" y="320" _dir="1" _id="0" _on="False" />
     <key id="29" x="512" y="224" />
     <shadow id="30" x="544" y="64" />
     <player id="31" x="512" y="64" />

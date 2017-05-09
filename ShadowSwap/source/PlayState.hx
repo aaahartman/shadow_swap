@@ -240,8 +240,9 @@ class PlayState extends FlxState
 	{
 		if (Reg.gotKey)
 		{
+			_door.openDoor();
 			add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
-			haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 300);
+			haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 500);
 			Main.LOGGER.logLevelEnd({won: true});
 		}
 	}
@@ -251,6 +252,7 @@ class PlayState extends FlxState
 		var id:Int = (cast B).getId();
 		var itr:FlxTypedGroupIterator<Gate> = _gates.iterator();
 		var curGate:Gate = new Gate();
+
 		while(itr.hasNext()) {
 			curGate = itr.next();
 			if (curGate.getId() == id)

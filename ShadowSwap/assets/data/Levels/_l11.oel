@@ -26,10 +26,10 @@
     <player id="0" x="352" y="128" />
     <shadow id="1" x="384" y="128" />
     <switch id="2" x="32" y="256" _id="0" _on="True" _fan="False" />
-    <fan id="4" x="256" y="64" _dir="0" _id="0" _on="True" />
+    <fan id="4" x="256" y="64" _dir="0" _id="0" _on="True" _rotation="False" />
     <key id="6" x="32" y="608" />
     <switch id="3" x="288" y="512" _id="0" _on="True" _fan="False" />
-    <fan id="5" x="288" y="544" _dir="0" _id="0" _on="True" />
+    <fan id="5" x="288" y="544" _dir="0" _id="0" _on="True" _rotation="False" />
     <gate id="7" x="480" y="64" _id="0" />
     <gate id="8" x="480" y="96" _id="0" />
     <gate id="9" x="480" y="128" _id="0" />

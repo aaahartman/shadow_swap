@@ -11,7 +11,7 @@ class Switch extends FlxSprite
 	private var _controlFan:Bool = false;
 	private var _on:Bool = false;
 
-	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?controlFan:Int = 0, ?on:Bool = false)
+	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?controlFan:Bool = false, ?on:Bool = false)
 	{
 		super(X, Y);
 		//makeGraphic(16, 16, FlxColor.WHITE);
@@ -23,7 +23,7 @@ class Switch extends FlxSprite
 
 		immovable = true;
 		_id = id;
-		_controlFan = (controlFan == 1);
+		_controlFan = controlFan;
 		_on = on;
 
 		if(_on) {

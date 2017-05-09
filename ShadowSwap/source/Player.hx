@@ -5,13 +5,17 @@ import flixel.system.FlxAssets;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
 import flixel.FlxObject;
 
 class Player extends FlxSprite
 {
 	public var speed:Float = 160;
+
+	public var default_speed:Float = 0;
 	public var gravity:Float = 900;
 	public var jump_speed:Float = 350;
+
 	private var jump_duration:Float = -1;
 	private var in_air:Bool = false;
 
@@ -29,9 +33,19 @@ class Player extends FlxSprite
         acceleration.y = gravity;
     }
 
-	override public function update(elapsed:Float):Void 
+	public function bbox():FlxRect
 	{
-        acceleration.x = 0;
+		return new FlxRect(Std.int(this.x), Std.int(this.y), 16, 16);
+	}
+
+	public function setDefaultSpeed(?speed:Float = 0):Void
+	{
+		default_speed = speed;
+	}
+
+	override public function update(elapsed:Float):Void
+	{
+        // acceleration.x = 0;
 
         var _jump:Bool = false;
  		var _left:Bool = false;
@@ -41,7 +55,7 @@ class Player extends FlxSprite
  		_left = FlxG.keys.anyPressed([LEFT, A]);
  		_right = FlxG.keys.anyPressed([RIGHT, D]);
 
- 		acceleration.x = 0;
+ 		// acceleration.x = 0;
  		in_air = !isTouching(FlxObject.FLOOR);
 
  		if (_left && _right) {
@@ -55,16 +69,16 @@ class Player extends FlxSprite
 		if (!in_air)
 			facing = FlxObject.DOWN;
 
-		velocity.x = 0;
+		velocity.x = default_speed;
 		if (_left) 
 		{
-		    velocity.x = -speed;
+		    velocity.x -= speed;
 		    facing = FlxObject.LEFT;
 		}
  		
  		if (_right) 
 		{
-			velocity.x = speed;
+			velocity.x += speed;
 			facing = FlxObject.RIGHT;
 		}
 

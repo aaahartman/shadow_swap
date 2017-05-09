@@ -12,7 +12,7 @@ class Fan extends FlxSprite
 	private var _on:Bool = false;
 	private var _bbox:FlxRect;
 	private var _rotation:Bool = false;
-	private var _numBlocks:Int = 5;
+	private var _numBlocks:Int = 10;
 	private var _size:Int = 32;
 
 	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Bool = false, ?rotation:Bool = false)
@@ -69,7 +69,7 @@ class Fan extends FlxSprite
 				_bbox = new FlxRect(x, y, _size * _numBlocks, _size);
 			case 2:
 				angle = 180;
-				_bbox = new FlxRect(x, y, _size, _size * _numBlocks);
+				_bbox = new FlxRect(x, y, _size, _size * _numBlocks / 2);
 			case 3:
 				angle = 270;
 				_bbox = new FlxRect(x - _size * _numBlocks + _size, y, _size * _numBlocks, _size);

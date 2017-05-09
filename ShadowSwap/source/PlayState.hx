@@ -32,6 +32,7 @@ class PlayState extends FlxState
 	private var _switches:FlxTypedGroup<Switch>;
 
 	private var _levels:Array<Dynamic>;
+	private var _levelNum:Int;
 	private var _timers:Map<Int, FlxTimer>;
 
 	private var _hud:HUD;
@@ -41,13 +42,12 @@ class PlayState extends FlxState
 		_levels = new Array();
 
 		// Initialize level tilemap paths
-		_levels[0] = AssetPaths._l1__oel;
-		_levels[1] = AssetPaths._l2__oel;
-		_levels[2] = AssetPaths._l3__oel;
-		_levels[3] = AssetPaths._l5__oel;
-		_levels[4] = AssetPaths._l6__oel;
-		_levels[5] = AssetPaths.level6__oel;
-		_levels[6] = AssetPaths.level6__oel;
+		_levels[1] = AssetPaths._l1__oel;
+		_levels[2] = AssetPaths._l2__oel;
+		_levels[3] = AssetPaths._l3__oel;
+		_levels[4] = AssetPaths.level4__oel;
+		_levels[5] = AssetPaths._l5__oel;
+		_levels[6] = AssetPaths._l6__oel;
 		_levels[7] = AssetPaths.level6__oel;
 		_levels[8] = AssetPaths.level6__oel;
 		_levels[9] = AssetPaths.level6__oel;
@@ -60,8 +60,9 @@ class PlayState extends FlxState
 
 		
 		_timers = new Map<Int, FlxTimer>();
+		_levelNum = LevelSelectState.getLevelNumber();
 
-		_map = new FlxOgmoLoader(_levels[LevelSelectState.getLevelNumber()]);
+		_map = new FlxOgmoLoader(_levels[_levelNum]);
 		_mWalls = _map.loadTilemap(AssetPaths.tiles__png, 32, 32, "walls");
 		_mWalls.follow();
   		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
@@ -75,7 +76,7 @@ class PlayState extends FlxState
 		_background.setTileProperties(1, FlxObject.NONE);
 		add(_background);
 
-		_hud = new HUD(LevelSelectState.getLevelNumber());
+		_hud = new HUD(_levelNum);
 
 		_player = new Player();  //player
 		_shadow = new Shadow();  //shadow
@@ -103,6 +104,8 @@ class PlayState extends FlxState
  		add(_shadow);
  		add(_hud);
 		super.create();
+
+		Main.LOGGER.logLevelStart(_levelNum);
 	}
 
 	private function placeEntities(entityName:String, entityData:Xml):Void
@@ -176,26 +179,33 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		// restart the game
-		if (FlxG.keys.justPressed.R)
+		if (FlxG.keys.justPressed.R) {
 			FlxG.switchState(new PlayState());
+			Main.LOGGER.logLevelAction(LoggingActions.CLICK_RESET, {level: _levelNum});
+		}
 
 		// return to level selection menu
-		if (FlxG.keys.justPressed.L)
+		if (FlxG.keys.justPressed.L) {
 			FlxG.switchState(new LevelSelectState());
+			Main.LOGGER.logLevelAction(LoggingActions.CLICK_LEVELSELECTION, {level: _levelNum});
+		}
 
 		// return to home menu
-		if (FlxG.keys.justPressed.H)
+		if (FlxG.keys.justPressed.H) {
 			FlxG.switchState(new SplashScreenState());
+			Main.LOGGER.logLevelAction(LoggingActions.CLICK_HOME, {level: _levelNum});
+		}
 
 
-		if (FlxG.keys.justPressed.S)
-		{
+		if (FlxG.keys.justPressed.S) {
 			var temp:Float = _player.x;
 			_player.x = _shadow.x;
 			_shadow.x = temp;
 			temp = _player.y;
 			_player.y = _shadow.y;
 			_shadow.y = temp;
+
+			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_SWAP);
 		}
 
 		super.update(elapsed);
@@ -232,6 +242,7 @@ class PlayState extends FlxState
 		{
 			add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
 			haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 300);
+			Main.LOGGER.logLevelEnd({won: true});
 		}
 	}
 

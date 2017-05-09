@@ -65,7 +65,7 @@
   <Tilesets>
     <Tileset>
       <Name>tiles</Name>
-      <FilePath>tiles.png</FilePath>
+      <FilePath>..\images\tiles.png</FilePath>
       <TileSize>
         <Width>32</Width>
         <Height>32</Height>

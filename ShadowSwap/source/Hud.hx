@@ -21,31 +21,25 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 
 	public function new(lv:Int) {
 		super();
-		background = new FlxSprite().makeGraphic(FlxG.width, 20, FlxColor.BLACK);
-		background.drawRect(0, 19, FlxG.width, 1, FlxColor.WHITE);
+		background = new FlxSprite().makeGraphic(FlxG.width, 30, FlxColor.BLACK);
+		background.drawRect(0, 29, FlxG.width, 1, FlxColor.WHITE);
 		
-		textLevel = new FlxText(0, 2, 0, "LV " + lv, 8);
+		textLevel = new FlxText(0, 3, 0, "LV " + lv, 15);
 		textLevel.setBorderStyle(SHADOW, FlxColor.GRAY, 1, 1);
 		
 		// Default setting: level does not have key.
-		textKey = new FlxText(textLevel.width + 20, 2, 0, "Key", 8);
-		keySlot = new FlxSprite(textLevel.width + 20 + textKey.width, 2);
+		textKey = new FlxText(textLevel.width + 50, 3, 0, "Key", 15);
+		keySlot = new FlxSprite(textLevel.width + 50 + textKey.width, 7);
 		keySlot.makeGraphic(8, 8, FlxColor.BLACK);
 
 		// Reset Button
-		reset = new FlxButton(FlxG.width - 70, 0, "Reset (R)", resetState);
-		reset.scale.x = 0.7;
-		reset.scale.y = 0.7;
+		reset = new FlxButton(FlxG.width - 80, 5, "Reset (R)", resetState);
 
 		// Level Selection Button
-		levelMenu = new FlxButton(FlxG.width - 140, 0, "Levels (L)", levelState);
-		levelMenu.scale.x = 0.7;
-		levelMenu.scale.y = 0.7;
+		levelMenu = new FlxButton(FlxG.width - 180, 5, "Levels (L)", levelState);
 
 		// Level Selection Button
-		homeMenu = new FlxButton(FlxG.width - 210, 0, "Home (H)", homeState);
-		homeMenu.scale.x = 0.7;
-		homeMenu.scale.y = 0.7;
+		homeMenu = new FlxButton(FlxG.width - 280, 5, "Home (H)", homeState);
 
 		add(background);
 		add(textLevel);

@@ -223,6 +223,12 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _door, unlockDoor);
 		FlxG.overlap(_buttons, _player, raiseGate);
+
+
+		// Release any button that is pressed.
+		if (!Reg.currentButton.isEmpty())
+			Reg.currentButton.pop().buttonReleased();
+
 		
 		var iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
 		while (iter.hasNext()) {
@@ -243,8 +249,9 @@ class PlayState extends FlxState
 	{
 		if (Reg.gotKey)
 		{
+			_door.openDoor();
 			add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
-			haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 300);
+			haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 500);
 			Main.LOGGER.logLevelEnd({won: true});
 		}
 	}
@@ -252,8 +259,11 @@ class PlayState extends FlxState
 	private function raiseGate(B:FlxObject, P:FlxObject):Void 
 	{
 		var id:Int = (cast B).getId();
+		var button:Button = (cast B);
+		button.buttonPressed();
 		var itr:FlxTypedGroupIterator<Gate> = _gates.iterator();
 		var curGate:Gate = new Gate();
+
 		while(itr.hasNext()) {
 			curGate = itr.next();
 			if (curGate.getId() == id)
@@ -262,11 +272,13 @@ class PlayState extends FlxState
 		if (curGate.isRaised()) 
 		{
 			_timers.get(id).reset();
+			Reg.currentButton.add(button);
 		}
 		else
 		{
 			curGate.raiseGate();
 			Reg.currentGates.add(curGate);
+			Reg.currentButton.add(button);
 			_timers.set(id, new FlxTimer().start(0.5, dropGate, 1));
 		}
 	}

@@ -13,4 +13,8 @@ class Door extends FlxSprite
 		height = 32;
 		immovable = true;
 	}
+
+	public function openDoor():Void {
+		loadGraphic(AssetPaths.Door_open__png, false, 32, 64);
+	}
 }

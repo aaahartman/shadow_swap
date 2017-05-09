@@ -342,7 +342,7 @@ class PlayState extends FlxState
 			var curFan:Fan = itr.next();
 			if (curFan.isOn()) {
 				var size:Float = curFan.width;
-				var numBlocks:Float = 5;
+				var numBlocks:Float = 10;
 				switch (curFan.getDir()){
                     // up
                     case 0:
@@ -350,6 +350,7 @@ class PlayState extends FlxState
                             _player.velocity.y = -200;
                     // right
                     case 1:
+						add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
                         if (!overlapsWithAnyFan(_player.bbox()))
 							_player.setDefaultSpeed(0);
                         else if (_player.bbox().overlaps(curFan.bbox()))

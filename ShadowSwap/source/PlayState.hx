@@ -36,8 +36,11 @@ class PlayState extends FlxState
 	private var _timers:Map<Int, FlxTimer>;
 
 	private var _hud:HUD;
-
 	private var _fanBoxes = new Array<FlxRect>();
+
+	private var _text1:FlxText = new FlxText(32, 32, FlxG.width, "fan (x,y,width)", 16);
+	private var _text2:FlxText = new FlxText(32, 64, FlxG.width, "player(x,y,width)", 16);
+	private var _text3:FlxText = new FlxText(32, 96, FlxG.width, "overlaps", 16);
 
 	override public function create():Void 
 	{
@@ -106,6 +109,11 @@ class PlayState extends FlxState
  		add(_hud);
 		super.create();
 
+		add(_text1);
+		add(_text2);
+		add(_text3);
+
+
 		Main.LOGGER.logLevelStart(_levelNum);
 	}
 
@@ -170,7 +178,8 @@ class PlayState extends FlxState
 				if (entityName == "fan")
 				{
 	 				var dir:Int = Std.parseInt(entityData.get("_dir"));
-					var fan:Fan = new Fan(x, y, id, dir, on);
+					var rotation:Bool = (entityData.get("_rotation").toLowerCase() == "true");
+					var fan:Fan = new Fan(x, y, id, dir, on, rotation);
 					_fanBoxes.push(fan.bbox());
 					_fans.add(fan);
 				}
@@ -356,6 +365,9 @@ class PlayState extends FlxState
 			if (curFan.isOn()) {
 				var size:Float = curFan.width;
 				var numBlocks:Float = 10;
+				_text1.text ="fan (x,y,width): "+(curFan.bbox().x + " " + curFan.bbox().y + " " + curFan.bbox().width);
+				_text2.text ="player(x,y,width): "+(_player.bbox().x + " " + _player.bbox().y + " " + _player.bbox().width);
+             	_text3.text = "overlaps: "+_player.bbox().overlaps(curFan.bbox());
 				switch (curFan.getDir()){
                     // up
                     case 0:

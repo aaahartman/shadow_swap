@@ -11,7 +11,7 @@ class Fan extends FlxSprite
 	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0)
 	{
 		super(X, Y);
-		makeGraphic(16, 16, FlxColor.ORANGE);
+		makeGraphic(32, 32, FlxColor.ORANGE);
 		immovable = true;
 		_id = id;
 		_dir = dir;

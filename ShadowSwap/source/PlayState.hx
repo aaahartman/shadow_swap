@@ -51,7 +51,7 @@ class PlayState extends FlxState
 		_levels[7] = AssetPaths.level6__oel;
 		_levels[8] = AssetPaths.level6__oel;
 		_levels[9] = AssetPaths.level6__oel;
-		_levels[10] = AssetPaths.level6__oel;
+		_levels[10] = AssetPaths._l10__oel;
 		_levels[11] = AssetPaths.level6__oel;
 		_levels[12] = AssetPaths.level6__oel;
 		_levels[13] = AssetPaths.level6__oel;

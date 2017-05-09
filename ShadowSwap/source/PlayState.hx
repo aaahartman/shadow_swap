@@ -37,8 +37,6 @@ class PlayState extends FlxState
 
 	private var _hud:HUD;
 
-	private var _fanBoxes = new Array<FlxRect>();
-
 	override public function create():Void 
 	{
 		_levels = new Array();
@@ -47,18 +45,18 @@ class PlayState extends FlxState
 		_levels[1] = AssetPaths._l1__oel;
 		_levels[2] = AssetPaths._l2__oel;
 		_levels[3] = AssetPaths._l3__oel;
-		_levels[4] = AssetPaths.level4__oel;
+		_levels[4] = AssetPaths._l5__oel;
 		_levels[5] = AssetPaths._l5__oel;
-		_levels[6] = AssetPaths._l6__oel;
-		_levels[7] = AssetPaths.level6__oel;
-		_levels[8] = AssetPaths.level6__oel;
-		_levels[9] = AssetPaths.level6__oel;
+		_levels[6] = AssetPaths._l5__oel;
+		_levels[7] = AssetPaths._l7__oel;
+		_levels[8] = AssetPaths._l8__oel;
+		_levels[9] = AssetPaths._l9__oel;
 		_levels[10] = AssetPaths._l10__oel;
-		_levels[11] = AssetPaths.level6__oel;
-		_levels[12] = AssetPaths.level6__oel;
-		_levels[13] = AssetPaths.level6__oel;
-		_levels[14] = AssetPaths.level6__oel;
-		_levels[15] = AssetPaths.level6__oel;
+		_levels[11] = AssetPaths._l11__oel;
+		_levels[12] = AssetPaths._l11__oel;
+		_levels[13] = AssetPaths._l11__oel;
+		_levels[14] = AssetPaths._l14__oel;
+		_levels[15] = AssetPaths._l15__oel;
 
 		_timers = new Map<Int, FlxTimer>();
 		_levelNum = LevelSelectState.getLevelNumber();
@@ -106,6 +104,7 @@ class PlayState extends FlxState
  		add(_hud);
 		super.create();
 
+
 		Main.LOGGER.logLevelStart(_levelNum);
 	}
 
@@ -144,6 +143,10 @@ class PlayState extends FlxState
 			{
 				_buttons.add(new Button(x, y, id));
 			}
+			else if (entityName == "water")
+			{
+				// do something
+			}
 			else {
 				var on:Bool = entityData.get("_on").toLowerCase() == "true";
 				if (entityName == "glass")
@@ -170,8 +173,8 @@ class PlayState extends FlxState
 				if (entityName == "fan")
 				{
 	 				var dir:Int = Std.parseInt(entityData.get("_dir"));
-					var fan:Fan = new Fan(x, y, id, dir, on);
-					_fanBoxes.push(fan.bbox());
+					var rotation:Bool = (entityData.get("_rotation").toLowerCase() == "true");
+					var fan:Fan = new Fan(x, y, id, dir, on, rotation);
 					_fans.add(fan);
 				}
 			}
@@ -349,10 +352,10 @@ class PlayState extends FlxState
 
 	private function overlapsWithAnyFan(bbox:FlxRect):Bool
 	{
-		var iter:Iterator<FlxRect> = _fanBoxes.iterator();
+		var iter:Iterator<Fan> = _fans.iterator();
 		while(iter.hasNext())
 		{
-			if (iter.next().overlaps(bbox))
+			if (iter.next().bbox().overlaps(bbox))
 			{
 				return true;
 			}

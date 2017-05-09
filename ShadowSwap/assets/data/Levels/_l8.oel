@@ -50,9 +50,9 @@
     <switch id="24" x="352" y="192" _id="0" _on="True" _fan="False" />
     <key id="25" x="448" y="352" />
     <switch id="26" x="800" y="448" _id="0" _on="True" _fan="False" />
-    <fan id="27" x="576" y="576" _dir="0" _id="0" _on="True" />
-    <fan id="28" x="576" y="224" _dir="0" _id="0" _on="True" />
-    <fan id="29" x="608" y="256" _dir="0" _id="0" _on="True" />
+    <fan id="27" x="576" y="576" _dir="0" _id="0" _on="True" _rotation="False"/>
+    <fan id="28" x="576" y="224" _dir="0" _id="0" _on="True" _rotation="False"/>
+    <fan id="29" x="608" y="256" _dir="0" _id="0" _on="True" _rotation="False"/>
     <shadow id="30" x="32" y="640" />
     <player id="31" x="64" y="640" />
   </entities>

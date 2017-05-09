@@ -11,27 +11,20 @@ class Fan extends FlxSprite
 	private var _dir:Int = 0;
 	private var _on:Bool = false;
 	private var _bbox:FlxRect;
+	private var _rotation:Bool = false;
 	private var _numBlocks:Int = 5;
 	private var _size:Int = 32;
 
-	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Bool = false)
+	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Bool = false, ?rotation:Bool = false)
 	{
 		super(X, Y);
 		makeGraphic(_size, _size, FlxColor.ORANGE);
-		switch(dir) {
-			case 0:
-				_bbox = new FlxRect(X, Y - _size * _numBlocks, _size, _size * _numBlocks);
-			case 1:
-				_bbox = new FlxRect(X, Y, _size * _numBlocks, _size);
-			case 2:
-				_bbox = new FlxRect(X, Y, _size, _size * _numBlocks);
-			case 3:
-				_bbox = new FlxRect(X - _size * _numBlocks, Y, _size * _numBlocks, _size);
-		}
 		immovable = true;
 		_id = id;
 		_dir = dir;
 		_on = on;
+		_rotation = rotation;
+		changeDirection();
 	}
 
 	public function getId():Int
@@ -51,11 +44,35 @@ class Fan extends FlxSprite
 
 	public function toggle():Void
 	{
-		_on = !_on;
+		if (_rotation)
+		{
+			_dir = (_dir + 1) % 4;
+			changeDirection();
+		}
+		else
+			_on = !_on;
 	}
 	
 	public function bbox():FlxRect
 	{
 		return _bbox;
+	}
+
+	public function changeDirection():Void
+	{
+		switch(_dir) {
+			case 0:
+				angle = 0;
+				_bbox = new FlxRect(x, y - _size * _numBlocks, _size, _size * _numBlocks);
+			case 1:
+				angle = 90;
+				_bbox = new FlxRect(x, y, _size * _numBlocks, _size);
+			case 2:
+				angle = 180;
+				_bbox = new FlxRect(x, y, _size, _size * _numBlocks);
+			case 3:
+				angle = 270;
+				_bbox = new FlxRect(x - _size * _numBlocks + _size, y, _size * _numBlocks, _size);
+		}
 	}
 }

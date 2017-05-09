@@ -24,8 +24,8 @@
 -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1</walls>
   <entities>
     <door id="21" x="416" y="512" />
-    <fan id="28" x="160" y="576" _dir="1" _id="0" _on="True" _rotation="True" />
-    <switch id="26" x="96" y="608" _id="0" _on="True" _fan="True" />
+    <fan id="28" x="160" y="480" _dir="1" _id="0" _on="False" _rotation="False" />
+    <switch id="26" x="160" y="288" _id="0" _on="True" _fan="True" />
     <key id="29" x="512" y="384" />
     <shadow id="30" x="544" y="224" />
     <player id="31" x="512" y="224" />

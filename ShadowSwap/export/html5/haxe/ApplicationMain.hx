@@ -46,6 +46,14 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("assets/data/Levels/_l12.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/Levels/_l13.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		urls.push ("assets/data/Levels/_l14.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
@@ -251,7 +259,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "157",
+			build: "160",
 			company: "HaxeFlixel",
 			file: "ShadowSwap",
 			fps: 60,

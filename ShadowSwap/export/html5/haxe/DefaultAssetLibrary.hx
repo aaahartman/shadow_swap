@@ -87,6 +87,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -104,6 +106,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/Levels/_l10.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l11.oel", __ASSET__assets_data_levels__l11_oel);
 		type.set ("assets/data/Levels/_l11.oel", AssetType.TEXT);
+		className.set ("assets/data/Levels/_l12.oel", __ASSET__assets_data_levels__l12_oel);
+		type.set ("assets/data/Levels/_l12.oel", AssetType.TEXT);
+		className.set ("assets/data/Levels/_l13.oel", __ASSET__assets_data_levels__l13_oel);
+		type.set ("assets/data/Levels/_l13.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l14.oel", __ASSET__assets_data_levels__l14_oel);
 		type.set ("assets/data/Levels/_l14.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l15.oel", __ASSET__assets_data_levels__l15_oel);
@@ -194,6 +200,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.TEXT);
 		id = "assets/data/Levels/_l11.oel";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l12.oel";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l13.oel";
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
@@ -370,6 +384,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/data/Levels/_l11.oel", __ASSET__assets_data_levels__l11_oel);
 		type.set ("assets/data/Levels/_l11.oel", AssetType.TEXT);
+		
+		className.set ("assets/data/Levels/_l12.oel", __ASSET__assets_data_levels__l12_oel);
+		type.set ("assets/data/Levels/_l12.oel", AssetType.TEXT);
+		
+		className.set ("assets/data/Levels/_l13.oel", __ASSET__assets_data_levels__l13_oel);
+		type.set ("assets/data/Levels/_l13.oel", AssetType.TEXT);
 		
 		className.set ("assets/data/Levels/_l14.oel", __ASSET__assets_data_levels__l14_oel);
 		type.set ("assets/data/Levels/_l14.oel", AssetType.TEXT);
@@ -1127,6 +1147,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l1_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l10_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l11_oel extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_levels__l12_oel extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_levels__l13_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l14_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l15_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l2_oel extends null { }
@@ -1203,6 +1225,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
 @:keep #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends lime.text.Font { public function new () { super (); name = "Nokia Cellphone FC Small"; } } 
 @:keep #if display private #end class __ASSET__flixel_fonts_monsterrat_ttf extends lime.text.Font { public function new () { super (); name = "Monsterrat"; } } 
 
@@ -1220,6 +1244,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/data/Levels/_l1.oel") #if display private #end class __ASSET__assets_data_levels__l1_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l10.oel") #if display private #end class __ASSET__assets_data_levels__l10_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l11.oel") #if display private #end class __ASSET__assets_data_levels__l11_oel extends lime.utils.Bytes {}
+@:file("assets/data/Levels/_l12.oel") #if display private #end class __ASSET__assets_data_levels__l12_oel extends lime.utils.Bytes {}
+@:file("assets/data/Levels/_l13.oel") #if display private #end class __ASSET__assets_data_levels__l13_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l14.oel") #if display private #end class __ASSET__assets_data_levels__l14_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l15.oel") #if display private #end class __ASSET__assets_data_levels__l15_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l2.oel") #if display private #end class __ASSET__assets_data_levels__l2_oel extends lime.utils.Bytes {}

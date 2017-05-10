@@ -11,7 +11,7 @@ class Gate extends FlxSprite
 	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0)
 	{
 		super(X, Y);
-		makeGraphic(32, 32, FlxColor.RED);
+		makeGraphic(32, 96, FlxColor.RED);
 		immovable = true;
 		_id = id;
 	}

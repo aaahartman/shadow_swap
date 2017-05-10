@@ -149,9 +149,13 @@ class PlayState extends FlxState
 		}
 		else {
 			var id:Int = Std.parseInt(entityData.get("_id"));
-			if (entityName == "gate")
+			if (entityName == "gate_vertical")
 			{
-				_gates.add(new Gate(x, y, id));
+				_gates.add(new VerticalGate(x, y, id));
+			}
+			else if (entityName == "gate_horizontal")
+			{
+				_gates.add(new HorizontalGate(x, y, id));
 			}
 			else if (entityName == "button")
 			{

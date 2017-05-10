@@ -272,7 +272,8 @@ class PlayState extends FlxState
 	private function killPlayer(S:FlxObject, P:FlxObject):Void
 	{
 			add(new FlxText(0, 0, FlxG.width, "YOU ARE DEAD!", 16).screenCenter());
-			FlxG.switchState(new PlayState());
+			_player.kill();
+			haxe.Timer.delay(FlxG.switchState.bind(new PlayState()), 600);
 			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {level: _levelNum});
 	}
 
@@ -288,7 +289,7 @@ class PlayState extends FlxState
 		{
 			_door.openDoor();
 			add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
-			haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 500);
+			haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 600);
 			Main.LOGGER.logLevelEnd({won: true});
 		}
 	}

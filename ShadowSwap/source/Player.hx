@@ -7,6 +7,7 @@ import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
 import flixel.FlxObject;
+import flixel.tweens.*;
 
 class Player extends FlxSprite
 {
@@ -109,6 +110,14 @@ class Player extends FlxSprite
 
 	public function isInAir():Bool {
 		return in_air;
+	}
+	
+	override public function kill():Void {
+		FlxTween.tween(this, { alpha: 0, y: y - 20 }, 2.0, { ease: FlxEase.circOut, onComplete: finishKill});
+	}
+
+	private function finishKill(_):Void {
+		exists = false;
 	}
 
 }

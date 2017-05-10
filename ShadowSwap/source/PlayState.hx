@@ -30,6 +30,7 @@ class PlayState extends FlxState
 	private var _buttons:FlxTypedGroup<Button>;
 	private var _fans:FlxTypedGroup<Fan>;
 	private var _switches:FlxTypedGroup<Switch>;
+	private var _spikes:FlxTypedGroup<Spike>;
 
 	private var _levels:Array<Dynamic>;
 	private var _levelNum:Int;
@@ -90,6 +91,7 @@ class PlayState extends FlxState
 		_switches = new FlxTypedGroup<Switch>();
 		_key = new Key();
 		_door = new Door(0, 0, true);
+		_spikes = new FlxTypedGroup<Spike>();
  		_map.loadEntities(placeEntities, "entities");
 
 		
@@ -101,11 +103,12 @@ class PlayState extends FlxState
 		add(_gates);
 		add(_buttons);
 		add(_fans);
- 		add(_player);
  		add(_switches);
- 		add(_shadow);
  		add(_hud);
  		add(_hint);
+		add(_spikes);
+ 		add(_player);
+ 		add(_shadow);
 		super.create();
 
 
@@ -154,6 +157,10 @@ class PlayState extends FlxState
 			else if (entityName == "hint") 
 			{
 				_hint = new Hint(x, y, id);
+			}
+			else if (entityName == "spike")
+			{
+				_spikes.add(new Spike(x, y));
 			}
 			else {
 				var on:Bool = entityData.get("_on").toLowerCase() == "true";
@@ -233,7 +240,7 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _door, unlockDoor);
 		FlxG.overlap(_buttons, _player, raiseGate);
-
+		FlxG.overlap(_spikes, _player, killPlayer);
 
 		// Release any button that is pressed.
 		if (!Reg.currentButton.isEmpty())
@@ -256,6 +263,13 @@ class PlayState extends FlxState
 				FlxG.collide(_shadow, curGate);
 			}
 		}
+	}
+
+	private function killPlayer(S:FlxObject, P:FlxObject):Void
+	{
+			add(new FlxText(0, 0, FlxG.width, "YOU ARE DEAD!", 16).screenCenter());
+			FlxG.switchState(new PlayState());
+			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {level: _levelNum});
 	}
 
 	private function collectKey(P:FlxObject, K:FlxObject):Void 

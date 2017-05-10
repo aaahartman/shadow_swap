@@ -31,6 +31,7 @@ class PlayState extends FlxState
 	private var _fans:FlxTypedGroup<Fan>;
 	private var _switches:FlxTypedGroup<Switch>;
 	private var _spikes:FlxTypedGroup<Spike>;
+	private var _water:FlxTypedGroup<Water>;
 
 	private var _levels:Array<Dynamic>;
 	private var _levelNum:Int;
@@ -92,10 +93,12 @@ class PlayState extends FlxState
 		_key = new Key();
 		_door = new Door(0, 0, true);
 		_spikes = new FlxTypedGroup<Spike>();
+		_water = new FlxTypedGroup<Water>();
  		_map.loadEntities(placeEntities, "entities");
 
 		
 		Reg.gotKey = false;
+		add(_water);
 		add(_glass);
 		add(_glassWithSwitch);
 		add(_key);
@@ -140,6 +143,10 @@ class PlayState extends FlxState
 			_door.x = x;
 			_door.y = y;
 		}
+		else if (entityName == "water")
+		{
+			_water.add(new Water(x, y));
+		}
 		else {
 			var id:Int = Std.parseInt(entityData.get("_id"));
 			if (entityName == "gate")
@@ -149,10 +156,6 @@ class PlayState extends FlxState
 			else if (entityName == "button")
 			{
 				_buttons.add(new Button(x, y, id));
-			}
-			else if (entityName == "water")
-			{
-				// do something
 			}
 			else if (entityName == "hint") 
 			{
@@ -241,6 +244,7 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _door, unlockDoor);
 		FlxG.overlap(_buttons, _player, raiseGate);
 		FlxG.overlap(_spikes, _player, killPlayer);
+		_player.inWater(_player.overlaps(_water));
 
 		// Release any button that is pressed.
 		if (!Reg.currentButton.isEmpty())

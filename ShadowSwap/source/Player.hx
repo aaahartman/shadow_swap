@@ -18,6 +18,7 @@ class Player extends FlxSprite
 
 	private var jump_duration:Float = -1;
 	private var in_air:Bool = false;
+	private var in_water:Bool = false;
 
     public function new(?X:Float=0, ?Y:Float=0)
     {
@@ -43,6 +44,11 @@ class Player extends FlxSprite
 		default_speed = speed;
 	}
 
+	public function inWater(water:Bool):Void
+	{
+		in_water = water;
+	}
+	
 	override public function update(elapsed:Float):Void
 	{
         // acceleration.x = 0;
@@ -56,7 +62,7 @@ class Player extends FlxSprite
  		_right = FlxG.keys.anyPressed([RIGHT, D]);
 
  		// acceleration.x = 0;
- 		in_air = !isTouching(FlxObject.FLOOR);
+ 		in_air = !isTouching(FlxObject.FLOOR) && !in_water;
 
  		if (_left && _right) {
       		_left = _right = false;
@@ -85,6 +91,11 @@ class Player extends FlxSprite
 		if (in_air)
 			facing = FlxObject.UP;
 
+		if (in_water)
+			acceleration.y = gravity / 2;
+		else
+			acceleration.y = gravity;
+	
 		switch (facing) {
 			case FlxObject.UP:
 				animation.play("jump");

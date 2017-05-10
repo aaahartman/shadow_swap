@@ -75,11 +75,9 @@
     <glass id="49" x="800" y="320" _id="0" _on="True" />
     <glass id="50" x="800" y="320" _id="0" _on="True" />
     <glass id="51" x="768" y="320" _id="0" _on="True" />
-    <glass id="52" x="512" y="576" _id="0" _on="True" />
-    <glass id="53" x="544" y="576" _id="0" _on="True" />
     <gate id="54" x="256" y="544" _id="3" />
-    <fan id="55" x="192" y="672" _dir="0" _id="0" _on="True" _rotation="False" />
-    <fan id="56" x="224" y="672" _dir="0" _id="0" _on="True" _rotation="False" />
+    <fan id="55" x="192" y="576" _dir="0" _id="0" _on="True" _rotation="False" />
+    <fan id="56" x="224" y="576" _dir="0" _id="0" _on="True" _rotation="False" />
     <gate id="57" x="576" y="320" _id="2" />
     <gate id="58" x="576" y="352" _id="2" />
     <key id="59" x="640" y="352" />

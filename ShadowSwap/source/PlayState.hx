@@ -245,13 +245,20 @@ class PlayState extends FlxState
 		FlxG.collide(_player, _glassWithSwitch);
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _door, unlockDoor);
-		FlxG.overlap(_buttons, _player, raiseGate);
 		FlxG.overlap(_spikes, _player, killPlayer);
 		_player.inWater(_player.overlaps(_water));
 
-		// Release any button that is pressed.
-		if (!Reg.currentButton.isEmpty())
-			Reg.currentButton.pop().buttonReleased();
+		
+		var button_iter:FlxTypedGroupIterator<Button> = _buttons.iterator();
+		while (button_iter.hasNext()) {
+			var curButton:Button = button_iter.next();
+			if (_player.overlaps(curButton)) {
+				raiseGate(curButton);
+				curButton.buttonPressed();
+			} else {
+				curButton.buttonReleased();
+			}
+		}
 
 		
 		var glass_iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
@@ -297,11 +304,9 @@ class PlayState extends FlxState
 		}
 	}
 
-	private function raiseGate(B:FlxObject, P:FlxObject):Void 
+	private function raiseGate(button:Button):Void 
 	{
-		var id:Int = (cast B).getId();
-		var button:Button = (cast B);
-		button.buttonPressed();
+		var id:Int = button.getId();
 		var itr:FlxTypedGroupIterator<Gate> = _gates.iterator();
 		var curGate:Gate = new Gate();
 
@@ -312,13 +317,11 @@ class PlayState extends FlxState
 				if (curGate.isRaised()) 
 				{
 					_timers.get(id).reset();
-					Reg.currentButton.add(button);
 				}
 				else
 				{
 					curGate.raiseGate();
 					Reg.currentGates.add(curGate);
-					Reg.currentButton.add(button);
 					_timers.set(id, new FlxTimer().start(1.0, dropGate, 1));
 				}
 			}

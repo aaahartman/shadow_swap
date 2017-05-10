@@ -51,14 +51,14 @@ class PlayState extends FlxState
 		_levels[4] = AssetPaths._l4__oel;
 		_levels[5] = AssetPaths._l5__oel;
 		_levels[6] = AssetPaths._l6__oel;
-		_levels[7] = AssetPaths._l6__oel;
-		_levels[8] = AssetPaths._l10__oel;
-		_levels[9] = AssetPaths._l11__oel;
-		_levels[10] = AssetPaths._l12__oel;
-		_levels[11] = AssetPaths._l13__oel;
-		_levels[12] = AssetPaths._l14__oel;
-		_levels[13] = AssetPaths._l14__oel;
-		_levels[14] = AssetPaths._l17__oel;
+		_levels[7] = AssetPaths._l10__oel;
+		_levels[8] = AssetPaths._l11__oel;
+		_levels[9] = AssetPaths._l12__oel;
+		_levels[10] = AssetPaths._l13__oel;
+		_levels[11] = AssetPaths._l14__oel;
+		_levels[12] = AssetPaths._l17__oel;
+		_levels[13] = AssetPaths._l18__oel;
+		_levels[14] = AssetPaths._l18__oel;
 		_levels[15] = AssetPaths._l18__oel;
 
 		_timers = new Map<Int, FlxTimer>();

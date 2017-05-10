@@ -18,11 +18,19 @@ class Fan extends FlxSprite
 	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Bool = false, ?rotation:Bool = false)
 	{
 		super(X, Y);
-		makeGraphic(_size, _size, FlxColor.ORANGE);
 		immovable = true;
 		_id = id;
 		_dir = dir;
 		_on = on;
+
+		if (_on) {
+			loadGraphic(AssetPaths.Fan_on__png, true, 32, 32);
+			animation.add("on", [0, 1], 11, true);
+			animation.play("on");
+		} else {
+			loadGraphic(AssetPaths.Fan_off__png, false, 32, 32);
+		}
+
 		_rotation = rotation;
 		changeDirection();
 	}
@@ -51,6 +59,14 @@ class Fan extends FlxSprite
 		}
 		else
 			_on = !_on;
+
+		if (_on) {
+			loadGraphic(AssetPaths.Fan_on__png, true, 32, 32);
+			animation.add("on", [0, 1], 11, true);
+			animation.play("on");
+		} else {
+			loadGraphic(AssetPaths.Fan_off__png, false, 32, 32);
+		}
 	}
 	
 	public function bbox():FlxRect
@@ -62,16 +78,16 @@ class Fan extends FlxSprite
 	{
 		switch(_dir) {
 			case 0:
-				angle = 0;
+				angle = -90;
 				_bbox = new FlxRect(x, y - _size * _numBlocks, _size, _size * _numBlocks);
 			case 1:
-				angle = 90;
+				angle = 0;
 				_bbox = new FlxRect(x, y, _size * _numBlocks, _size);
 			case 2:
-				angle = 180;
+				angle = 90;
 				_bbox = new FlxRect(x, y, _size, _size * _numBlocks / 2);
 			case 3:
-				angle = 270;
+				angle = 180;
 				_bbox = new FlxRect(x - _size * _numBlocks + _size, y, _size * _numBlocks, _size);
 		}
 	}

@@ -49,19 +49,18 @@ class PlayState extends FlxState
 		_levels[1] = AssetPaths._l1__oel;
 		_levels[2] = AssetPaths._l2__oel;
 		_levels[3] = AssetPaths._l3__oel;
-		_levels[4] = AssetPaths._l5__oel;
-		_levels[5] = AssetPaths._l7__oel;
-		_levels[6] = AssetPaths._l10__oel;
-		_levels[7] = AssetPaths._l12__oel;
-		_levels[8] = AssetPaths._l13__oel;
-		
-		_levels[9] = AssetPaths._l9__oel;
-		_levels[10] = AssetPaths._l10__oel;
-		_levels[11] = AssetPaths._l11__oel;
-		_levels[12] = AssetPaths._l12__oel;
-		_levels[13] = AssetPaths._l13__oel;
-		_levels[14] = AssetPaths._l14__oel;
-		_levels[15] = AssetPaths._l15__oel;
+		_levels[4] = AssetPaths._l4__oel;
+		_levels[5] = AssetPaths._l5__oel;
+		_levels[6] = AssetPaths._l6__oel;
+		_levels[7] = AssetPaths._l10__oel;
+		_levels[8] = AssetPaths._l11__oel;
+		_levels[9] = AssetPaths._l12__oel;
+		_levels[10] = AssetPaths._l13__oel;
+		_levels[11] = AssetPaths._l14__oel;
+		_levels[12] = AssetPaths._l17__oel;
+		_levels[13] = AssetPaths._l18__oel;
+		_levels[14] = AssetPaths._l18__oel;
+		_levels[15] = AssetPaths._l18__oel;
 
 		_timers = new Map<Int, FlxTimer>();
 		_levelNum = LevelSelectState.getLevelNumber();
@@ -257,13 +256,20 @@ class PlayState extends FlxState
 		FlxG.collide(_player, _glassWithSwitch);
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _door, unlockDoor);
-		FlxG.overlap(_buttons, _player, raiseGate);
 		FlxG.overlap(_spikes, _player, killPlayer);
 		_player.inWater(_player.overlaps(_water));
 
-		// Release any button that is pressed.
-		if (!Reg.currentButton.isEmpty())
-			Reg.currentButton.pop().buttonReleased();
+		
+		var button_iter:FlxTypedGroupIterator<Button> = _buttons.iterator();
+		while (button_iter.hasNext()) {
+			var curButton:Button = button_iter.next();
+			if (_player.overlaps(curButton)) {
+				raiseGate(curButton);
+				curButton.buttonPressed();
+			} else {
+				curButton.buttonReleased();
+			}
+		}
 
 		
 		var glass_iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
@@ -318,11 +324,9 @@ class PlayState extends FlxState
 	    FlxG.switchState(new PlayState());
 	}	
 
-	private function raiseGate(B:FlxObject, P:FlxObject):Void 
+	private function raiseGate(button:Button):Void 
 	{
-		var id:Int = (cast B).getId();
-		var button:Button = (cast B);
-		button.buttonPressed();
+		var id:Int = button.getId();
 		var itr:FlxTypedGroupIterator<Gate> = _gates.iterator();
 		var curGate:Gate = new Gate();
 
@@ -333,13 +337,11 @@ class PlayState extends FlxState
 				if (curGate.isRaised()) 
 				{
 					_timers.get(id).reset();
-					Reg.currentButton.add(button);
 				}
 				else
 				{
 					curGate.raiseGate();
 					Reg.currentGates.add(curGate);
-					Reg.currentButton.add(button);
 					_timers.set(id, new FlxTimer().start(1.0, dropGate, 1));
 				}
 			}

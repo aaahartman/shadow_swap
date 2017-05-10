@@ -9,14 +9,14 @@
     <Height>720</Height>
   </LevelDefaultSize>
   <LevelMinimumSize>
-    <Width>1280</Width>
-    <Height>720</Height>
+    <Width>32</Width>
+    <Height>32</Height>
   </LevelMinimumSize>
   <LevelMaximumSize>
     <Width>1280</Width>
     <Height>720</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\Andrew Hartman\shadow_swap\ShadowSwap\assets\data\Shadow Swap.oep</Filename>
+  <Filename>C:\Users\andre\shadow_swap\ShadowSwap\assets\data\Shadow Swap.oep</Filename>
   <AngleMode>Degrees</AngleMode>
   <CameraEnabled>false</CameraEnabled>
   <CameraSize>

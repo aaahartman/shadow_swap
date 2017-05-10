@@ -118,11 +118,19 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/images/Fan_On.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/images/Glass.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("assets/images/Ground.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Hint_S.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -150,11 +158,19 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/images/Spike.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/images/Switch.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("assets/images/tiles.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Water.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -259,7 +275,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "160",
+			build: "161",
 			company: "HaxeFlixel",
 			file: "ShadowSwap",
 			fps: 60,

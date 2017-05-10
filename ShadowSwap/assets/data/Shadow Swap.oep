@@ -9,8 +9,8 @@
     <Height>720</Height>
   </LevelDefaultSize>
   <LevelMinimumSize>
-    <Width>1280</Width>
-    <Height>720</Height>
+    <Width>32</Width>
+    <Height>32</Height>
   </LevelMinimumSize>
   <LevelMaximumSize>
     <Width>1280</Width>

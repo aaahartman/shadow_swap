@@ -75,4 +75,8 @@ class LevelSelectState extends FlxState
 	public static function getLevelNumber():Int {
 		return _levelNum;
 	}
+
+	public static function setLevelNumer(lv:Int):Void {
+		_levelNum = lv;
+	}
 }

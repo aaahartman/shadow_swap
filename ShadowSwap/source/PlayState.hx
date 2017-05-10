@@ -9,6 +9,7 @@ import flixel.text.FlxText;
 import flixel.group.FlxGroup;
 import flixel.util.FlxTimer;
 import flixel.math.FlxRect;
+import flixel.ui.FlxButton;
 
 
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
@@ -219,10 +220,10 @@ class PlayState extends FlxState
 		}
 
 		// return to home menu
-		if (FlxG.keys.justPressed.H) {
-			FlxG.switchState(new SplashScreenState());
-			Main.LOGGER.logLevelAction(LoggingActions.CLICK_HOME, {level: _levelNum});
-		}
+		//if (FlxG.keys.justPressed.H) {
+		//	FlxG.switchState(new SplashScreenState());
+		//	Main.LOGGER.logLevelAction(LoggingActions.CLICK_HOME, {level: _levelNum});
+		//}
 
 
 		if (FlxG.keys.justPressed.S) {
@@ -293,10 +294,19 @@ class PlayState extends FlxState
 		{
 			_door.openDoor();
 			add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
-			haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 600);
+			//haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 600);
 			Main.LOGGER.logLevelEnd({won: true});
+			var next = new FlxButton(FlxG.width /2 , 10, "Next Level", promptNext);
+			add(next);
+			next.screenCenter();
 		}
 	}
+
+	private function promptNext():Void {
+		Main.LOGGER.logActionWithNoLevel(LoggingActions.CLICK_NEXT,  {level:_levelNum});
+		LevelSelectState.setLevelNumer(_levelNum + 1);
+	    FlxG.switchState(new PlayState());
+	}	
 
 	private function raiseGate(B:FlxObject, P:FlxObject):Void 
 	{

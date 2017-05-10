@@ -17,7 +17,7 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 	private var keySlot:FlxSprite;
 	private var reset:FlxButton;
 	private var levelMenu:FlxButton;
-	private var homeMenu:FlxButton;
+	//private var homeMenu:FlxButton;
 
 	public function new(lv:Int) {
 		super();
@@ -33,13 +33,13 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 		keySlot.makeGraphic(8, 8, FlxColor.BLACK);
 
 		// Reset Button
-		reset = new FlxButton(FlxG.width - 80, 5, "Reset (R)", resetState);
+		reset = new FlxButton(FlxG.width /2 , 5, "Reset (R)", resetState);
 
 		// Level Selection Button
-		levelMenu = new FlxButton(FlxG.width - 180, 5, "Levels (L)", levelState);
+		levelMenu = new FlxButton(FlxG.width /2 + 50, 5, "Levels (L)", levelState);
 
 		// Level Selection Button
-		homeMenu = new FlxButton(FlxG.width - 280, 5, "Home (H)", homeState);
+		//homeMenu = new FlxButton(FlxG.width - 280, 5, "Home (H)", homeState);
 
 		add(background);
 		add(textLevel);
@@ -47,7 +47,7 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 		add(keySlot);
 		add(reset);
 		add(levelMenu);
-		add(homeMenu);
+		//add(homeMenu);
 
 		forEach(
 			function(spr:FlxSprite) {
@@ -63,9 +63,9 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 		FlxG.switchState(new LevelSelectState());
 	}
 
-	private function homeState():Void {
-		FlxG.switchState(new SplashScreenState());
-	}
+	//private function homeState():Void {
+	//	FlxG.switchState(new SplashScreenState());
+	//}
 
 	public function setKey():Void {
 		//keySlot.makeGraphic(8, 8, FlxColor.GRAY);

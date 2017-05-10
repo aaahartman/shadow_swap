@@ -17,29 +17,28 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 	private var keySlot:FlxSprite;
 	private var reset:FlxButton;
 	private var levelMenu:FlxButton;
-	//private var homeMenu:FlxButton;
 
 	public function new(lv:Int) {
 		super();
-		background = new FlxSprite().makeGraphic(FlxG.width, 30, FlxColor.BLACK);
-		background.drawRect(0, 29, FlxG.width, 1, FlxColor.WHITE);
+		background = new FlxSprite().makeGraphic(FlxG.width, 32, FlxColor.BLACK);
+		background.drawRect(0, 31, FlxG.width, 1, FlxColor.WHITE);
 		
-		textLevel = new FlxText(0, 3, 0, "LV " + lv, 15);
-		textLevel.setBorderStyle(SHADOW, FlxColor.GRAY, 1, 1);
+		textLevel = new FlxText(0, 5, 0, "LV " + lv, 18);
+		//textLevel.setBorderStyle(SHADOW, FlxColor.GRAY, 1, 1);
 		
 		// Default setting: level does not have key.
-		textKey = new FlxText(textLevel.width + 50, 3, 0, "Key", 15);
-		keySlot = new FlxSprite(textLevel.width + 50 + textKey.width, 7);
+		textKey = new FlxText(textLevel.width + 50, 5, 0, "Key", 18);
+		keySlot = new FlxSprite(textLevel.width + 50 + textKey.width, 10);
 		keySlot.makeGraphic(8, 8, FlxColor.BLACK);
 
 		// Reset Button
-		reset = new FlxButton(FlxG.width /2 , 5, "Reset (R)", resetState);
+		var offset = textLevel.width + 100 + textKey.width + keySlot.width + 50;
+		reset = new FlxButton(offset, 0, "", resetState);
+		reset.loadGraphic(AssetPaths.Reset__png, true, 50, 30);
 
 		// Level Selection Button
-		levelMenu = new FlxButton(FlxG.width /2 + 50, 5, "Levels (L)", levelState);
-
-		// Level Selection Button
-		//homeMenu = new FlxButton(FlxG.width - 280, 5, "Home (H)", homeState);
+		levelMenu = new FlxButton(offset + 100, 0, "", levelState);
+		levelMenu.loadGraphic(AssetPaths.Menu__png, true, 50, 30);
 
 		add(background);
 		add(textLevel);
@@ -47,7 +46,6 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 		add(keySlot);
 		add(reset);
 		add(levelMenu);
-		//add(homeMenu);
 
 		forEach(
 			function(spr:FlxSprite) {
@@ -63,12 +61,7 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 		FlxG.switchState(new LevelSelectState());
 	}
 
-	//private function homeState():Void {
-	//	FlxG.switchState(new SplashScreenState());
-	//}
-
 	public function setKey():Void {
-		//keySlot.makeGraphic(8, 8, FlxColor.GRAY);
 		keySlot.loadGraphic(AssetPaths.Key_slot__png, false, 32, 14);
 	}
 

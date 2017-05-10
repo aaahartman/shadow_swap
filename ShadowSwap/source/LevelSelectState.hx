@@ -14,6 +14,10 @@ class LevelSelectState extends FlxState
 	private static var _levelNum:Int;
 	
 	override public function create():Void {
+
+		flixel.FlxCamera.defaultZoom = 1;
+		FlxG.cameras.reset();
+		FlxG.camera.setSize(1080, 720);
 		
 		FlxG.log.redirectTraces = true;
 

@@ -68,17 +68,27 @@ class PlayState extends FlxState
 
 		_map = new FlxOgmoLoader(_levels[_levelNum]);
 		_mWalls = _map.loadTilemap(AssetPaths.tiles__png, 32, 32, "walls");
+		//_mWalls.setPosition((FlxG.width - _mWalls.width) / 2, 0);
 		_mWalls.follow();
   		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
   		_mWalls.setTileProperties(2, FlxObject.ANY); // ground
   		_mWalls.setTileProperties(3, FlxObject.NONE); // ground
-
  		add(_mWalls);
-		
+	
+
 		_background = _map.loadTilemap(AssetPaths.tiles__png, 32, 32, "background");
+		//_background.setPosition((FlxG.width - _background.width) / 2, 0);
 		_background.follow();
 		_background.setTileProperties(1, FlxObject.NONE);
 		add(_background);
+
+
+
+		flixel.FlxCamera.defaultZoom = 1;
+		FlxG.cameras.reset();
+		FlxG.camera.setSize((cast _mWalls.width), 720);
+		FlxG.camera.x = (FlxG.width - _mWalls.width) / 2;
+
 
 		_hud = new HUD(_levelNum);
 

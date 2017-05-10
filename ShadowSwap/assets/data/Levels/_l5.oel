@@ -57,6 +57,11 @@
     <glass id="0" x="288" y="224" _id="0" _on="True" />
     <glass id="0" x="256" y="224" _id="0" _on="True" />
     <glass id="0" x="224" y="224" _id="0" _on="True" />
+    <spike id="38" x="224" y="640" />
+    <spike id="39" x="256" y="640" />
+    <spike id="40" x="288" y="640" />
+    <spike id="41" x="320" y="640" />
+    <spike id="42" x="352" y="640" />
     <key id="34" x="448" y="640" />
     <door id="35" x="736" y="192" />
     <player id="36" x="64" y="64" />

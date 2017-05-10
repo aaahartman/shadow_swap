@@ -15,6 +15,7 @@ class LoggingActions
 	public static var PLAYER_JUMP:Int = 6;
 
 	public static var SWITCH_TOGGLE:Int = 7;
+	public static var PLAYER_DIE:Int = 8;
 	
 	public function new() {}
 }

@@ -154,7 +154,6 @@ class PlayState extends FlxState
 		add(_fans);
  		add(_switches);
  		add(_hud);
- 		add(_hint);
 		add(_spikes);
  		add(_player);
  		add(_shadow);
@@ -162,6 +161,8 @@ class PlayState extends FlxState
 		add(_loseText);
 		add(_nextButton);
 		add(_winText);
+		if (_hint != null)
+			add(_hint);
 
 		super.create();
 

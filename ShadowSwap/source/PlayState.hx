@@ -272,14 +272,17 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _door, unlockDoor);
 		FlxG.overlap(_spikes, _player, killPlayer);
 
-		if (_player.overlaps(_water)) {
+		if (_player.overlaps(_water)) 
+		{
 			_player.inWater(true);
 			if (!_timerOn)
 			{
 				_timerOn = true;
 				_timeInWater.start(1, countDown, 11);
 			}
-		} else {
+		} 
+		else 
+		{
 			_player.inWater(false);
 			if (_timerOn)
 			{

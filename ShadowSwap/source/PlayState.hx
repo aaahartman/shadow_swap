@@ -115,8 +115,8 @@ class PlayState extends FlxState
 		_countDownText = new FlxText(_mWalls.width / 2 - 32, _mWalls.height / 2, FlxG.width, "", 64);
 
 		// Initialize winning and losing display
-		_loseText = new FlxText(_mWalls.width / 2 - 100, _mWalls.height / 2, 0, "", 25);
-		_winText = new FlxText(_mWalls.width / 2 - 75, _mWalls.height / 2, 0, "", 25);
+		_loseText = new FlxText(_mWalls.width / 2 - 70, _mWalls.height / 2, 0, "", 25);
+		_winText = new FlxText(_mWalls.width / 2 - 70, _mWalls.height / 2, 0, "", 25);
 
 		// Create and Hide the "Next" button
 		_nextButton = new FlxButton(_mWalls.width / 2, _mWalls.height / 2 + _winText.height, "", promptNext);
@@ -398,8 +398,11 @@ class PlayState extends FlxState
 			_door.openDoor();
 
 			_winText.text = "YOU WIN!";
-			_nextButton.active = true;
-			_nextButton.visible = true;
+
+			if (_levelNum < 15) {
+				_nextButton.active = true;
+				_nextButton.visible = true;
+			}
 			
 			Main.LOGGER.logLevelEnd({won: true});
 		}

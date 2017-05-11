@@ -37,6 +37,10 @@ class PlayState extends FlxState
 	private var _levels:Array<Dynamic>;
 	private var _levelNum:Int;
 	private var _timers:Map<Int, FlxTimer>;
+	private var _timeInWater:FlxTimer;
+	private var _timerOn:Bool;
+	private var _counter:Int;
+	private var _countDownText:FlxText;
 	private var _hint:Hint;
 
 	private var _hud:HUD;
@@ -81,13 +85,14 @@ class PlayState extends FlxState
 		_background.setTileProperties(1, FlxObject.NONE);
 		add(_background);
 
-
-
 		flixel.FlxCamera.defaultZoom = 1;
 		FlxG.cameras.reset();
 		FlxG.camera.setSize((cast _mWalls.width), 720);
 		FlxG.camera.x = (FlxG.width - _mWalls.width) / 2;
 
+		_timeInWater = new FlxTimer();
+		_counter = 10;
+		_countDownText = new FlxText(_mWalls.width / 2 - 32, _mWalls.height / 2, FlxG.width, "", 64);
 
 		_hud = new HUD(_levelNum);
 
@@ -105,7 +110,6 @@ class PlayState extends FlxState
 		_spikes = new FlxTypedGroup<Spike>();
 		_water = new FlxTypedGroup<Water>();
  		_map.loadEntities(placeEntities, "entities");
-
 		
 		Reg.gotKey = false;
 		add(_water);
@@ -122,6 +126,7 @@ class PlayState extends FlxState
 		add(_spikes);
  		add(_player);
  		add(_shadow);
+		add(_countDownText);
 		super.create();
 
 
@@ -266,9 +271,25 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _door, unlockDoor);
 		FlxG.overlap(_spikes, _player, killPlayer);
-		_player.inWater(_player.overlaps(_water));
 
-		
+		if (_player.overlaps(_water)) {
+			_player.inWater(true);
+			if (!_timerOn)
+			{
+				_timerOn = true;
+				_timeInWater.start(1, countDown, 11);
+			}
+		} else {
+			_player.inWater(false);
+			if (_timerOn)
+			{
+				_timerOn = false;
+				_timeInWater.destroy();
+				_counter = 10;
+				_countDownText.text = "";
+			}
+		}
+
 		var button_iter:FlxTypedGroupIterator<Button> = _buttons.iterator();
 		while (button_iter.hasNext()) 
 		{
@@ -307,7 +328,19 @@ class PlayState extends FlxState
 		}
 	}
 
-	private function killPlayer(S:FlxObject, P:FlxObject):Void
+	private function countDown(Timer:FlxTimer):Void
+	{
+		_countDownText.text = "" + _counter;
+		if (_counter > 0)
+			_counter--;
+		else
+		{
+			killPlayer();
+			_countDownText.text = "";
+		}
+	}
+
+	private function killPlayer(S:FlxObject = null, P:FlxObject = null):Void
 	{
 			add(new FlxText(0, 0, FlxG.width, "YOU ARE DEAD!", 16).screenCenter());
 			_player.kill();

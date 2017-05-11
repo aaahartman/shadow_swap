@@ -467,13 +467,11 @@ class PlayState extends FlxState
 					curGlass.toggle();
 					if (s.on()) 
 					{
-						// hide glass, set tile to ground 
-						curGlass.setAlpha(0);
-
+						curGlass.setAlpha(1);
 					}
 					else 
 					{
-
+						curGlass.setAlpha(0);
 					}
 				}
 			}

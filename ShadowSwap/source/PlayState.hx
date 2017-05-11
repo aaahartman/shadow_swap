@@ -10,6 +10,7 @@ import flixel.group.FlxGroup;
 import flixel.util.FlxTimer;
 import flixel.math.FlxRect;
 import flixel.ui.FlxButton;
+import flixel.FlxSprite;
 
 
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
@@ -42,8 +43,11 @@ class PlayState extends FlxState
 	private var _counter:Int;
 	private var _countDownText:FlxText;
 	private var _hint:Hint;
+	private var _winText:FlxText;
+	private var _loseText:FlxText;
 
 	private var _hud:HUD;
+	private var _nextButton:FlxButton;
 
 	override public function create():Void 
 	{
@@ -66,41 +70,55 @@ class PlayState extends FlxState
 		_levels[14] = AssetPaths._l18__oel;
 		_levels[15] = AssetPaths._l18__oel;
 
+
 		_timers = new Map<Int, FlxTimer>();
 		_levelNum = LevelSelectState.getLevelNumber();
 
+		// Import tile map
 		_map = new FlxOgmoLoader(_levels[_levelNum]);
 		_mWalls = _map.loadTilemap(AssetPaths.tiles__png, 32, 32, "walls");
-		//_mWalls.setPosition((FlxG.width - _mWalls.width) / 2, 0);
 		_mWalls.follow();
   		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
   		_mWalls.setTileProperties(2, FlxObject.ANY); // ground
   		_mWalls.setTileProperties(3, FlxObject.NONE); // ground
  		add(_mWalls);
 	
-
+ 		// Import tile map non-collidible layer
 		_background = _map.loadTilemap(AssetPaths.tiles__png, 32, 32, "background");
-		//_background.setPosition((FlxG.width - _background.width) / 2, 0);
 		_background.follow();
 		_background.setTileProperties(1, FlxObject.NONE);
 		add(_background);
 
+		// Resize screen to fit tilemap at center
 		flixel.FlxCamera.defaultZoom = 1;
 		FlxG.cameras.reset();
 		FlxG.camera.setSize((cast _mWalls.width), 720);
 		FlxG.camera.x = (FlxG.width - _mWalls.width) / 2;
 
+		// Create HUD
+		_hud = new HUD(_levelNum);
+
+		// Initialize water related components
 		_timeInWater = new FlxTimer();
 		_counter = 10;
 		_countDownText = new FlxText(_mWalls.width / 2 - 32, _mWalls.height / 2, FlxG.width, "", 64);
 
-		_hud = new HUD(_levelNum);
+		// Initialize winning and losing display
+		_loseText = new FlxText(_mWalls.width / 2 - 100, _mWalls.height / 2, 0, "", 25);
+		_winText = new FlxText(_mWalls.width / 2 - 75, _mWalls.height / 2, 0, "", 25);
 
-		_player = new Player();  //player
-		_shadow = new Shadow();  //shadow
+		// Create and Hide the "Next" button
+		_nextButton = new FlxButton(_mWalls.width / 2, _mWalls.height / 2 + _winText.height, "", promptNext);
+		_nextButton.loadGraphic(AssetPaths.Next__png, true, 50, 30);
+		_nextButton.x -= _nextButton.width / 2;
+		_nextButton.active = false;
+		_nextButton.visible = false;
+
+		// Initialize all entities
+		_player = new Player();
+		_shadow = new Shadow();
 		_glass = new FlxTypedGroup<Glass>();
 		_glassWithSwitch = new FlxTypedGroup<Glass>();
-
 		_gates = new FlxTypedGroup<Gate>();
 		_buttons = new FlxTypedGroup<Button>();
 		_fans = new FlxTypedGroup<Fan>();
@@ -111,7 +129,10 @@ class PlayState extends FlxState
 		_water = new FlxTypedGroup<Water>();
  		_map.loadEntities(placeEntities, "entities");
 		
+		// Initialze Got key to false
 		Reg.gotKey = false;
+
+		// Add all components to game state
 		add(_water);
 		add(_glass);
 		add(_glassWithSwitch);
@@ -127,8 +148,11 @@ class PlayState extends FlxState
  		add(_player);
  		add(_shadow);
 		add(_countDownText);
-		super.create();
+		add(_loseText);
+		add(_nextButton);
+		add(_winText);
 
+		super.create();
 
 		Main.LOGGER.logLevelStart(_levelNum);
 	}
@@ -227,29 +251,20 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
-		// restart the game
-		if (FlxG.keys.justPressed.R) 
-		{
+		// If pressed "R", restart the game
+		if (FlxG.keys.justPressed.R) {
 			FlxG.switchState(new PlayState());
 			Main.LOGGER.logLevelAction(LoggingActions.CLICK_RESET, {level: _levelNum});
 		}
 
-		// return to level selection menu
-		if (FlxG.keys.justPressed.L) 
-		{
+		// If pressed "L", return to level selection menu
+		if (FlxG.keys.justPressed.L) {
 			FlxG.switchState(new LevelSelectState());
 			Main.LOGGER.logLevelAction(LoggingActions.CLICK_LEVELSELECTION, {level: _levelNum});
 		}
 
-		// return to home menu
-		//if (FlxG.keys.justPressed.H) {
-		//	FlxG.switchState(new SplashScreenState());
-		//	Main.LOGGER.logLevelAction(LoggingActions.CLICK_HOME, {level: _levelNum});
-		//}
-
-
-		if (FlxG.keys.justPressed.S) 
-		{
+		// If pressed "S", swap player and shadow
+		if (FlxG.keys.justPressed.S) {
 			var temp:Float = _player.x;
 			_player.x = _shadow.x;
 			_shadow.x = temp;
@@ -264,6 +279,8 @@ class PlayState extends FlxState
 		
 		updateSwitches();
 		updateFans();
+
+		// Check for player collision with walls and entities
 		FlxG.collide(_player, _mWalls);
 		FlxG.collide(_shadow, _mWalls);
 		FlxG.collide(_player, _glass);
@@ -272,20 +289,19 @@ class PlayState extends FlxState
 		FlxG.overlap(_player, _door, unlockDoor);
 		FlxG.overlap(_spikes, _player, killPlayer);
 
-		if (_player.overlaps(_water)) 
-		{
+
+		// Player / Water interaction
+		if (_player.overlaps(_water)) {
 			_player.inWater(true);
-			if (!_timerOn)
-			{
+			if (!_timerOn) {
+
 				_timerOn = true;
 				_timeInWater.start(1, countDown, 11);
 			}
-		} 
-		else 
-		{
+		} else {
 			_player.inWater(false);
-			if (_timerOn)
-			{
+
+			if (_timerOn) {
 				_timerOn = false;
 				_timeInWater.destroy();
 				_counter = 10;
@@ -293,6 +309,7 @@ class PlayState extends FlxState
 			}
 		}
 
+		// Player / Button interaction
 		var button_iter:FlxTypedGroupIterator<Button> = _buttons.iterator();
 		while (button_iter.hasNext()) 
 		{
@@ -308,7 +325,7 @@ class PlayState extends FlxState
 			}
 		}
 
-		
+		// Player / Glass Interaction
 		var glass_iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
 		while (glass_iter.hasNext()) 
 		{
@@ -319,6 +336,7 @@ class PlayState extends FlxState
 			}
 		}
 
+		// Player / Gate Interaction
 		var gate_iter:FlxTypedGroupIterator<Gate> = _gates.iterator();
 		while (gate_iter.hasNext()) 
 		{
@@ -331,6 +349,7 @@ class PlayState extends FlxState
 		}
 	}
 
+	// Countdown for player's remaining time in water.
 	private function countDown(Timer:FlxTimer):Void
 	{
 		_countDownText.text = "" + _counter;
@@ -343,31 +362,35 @@ class PlayState extends FlxState
 		}
 	}
 
+	// Kill player and restart the game.
 	private function killPlayer(S:FlxObject = null, P:FlxObject = null):Void
 	{
-			add(new FlxText(0, 0, FlxG.width, "YOU ARE DEAD!", 16).screenCenter());
+			_loseText.text = "YOU DIED.";
 			_player.kill();
-			haxe.Timer.delay(FlxG.switchState.bind(new PlayState()), 600);
+			haxe.Timer.delay(FlxG.switchState.bind(new PlayState()), 800);
+
 			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {level: _levelNum});
 	}
 
+	// Destroy Key object when it is collected.
 	private function collectKey(P:FlxObject, K:FlxObject):Void 
 	{
 		_hud.updateHUD();
 		K.kill();
 	}
 
+	// Check for key and handle player winning UI.
 	private function unlockDoor(P:FlxObject, D:FlxObject):Void 
 	{
 		if (Reg.gotKey)
 		{
 			_door.openDoor();
-			add(new FlxText(0, 0, FlxG.width, "YOU WIN!", 16).screenCenter());
-			//haxe.Timer.delay(FlxG.switchState.bind(new LevelSelectState()), 600);
+
+			_winText.text = "YOU WIN!";
+			_nextButton.active = true;
+			_nextButton.visible = true;
+			
 			Main.LOGGER.logLevelEnd({won: true});
-			var next = new FlxButton(FlxG.width /2 , 10, "Next Level", promptNext);
-			add(next);
-			next.screenCenter();
 		}
 	}
 

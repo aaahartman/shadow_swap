@@ -23,13 +23,16 @@ class Button extends FlxSprite
 		return _id;
 	}
 
-	public function buttonPressed():Void {
+	public function buttonPressed():Void 
+	{
 		pressed = true;
 		loadGraphic(AssetPaths.Button_Pressed__png, false, 32, 32);
 	}
 
-	public function buttonReleased():Void {
-		if (pressed) {
+	public function buttonReleased():Void 
+	{
+		if (pressed) 
+		{
 			pressed = false;
 			loadGraphic(AssetPaths.Button__png, false, 32, 32);
 		}

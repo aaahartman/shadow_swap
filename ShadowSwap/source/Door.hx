@@ -14,7 +14,8 @@ class Door extends FlxSprite
 		immovable = true;
 	}
 
-	public function openDoor():Void {
+	public function openDoor():Void 
+	{
 		loadGraphic(AssetPaths.Door_open__png, false, 32, 64);
 	}
 }

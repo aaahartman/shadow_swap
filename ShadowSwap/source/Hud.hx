@@ -9,7 +9,8 @@ import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
 using flixel.util.FlxSpriteUtil;
 
-class HUD extends FlxTypedGroup<FlxSprite> {
+class HUD extends FlxTypedGroup<FlxSprite> 
+{
 	
 	private var background:FlxSprite;
 	private var textLevel:FlxText;
@@ -18,7 +19,8 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 	private var reset:FlxButton;
 	private var levelMenu:FlxButton;
 
-	public function new(lv:Int) {
+	public function new(lv:Int) 
+	{
 		super();
 		background = new FlxSprite().makeGraphic(FlxG.width, 32, FlxColor.BLACK);
 		background.drawRect(0, 31, FlxG.width, 1, FlxColor.WHITE);
@@ -48,24 +50,30 @@ class HUD extends FlxTypedGroup<FlxSprite> {
 		add(levelMenu);
 
 		forEach(
-			function(spr:FlxSprite) {
+			function(spr:FlxSprite) 
+			{
 				spr.scrollFactor.set(0, 0);
-		});
+			}
+		);
 	}
 
-	private function resetState():Void {
+	private function resetState():Void 
+	{
 		FlxG.switchState(new PlayState());
 	}
 
-	private function levelState():Void {
+	private function levelState():Void 
+	{
 		FlxG.switchState(new LevelSelectState());
 	}
 
-	public function setKey():Void {
+	public function setKey():Void 
+	{
 		keySlot.loadGraphic(AssetPaths.Key_slot__png, false, 32, 14);
 	}
 
-	public function updateHUD():Void {
+	public function updateHUD():Void 
+	{
 		keySlot.loadGraphic(AssetPaths.Key_slot_filled__png, false, 32, 14);
 	}
 }

@@ -65,16 +65,20 @@ class Player extends FlxSprite
  		// acceleration.x = 0;
  		in_air = !isTouching(FlxObject.FLOOR) && !in_water;
 
- 		if (_left && _right) {
+ 		if (_left && _right) 
+ 		{
       		_left = _right = false;
  		}
 
-		if (_jump && !in_air) {		
+		if (_jump && !in_air) 
+		{		
 			velocity.y = -jump_speed;
 		}
 
-		if (!in_air)
+		if (!in_air) 
+		{
 			facing = FlxObject.DOWN;
+		}
 
 		velocity.x = default_speed;
 		if (_left) 
@@ -89,15 +93,22 @@ class Player extends FlxSprite
 			facing = FlxObject.RIGHT;
 		}
 
-		if (in_air)
+		if (in_air) 
+		{
 			facing = FlxObject.UP;
+		}
 
-		if (in_water)
+		if (in_water) 
+		{
 			acceleration.y = gravity / 2;
-		else
+		}
+		else 
+		{
 			acceleration.y = gravity;
+		}
 	
-		switch (facing) {
+		switch (facing) 
+		{
 			case FlxObject.UP:
 				animation.play("jump");
 			case FlxObject.LEFT, FlxObject.RIGHT:
@@ -108,15 +119,18 @@ class Player extends FlxSprite
 	    super.update(elapsed);
 	}
 
-	public function isInAir():Bool {
+	public function isInAir():Bool 
+	{
 		return in_air;
 	}
 	
-	override public function kill():Void {
+	override public function kill():Void 
+	{
 		FlxTween.tween(this, { alpha: 0, y: y - 20 }, 2.0, { ease: FlxEase.circOut, onComplete: finishKill});
 	}
 
-	private function finishKill(_):Void {
+	private function finishKill(_):Void 
+	{
 		exists = false;
 	}
 

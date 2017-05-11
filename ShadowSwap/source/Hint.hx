@@ -11,20 +11,26 @@ class Hint extends FlxSprite
 		super(X, Y);
 		immovable = true;
 
-		if (id == 0)
+		if (id == 0) 
+		{
 			SwapHint();
-		else
+		}
+		else 
+		{
 			RecallHint();
+		}
 	}
 
-	public function SwapHint():Void {
+	public function SwapHint():Void 
+	{
 		//makeGraphic(32, 20, FlxColor.WHITE);
 		loadGraphic(AssetPaths.Hint_S__png, true, 32, 22);
 		animation.add("flash", [0, 1], 1, true);
 		animation.play("flash");
 	}
 
-	public function RecallHint():Void {
+	public function RecallHint():Void 
+	{
 		makeGraphic(32, 20, FlxColor.WHITE);
 		var text = new FlxText(0, 0, 0, "R", 8);
 	}

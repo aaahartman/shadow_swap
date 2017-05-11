@@ -26,9 +26,12 @@ class Switch extends FlxSprite
 		_controlFan = controlFan;
 		_on = on;
 
-		if(_on) {
+		if(_on) 
+		{
 			facing = FlxObject.LEFT;
-		} else {
+		} 
+		else 
+		{
 			facing = FlxObject.RIGHT;
 		}
 	}
@@ -53,9 +56,12 @@ class Switch extends FlxSprite
 		_on = !_on;
 		Main.LOGGER.logLevelAction(LoggingActions.SWITCH_TOGGLE, {on : _on});
 
-		if(_on) {
+		if(_on) 
+		{
 			facing = FlxObject.LEFT;
-		} else {
+		} 
+		else 
+		{
 			facing = FlxObject.RIGHT;
 		}
 

@@ -23,11 +23,14 @@ class Fan extends FlxSprite
 		_dir = dir;
 		_on = on;
 
-		if (_on) {
+		if (_on) 
+		{
 			loadGraphic(AssetPaths.Fan_On__png, true, 32, 32);
 			animation.add("on", [0, 1], 11, true);
 			animation.play("on");
-		} else {
+		} 
+		else 
+		{
 			loadGraphic(AssetPaths.Fan_off__png, false, 32, 32);
 		}
 
@@ -57,14 +60,19 @@ class Fan extends FlxSprite
 			_dir = (_dir + 1) % 4;
 			changeDirection();
 		}
-		else
+		else 
+		{
 			_on = !_on;
+		}
 
-		if (_on) {
+		if (_on) 
+		{
 			loadGraphic(AssetPaths.Fan_On__png, true, 32, 32);
 			animation.add("on", [0, 1], 11, true);
 			animation.play("on");
-		} else {
+		} 
+		else 
+		{
 			loadGraphic(AssetPaths.Fan_off__png, false, 32, 32);
 		}
 	}
@@ -76,7 +84,8 @@ class Fan extends FlxSprite
 
 	public function changeDirection():Void
 	{
-		switch(_dir) {
+		switch(_dir) 
+		{
 			case 0:
 				angle = -90;
 				_bbox = new FlxRect(x, y - _size * _numBlocks, _size, _size * _numBlocks);

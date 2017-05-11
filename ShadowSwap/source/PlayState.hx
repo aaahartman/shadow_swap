@@ -543,6 +543,7 @@ class PlayState extends FlxState
 					 	if (!overlapsWithAnyFan(_player.bbox()))
 						{
 							_player.acceleration.y = _player.gravity;
+							_player.setDefaultSpeed(0);
 						}
 						else if (_player.bbox().overlaps(curFan.bbox()))
 						{
@@ -565,6 +566,7 @@ class PlayState extends FlxState
 					 	if (!overlapsWithAnyFan(_player.bbox()))
 						{
 							_player.acceleration.y = _player.gravity;
+							_player.setDefaultSpeed(0);
 						}
                         else if (_player.bbox().overlaps(curFan.bbox()))
 						{

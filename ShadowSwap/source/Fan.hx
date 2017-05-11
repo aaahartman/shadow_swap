@@ -24,7 +24,7 @@ class Fan extends FlxSprite
 		_on = on;
 
 		if (_on) {
-			loadGraphic(AssetPaths.Fan_on__png, true, 32, 32);
+			loadGraphic(AssetPaths.Fan_On__png, true, 32, 32);
 			animation.add("on", [0, 1], 11, true);
 			animation.play("on");
 		} else {
@@ -61,7 +61,7 @@ class Fan extends FlxSprite
 			_on = !_on;
 
 		if (_on) {
-			loadGraphic(AssetPaths.Fan_on__png, true, 32, 32);
+			loadGraphic(AssetPaths.Fan_On__png, true, 32, 32);
 			animation.add("on", [0, 1], 11, true);
 			animation.play("on");
 		} else {

@@ -58,7 +58,11 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("assets/data/Levels/_l15.oel");
+		urls.push ("assets/data/Levels/_l17.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/Levels/_l18.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -70,19 +74,15 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("assets/data/Levels/_l4.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		urls.push ("assets/data/Levels/_l5.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("assets/data/Levels/_l7.oel");
-		types.push (lime.Assets.AssetType.TEXT);
-		
-		
-		urls.push ("assets/data/Levels/_l8.oel");
-		types.push (lime.Assets.AssetType.TEXT);
-		
-		
-		urls.push ("assets/data/Levels/_l9.oel");
+		urls.push ("assets/data/Levels/_l6.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -118,6 +118,10 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/images/Fan_off.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/images/Fan_On.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -143,6 +147,14 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/images/Key_slot_filled.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Menu.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Reset.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -275,7 +287,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "161",
+			build: "165",
 			company: "HaxeFlixel",
 			file: "ShadowSwap",
 			fps: 60,

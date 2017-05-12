@@ -8,6 +8,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
 using flixel.util.FlxSpriteUtil;
+import flixel.system.FlxAssets;
 
 class HUD extends FlxTypedGroup<FlxSprite> 
 {
@@ -21,25 +22,30 @@ class HUD extends FlxTypedGroup<FlxSprite>
 
 	public function new(lv:Int) 
 	{
+
 		super();
-		background = new FlxSprite().makeGraphic(FlxG.width, 32, FlxColor.BLACK);
-		background.drawRect(0, 31, FlxG.width, 1, FlxColor.WHITE);
+		background = new FlxSprite().makeGraphic(FlxG.width, 34, FlxColor.BLACK);
+		background.drawRect(0, 33, FlxG.width, 1, FlxColor.WHITE);
 		
-		textLevel = new FlxText(0, 5, 0, "LV " + lv, 18);
-		//textLevel.setBorderStyle(SHADOW, FlxColor.GRAY, 1, 1);
+		textLevel = new FlxText(0, 0, 0, "Lv " + lv, 21);
+		textLevel.systemFont = "Arial Black";
+		//textLevel.bold = true;
 		
 		// Default setting: level does not have key.
-		textKey = new FlxText(textLevel.width + 50, 5, 0, "Key", 18);
+		textKey = new FlxText(textLevel.width + 50, 0, 0, "Key", 21);
+		textKey.systemFont = "Arial Black";
+		//textKey.bold = true;
+
 		keySlot = new FlxSprite(textLevel.width + 50 + textKey.width, 10);
 		keySlot.makeGraphic(8, 8, FlxColor.BLACK);
 
 		// Reset Button
 		var offset = textLevel.width + 100 + textKey.width + keySlot.width + 50;
-		reset = new FlxButton(offset, 0, "", resetState);
+		reset = new FlxButton(offset, 2, "", resetState);
 		reset.loadGraphic(AssetPaths.Reset__png, true, 50, 30);
 
 		// Level Selection Button
-		levelMenu = new FlxButton(offset + 100, 0, "", levelState);
+		levelMenu = new FlxButton(offset + 100, 2, "", levelState);
 		levelMenu.loadGraphic(AssetPaths.Menu__png, true, 50, 30);
 
 		add(background);

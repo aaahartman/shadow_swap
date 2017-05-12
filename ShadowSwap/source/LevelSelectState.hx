@@ -25,22 +25,29 @@ class LevelSelectState extends FlxState
 		var _canvas = new FlxSprite();
 		_canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
 		add(_canvas);
-		_canvas.drawRect(FlxG.width / 2 - 220, 80, 120, 270, 0xff0f635f);
-		_canvas.drawRect(FlxG.width / 2 - 70, 80, 120, 270, 0xff4c3c34);
-		_canvas.drawRect(FlxG.width / 2 + 80, 80, 120, 270, 0xff937566);
 
-		_canvas.drawRect(FlxG.width / 2 - 215, 85, 110, 260, FlxColor.BLACK);
-		_canvas.drawRect(FlxG.width / 2 - 65, 85, 110, 260, FlxColor.BLACK);
-		_canvas.drawRect(FlxG.width / 2 + 85, 85, 110, 260, FlxColor.BLACK);
+		// Color border 
+		_canvas.drawRect(FlxG.width / 2 - 270, 130, 120, 380, 0xff86cc9b);
+		_canvas.drawRect(FlxG.width / 2 - 130, 130, 120, 380, 0xff0f635f);
+		_canvas.drawRect(FlxG.width / 2 + 10, 130, 120, 380, 0xff4c3c34);
+		_canvas.drawRect(FlxG.width / 2 + 150, 130, 120, 380, 0xff937566);
 
-		_canvas.drawRect(FlxG.width / 2 - 210, 90, 100, 250, 0xff0f635f);
-		_canvas.drawRect(FlxG.width / 2 - 60, 90, 100, 250, 0xff4c3c34);
-		_canvas.drawRect(FlxG.width / 2 + 90, 90, 100, 250, 0xff937566);
+		// black border
+		_canvas.drawRect(FlxG.width / 2 - 265, 135, 110, 370, FlxColor.BLACK);
+		_canvas.drawRect(FlxG.width / 2 - 125, 135, 110, 370, FlxColor.BLACK);
+		_canvas.drawRect(FlxG.width / 2 + 15, 135, 110, 370, FlxColor.BLACK);
+		_canvas.drawRect(FlxG.width / 2 + 155, 135, 110, 370, FlxColor.BLACK);
+
+		// Color background
+		_canvas.drawRect(FlxG.width / 2 - 260, 140, 100, 360, 0xff86cc9b);
+		_canvas.drawRect(FlxG.width / 2 - 120, 140, 100, 360, 0xff0f635f);
+		_canvas.drawRect(FlxG.width / 2 + 20, 140, 100, 360, 0xff4c3c34);
+		_canvas.drawRect(FlxG.width / 2 + 160, 140, 100, 360, 0xff937566);
 
 		// Stage 1 buttons
 		for (i in 1...6) 
 		{
-			var _btn = new FlxButton(FlxG.width / 2 - 200, 50 + 50 * i, "Level " + i);
+			var _btn = new FlxButton(FlxG.width / 2 - 250, 150 + 70 * (i - 1), "Level " + i);
 			_btn.onDown.callback = clickPlay.bind(i);
 			_btn.loadGraphic("assets/images/ButtonBackdrop.png", true, 75, 27);
 			add(_btn);
@@ -49,7 +56,7 @@ class LevelSelectState extends FlxState
 		// Stage 2 buttons
 		for (i in 6...11) 
 		{
-			var _btn = new FlxButton(FlxG.width / 2 - 50, 50 + 50 * (i - 5), "Level " + i);
+			var _btn = new FlxButton(FlxG.width / 2 - 110, 150+ 70 * (i - 6), "Level " + i);
 			_btn.onDown.callback = clickPlay.bind(i);
 			_btn.loadGraphic("assets/images/ButtonBackdrop2.png", true, 75, 27);
 			add(_btn);
@@ -58,13 +65,24 @@ class LevelSelectState extends FlxState
 		// Stage 3 buttons
 		for (i in 11...16) 
 		{
-			var _btn = new FlxButton(FlxG.width / 2 + 100, 50 + 50 * (i - 10), "Level " + i);
+			var _btn = new FlxButton(FlxG.width / 2 + 30, 150 + 70 * (i - 11), "Level " + i);
 			_btn.onDown.callback = clickPlay.bind(i);
 			_btn.loadGraphic("assets/images/ButtonBackdrop3.png", true, 75, 27);
 			add(_btn);
 		}
 
-		_text = new FlxText(FlxG.width / 2 - 70, 40, FlxG.width, "Select Level", 16);
+		// Stage 4 buttons
+		for (i in 16...21)
+		{
+			var _btn = new FlxButton(FlxG.width / 2 + 170, 150 + 70 * (i - 16), "Level " + i);
+			_btn.onDown.callback = clickPlay.bind(i);
+			_btn.loadGraphic("assets/images/ButtonBackdrop3.png", true, 75, 27);
+			add(_btn);
+		}
+
+		_text = new FlxText(FlxG.width / 2 - 80, 90, FlxG.width, " Level Menu", 25);
+		_text.systemFont = "Arial Black";
+		//_text.bold = true;
 
  		add(_text);
 		super.create();

@@ -70,6 +70,13 @@ class PlayState extends FlxState
 		_levels[14] = AssetPaths._l18__oel;
 		_levels[15] = AssetPaths._l19__oel;
 
+		// New levels to be completed!!
+		_levels[16] = AssetPaths._l19__oel;
+		_levels[17] = AssetPaths._l19__oel;
+		_levels[18] = AssetPaths._l19__oel;
+		_levels[19] = AssetPaths._l19__oel;
+		_levels[20] = AssetPaths._l19__oel;
+
 
 		_timers = new Map<Int, FlxTimer>();
 		_levelNum = LevelSelectState.getLevelNumber();

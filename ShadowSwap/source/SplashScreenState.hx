@@ -12,10 +12,11 @@ class SplashScreenState extends FlxState
 
 	override public function create():Void
 	{
-		_text = new FlxText(20, 20, FlxG.width, "Shadow Swap", 32);
+		_text = new FlxText(0, 0, FlxG.width, "Shadow Swap", 32);
 		_text.screenCenter();
 		//_text.y += 20;
-		_btnPlay = new FlxButton(0, 0, "Play", clickPlay);
+		_btnPlay = new FlxButton(0, 0, "", clickPlay);
+		_btnPlay.loadGraphic(AssetPaths.Play__png, true, 90, 50);
 		_btnPlay.screenCenter();
  		add(_btnPlay);
  		add(_text);

@@ -68,6 +68,42 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -77,6 +113,42 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -600,6 +672,42 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -609,22 +717,94 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
-		path.set ("assets/data/colortiles.png", "assets/data/colortiles.png");
-		type.set ("assets/data/colortiles.png", AssetType.IMAGE);
-		path.set ("assets/data/Levels/level0.oel", "assets/data/Levels/level0.oel");
-		type.set ("assets/data/Levels/level0.oel", AssetType.TEXT);
-		path.set ("assets/data/Levels/level1.oel", "assets/data/Levels/level1.oel");
-		type.set ("assets/data/Levels/level1.oel", AssetType.TEXT);
-		path.set ("assets/data/Levels/level2.oel", "assets/data/Levels/level2.oel");
-		type.set ("assets/data/Levels/level2.oel", AssetType.TEXT);
-		path.set ("assets/data/Levels/level3.oel", "assets/data/Levels/level3.oel");
-		type.set ("assets/data/Levels/level3.oel", AssetType.TEXT);
-		path.set ("assets/data/Levels/level4.oel", "assets/data/Levels/level4.oel");
-		type.set ("assets/data/Levels/level4.oel", AssetType.TEXT);
-		path.set ("assets/data/New Project.oep", "assets/data/New Project.oep");
-		type.set ("assets/data/New Project.oep", AssetType.TEXT);
-		path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
-		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
+		path.set ("assets/data/Levels/uncomp.oel", "assets/data/Levels/uncomp.oel");
+		type.set ("assets/data/Levels/uncomp.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l1.oel", "assets/data/Levels/_l1.oel");
+		type.set ("assets/data/Levels/_l1.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l10.oel", "assets/data/Levels/_l10.oel");
+		type.set ("assets/data/Levels/_l10.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l11.oel", "assets/data/Levels/_l11.oel");
+		type.set ("assets/data/Levels/_l11.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l12.oel", "assets/data/Levels/_l12.oel");
+		type.set ("assets/data/Levels/_l12.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l13.oel", "assets/data/Levels/_l13.oel");
+		type.set ("assets/data/Levels/_l13.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l14.oel", "assets/data/Levels/_l14.oel");
+		type.set ("assets/data/Levels/_l14.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l17.oel", "assets/data/Levels/_l17.oel");
+		type.set ("assets/data/Levels/_l17.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l18.oel", "assets/data/Levels/_l18.oel");
+		type.set ("assets/data/Levels/_l18.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l19.oel", "assets/data/Levels/_l19.oel");
+		type.set ("assets/data/Levels/_l19.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l2.oel", "assets/data/Levels/_l2.oel");
+		type.set ("assets/data/Levels/_l2.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l3.oel", "assets/data/Levels/_l3.oel");
+		type.set ("assets/data/Levels/_l3.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l4.oel", "assets/data/Levels/_l4.oel");
+		type.set ("assets/data/Levels/_l4.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l5.oel", "assets/data/Levels/_l5.oel");
+		type.set ("assets/data/Levels/_l5.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l6.oel", "assets/data/Levels/_l6.oel");
+		type.set ("assets/data/Levels/_l6.oel", AssetType.TEXT);
+		path.set ("assets/data/Levels/_l7.oel", "assets/data/Levels/_l7.oel");
+		type.set ("assets/data/Levels/_l7.oel", AssetType.TEXT);
+		path.set ("assets/data/Shadow Swap.oep", "assets/data/Shadow Swap.oep");
+		type.set ("assets/data/Shadow Swap.oep", AssetType.TEXT);
+		path.set ("assets/images/Button.png", "assets/images/Button.png");
+		type.set ("assets/images/Button.png", AssetType.IMAGE);
+		path.set ("assets/images/ButtonBackdrop.png", "assets/images/ButtonBackdrop.png");
+		type.set ("assets/images/ButtonBackdrop.png", AssetType.IMAGE);
+		path.set ("assets/images/ButtonBackdrop2.png", "assets/images/ButtonBackdrop2.png");
+		type.set ("assets/images/ButtonBackdrop2.png", AssetType.IMAGE);
+		path.set ("assets/images/ButtonBackdrop3.png", "assets/images/ButtonBackdrop3.png");
+		type.set ("assets/images/ButtonBackdrop3.png", AssetType.IMAGE);
+		path.set ("assets/images/Button_Pressed.png", "assets/images/Button_Pressed.png");
+		type.set ("assets/images/Button_Pressed.png", AssetType.IMAGE);
+		path.set ("assets/images/Door.png", "assets/images/Door.png");
+		type.set ("assets/images/Door.png", AssetType.IMAGE);
+		path.set ("assets/images/Door_open.png", "assets/images/Door_open.png");
+		type.set ("assets/images/Door_open.png", AssetType.IMAGE);
+		path.set ("assets/images/Fan_off.png", "assets/images/Fan_off.png");
+		type.set ("assets/images/Fan_off.png", AssetType.IMAGE);
+		path.set ("assets/images/Fan_On.png", "assets/images/Fan_On.png");
+		type.set ("assets/images/Fan_On.png", AssetType.IMAGE);
+		path.set ("assets/images/Glass.png", "assets/images/Glass.png");
+		type.set ("assets/images/Glass.png", AssetType.IMAGE);
+		path.set ("assets/images/Ground.png", "assets/images/Ground.png");
+		type.set ("assets/images/Ground.png", AssetType.IMAGE);
+		path.set ("assets/images/Hint_S.png", "assets/images/Hint_S.png");
+		type.set ("assets/images/Hint_S.png", AssetType.IMAGE);
+		path.set ("assets/images/Key.png", "assets/images/Key.png");
+		type.set ("assets/images/Key.png", AssetType.IMAGE);
+		path.set ("assets/images/Key_slot.png", "assets/images/Key_slot.png");
+		type.set ("assets/images/Key_slot.png", AssetType.IMAGE);
+		path.set ("assets/images/Key_slot_filled.png", "assets/images/Key_slot_filled.png");
+		type.set ("assets/images/Key_slot_filled.png", AssetType.IMAGE);
+		path.set ("assets/images/Menu.png", "assets/images/Menu.png");
+		type.set ("assets/images/Menu.png", AssetType.IMAGE);
+		path.set ("assets/images/Next.png", "assets/images/Next.png");
+		type.set ("assets/images/Next.png", AssetType.IMAGE);
+		path.set ("assets/images/Reset.png", "assets/images/Reset.png");
+		type.set ("assets/images/Reset.png", AssetType.IMAGE);
+		path.set ("assets/images/Shadow.png", "assets/images/Shadow.png");
+		type.set ("assets/images/Shadow.png", AssetType.IMAGE);
+		path.set ("assets/images/Shadow2.png", "assets/images/Shadow2.png");
+		type.set ("assets/images/Shadow2.png", AssetType.IMAGE);
+		path.set ("assets/images/Shadow3.png", "assets/images/Shadow3.png");
+		type.set ("assets/images/Shadow3.png", AssetType.IMAGE);
+		path.set ("assets/images/Spike.png", "assets/images/Spike.png");
+		type.set ("assets/images/Spike.png", AssetType.IMAGE);
+		path.set ("assets/images/Switch.png", "assets/images/Switch.png");
+		type.set ("assets/images/Switch.png", AssetType.IMAGE);
+		path.set ("assets/images/tiles.png", "assets/images/tiles.png");
+		type.set ("assets/images/tiles.png", AssetType.IMAGE);
+		path.set ("assets/images/Water.png", "assets/images/Water.png");
+		type.set ("assets/images/Water.png", AssetType.IMAGE);
+		path.set ("assets/images/White_spritesheet.png", "assets/images/White_spritesheet.png");
+		type.set ("assets/images/White_spritesheet.png", AssetType.IMAGE);
+		path.set ("assets/images/White_spritesheet2.png", "assets/images/White_spritesheet2.png");
+		type.set ("assets/images/White_spritesheet2.png", AssetType.IMAGE);
 		path.set ("assets/music/music-goes-here.txt", "assets/music/music-goes-here.txt");
 		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
 		path.set ("assets/sounds/sounds-go-here.txt", "assets/sounds/sounds-go-here.txt");
@@ -646,30 +826,138 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
-		id = "assets/data/colortiles.png";
+		id = "assets/data/Levels/uncomp.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l1.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l10.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l11.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l12.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l13.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l14.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l17.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l18.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l19.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l2.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l3.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l4.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l5.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l6.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l7.oel";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Shadow Swap.oep";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/images/Button.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
-		id = "assets/data/Levels/level0.oel";
+		id = "assets/images/ButtonBackdrop.png";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
-		id = "assets/data/Levels/level1.oel";
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/ButtonBackdrop2.png";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
-		id = "assets/data/Levels/level2.oel";
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/ButtonBackdrop3.png";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
-		id = "assets/data/Levels/level3.oel";
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Button_Pressed.png";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
-		id = "assets/data/Levels/level4.oel";
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Door.png";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
-		id = "assets/data/New Project.oep";
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Door_open.png";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
-		id = "assets/images/images-go-here.txt";
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Fan_off.png";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Fan_On.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Glass.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Ground.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Hint_S.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Key.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Key_slot.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Key_slot_filled.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Menu.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Next.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Reset.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Shadow.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Shadow2.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Shadow3.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Spike.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Switch.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/tiles.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Water.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/White_spritesheet.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/White_spritesheet2.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/music/music-goes-here.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
@@ -717,6 +1005,42 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1473,6 +1797,42 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1482,6 +1842,42 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

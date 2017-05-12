@@ -109,10 +109,13 @@ class PlayState extends FlxState
 		_timeInWater = new FlxTimer();
 		_counter = 10;
 		_countDownText = new FlxText(_mWalls.width / 2 - 32, _mWalls.height / 2, FlxG.width, "", 64);
+		_countDownText.systemFont = "Arial Black";
 
 		// Initialize winning and losing display
 		_loseText = new FlxText(_mWalls.width / 2 - 70, _mWalls.height / 2, 0, "", 25);
+		_loseText.systemFont = "Arial Black";
 		_winText = new FlxText(_mWalls.width / 2 - 70, _mWalls.height / 2, 0, "", 25);
+		_winText.systemFont = "Arial Black";
 
 		// Create and Hide the "Next" button
 		_nextButton = new FlxButton(_mWalls.width / 2, _mWalls.height / 2 + _winText.height, "", promptNext);

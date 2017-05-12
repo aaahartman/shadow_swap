@@ -400,7 +400,7 @@ class PlayState extends FlxState
 			_winText.text = "YOU WIN!";
 
 			// Activate "Next" button
-			if (_levelNum < 15) {
+			if (_levelNum < 20) {
 				_nextButton.active = true;
 				_nextButton.visible = true;
 			}

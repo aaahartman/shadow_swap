@@ -71,17 +71,6 @@ class PlayState extends FlxState
 		_levels[15] = AssetPaths._l19__oel;
 
 
-		// _levels[7] = AssetPaths._l10__oel;
-		// _levels[8] = AssetPaths._l11__oel;
-		// _levels[9] = AssetPaths._l12__oel;
-		// _levels[10] = AssetPaths._l13__oel;
-		// _levels[11] = AssetPaths._l14__oel;
-		// _levels[12] = AssetPaths._l17__oel;
-		// _levels[13] = AssetPaths._l18__oel;
-		// _levels[14] = AssetPaths._l19__oel;
-		// _levels[15] = AssetPaths._l19__oel;
-
-
 		_timers = new Map<Int, FlxTimer>();
 		_levelNum = LevelSelectState.getLevelNumber();
 
@@ -269,8 +258,8 @@ class PlayState extends FlxState
 			Main.LOGGER.logLevelAction(LoggingActions.CLICK_RESET, {level: _levelNum});
 		}
 
-		// If pressed "L", return to level selection menu
-		if (FlxG.keys.justPressed.L) {
+		// If pressed "M", return to level selection menu
+		if (FlxG.keys.justPressed.M) {
 			FlxG.switchState(new LevelSelectState());
 			Main.LOGGER.logLevelAction(LoggingActions.CLICK_LEVELSELECTION, {level: _levelNum});
 		}
@@ -400,11 +389,16 @@ class PlayState extends FlxState
 
 			_winText.text = "YOU WIN!";
 
+			// Activate "Next" button
 			if (_levelNum < 15) {
 				_nextButton.active = true;
 				_nextButton.visible = true;
 			}
 			
+			// If pressed "Enter", go to next level
+			if (FlxG.keys.justPressed.ENTER)
+				promptNext();
+
 			Main.LOGGER.logLevelEnd({won: true});
 		}
 	}

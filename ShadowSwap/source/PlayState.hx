@@ -410,6 +410,12 @@ class PlayState extends FlxState
 				promptNext();
 
 			Main.LOGGER.logLevelEnd({won: true});
+
+			// Save the current furthest progress
+			if (_levelNum + 1 > Reg.loadLevel()) {
+				Reg.saveLevel(_levelNum + 1);
+				LevelSelectState.updateLevelUnlocked(_levelNum + 1);
+			}
 		}
 	}
 

@@ -31,6 +31,9 @@ class Main extends Sprite
 			Main.LOGGER.setSavedUserId(userId);
 		}
 		Main.LOGGER.startNewSession(userId, this.onSessionReady);
+
+		// Initialize Save Object in Registry
+		Reg.initSave();
 	}
 
 	private function onSessionReady(sessionRecieved:Bool):Void 

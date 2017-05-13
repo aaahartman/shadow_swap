@@ -47,7 +47,7 @@ class PlayState extends FlxState
 	private var _loseText:FlxText;
 
 	private var _hud:HUD;
-	private var _nextButton:FlxButton;
+	//private var _nextButton:FlxButton;
 
 	override public function create():Void 
 	{
@@ -79,7 +79,7 @@ class PlayState extends FlxState
 
 
 		_timers = new Map<Int, FlxTimer>();
-		_levelNum = LevelSelectState.getLevelNumber();
+		_levelNum = Reg.getCurrentLevel();
 
 		// Import tile map
 		_map = new FlxOgmoLoader(_levels[_levelNum]);
@@ -118,11 +118,11 @@ class PlayState extends FlxState
 		_winText.systemFont = "Arial Black";
 
 		// Create and Hide the "Next" button
-		_nextButton = new FlxButton(_mWalls.width / 2, _mWalls.height / 2 + _winText.height, "", promptNext);
-		_nextButton.loadGraphic(AssetPaths.Next__png, true, 50, 30);
-		_nextButton.x -= _nextButton.width / 2;
-		_nextButton.active = false;
-		_nextButton.visible = false;
+		// _nextButton = new FlxButton(_mWalls.width / 2, _mWalls.height / 2 + _winText.height, "", promptNext);
+		// _nextButton.loadGraphic(AssetPaths.Next__png, true, 50, 30);
+		// _nextButton.x -= _nextButton.width / 2;
+		// _nextButton.active = false;
+		// _nextButton.visible = false;
 
 		// Initialize all entities
 		_player = new Player();
@@ -158,7 +158,7 @@ class PlayState extends FlxState
  		add(_shadow);
 		add(_countDownText);
 		add(_loseText);
-		add(_nextButton);
+		//add(_nextButton);
 		add(_winText);
 		if (_hint != null)
 			add(_hint);
@@ -396,40 +396,36 @@ class PlayState extends FlxState
 		if (Reg.gotKey)
 		{
 			_door.openDoor();
+			Main.LOGGER.logLevelEnd({won: true});
 			
 			// If it's the last level, enter end credit
 			if (_levelNum == 20) {
 				FlxG.switchState(new EndCredit());
 			} 
-
 			// Activate "Next" button if it's not the last level
 			else if (_levelNum < 20) {
-				_winText.text = "YOU WIN!";
 
-				_nextButton.active = true;
-				_nextButton.visible = true;
+			//_winText.text = "YOU WIN!";
 
-				// If pressed "Enter", go to next level
-				if (FlxG.keys.justPressed.ENTER)
-					promptNext();
+			// // Activate "Next" button
+			// if (_levelNum < 20) {
+			// 	_nextButton.active = true;
+			// 	_nextButton.visible = true;
+			// }
+			
+			// // If pressed "Enter", go to next level
+			// if (FlxG.keys.justPressed.ENTER)
+			// 	promptNext();
 
-				Main.LOGGER.logLevelEnd({won: true});
-
-				// Save the current furthest progress
-				if (_levelNum + 1 > Reg.loadLevel()) {
-					Reg.saveLevel(_levelNum + 1);
-					LevelSelectState.updateLevelUnlocked(_levelNum + 1);
-				}
+			// Save the current furthest progress
+			// if (_levelNum + 1 > Reg.loadLevel()) {
+			// 	Reg.saveLevel(_levelNum + 1);
+			// 	LevelSelectState.updateLevelUnlocked(_levelNum + 1);
+			// }
+				FlxG.switchState(new FinishScreenState());
 			}
 		}
 	}
-
-	private function promptNext():Void 
-	{
-		Main.LOGGER.logActionWithNoLevel(LoggingActions.CLICK_NEXT,  {level:_levelNum});
-		LevelSelectState.setLevelNumer(_levelNum + 1);
-	    FlxG.switchState(new PlayState());
-	}	
 
 	private function raiseGate(button:Button):Void 
 	{

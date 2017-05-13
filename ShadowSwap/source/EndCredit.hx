@@ -46,7 +46,7 @@ class EndCredit extends FlxState
 			_ground.add(ground);
 		}	
 
-		_text3 = new FlxText(0, 0, 0, "Created by\nAndrew Hartman\nTing Cheng\nYina Zhou", 15);
+		_text3 = new FlxText(0, 0, 0, "Created by\nAndrew Hartman\nTing Cheng\nYina Zhu", 15);
 		_text3.systemFont = "Arial Black";
 		_text3.alignment = ("center");
 		_text3.screenCenter();

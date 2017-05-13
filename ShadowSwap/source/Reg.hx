@@ -13,6 +13,10 @@ class Reg
 		// Initialize saving
 		_save = new FlxSave();
 		_save.bind("LevelProgression");
+
+
+		// UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
+		//_save.data.level = 20;
 	}
 
 	public static function saveLevel(_level:Int):Void {

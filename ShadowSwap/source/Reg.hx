@@ -15,7 +15,7 @@ class Reg
 		_save.bind("LevelProgression");
 
 		// UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
-		//_save.data.level = 20;
+		_save.data.level = 20;
 	}
 
 	public static function saveLevel(_level:Int):Void {

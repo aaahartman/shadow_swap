@@ -396,25 +396,30 @@ class PlayState extends FlxState
 		if (Reg.gotKey)
 		{
 			_door.openDoor();
+			
+			// If it's the last level, enter end credit
+			if (_levelNum == 20) {
+				FlxG.switchState(new EndCredit());
+			} 
 
-			_winText.text = "YOU WIN!";
+			// Activate "Next" button if it's not the last level
+			else if (_levelNum < 20) {
+				_winText.text = "YOU WIN!";
 
-			// Activate "Next" button
-			if (_levelNum < 20) {
 				_nextButton.active = true;
 				_nextButton.visible = true;
-			}
-			
-			// If pressed "Enter", go to next level
-			if (FlxG.keys.justPressed.ENTER)
-				promptNext();
 
-			Main.LOGGER.logLevelEnd({won: true});
+				// If pressed "Enter", go to next level
+				if (FlxG.keys.justPressed.ENTER)
+					promptNext();
 
-			// Save the current furthest progress
-			if (_levelNum + 1 > Reg.loadLevel()) {
-				Reg.saveLevel(_levelNum + 1);
-				LevelSelectState.updateLevelUnlocked(_levelNum + 1);
+				Main.LOGGER.logLevelEnd({won: true});
+
+				// Save the current furthest progress
+				if (_levelNum + 1 > Reg.loadLevel()) {
+					Reg.saveLevel(_levelNum + 1);
+					LevelSelectState.updateLevelUnlocked(_levelNum + 1);
+				}
 			}
 		}
 	}

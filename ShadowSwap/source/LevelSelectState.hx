@@ -11,51 +11,16 @@ import flixel.group.FlxGroup;
 
 class LevelSelectState extends FlxState
 {
-	private var _text:FlxText;
-	private static var _levelNum:Int;
-	private static var _levelUnlocked:Int;
-	private var _btns:FlxTypedGroup<FlxButton>;
-	
 	override public function create():Void 
 	{
-		// Initialize Playable Levels
-		if (Reg._save.data.level != null)
-			_levelUnlocked = Reg.loadLevel();
-		else 
-			_levelUnlocked = 1;
-
-
 		flixel.FlxCamera.defaultZoom = 1;
 		FlxG.cameras.reset();
-		FlxG.camera.setSize(1080, 720);
-		
-		/*
-		// Create transparent canvas for drawing
-		var _canvas = new FlxSprite();
-		_canvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
-		add(_canvas);
-
-		// Color border 
-		_canvas.drawRect(FlxG.width / 2 - 270, 130, 120, 380, 0xff30cc93);
-		_canvas.drawRect(FlxG.width / 2 - 130, 130, 120, 380, 0xff0f635f);
-		_canvas.drawRect(FlxG.width / 2 + 10, 130, 120, 380, 0xff4c3c34);
-		_canvas.drawRect(FlxG.width / 2 + 150, 130, 120, 380, 0xff937566);
-
-		// black border
-		_canvas.drawRect(FlxG.width / 2 - 265, 135, 110, 370, FlxColor.BLACK);
-		_canvas.drawRect(FlxG.width / 2 - 125, 135, 110, 370, FlxColor.BLACK);
-		_canvas.drawRect(FlxG.width / 2 + 15, 135, 110, 370, FlxColor.BLACK);
-		_canvas.drawRect(FlxG.width / 2 + 155, 135, 110, 370, FlxColor.BLACK);
-
-		// Color background
-		_canvas.drawRect(FlxG.width / 2 - 260, 140, 100, 360, 0xff30cc93);
-		_canvas.drawRect(FlxG.width / 2 - 120, 140, 100, 360, 0xff0f635f);
-		_canvas.drawRect(FlxG.width / 2 + 20, 140, 100, 360, 0xff4c3c34);
-		_canvas.drawRect(FlxG.width / 2 + 160, 140, 100, 360, 0xff937566);
-		*/
+		FlxG.camera.setSize(800, 720);
 
 		// Create a group to hold all the buttons
-		_btns = new FlxTypedGroup<FlxButton>();
+		var _btns:FlxTypedGroup<FlxButton> = new FlxTypedGroup<FlxButton>();
+
+		var unlocked:Int = Reg.getNumUnlockedLevels();
 
 		// Stage 1 buttons
 		for (i in 1...6) 
@@ -68,7 +33,7 @@ class LevelSelectState extends FlxState
 			_btn.label.color = FlxColor.WHITE;
 
 			// lock levels
-			if (i > _levelUnlocked) {
+			if (i > unlocked) {
 				_btn.active = false;
 				_btn.alpha = 0.5;
 			}
@@ -91,7 +56,7 @@ class LevelSelectState extends FlxState
 			_btn.label.color = FlxColor.WHITE;
 			
 			// lock levels
-			if (i > _levelUnlocked) {
+			if (i > unlocked) {
 				_btn.active = false;
 				_btn.alpha = 0.5;
 			}
@@ -114,7 +79,7 @@ class LevelSelectState extends FlxState
 			_btn.label.color = FlxColor.WHITE;
 
 			// lock levels
-			if (i > _levelUnlocked) {
+			if (i > unlocked) {
 				_btn.active = false;
 				_btn.alpha = 0.5;
 			}
@@ -137,7 +102,7 @@ class LevelSelectState extends FlxState
 			_btn.label.color = FlxColor.WHITE;
 
 			// lock levels
-			if (i > _levelUnlocked) {
+			if (i > unlocked) {
 				_btn.active = false;
 				_btn.alpha = 0.5;
 			}	
@@ -149,9 +114,8 @@ class LevelSelectState extends FlxState
 			add(_star);		
 		}
 
-		_text = new FlxText(FlxG.width / 2 - 80, 80, FlxG.width, " Level Menu", 25);
+		var _text:FlxText = new FlxText(FlxG.width / 2 - 80, 80, FlxG.width, " Level Menu", 25);
 		_text.systemFont = "Arial Black";
-		//_text.bold = true;
 
  		add(_text);
  		add(_btns);
@@ -161,42 +125,12 @@ class LevelSelectState extends FlxState
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
-		
-		// lock or unlock buttons based on levels
-		var btns_iter:FlxTypedGroupIterator<FlxButton> = _btns.iterator();
-		var index = 1;
-		while (btns_iter.hasNext()) {
-			var curButton:FlxButton = btns_iter.next();
-			if (index <= _levelUnlocked) {
-				curButton.active = true;
-				curButton.alpha = 1.0;
-
-				index++;
-			} else {
-				break;
-			}
-		}
 	}
 
 	private function clickPlay(_level:Int):Void 
 	{
-		_levelNum = _level;
-		Main.LOGGER.logActionWithNoLevel(LoggingActions.CLICK_START,  {level:_levelNum});
+		Reg.updateCurrentLevel(_level);
+		Main.LOGGER.logActionWithNoLevel(LoggingActions.CLICK_START,  {level:_level});
 	    FlxG.switchState(new PlayState());
-	}	
-
-	public static function getLevelNumber():Int 
-	{
-		return _levelNum;
-	}
-
-	public static function setLevelNumer(lv:Int):Void 
-	{
-		_levelNum = lv;
-	}
-
-	public static function updateLevelUnlocked(lv:Int):Void 
-	{
-		_levelUnlocked = lv;
 	}
 }

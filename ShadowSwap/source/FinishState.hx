@@ -5,25 +5,21 @@ import flixel.FlxG;
 import flixel.ui.FlxButton;
 import flixel.text.FlxText;
 
-class SplashScreenState extends FlxState
+class FinishState extends FlxState
 {
+
 	override public function create():Void
 	{
-		Reg.updateCurrentLevel(1);
-		Reg.unlockLevel(1);
-
-		var _text:FlxText = new FlxText(0, 0, 0, "SHADOW SWAP", 40);
+		_text = new FlxText(0, 0, 0, "Yay! You finished!", 32);
 		_text.systemFont = "Arial Black";
 		_text.screenCenter();
 		_text.y -= 50;
 
-		var _btnPlay:FlxButton = new FlxButton(0, 0, "", clickPlay);
-		_btnPlay.loadGraphic(AssetPaths.Play__png, true, 90, 50);
-		_btnPlay.screenCenter();
-
- 		add(_btnPlay);
+		_levelButton = new FlxButton(0, 0, "Next Level", nextLevel);
+		_MenuButton = new FlxButton(50, 50, "Main Menu", toMenu);
+ 		add(_MenuButton);
+ 		add(_levelButton);
  		add(_text);
-
 		super.create();
 	}
 
@@ -32,7 +28,12 @@ class SplashScreenState extends FlxState
 		super.update(elapsed);
 	}
 
-	private function clickPlay():Void
+	private function nextLevel():Void 
+	{
+		
+	}
+
+	private function toMenu():Void
 	{
 	    FlxG.switchState(new LevelSelectState());
 	}	

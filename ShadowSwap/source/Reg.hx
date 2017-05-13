@@ -34,7 +34,7 @@ class Reg
 			numUnlockedLevels = 1;
 
 		// UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
-		//_save.data.level = 20;
+		//numUnlockedLevels = 20;
 	}
 
 	// Save new player progression

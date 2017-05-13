@@ -14,7 +14,6 @@ class Reg
 		_save = new FlxSave();
 		_save.bind("LevelProgression");
 
-
 		// UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
 		//_save.data.level = 20;
 	}

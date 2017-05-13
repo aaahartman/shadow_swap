@@ -416,14 +416,23 @@ class PlayState extends FlxState
 			// // If pressed "Enter", go to next level
 			// if (FlxG.keys.justPressed.ENTER)
 			// 	promptNext();
+<<<<<<< HEAD
+=======
+
+			Main.LOGGER.logLevelEnd({won: true});
+>>>>>>> b9a8b5e1d40e64e11ba26d000ea449f408e524ce
 
 			// Save the current furthest progress
 			// if (_levelNum + 1 > Reg.loadLevel()) {
 			// 	Reg.saveLevel(_levelNum + 1);
 			// 	LevelSelectState.updateLevelUnlocked(_levelNum + 1);
 			// }
+<<<<<<< HEAD
 				FlxG.switchState(new FinishScreenState());
 			}
+=======
+			FlxG.switchState(new FinishScreenState());
+>>>>>>> b9a8b5e1d40e64e11ba26d000ea449f408e524ce
 		}
 	}
 

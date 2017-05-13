@@ -44,6 +44,7 @@ class FinishScreenState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+
 		// If pressed "M", go to Menu
 		if (FlxG.keys.justPressed.M)
 			lvl();

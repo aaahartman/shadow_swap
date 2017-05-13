@@ -27,21 +27,24 @@ class Reg
 		_save = new FlxSave();
 		_save.bind("LevelProgression");
 
+		// Initialize Playable Levels
+		if (Reg._save.data.level != null)
+			numUnlockedLevels = _save.data.level;
+		else 
+			numUnlockedLevels = 1;
+
 		// UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
-		_save.data.level = 20;
+		//_save.data.level = 20;
 	}
 
-	public static function saveLevel(_level:Int):Void 
+	// Save new player progression
+	public static function unlockLevel(levelNumToUnlock:Int):Void 
 	{
-    	_save.data.level = _level;
-    	_save.flush();
-	}
-
-	//public static function saveStars():Void {}
-
-	public static function loadLevel():Int 
-	{
-    	return _save.data.level;
+		if (levelNumToUnlock > numUnlockedLevels) {
+			numUnlockedLevels = levelNumToUnlock;
+			_save.data.level = levelNumToUnlock;
+    		_save.flush();
+    	}
 	}
 
 	public static function getCurrentLevel():Int 
@@ -59,15 +62,11 @@ class Reg
 		return queryLevel <= numUnlockedLevels;
 	}	
 
-	public static function unlockLevel(levelNumToUnlock:Int):Void 
-	{
-		numUnlockedLevels = levelNumToUnlock;
-	}
-
 	public static function updateCurrentLevel(newLevelNum:Int):Void
 	{
 		currentLevelNum = newLevelNum;
 	}
 
+	//public static function saveStars():Void {}
 	//public statuc function loadStars():Int {}
 }

@@ -422,6 +422,8 @@ class PlayState extends FlxState
 			// 	Reg.saveLevel(_levelNum + 1);
 			// 	LevelSelectState.updateLevelUnlocked(_levelNum + 1);
 			// }
+				
+				Reg.unlockLevel(Reg.getCurrentLevel() + 1);
 				FlxG.switchState(new FinishScreenState());
 			}
 		}

@@ -13,7 +13,7 @@ class Shadow extends FlxSprite
     public function new(?X:Float=0, ?Y:Float=0)
     {
         super(X, Y);
-        loadGraphic(AssetPaths.Shadow3__png, false, 32, 32);
+        loadGraphic(AssetPaths.Shadow3__png, false, 22, 32);
         alpha = 0.8;
         acceleration.y = 900;
     }

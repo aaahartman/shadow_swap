@@ -141,6 +141,8 @@ class PlayState extends FlxState
 		
 		// Initialze Got key to false
 		Reg.gotKey = false;
+		// Initialize current gates to empty
+		Reg.currentGates = new List<Gate>();
 
 		// Add all components to game state
 		add(_water);

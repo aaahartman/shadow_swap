@@ -19,6 +19,19 @@ class EndCredit extends FlxState
 
 	override public function create():Void
 	{
+		var _level = Reg.getCurrentLevel();
+		var _numSwap = Reg.getNumSwap();
+		var _minSwap = Reg.getMinSwap(_level);
+
+		// Update star status for last level
+		if (_numSwap <= _minSwap)
+			Reg.setStars(_level, 3);
+		else if (_numSwap <= _minSwap + 3) 
+			Reg.setStars(_level, 2);
+		else 
+			Reg.setStars(_level, 1);
+
+
 		_text = new FlxText(0, 0, 0, "CONGRATULATION!", 25);
 		_text.systemFont = "Arial Black";
 		_text.color = FlxColor.WHITE;

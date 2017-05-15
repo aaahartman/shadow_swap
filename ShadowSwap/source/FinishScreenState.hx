@@ -15,55 +15,58 @@ class FinishScreenState extends FlxState
 		var _numSwap = Reg.getNumSwap();
 		var _minSwap = Reg.getMinSwap(_level);
 
-		// Handle Stars Logic : Player can earn 1-3 stars upon completion of a level
-		// TODO: handle high score??????
+		// Player can earn 1-3 stars upon completion of a level
 		var _star = new FlxSprite(50, 50);
+		_star.scale.x = 2;
+		_star.scale.y = 2;
+		_star.screenCenter();
+		_star.y -= 100;
+		_star.x -= 35;
 		if (_numSwap <= _minSwap)
 		{
 			_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
-			_star.screenCenter();
-			_star.y -= 100;
-			add(_star);
 			Reg.setStars(_level, 3);
 		} 
-		else if (_numSwap <= _minSwap + 2) 
+		else if (_numSwap <= _minSwap + 3) 
 		{
 			_star.loadGraphic(AssetPaths.Stars2__png, false, 70, 20);
-			_star.screenCenter();
-			_star.y -= 100;
-			add(_star);
 			Reg.setStars(_level, 2);
 		}
 		else 
 		{
 			_star.loadGraphic(AssetPaths.Stars1__png, false, 70, 20);
-			_star.screenCenter();
-			_star.y -= 100;
-			add(_star);
 			Reg.setStars(_level, 1);
 		}
+		add(_star);
 
+		// Congratulation Text
 		var _text:FlxText = new FlxText(0, 0, 0, "Level " + Reg.getCurrentLevel() + " complete!", 40);
 		_text.systemFont = "Arial Black";
 		_text.screenCenter();
-
 		_text.y -= 200;
 
+		// Number of Swaps Text
+		var _swapText:FlxText = new FlxText(0, 0, 0, "Swap Used: " + _numSwap, 20);
+		_swapText.systemFont = "Arial Black";
+		_swapText.screenCenter();
+		_swapText.y -= 150;
+
+		// Level Menu Button
 		var _lvlBtn:FlxButton = new FlxButton(0, 0, "", lvl);
 		_lvlBtn.loadGraphic(AssetPaths.lvlButton__png, true, 70, 50);
-
-		var _nxtBtn:FlxButton = new FlxButton(0, 0, "", nxt);
-		_nxtBtn.loadGraphic(AssetPaths.nxtButton__png, true, 70, 50);
-
 		_lvlBtn.screenCenter();
 		_lvlBtn.x -= 100;
 
+		// Next Level Button
+		var _nxtBtn:FlxButton = new FlxButton(0, 0, "", nxt);
+		_nxtBtn.loadGraphic(AssetPaths.nxtButton__png, true, 70, 50);
 		_nxtBtn.screenCenter();
 		_nxtBtn.x += 100;
 
  		add(_lvlBtn);
   		add(_nxtBtn);
  		add(_text);
+ 		add(_swapText);
 
 		super.create();
 	}

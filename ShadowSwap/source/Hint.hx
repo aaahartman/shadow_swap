@@ -25,6 +25,8 @@ class Hint extends FlxSprite
 	{
 		//makeGraphic(32, 20, FlxColor.WHITE);
 		loadGraphic(AssetPaths.Hint_S__png, true, 32, 22);
+		scale.x = 1.5;
+		scale.y = 1.5;
 		animation.add("flash", [0, 1], 1, true);
 		animation.play("flash");
 	}

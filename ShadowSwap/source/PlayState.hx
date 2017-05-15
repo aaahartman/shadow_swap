@@ -416,11 +416,11 @@ class PlayState extends FlxState
 			Reg.setNumSwap(_numSwap);
 			
 			// If it's the last level, enter end credit
-			if (_levelNum == 20) {
+			if (_levelNum == 15) {
 				FlxG.switchState(new EndCredit());
 			} 
 			// Activate "Next" button if it's not the last level
-			else if (_levelNum < 20) {
+			else if (_levelNum < 15) {
 				Reg.unlockLevel(Reg.getCurrentLevel() + 1);
 				FlxG.switchState(new FinishScreenState());
 			}

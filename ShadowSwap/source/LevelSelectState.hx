@@ -129,7 +129,9 @@ class LevelSelectState extends FlxState
 			_btn.onDown.callback = clickPlay.bind(i);
 			_btn.loadGraphic("assets/images/levelButton4.png", true, 70, 50);
 			_btn.label.systemFont = "Arial Black";
-			_btn.label.size = 28;
+			_btn.label.text = "Coming\nSoon";
+			_btn.label.size = 13;
+			//_btn.label.size = 28;
 			_btn.label.color = FlxColor.WHITE;
 
 			// lock levels

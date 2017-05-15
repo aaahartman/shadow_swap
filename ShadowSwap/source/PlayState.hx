@@ -306,7 +306,8 @@ class PlayState extends FlxState
 		// Player / Water interaction
 		if (_player.overlaps(_water)) {
 			_player.inWater(true);
-			if (!_timerOn) {
+			if (!_timerOn)
+			{
 
 				_timerOn = true;
 				_timeInWater.start(1, countDown, 11);
@@ -314,13 +315,15 @@ class PlayState extends FlxState
 		} else {
 			_player.inWater(false);
 
-			if (_timerOn) {
+			if (_timerOn)
+			{
 				_timerOn = false;
 				_timeInWater.destroy();
 				_counter = 10;
 				_countDownText.text = "";
 			}
 		}
+		_shadow.inWater(_shadow.overlaps(_water));
 
 		// Player / Button interaction
 		var button_iter:FlxTypedGroupIterator<Button> = _buttons.iterator();

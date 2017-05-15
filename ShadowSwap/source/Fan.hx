@@ -88,7 +88,7 @@ class Fan extends FlxSprite
 		{
 			case 0:
 				angle = -90;
-				_bbox = new FlxRect(x, y - _size * _numBlocks, _size, _size * _numBlocks);
+				_bbox = new FlxRect(x, y - _size * _numBlocks + _size, _size, _size * _numBlocks);
 			case 1:
 				angle = 0;
 				_bbox = new FlxRect(x, y, _size * _numBlocks, _size);

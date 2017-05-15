@@ -565,22 +565,25 @@ class PlayState extends FlxState
 					 	if (!overlapsWithAnyFan(_player.bbox()))
 						{
 							_player.acceleration.y = _player.gravity;
-							_player.setDefaultSpeed(0);
+							_player.setXSpeed(0);
+							_player.setYSpeed(0);
 						}
 						else if (_player.bbox().overlaps(curFan.bbox()))
 						{
-                            _player.velocity.y = -200;
+                            // _player.velocity.y = -200;
+							_player.setYSpeed(-200);
 							_player.acceleration.y = 0;
 						}
                     // right
                     case 1:
                         if (!overlapsWithAnyFan(_player.bbox()))
 						{
-							_player.setDefaultSpeed(0);
+							_player.setXSpeed(0);
+							_player.setYSpeed(0);
 						}
                         else if(_player.bbox().overlaps(curFan.bbox()))
 						{
-							_player.setDefaultSpeed(100);
+							_player.setXSpeed(100);
 							_player.velocity.y = 0;
 						}
                     // down
@@ -588,22 +591,25 @@ class PlayState extends FlxState
 					 	if (!overlapsWithAnyFan(_player.bbox()))
 						{
 							_player.acceleration.y = _player.gravity;
-							_player.setDefaultSpeed(0);
+							_player.setXSpeed(0);
+							_player.setYSpeed(0);
 						}
                         else if (_player.bbox().overlaps(curFan.bbox()))
 						{
-                            _player.velocity.y = 200;
+							_player.setYSpeed(200);
+                            // _player.velocity.y = 200;
 							_player.acceleration.y = 0;
 						}
                     // left
                     case 3:
                         if (!overlapsWithAnyFan(_player.bbox()))
 						{
-							_player.setDefaultSpeed(0);
+							_player.setXSpeed(0);
+							_player.setYSpeed(0);
 						}
                         else if (_player.bbox().overlaps(curFan.bbox()))
 						{
-							_player.setDefaultSpeed(-100);
+							_player.setXSpeed(-100);
 							_player.velocity.y = 0;
 						}
 				}

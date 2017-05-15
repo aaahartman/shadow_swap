@@ -12,8 +12,8 @@ import flixel.tweens.*;
 class Player extends FlxSprite
 {
 	public var speed:Float = 175;
-
-	public var default_speed:Float = 0;
+	public var x_speed:Float = 0;
+	public var y_speed:Float = 0;
 	public var gravity:Float = 900;
 	public var jump_speed:Float = 350;
 	public var swim_up_speed:Float = 10;
@@ -41,9 +41,14 @@ class Player extends FlxSprite
 		return new FlxRect(Std.int(this.x), Std.int(this.y), 32, 32);
 	}
 
-	public function setDefaultSpeed(?speed:Float = 0):Void
+	public function setXSpeed(?speed:Float = 0):Void
 	{
-		default_speed = speed;
+		x_speed = speed;
+	}
+
+	public function setYSpeed(?speed:Float = 0):Void
+	{
+		y_speed = speed;
 	}
 
 	public function inWater(water:Bool):Void
@@ -53,8 +58,6 @@ class Player extends FlxSprite
 	
 	override public function update(elapsed:Float):Void
 	{
-        // acceleration.x = 0;
-
         var _jump:Bool = false;
  		var _left:Bool = false;
  		var _right:Bool = false;
@@ -78,7 +81,10 @@ class Player extends FlxSprite
  		{
       		_left = _right = false;
  		}
-
+		if (y_speed != 0)
+		{
+			velocity.y = y_speed;
+		}
 		if (_jump && in_water) 
 		{
 			velocity.y -= swim_up_speed;
@@ -93,7 +99,7 @@ class Player extends FlxSprite
 			facing = FlxObject.DOWN;
 		}
 
-		velocity.x = default_speed;
+		velocity.x = x_speed;
 		if (_left) 
 		{
 			if (in_water)

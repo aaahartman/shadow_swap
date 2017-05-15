@@ -5,7 +5,7 @@
   <BackgroundColor A="255" R="125" G="160" B="255" />
   <GridColor A="255" R="255" G="240" B="90" />
   <LevelDefaultSize>
-    <Width>1280</Width>
+    <Width>800</Width>
     <Height>720</Height>
   </LevelDefaultSize>
   <LevelMinimumSize>
@@ -13,7 +13,7 @@
     <Height>32</Height>
   </LevelMinimumSize>
   <LevelMaximumSize>
-    <Width>1280</Width>
+    <Width>800</Width>
     <Height>720</Height>
   </LevelMaximumSize>
   <Filename>C:\Users\Andrew Hartman\shadow_swap\ShadowSwap\assets\data\Shadow Swap.oep</Filename>

@@ -16,7 +16,7 @@
     <Width>1280</Width>
     <Height>720</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\andre\shadow_swap\ShadowSwap\assets\data\Shadow Swap.oep</Filename>
+  <Filename>C:\Users\Andrew Hartman\shadow_swap\ShadowSwap\assets\data\Shadow Swap.oep</Filename>
   <AngleMode>Degrees</AngleMode>
   <CameraEnabled>false</CameraEnabled>
   <CameraSize>
@@ -106,7 +106,7 @@
         <ValueDefinition xsi:type="IntValueDefinition" Name="_id" Default="0" Min="0" Max="100" ShowSlider="false" />
         <ValueDefinition xsi:type="BoolValueDefinition" Name="_on" Default="true" />
         <ValueDefinition xsi:type="BoolValueDefinition" Name="_rotation" Default="false" />
-        <ValueDefinition xsi:type="IntValueDefinition" Name="_range" Default="10" />
+        <ValueDefinition xsi:type="IntValueDefinition" Name="_range" Default="10" Min="0" Max="100" ShowSlider="false" />
       </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>

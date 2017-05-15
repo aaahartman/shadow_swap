@@ -12,10 +12,11 @@ import flixel.tweens.*;
 class Player extends FlxSprite
 {
 	public var speed:Float = 175;
-
-	public var default_speed:Float = 0;
+	public var x_speed:Float = 0;
+	public var y_speed:Float = 0;
 	public var gravity:Float = 900;
 	public var jump_speed:Float = 350;
+	public var swim_up_speed:Float = 10;
 
 	private var jump_duration:Float = -1;
 	private var in_air:Bool = false;
@@ -37,12 +38,17 @@ class Player extends FlxSprite
 
 	public function bbox():FlxRect
 	{
-		return new FlxRect(Std.int(this.x), Std.int(this.y), 16, 16);
+		return new FlxRect(Std.int(this.x), Std.int(this.y), 32, 32);
 	}
 
-	public function setDefaultSpeed(?speed:Float = 0):Void
+	public function setXSpeed(?speed:Float = 0):Void
 	{
-		default_speed = speed;
+		x_speed = speed;
+	}
+
+	public function setYSpeed(?speed:Float = 0):Void
+	{
+		y_speed = speed;
 	}
 
 	public function inWater(water:Bool):Void
@@ -52,25 +58,38 @@ class Player extends FlxSprite
 	
 	override public function update(elapsed:Float):Void
 	{
-        // acceleration.x = 0;
-
         var _jump:Bool = false;
  		var _left:Bool = false;
  		var _right:Bool = false;
 
- 		_jump = FlxG.keys.anyJustPressed([UP, W, SPACE]);
+		if (in_water)
+		{
+			_jump = FlxG.keys.anyPressed([UP, W, SPACE]);
+		}
+		else
+		{
+			_jump = FlxG.keys.anyJustPressed([UP, W, SPACE]);
+		}
+ 		
  		_left = FlxG.keys.anyPressed([LEFT, A]);
  		_right = FlxG.keys.anyPressed([RIGHT, D]);
 
  		// acceleration.x = 0;
- 		in_air = !isTouching(FlxObject.FLOOR) && !in_water;
+ 		in_air = !isTouching(FlxObject.FLOOR);
 
  		if (_left && _right) 
  		{
       		_left = _right = false;
  		}
-
-		if (_jump && !in_air) 
+		if (y_speed != 0)
+		{
+			velocity.y = y_speed;
+		}
+		if (_jump && in_water) 
+		{
+			velocity.y -= swim_up_speed;
+		}
+		else if (_jump && !in_air) 
 		{		
 			velocity.y = -jump_speed;
 		}
@@ -80,16 +99,30 @@ class Player extends FlxSprite
 			facing = FlxObject.DOWN;
 		}
 
-		velocity.x = default_speed;
+		velocity.x = x_speed;
 		if (_left) 
 		{
-		    velocity.x -= speed;
+			if (in_water)
+			{
+		    	velocity.x -= speed / 2;
+			}
+			else
+			{
+				velocity.x -= speed;
+			}
 		    facing = FlxObject.LEFT;
 		}
  		
  		if (_right) 
 		{
-			velocity.x += speed;
+			if (in_water)
+			{
+				velocity.x += speed / 2;
+			}
+			else
+			{
+				velocity.x += speed;
+			}
 			facing = FlxObject.RIGHT;
 		}
 

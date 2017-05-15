@@ -123,6 +123,7 @@
     <glass id="170" x="384" y="384" _id="2" _on="False" />
     <glass id="171" x="416" y="384" _id="2" _on="False" />
     <button id="172" x="192" y="480" _id="6" />
+    <fan id="184" x="32" y="480" _dir="0" _id="0" _on="True" _rotation="False" _range="3"/>
     <switch id="173" x="128" y="480" _id="2" _on="False" _fan="False" />
     <key id="176" x="384" y="480" />
     <button id="182" x="320" y="224" _id="3" />
@@ -132,6 +133,7 @@
     <water id="51" x="640" y="416" />
     <water id="52" x="640" y="448" />
     <water id="149" x="640" y="480" />
+    <fan id="185" x="736" y="480" _dir="0" _id="0" _on="True" _rotation="False" _range="3"/>
     <switch id="174" x="640" y="480" _id="1" _on="False" _fan="False" />
     <water id="3" x="64" y="480" />
     <water id="28" x="704" y="480" />

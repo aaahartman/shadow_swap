@@ -57,7 +57,7 @@ class Reg
 
 		// Initialize the minimun swaps of all levels
 		_minSwaps = new Array<Int>();
-		_minSwaps = [0, 1, 1, 3, 5, 7, 2, 4, 6, 3, 1, 5, 6, 8, 10, 10];
+		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 4, 6, 3, 1, 5, 6, 8, 10, 10];
 
 		// *** UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
 		//numUnlockedLevels = 1;

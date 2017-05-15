@@ -15,7 +15,7 @@ class Fan extends FlxSprite
 	private var _numBlocks:Int = 10;
 	private var _size:Int = 32;
 
-	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Bool = false, ?rotation:Bool = false)
+	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Bool = false, ?rotation:Bool = false, ?range:Int = 10)
 	{
 		super(X, Y);
 		immovable = true;
@@ -35,6 +35,7 @@ class Fan extends FlxSprite
 		}
 
 		_rotation = rotation;
+		_numBlocks = range;
 		changeDirection();
 	}
 
@@ -94,7 +95,7 @@ class Fan extends FlxSprite
 				_bbox = new FlxRect(x, y, _size * _numBlocks, _size);
 			case 2:
 				angle = 90;
-				_bbox = new FlxRect(x, y, _size, _size * _numBlocks / 2);
+				_bbox = new FlxRect(x, y, _size, _size * _numBlocks);
 			case 3:
 				angle = 180;
 				_bbox = new FlxRect(x - _size * _numBlocks + _size, y, _size * _numBlocks, _size);

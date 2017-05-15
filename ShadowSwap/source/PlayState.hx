@@ -254,7 +254,15 @@ class PlayState extends FlxState
 				{
 	 				var dir:Int = Std.parseInt(entityData.get("_dir"));
 					var rotation:Bool = (entityData.get("_rotation").toLowerCase() == "true");
-					var fan:Fan = new Fan(x, y, id, dir, on, rotation);
+					var range:Int;
+					if (entityData.get("_range") == null)
+					{
+						range = 10;
+					}
+					else{
+						range = Std.parseInt(entityData.get("_range"));
+					}
+					var fan:Fan = new Fan(x, y, id, dir, on, rotation, range);
 					_fans.add(fan);
 				}
 			}

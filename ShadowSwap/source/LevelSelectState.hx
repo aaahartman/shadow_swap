@@ -25,6 +25,7 @@ class LevelSelectState extends FlxState
 		// Stage 1 buttons
 		for (i in 1...6) 
 		{
+			// Create Button
 			var _btn = new FlxButton(FlxG.width / 2 - 215, 130 + 90 * (i - 1), "" + i);
 			_btn.onDown.callback = clickPlay.bind(i);
 			_btn.loadGraphic("assets/images/levelButton1.png", true, 70, 50);
@@ -32,7 +33,7 @@ class LevelSelectState extends FlxState
 			_btn.label.size = 28;
 			_btn.label.color = FlxColor.WHITE;
 
-			// lock levels
+			// Lock levels
 			if (i > unlocked) {
 				_btn.active = false;
 				_btn.alpha = 0.5;
@@ -40,8 +41,18 @@ class LevelSelectState extends FlxState
 
 			_btns.add(_btn);
 
+			// Handle Stars
+			var numStar = Reg.getStars(i);
 			var _star = new FlxSprite(FlxG.width / 2 - 215, 185 + 90 * (i - 1));
-			_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+			if (numStar == 3)
+				_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
+			else if (numStar == 2)
+				_star.loadGraphic(AssetPaths.Stars2__png, false, 70, 20);
+			else if (numStar == 1)
+				_star.loadGraphic(AssetPaths.Stars1__png, false, 70, 20);
+			else
+				_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+
 			add(_star);
 		}
 
@@ -63,8 +74,18 @@ class LevelSelectState extends FlxState
 
 			_btns.add(_btn);
 
+			// Handle Stars
+			var numStar = Reg.getStars(i);
 			var _star = new FlxSprite(FlxG.width / 2 - 95, 185 + 90 * (i - 6));
-			_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+			if (numStar == 3)
+				_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
+			else if (numStar == 2)
+				_star.loadGraphic(AssetPaths.Stars2__png, false, 70, 20);
+			else if (numStar == 1)
+				_star.loadGraphic(AssetPaths.Stars1__png, false, 70, 20);
+			else
+				_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+
 			add(_star);
 		}
 
@@ -86,8 +107,18 @@ class LevelSelectState extends FlxState
 
 			_btns.add(_btn);
 
+			// Handle Stars
+			var numStar = Reg.getStars(i);
 			var _star = new FlxSprite(FlxG.width / 2 + 25, 185 + 90 * (i - 11));
-			_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+			if (numStar == 3)
+				_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
+			else if (numStar == 2)
+				_star.loadGraphic(AssetPaths.Stars2__png, false, 70, 20);
+			else if (numStar == 1)
+				_star.loadGraphic(AssetPaths.Stars1__png, false, 70, 20);
+			else
+				_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+
 			add(_star);
 		}
 
@@ -109,8 +140,18 @@ class LevelSelectState extends FlxState
 
 			_btns.add(_btn);
 
+			// Handle Stars
+			var numStar = Reg.getStars(i);
 			var _star = new FlxSprite(FlxG.width / 2 + 145, 185 + 90 * (i - 16));
-			_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+			if (numStar == 3)
+				_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
+			else if (numStar == 2)
+				_star.loadGraphic(AssetPaths.Stars2__png, false, 70, 20);
+			else if (numStar == 1)
+				_star.loadGraphic(AssetPaths.Stars1__png, false, 70, 20);
+			else
+				_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+
 			add(_star);		
 		}
 

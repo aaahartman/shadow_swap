@@ -46,6 +46,8 @@ class PlayState extends FlxState
 	private var _winText:FlxText;
 	private var _loseText:FlxText;
 
+	private var _numSwap:Int;
+
 	private var _hud:HUD;
 	//private var _nextButton:FlxButton;
 
@@ -117,13 +119,6 @@ class PlayState extends FlxState
 		_winText = new FlxText(_mWalls.width / 2 - 70, _mWalls.height / 2, 0, "", 25);
 		_winText.systemFont = "Arial Black";
 
-		// Create and Hide the "Next" button
-		// _nextButton = new FlxButton(_mWalls.width / 2, _mWalls.height / 2 + _winText.height, "", promptNext);
-		// _nextButton.loadGraphic(AssetPaths.Next__png, true, 50, 30);
-		// _nextButton.x -= _nextButton.width / 2;
-		// _nextButton.active = false;
-		// _nextButton.visible = false;
-
 		// Initialize all entities
 		_player = new Player();
 		_shadow = new Shadow();
@@ -139,10 +134,13 @@ class PlayState extends FlxState
 		_water = new FlxTypedGroup<Water>();
  		_map.loadEntities(placeEntities, "entities");
 		
-		// Initialze Got key to false
+		// Initialize Got key to false
 		Reg.gotKey = false;
 		// Initialize current gates to empty
 		Reg.currentGates = new List<Gate>();
+
+		//Local saving of number of swaps, initialized to 0;
+		_numSwap = 0;
 
 		// Add all components to game state
 		add(_water);
@@ -285,6 +283,9 @@ class PlayState extends FlxState
 			_player.y = _shadow.y;
 			_shadow.y = temp;
 
+			// update local number swaps
+			_numSwap++;
+
 			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_SWAP);
 		}
 
@@ -399,6 +400,9 @@ class PlayState extends FlxState
 		{
 			_door.openDoor();
 			Main.LOGGER.logLevelEnd({won: true});
+
+			// update Registery's current number of swaps
+			Reg.setNumSwap(_numSwap);
 			
 			// If it's the last level, enter end credit
 			if (_levelNum == 20) {
@@ -406,25 +410,6 @@ class PlayState extends FlxState
 			} 
 			// Activate "Next" button if it's not the last level
 			else if (_levelNum < 20) {
-
-			//_winText.text = "YOU WIN!";
-
-			// // Activate "Next" button
-			// if (_levelNum < 20) {
-			// 	_nextButton.active = true;
-			// 	_nextButton.visible = true;
-			// }
-			
-			// // If pressed "Enter", go to next level
-			// if (FlxG.keys.justPressed.ENTER)
-			// 	promptNext();
-
-			// Save the current furthest progress
-			// if (_levelNum + 1 > Reg.loadLevel()) {
-			// 	Reg.saveLevel(_levelNum + 1);
-			// 	LevelSelectState.updateLevelUnlocked(_levelNum + 1);
-			// }
-				
 				Reg.unlockLevel(Reg.getCurrentLevel() + 1);
 				FlxG.switchState(new FinishScreenState());
 			}

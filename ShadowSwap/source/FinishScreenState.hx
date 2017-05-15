@@ -8,13 +8,40 @@ import flixel.text.FlxText;
 
 class FinishScreenState extends FlxState
 {
+
 	override public function create():Void
 	{
+		var _level = Reg.getCurrentLevel();
+		var _numSwap = Reg.getNumSwap();
+		var _minSwap = Reg.getMinSwap(_level);
+
+		// Handle Stars Logic : Player can earn 1-3 stars upon completion of a level
+		// TODO: handle high score??????
 		var _star = new FlxSprite(50, 50);
-		_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
-		_star.screenCenter();
-		_star.y -= 100;
-		add(_star);
+		if (_numSwap <= _minSwap)
+		{
+			_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
+			_star.screenCenter();
+			_star.y -= 100;
+			add(_star);
+			Reg.setStars(_level, 3);
+		} 
+		else if (_numSwap <= _minSwap + 2) 
+		{
+			_star.loadGraphic(AssetPaths.Stars2__png, false, 70, 20);
+			_star.screenCenter();
+			_star.y -= 100;
+			add(_star);
+			Reg.setStars(_level, 2);
+		}
+		else 
+		{
+			_star.loadGraphic(AssetPaths.Stars1__png, false, 70, 20);
+			_star.screenCenter();
+			_star.y -= 100;
+			add(_star);
+			Reg.setStars(_level, 1);
+		}
 
 		var _text:FlxText = new FlxText(0, 0, 0, "Level " + Reg.getCurrentLevel() + " complete!", 40);
 		_text.systemFont = "Arial Black";

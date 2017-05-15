@@ -21,6 +21,10 @@ class Reg
 	private static var currentLevelNum:Int;
 	private static var numUnlockedLevels:Int;
 
+	private static var _minSwaps:Array<Int>;
+	private static var _starRecord:Array<Int>;
+	private static var _currentSwap:Int;
+
 	public static function initSave():Void 
 	{
 		// Initialize saving
@@ -33,8 +37,32 @@ class Reg
 		else 
 			numUnlockedLevels = 1;
 
-		// UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
-		//numUnlockedLevels = 20;
+		// Initialize Personal Swap Record (Level 0 does not exist)
+
+		// *** Uncomment these two lines to reset all stars to 0
+		//_save.data.stars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		//_save.flush();
+
+		if (Reg._save.data.stars != null) {
+			_starRecord = _save.data.stars;
+		} else {
+			_starRecord = new Array<Int>();
+			for (i in 0...15)
+				_starRecord.push(0);
+			_save.data.stars = new Array();
+			_save.data.stars = _starRecord;
+
+			_save.flush();
+		}
+
+		// Initialize the minimun swaps of all levels
+		_minSwaps = new Array<Int>();
+		_minSwaps = [0, 1, 1, 3, 5, 7, 2, 4, 6, 3, 1, 5, 6, 8, 10, 10];
+
+
+
+		// *** UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
+		numUnlockedLevels = 1;
 	}
 
 	// Save new player progression
@@ -67,6 +95,32 @@ class Reg
 		currentLevelNum = newLevelNum;
 	}
 
-	//public static function saveStars():Void {}
-	//public statuc function loadStars():Int {}
+	public static function getNumSwap():Int
+	{
+		return _currentSwap;
+	}
+
+	public static function setNumSwap(numSwap:Int):Void
+	{
+		_currentSwap = numSwap;
+	}
+
+	public static function getMinSwap(level:Int):Int
+	{
+		return _minSwaps[level];
+	}
+
+	public static function setStars(level:Int, newStars:Int):Void 
+	{
+		if (newStars > _starRecord[level]) {
+			_starRecord[level] = newStars;
+			_save.data.stars[level] = newStars;
+    		_save.flush();
+    	}
+	}
+
+	public static function getStars(level:Int):Int 
+	{
+		return _starRecord[level];
+	}
 }

@@ -58,7 +58,7 @@
     <switch id="6" x="512" y="192" _id="2" _on="False" _fan="False" />
     <door id="63" x="640" y="288" />
     <key id="64" x="352" y="224" />
-    <fan id="65" x="128" y="288" _dir="2" _id="2" _on="True" _rotation="True" _range="10", _power="90000" />
+    <fan id="65" x="128" y="288" _dir="2" _id="2" _on="True" _rotation="True" _range="7" _power="15000" />
     <shadow id="66" x="64" y="64" />
     <player id="67" x="32" y="64" />
     <switch id="68" x="32" y="352" _id="2" _on="True" _fan="True" />

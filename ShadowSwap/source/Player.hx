@@ -66,7 +66,22 @@ class Player extends FlxSprite
 		fanYForce = 0;
 		if (in_water)
 		{
-			applyWaterForce();
+			applyWaterForce();				
+			if (FlxG.keys.anyPressed([UP, W, SPACE]))
+			{
+				facing = FlxObject.UP;
+				applySwimUpForce();
+			}
+			if (FlxG.keys.anyPressed([RIGHT, D]))
+			{
+				facing = FlxObject.RIGHT;
+				applySwimRightForce();
+			}
+			if (FlxG.keys.anyPressed([LEFT, A]))
+			{
+				facing = FlxObject.LEFT;
+				applySwimLeftForce();
+			}
 		} else {
 			applyAirDrag();
 			applyGravity();
@@ -161,6 +176,16 @@ class Player extends FlxSprite
 		acceleration.x -= 4500;
 	}
 
+	private function applySwimRightForce()
+	{
+		acceleration.x += 4500;
+	}
+
+	private function applySwimLeftForce()
+	{
+		acceleration.x -= 4500;
+	}
+
 	private function applySmallRightForce()
 	{
 		acceleration.x += 500;
@@ -173,13 +198,18 @@ class Player extends FlxSprite
 
 	private function applyWaterForce()
 	{
-		acceleration.x -= 20 * velocity.x;
-		acceleration.y -= 20 * velocity.y;
+		acceleration.x -= 25 * velocity.x;
+		acceleration.y = gravity / 1.25 - 10 * velocity.y;
 	}
 
 	private function applyUpForce()
 	{
 		acceleration.y -= 27000; 
+	}
+
+	private function applySwimUpForce()
+	{
+		acceleration.y -= 2000; 
 	}
 
 	public function isInAir():Bool 

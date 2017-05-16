@@ -15,7 +15,7 @@ class Player extends FlxSprite
 	public var x_speed:Float = 0;
 	public var y_speed:Float = 0;
 	public var gravity:Float = 900;
-	public var jump_speed:Float = 350;
+	public var jump_speed:Float = 500;
 	public var swim_up_speed:Float = 10;
 	public var swim_maximum_speed:Float = -100;
 
@@ -137,11 +137,11 @@ class Player extends FlxSprite
 
 		if (in_water) 
 		{
-			acceleration.y = gravity / 6 - 2 * velocity.y / 6;
+			acceleration.y = gravity / 6 - 1.75 * velocity.y / 6;
 		}
 		else 
 		{
-			acceleration.y = gravity - 2 * velocity.y;
+			acceleration.y = gravity - 1.75 * velocity.y;
 		}
 	
 		switch (facing) 

@@ -26,11 +26,11 @@ class Shadow extends FlxSprite
 		velocity.x = 0;
         if (in_water)
         {
-            acceleration.y = gravity / 6;
+            acceleration.y = gravity / 6 - 1.75 * velocity.y / 6;
         }
         else
         {
-            acceleration.y = gravity;
+            acceleration.y = gravity - 1.75 * velocity.y;
         }
 	    super.update(elapsed);
 	}

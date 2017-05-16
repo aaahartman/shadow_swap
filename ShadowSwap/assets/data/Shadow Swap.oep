@@ -6,7 +6,7 @@
   <GridColor A="255" R="255" G="240" B="90" />
   <LevelDefaultSize>
     <Width>800</Width>
-    <Height>720</Height>
+    <Height>736</Height>
   </LevelDefaultSize>
   <LevelMinimumSize>
     <Width>32</Width>
@@ -14,7 +14,7 @@
   </LevelMinimumSize>
   <LevelMaximumSize>
     <Width>800</Width>
-    <Height>720</Height>
+    <Height>736</Height>
   </LevelMaximumSize>
   <Filename>C:\Users\andre\shadow_swap\ShadowSwap\assets\data\Shadow Swap.oep</Filename>
   <AngleMode>Degrees</AngleMode>

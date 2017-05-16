@@ -137,11 +137,11 @@ class Player extends FlxSprite
 
 		if (in_water) 
 		{
-			acceleration.y = gravity / 6;
+			acceleration.y = gravity / 6 - 2 * velocity.y / 6;
 		}
 		else 
 		{
-			acceleration.y = gravity;
+			acceleration.y = gravity - 2 * velocity.y;
 		}
 	
 		switch (facing) 

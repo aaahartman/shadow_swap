@@ -544,13 +544,13 @@ class PlayState extends FlxState
 	private function updateFans():Void
 	{
 		var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
-		var fanOn:Bool = false;
+		var updated:Bool = false;
 		while(itr.hasNext()) 
 		{
 			var curFan:Fan = itr.next();
 			if (curFan.isOn()) 
 			{
-				fanOn = true;
+				updated = true;
 				var size:Float = curFan.width;
 				var numBlocks:Float = 10;
 				switch (curFan.getDir())
@@ -579,7 +579,7 @@ class PlayState extends FlxState
                         else if(_player.bbox().overlaps(curFan.bbox()))
 						{
 							_player.setXSpeed(100);
-							_player.velocity.y = 0;
+							_player.setYSpeed(-1);
 						}
                     // down
                     case 2:
@@ -605,12 +605,12 @@ class PlayState extends FlxState
                         else if (_player.bbox().overlaps(curFan.bbox()))
 						{
 							_player.setXSpeed(-100);
-							_player.velocity.y = 0;
+							_player.setYSpeed(-1);
 						}
 				}
 			}
 		}
-		if (!fanOn) {
+		if (!updated) {
 			_player.setXSpeed(0);
 			_player.setYSpeed(0);
 		}

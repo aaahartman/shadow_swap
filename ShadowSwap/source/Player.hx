@@ -18,7 +18,6 @@ class Player extends FlxSprite
 	public var jump_speed:Float = 350;
 	public var swim_up_speed:Float = 10;
 	public var swim_maximum_speed:Float = -100;
-
 	private var jump_duration:Float = -1;
 	private var in_air:Bool = false;
 	private var in_water:Bool = false;
@@ -63,7 +62,7 @@ class Player extends FlxSprite
  		var _left:Bool = false;
  		var _right:Bool = false;
 
-		if (in_water)
+		if (in_water || y_speed != 0)
 		{
 			_jump = FlxG.keys.anyPressed([UP, W, SPACE]);
 		}
@@ -82,10 +81,6 @@ class Player extends FlxSprite
  		{
       		_left = _right = false;
  		}
-		if (y_speed != 0)
-		{
-			velocity.y = y_speed;
-		}
 		if (_jump && in_water) 
 		{
 			if (velocity.y > swim_maximum_speed)
@@ -96,6 +91,15 @@ class Player extends FlxSprite
 		else if (_jump && !in_air) 
 		{		
 			velocity.y = -jump_speed;
+		}
+
+		if (y_speed != 0)
+		{
+			velocity.y = y_speed;
+			if (_jump)
+			{
+				velocity.y = -jump_speed * 3 / 4;
+			}
 		}
 
 		if (!in_air) 

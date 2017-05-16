@@ -15,7 +15,7 @@ class Player extends FlxSprite
 	public var x_speed:Float = 0;
 	public var y_speed:Float = 0;
 	public var gravity:Float = 900;
-	public var jump_speed:Float = 350;
+	public var jump_speed:Float = 500;
 	public var swim_up_speed:Float = 10;
 	public var swim_maximum_speed:Float = -100;
 	private var jump_duration:Float = -1;
@@ -62,8 +62,9 @@ class Player extends FlxSprite
  		var _left:Bool = false;
  		var _right:Bool = false;
 
-		if (in_water || y_speed != 0)
+		if (in_water || y_speed < 0)
 		{
+			// if in water, or player is affected by a fan (not in DOWN direction)
 			_jump = FlxG.keys.anyPressed([UP, W, SPACE]);
 		}
 		else
@@ -98,7 +99,7 @@ class Player extends FlxSprite
 			velocity.y = y_speed;
 			if (_jump)
 			{
-				velocity.y = -jump_speed * 3 / 4;
+				velocity.y = -jump_speed;
 			}
 		}
 

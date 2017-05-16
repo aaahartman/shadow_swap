@@ -533,7 +533,8 @@ class PlayState extends FlxState
 		var iter:Iterator<Fan> = _fans.iterator();
 		while(iter.hasNext())
 		{
-			if (iter.next().bbox().overlaps(bbox))
+			var curFan:Fan = iter.next();
+			if (curFan.isOn() && curFan.bbox().overlaps(bbox))
 			{
 				return true;
 			}
@@ -565,7 +566,6 @@ class PlayState extends FlxState
 						}
 						else if (_player.bbox().overlaps(curFan.bbox()))
 						{
-                            // _player.velocity.y = -200;
 							_player.setYSpeed(-200);
 							_player.acceleration.y = 0;
 						}
@@ -592,7 +592,6 @@ class PlayState extends FlxState
                         else if (_player.bbox().overlaps(curFan.bbox()))
 						{
 							_player.setYSpeed(200);
-                            // _player.velocity.y = 200;
 							_player.acceleration.y = 0;
 						}
                     // left

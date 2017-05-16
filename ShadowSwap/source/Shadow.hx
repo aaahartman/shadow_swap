@@ -17,7 +17,7 @@ class Shadow extends FlxSprite
         super(X, Y);
         loadGraphic(AssetPaths.Shadow3__png, false, 22, 32);
         alpha = 0.8;
-        acceleration.y = gravity / 2;
+        acceleration.y = gravity;
     }
 
 	override public function update(elapsed:Float):Void
@@ -26,7 +26,7 @@ class Shadow extends FlxSprite
 		velocity.x = 0;
         if (in_water)
         {
-            acceleration.y = 300;
+            acceleration.y = gravity / 6;
         }
         else
         {

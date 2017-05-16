@@ -12,10 +12,11 @@ class Fan extends FlxSprite
 	private var _on:Bool = false;
 	private var _bbox:FlxRect;
 	private var _rotation:Bool = false;
-	private var _numBlocks:Int = 10;
-	private var _size:Int = 32;
+	private var _range:Int = 10;
+	private var _blockToPixel:Int = 32;
+	private var _power:Int = 0;
 
-	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Bool = false, ?rotation:Bool = false, ?range:Int = 10)
+	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0, ?dir:Int = 0, ?on:Bool = false, ?rotation:Bool = false, ?range:Int = 10, ?power:Int = 0)
 	{
 		super(X, Y);
 		immovable = true;
@@ -35,8 +36,14 @@ class Fan extends FlxSprite
 		}
 
 		_rotation = rotation;
-		_numBlocks = range;
-		changeDirection();
+		_range = range;
+		_power = power;
+		updateBoundingBox();
+	}
+
+	public function getPower():Int
+	{
+		return _power;
 	}
 
 	public function getId():Int
@@ -59,7 +66,7 @@ class Fan extends FlxSprite
 		if (_rotation)
 		{
 			_dir = (_dir + 1) % 4;
-			changeDirection();
+			updateBoundingBox();
 		}
 		else 
 		{
@@ -83,22 +90,22 @@ class Fan extends FlxSprite
 		return _bbox;
 	}
 
-	public function changeDirection():Void
+	public function updateBoundingBox():Void
 	{
 		switch(_dir) 
 		{
 			case 0:
 				angle = -90;
-				_bbox = new FlxRect(x, y - _size * _numBlocks + _size, _size, _size * _numBlocks);
+				_bbox = new FlxRect(x, y - _blockToPixel * _range + _blockToPixel, _blockToPixel, _blockToPixel * _range);
 			case 1:
 				angle = 0;
-				_bbox = new FlxRect(x, y, _size * _numBlocks, _size);
+				_bbox = new FlxRect(x, y, _blockToPixel * _range, _blockToPixel);
 			case 2:
 				angle = 90;
-				_bbox = new FlxRect(x, y, _size, _size * _numBlocks);
+				_bbox = new FlxRect(x, y, _blockToPixel, _blockToPixel * _range);
 			case 3:
 				angle = 180;
-				_bbox = new FlxRect(x - _size * _numBlocks + _size, y, _size * _numBlocks, _size);
+				_bbox = new FlxRect(x - _blockToPixel * _range + _blockToPixel, y, _blockToPixel * _range, _blockToPixel);
 		}
 	}
 }

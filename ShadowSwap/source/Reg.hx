@@ -26,26 +26,26 @@ class Reg
 
 	private static var _finishedCurrentLevel:Bool = false;
 	private static var _levels:Array<Dynamic> = [
-													AssetPaths._l1__oel,
-													AssetPaths._l2__oel,
-													AssetPaths._l3__oel,
-													AssetPaths._l4__oel,
-													AssetPaths._l5__oel,
-													AssetPaths._l6__oel,
-													AssetPaths._l7__oel,
-													AssetPaths._l9__oel,
-													AssetPaths._l10__oel,
-													AssetPaths._l11__oel,
-													AssetPaths._l12__oel,
-													AssetPaths._l13__oel,
-													AssetPaths._l14__oel,
-													AssetPaths._l15__oel,
-													AssetPaths.fan_playground__oel,
-													AssetPaths._l17__oel,
-													AssetPaths._l18__oel,
-													AssetPaths._l19__oel,
-													AssetPaths._l20__oel,
-													AssetPaths.hard_lvl__oel
+						/* 1 */						AssetPaths._l1__oel,
+						/* 2 */						AssetPaths._l2__oel,
+						/* 3 */						AssetPaths._l3__oel,
+						/* 4 */						AssetPaths._l4__oel,
+						/* 5 */						AssetPaths._l5__oel,
+						/* 6 */						AssetPaths._l6__oel,
+						/* 7 */						AssetPaths._l7__oel,
+						/* 8 */						AssetPaths._l9__oel,
+						/* 9 */						AssetPaths._l10__oel,
+						/* 10 */					AssetPaths._l11__oel,
+						/* 11 */					AssetPaths._l12__oel,
+						/* 12 */					AssetPaths._l13__oel,
+						/* 13 */					AssetPaths._l14__oel,
+						/* 14 */					AssetPaths._l15__oel,
+						/* 15 */					AssetPaths.fan_playground__oel,
+						/* 16 */					AssetPaths._l17__oel,
+						/* 17 */					AssetPaths._l18__oel,
+						/* 18 */					AssetPaths._l19__oel,
+						/* 19 */					AssetPaths._l20__oel,
+						/* 20 */					AssetPaths.hard_lvl__oel
 												];
 
 	public static function getLevel(_levelIndex):Dynamic
@@ -93,7 +93,7 @@ class Reg
 		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 0, 3, 7, 0, 2, 1, 6, 6, 0, 0, 8, 10, 10];
 
 		// *** UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
-		// _numUnlockedLevels = 20;
+		 _numUnlockedLevels = 20;
 	}
 
 	public static function wasSuccessfulFinish():Bool

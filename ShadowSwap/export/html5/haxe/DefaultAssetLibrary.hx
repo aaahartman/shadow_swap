@@ -96,6 +96,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -105,8 +125,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
-		className.set ("assets/data/Levels/uncomp.oel", __ASSET__assets_data_levels_uncomp_oel);
-		type.set ("assets/data/Levels/uncomp.oel", AssetType.TEXT);
+		className.set ("assets/data/Levels/fan_playground.oel", __ASSET__assets_data_levels_fan_playground_oel);
+		type.set ("assets/data/Levels/fan_playground.oel", AssetType.TEXT);
+		className.set ("assets/data/Levels/hard_lvl.oel", __ASSET__assets_data_levels_hard_lvl_oel);
+		type.set ("assets/data/Levels/hard_lvl.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l1.oel", __ASSET__assets_data_levels__l1_oel);
 		type.set ("assets/data/Levels/_l1.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l10.oel", __ASSET__assets_data_levels__l10_oel);
@@ -119,12 +141,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/Levels/_l13.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l14.oel", __ASSET__assets_data_levels__l14_oel);
 		type.set ("assets/data/Levels/_l14.oel", AssetType.TEXT);
+		className.set ("assets/data/Levels/_l15.oel", __ASSET__assets_data_levels__l15_oel);
+		type.set ("assets/data/Levels/_l15.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l17.oel", __ASSET__assets_data_levels__l17_oel);
 		type.set ("assets/data/Levels/_l17.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l18.oel", __ASSET__assets_data_levels__l18_oel);
 		type.set ("assets/data/Levels/_l18.oel", AssetType.TEXT);
+		className.set ("assets/data/Levels/_l19.oel", __ASSET__assets_data_levels__l19_oel);
+		type.set ("assets/data/Levels/_l19.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l2.oel", __ASSET__assets_data_levels__l2_oel);
 		type.set ("assets/data/Levels/_l2.oel", AssetType.TEXT);
+		className.set ("assets/data/Levels/_l20.oel", __ASSET__assets_data_levels__l20_oel);
+		type.set ("assets/data/Levels/_l20.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l3.oel", __ASSET__assets_data_levels__l3_oel);
 		type.set ("assets/data/Levels/_l3.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l4.oel", __ASSET__assets_data_levels__l4_oel);
@@ -133,6 +161,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/Levels/_l5.oel", AssetType.TEXT);
 		className.set ("assets/data/Levels/_l6.oel", __ASSET__assets_data_levels__l6_oel);
 		type.set ("assets/data/Levels/_l6.oel", AssetType.TEXT);
+		className.set ("assets/data/Levels/_l7.oel", __ASSET__assets_data_levels__l7_oel);
+		type.set ("assets/data/Levels/_l7.oel", AssetType.TEXT);
+		className.set ("assets/data/Levels/_l9.oel", __ASSET__assets_data_levels__l9_oel);
+		type.set ("assets/data/Levels/_l9.oel", AssetType.TEXT);
 		className.set ("assets/data/Shadow Swap.oep", __ASSET__assets_data_shadow_swap_oep);
 		type.set ("assets/data/Shadow Swap.oep", AssetType.TEXT);
 		className.set ("assets/images/Button.png", __ASSET__assets_images_button_png);
@@ -165,8 +197,28 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/Key_slot.png", AssetType.IMAGE);
 		className.set ("assets/images/Key_slot_filled.png", __ASSET__assets_images_key_slot_filled_png);
 		type.set ("assets/images/Key_slot_filled.png", AssetType.IMAGE);
+		className.set ("assets/images/levelButton.png", __ASSET__assets_images_levelbutton_png);
+		type.set ("assets/images/levelButton.png", AssetType.IMAGE);
+		className.set ("assets/images/levelButton1.png", __ASSET__assets_images_levelbutton1_png);
+		type.set ("assets/images/levelButton1.png", AssetType.IMAGE);
+		className.set ("assets/images/levelButton2.png", __ASSET__assets_images_levelbutton2_png);
+		type.set ("assets/images/levelButton2.png", AssetType.IMAGE);
+		className.set ("assets/images/levelButton3.png", __ASSET__assets_images_levelbutton3_png);
+		type.set ("assets/images/levelButton3.png", AssetType.IMAGE);
+		className.set ("assets/images/levelButton4.png", __ASSET__assets_images_levelbutton4_png);
+		type.set ("assets/images/levelButton4.png", AssetType.IMAGE);
+		className.set ("assets/images/lvlButton.png", __ASSET__assets_images_lvlbutton_png);
+		type.set ("assets/images/lvlButton.png", AssetType.IMAGE);
 		className.set ("assets/images/Menu.png", __ASSET__assets_images_menu_png);
 		type.set ("assets/images/Menu.png", AssetType.IMAGE);
+		className.set ("assets/images/Next.png", __ASSET__assets_images_next_png);
+		type.set ("assets/images/Next.png", AssetType.IMAGE);
+		className.set ("assets/images/nxtButton.png", __ASSET__assets_images_nxtbutton_png);
+		type.set ("assets/images/nxtButton.png", AssetType.IMAGE);
+		className.set ("assets/images/Play.png", __ASSET__assets_images_play_png);
+		type.set ("assets/images/Play.png", AssetType.IMAGE);
+		className.set ("assets/images/replayButton.png", __ASSET__assets_images_replaybutton_png);
+		type.set ("assets/images/replayButton.png", AssetType.IMAGE);
 		className.set ("assets/images/Reset.png", __ASSET__assets_images_reset_png);
 		type.set ("assets/images/Reset.png", AssetType.IMAGE);
 		className.set ("assets/images/Shadow.png", __ASSET__assets_images_shadow_png);
@@ -177,6 +229,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/Shadow3.png", AssetType.IMAGE);
 		className.set ("assets/images/Spike.png", __ASSET__assets_images_spike_png);
 		type.set ("assets/images/Spike.png", AssetType.IMAGE);
+		className.set ("assets/images/Stars0.png", __ASSET__assets_images_stars0_png);
+		type.set ("assets/images/Stars0.png", AssetType.IMAGE);
+		className.set ("assets/images/Stars1.png", __ASSET__assets_images_stars1_png);
+		type.set ("assets/images/Stars1.png", AssetType.IMAGE);
+		className.set ("assets/images/Stars2.png", __ASSET__assets_images_stars2_png);
+		type.set ("assets/images/Stars2.png", AssetType.IMAGE);
+		className.set ("assets/images/Stars3.png", __ASSET__assets_images_stars3_png);
+		type.set ("assets/images/Stars3.png", AssetType.IMAGE);
 		className.set ("assets/images/Switch.png", __ASSET__assets_images_switch_png);
 		type.set ("assets/images/Switch.png", AssetType.IMAGE);
 		className.set ("assets/images/tiles.png", __ASSET__assets_images_tiles_png);
@@ -208,7 +268,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
-		id = "assets/data/Levels/uncomp.oel";
+		id = "assets/data/Levels/fan_playground.oel";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/hard_lvl.oel";
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
@@ -236,6 +300,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l15.oel";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
 		id = "assets/data/Levels/_l17.oel";
 		path.set (id, id);
 		
@@ -244,7 +312,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l19.oel";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
 		id = "assets/data/Levels/_l2.oel";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l20.oel";
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
@@ -261,6 +337,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.TEXT);
 		id = "assets/data/Levels/_l6.oel";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l7.oel";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/Levels/_l9.oel";
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
@@ -328,7 +412,47 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "assets/images/levelButton.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/levelButton1.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/levelButton2.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/levelButton3.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/levelButton4.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/lvlButton.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/Menu.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Next.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/nxtButton.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Play.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/replayButton.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -349,6 +473,22 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/Spike.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Stars0.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Stars1.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Stars2.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Stars3.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -422,8 +562,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		var useManifest = false;
 		
-		className.set ("assets/data/Levels/uncomp.oel", __ASSET__assets_data_levels_uncomp_oel);
-		type.set ("assets/data/Levels/uncomp.oel", AssetType.TEXT);
+		className.set ("assets/data/Levels/fan_playground.oel", __ASSET__assets_data_levels_fan_playground_oel);
+		type.set ("assets/data/Levels/fan_playground.oel", AssetType.TEXT);
+		
+		className.set ("assets/data/Levels/hard_lvl.oel", __ASSET__assets_data_levels_hard_lvl_oel);
+		type.set ("assets/data/Levels/hard_lvl.oel", AssetType.TEXT);
 		
 		className.set ("assets/data/Levels/_l1.oel", __ASSET__assets_data_levels__l1_oel);
 		type.set ("assets/data/Levels/_l1.oel", AssetType.TEXT);
@@ -443,14 +586,23 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/data/Levels/_l14.oel", __ASSET__assets_data_levels__l14_oel);
 		type.set ("assets/data/Levels/_l14.oel", AssetType.TEXT);
 		
+		className.set ("assets/data/Levels/_l15.oel", __ASSET__assets_data_levels__l15_oel);
+		type.set ("assets/data/Levels/_l15.oel", AssetType.TEXT);
+		
 		className.set ("assets/data/Levels/_l17.oel", __ASSET__assets_data_levels__l17_oel);
 		type.set ("assets/data/Levels/_l17.oel", AssetType.TEXT);
 		
 		className.set ("assets/data/Levels/_l18.oel", __ASSET__assets_data_levels__l18_oel);
 		type.set ("assets/data/Levels/_l18.oel", AssetType.TEXT);
 		
+		className.set ("assets/data/Levels/_l19.oel", __ASSET__assets_data_levels__l19_oel);
+		type.set ("assets/data/Levels/_l19.oel", AssetType.TEXT);
+		
 		className.set ("assets/data/Levels/_l2.oel", __ASSET__assets_data_levels__l2_oel);
 		type.set ("assets/data/Levels/_l2.oel", AssetType.TEXT);
+		
+		className.set ("assets/data/Levels/_l20.oel", __ASSET__assets_data_levels__l20_oel);
+		type.set ("assets/data/Levels/_l20.oel", AssetType.TEXT);
 		
 		className.set ("assets/data/Levels/_l3.oel", __ASSET__assets_data_levels__l3_oel);
 		type.set ("assets/data/Levels/_l3.oel", AssetType.TEXT);
@@ -463,6 +615,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/data/Levels/_l6.oel", __ASSET__assets_data_levels__l6_oel);
 		type.set ("assets/data/Levels/_l6.oel", AssetType.TEXT);
+		
+		className.set ("assets/data/Levels/_l7.oel", __ASSET__assets_data_levels__l7_oel);
+		type.set ("assets/data/Levels/_l7.oel", AssetType.TEXT);
+		
+		className.set ("assets/data/Levels/_l9.oel", __ASSET__assets_data_levels__l9_oel);
+		type.set ("assets/data/Levels/_l9.oel", AssetType.TEXT);
 		
 		className.set ("assets/data/Shadow Swap.oep", __ASSET__assets_data_shadow_swap_oep);
 		type.set ("assets/data/Shadow Swap.oep", AssetType.TEXT);
@@ -512,8 +670,38 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/images/Key_slot_filled.png", __ASSET__assets_images_key_slot_filled_png);
 		type.set ("assets/images/Key_slot_filled.png", AssetType.IMAGE);
 		
+		className.set ("assets/images/levelButton.png", __ASSET__assets_images_levelbutton_png);
+		type.set ("assets/images/levelButton.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/levelButton1.png", __ASSET__assets_images_levelbutton1_png);
+		type.set ("assets/images/levelButton1.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/levelButton2.png", __ASSET__assets_images_levelbutton2_png);
+		type.set ("assets/images/levelButton2.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/levelButton3.png", __ASSET__assets_images_levelbutton3_png);
+		type.set ("assets/images/levelButton3.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/levelButton4.png", __ASSET__assets_images_levelbutton4_png);
+		type.set ("assets/images/levelButton4.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/lvlButton.png", __ASSET__assets_images_lvlbutton_png);
+		type.set ("assets/images/lvlButton.png", AssetType.IMAGE);
+		
 		className.set ("assets/images/Menu.png", __ASSET__assets_images_menu_png);
 		type.set ("assets/images/Menu.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/Next.png", __ASSET__assets_images_next_png);
+		type.set ("assets/images/Next.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/nxtButton.png", __ASSET__assets_images_nxtbutton_png);
+		type.set ("assets/images/nxtButton.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/Play.png", __ASSET__assets_images_play_png);
+		type.set ("assets/images/Play.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/replayButton.png", __ASSET__assets_images_replaybutton_png);
+		type.set ("assets/images/replayButton.png", AssetType.IMAGE);
 		
 		className.set ("assets/images/Reset.png", __ASSET__assets_images_reset_png);
 		type.set ("assets/images/Reset.png", AssetType.IMAGE);
@@ -529,6 +717,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/images/Spike.png", __ASSET__assets_images_spike_png);
 		type.set ("assets/images/Spike.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/Stars0.png", __ASSET__assets_images_stars0_png);
+		type.set ("assets/images/Stars0.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/Stars1.png", __ASSET__assets_images_stars1_png);
+		type.set ("assets/images/Stars1.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/Stars2.png", __ASSET__assets_images_stars2_png);
+		type.set ("assets/images/Stars2.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/Stars3.png", __ASSET__assets_images_stars3_png);
+		type.set ("assets/images/Stars3.png", AssetType.IMAGE);
 		
 		className.set ("assets/images/Switch.png", __ASSET__assets_images_switch_png);
 		type.set ("assets/images/Switch.png", AssetType.IMAGE);
@@ -1213,20 +1413,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 #if !display
 #if flash
 
-@:keep @:bind #if display private #end class __ASSET__assets_data_levels_uncomp_oel extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_levels_fan_playground_oel extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_levels_hard_lvl_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l1_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l10_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l11_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l12_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l13_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l14_oel extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_levels__l15_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l17_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l18_oel extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_levels__l19_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l2_oel extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_levels__l20_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l3_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l4_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l5_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels__l6_oel extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_levels__l7_oel extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_levels__l9_oel extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_shadow_swap_oep extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_images_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_buttonbackdrop_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1243,12 +1449,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__assets_images_key_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_key_slot_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_key_slot_filled_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_levelbutton_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_levelbutton1_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_levelbutton2_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_levelbutton3_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_levelbutton4_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_lvlbutton_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_menu_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_next_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_nxtbutton_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_play_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_replaybutton_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_reset_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_shadow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_shadow2_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_shadow3_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_spike_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_stars0_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_stars1_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_stars2_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_stars3_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_switch_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_water_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1311,6 +1531,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @:keep #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends lime.text.Font { public function new () { super (); name = "Nokia Cellphone FC Small"; } } 
 @:keep #if display private #end class __ASSET__flixel_fonts_monsterrat_ttf extends lime.text.Font { public function new () { super (); name = "Monsterrat"; } } 
 
@@ -1324,20 +1564,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 #if (windows || mac || linux || cpp)
 
 
-@:file("assets/data/Levels/uncomp.oel") #if display private #end class __ASSET__assets_data_levels_uncomp_oel extends lime.utils.Bytes {}
+@:file("assets/data/Levels/fan_playground.oel") #if display private #end class __ASSET__assets_data_levels_fan_playground_oel extends lime.utils.Bytes {}
+@:file("assets/data/Levels/hard_lvl.oel") #if display private #end class __ASSET__assets_data_levels_hard_lvl_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l1.oel") #if display private #end class __ASSET__assets_data_levels__l1_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l10.oel") #if display private #end class __ASSET__assets_data_levels__l10_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l11.oel") #if display private #end class __ASSET__assets_data_levels__l11_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l12.oel") #if display private #end class __ASSET__assets_data_levels__l12_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l13.oel") #if display private #end class __ASSET__assets_data_levels__l13_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l14.oel") #if display private #end class __ASSET__assets_data_levels__l14_oel extends lime.utils.Bytes {}
+@:file("assets/data/Levels/_l15.oel") #if display private #end class __ASSET__assets_data_levels__l15_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l17.oel") #if display private #end class __ASSET__assets_data_levels__l17_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l18.oel") #if display private #end class __ASSET__assets_data_levels__l18_oel extends lime.utils.Bytes {}
+@:file("assets/data/Levels/_l19.oel") #if display private #end class __ASSET__assets_data_levels__l19_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l2.oel") #if display private #end class __ASSET__assets_data_levels__l2_oel extends lime.utils.Bytes {}
+@:file("assets/data/Levels/_l20.oel") #if display private #end class __ASSET__assets_data_levels__l20_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l3.oel") #if display private #end class __ASSET__assets_data_levels__l3_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l4.oel") #if display private #end class __ASSET__assets_data_levels__l4_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l5.oel") #if display private #end class __ASSET__assets_data_levels__l5_oel extends lime.utils.Bytes {}
 @:file("assets/data/Levels/_l6.oel") #if display private #end class __ASSET__assets_data_levels__l6_oel extends lime.utils.Bytes {}
+@:file("assets/data/Levels/_l7.oel") #if display private #end class __ASSET__assets_data_levels__l7_oel extends lime.utils.Bytes {}
+@:file("assets/data/Levels/_l9.oel") #if display private #end class __ASSET__assets_data_levels__l9_oel extends lime.utils.Bytes {}
 @:file("assets/data/Shadow Swap.oep") #if display private #end class __ASSET__assets_data_shadow_swap_oep extends lime.utils.Bytes {}
 @:image("assets/images/Button.png") #if display private #end class __ASSET__assets_images_button_png extends lime.graphics.Image {}
 @:image("assets/images/ButtonBackdrop.png") #if display private #end class __ASSET__assets_images_buttonbackdrop_png extends lime.graphics.Image {}
@@ -1354,12 +1600,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:image("assets/images/Key.png") #if display private #end class __ASSET__assets_images_key_png extends lime.graphics.Image {}
 @:image("assets/images/Key_slot.png") #if display private #end class __ASSET__assets_images_key_slot_png extends lime.graphics.Image {}
 @:image("assets/images/Key_slot_filled.png") #if display private #end class __ASSET__assets_images_key_slot_filled_png extends lime.graphics.Image {}
+@:image("assets/images/levelButton.png") #if display private #end class __ASSET__assets_images_levelbutton_png extends lime.graphics.Image {}
+@:image("assets/images/levelButton1.png") #if display private #end class __ASSET__assets_images_levelbutton1_png extends lime.graphics.Image {}
+@:image("assets/images/levelButton2.png") #if display private #end class __ASSET__assets_images_levelbutton2_png extends lime.graphics.Image {}
+@:image("assets/images/levelButton3.png") #if display private #end class __ASSET__assets_images_levelbutton3_png extends lime.graphics.Image {}
+@:image("assets/images/levelButton4.png") #if display private #end class __ASSET__assets_images_levelbutton4_png extends lime.graphics.Image {}
+@:image("assets/images/lvlButton.png") #if display private #end class __ASSET__assets_images_lvlbutton_png extends lime.graphics.Image {}
 @:image("assets/images/Menu.png") #if display private #end class __ASSET__assets_images_menu_png extends lime.graphics.Image {}
+@:image("assets/images/Next.png") #if display private #end class __ASSET__assets_images_next_png extends lime.graphics.Image {}
+@:image("assets/images/nxtButton.png") #if display private #end class __ASSET__assets_images_nxtbutton_png extends lime.graphics.Image {}
+@:image("assets/images/Play.png") #if display private #end class __ASSET__assets_images_play_png extends lime.graphics.Image {}
+@:image("assets/images/replayButton.png") #if display private #end class __ASSET__assets_images_replaybutton_png extends lime.graphics.Image {}
 @:image("assets/images/Reset.png") #if display private #end class __ASSET__assets_images_reset_png extends lime.graphics.Image {}
 @:image("assets/images/Shadow.png") #if display private #end class __ASSET__assets_images_shadow_png extends lime.graphics.Image {}
 @:image("assets/images/Shadow2.png") #if display private #end class __ASSET__assets_images_shadow2_png extends lime.graphics.Image {}
 @:image("assets/images/Shadow3.png") #if display private #end class __ASSET__assets_images_shadow3_png extends lime.graphics.Image {}
 @:image("assets/images/Spike.png") #if display private #end class __ASSET__assets_images_spike_png extends lime.graphics.Image {}
+@:image("assets/images/Stars0.png") #if display private #end class __ASSET__assets_images_stars0_png extends lime.graphics.Image {}
+@:image("assets/images/Stars1.png") #if display private #end class __ASSET__assets_images_stars1_png extends lime.graphics.Image {}
+@:image("assets/images/Stars2.png") #if display private #end class __ASSET__assets_images_stars2_png extends lime.graphics.Image {}
+@:image("assets/images/Stars3.png") #if display private #end class __ASSET__assets_images_stars3_png extends lime.graphics.Image {}
 @:image("assets/images/Switch.png") #if display private #end class __ASSET__assets_images_switch_png extends lime.graphics.Image {}
 @:image("assets/images/tiles.png") #if display private #end class __ASSET__assets_images_tiles_png extends lime.graphics.Image {}
 @:image("assets/images/Water.png") #if display private #end class __ASSET__assets_images_water_png extends lime.graphics.Image {}

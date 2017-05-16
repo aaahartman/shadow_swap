@@ -30,7 +30,11 @@ class ApplicationMain {
 		var types = [];
 		
 		
-		urls.push ("assets/data/Levels/uncomp.oel");
+		urls.push ("assets/data/Levels/fan_playground.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/Levels/hard_lvl.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -58,6 +62,10 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("assets/data/Levels/_l15.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		urls.push ("assets/data/Levels/_l17.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
@@ -66,7 +74,15 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("assets/data/Levels/_l19.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		urls.push ("assets/data/Levels/_l2.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/Levels/_l20.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -83,6 +99,14 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/data/Levels/_l6.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/Levels/_l7.oel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/Levels/_l9.oel");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -150,7 +174,47 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/images/levelButton.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/levelButton1.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/levelButton2.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/levelButton3.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/levelButton4.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/lvlButton.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/images/Menu.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Next.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/nxtButton.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Play.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/replayButton.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -171,6 +235,22 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/images/Spike.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Stars0.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Stars1.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Stars2.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/Stars3.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -287,7 +367,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "165",
+			build: "233",
 			company: "HaxeFlixel",
 			file: "ShadowSwap",
 			fps: 60,
@@ -305,13 +385,13 @@ class ApplicationMain {
 					display: 0,
 					fullscreen: false,
 					hardware: false,
-					height: 720,
+					height: 736,
 					parameters: "{}",
 					resizable: false,
 					stencilBuffer: true,
 					title: "ShadowSwap",
 					vsync: true,
-					width: 1280,
+					width: 800,
 					x: null,
 					y: null
 				},
@@ -329,7 +409,7 @@ class ApplicationMain {
 		
 		#if (js && html5)
 		#if (munit || utest)
-		openfl.Lib.embed (null, 1280, 720, "000000");
+		openfl.Lib.embed (null, 800, 736, "000000");
 		#end
 		#else
 		create ();

@@ -9,6 +9,7 @@ import flixel.text.FlxText;
 import flixel.group.FlxGroup;
 import flixel.util.FlxTimer;
 import flixel.math.FlxRect;
+import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 
@@ -51,6 +52,7 @@ class PlayState extends FlxState
 
 	override public function create():Void 
 	{
+		FlxG.log.redirectTraces = true;
 		Reg.playerNewStart();
 		_timers = new Map<Int, FlxTimer>();
 		_levelNum = Reg.getCurrentLevel();
@@ -217,6 +219,7 @@ class PlayState extends FlxState
 				if (entityName == "fan")
 				{
 	 				var dir:Int = Std.parseInt(entityData.get("_dir"));
+	 				var _power:Int = Std.parseInt(entityData.get("_power"));
 					var rotation:Bool = (entityData.get("_rotation").toLowerCase() == "true");
 					var range:Int;
 					if (entityData.get("_range") == null)
@@ -226,7 +229,7 @@ class PlayState extends FlxState
 					else{
 						range = Std.parseInt(entityData.get("_range"));
 					}
-					var fan:Fan = new Fan(x, y, id, dir, on, rotation, range);
+					var fan:Fan = new Fan(x, y, id, dir, on, rotation, range, _power);
 					_fans.add(fan);
 				}
 			}
@@ -492,74 +495,17 @@ class PlayState extends FlxState
 
 	private function updateFans():Void
 	{
-		var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
-		var updated:Bool = false;
-		while(itr.hasNext()) 
+		_fans.forEachAlive(applyFanForce, false);
+	}
+
+	private function applyFanForce(_O:FlxObject):Void
+	{
+		var _fan:Fan = cast _O;
+		if(_fan.isOn() && _fan.bbox().overlaps(_player.bbox()))
 		{
-			var curFan:Fan = itr.next();
-			if (curFan.isOn()) 
-			{
-				updated = true;
-				var size:Float = curFan.width;
-				var numBlocks:Float = 10;
-				switch (curFan.getDir())
-				{
-                    // up
-                    case 0:
-					 	if (!overlapsWithAnyFan(_player.bbox()))
-						{
-							_player.acceleration.y = _player.gravity;
-							_player.setXSpeed(0);
-							_player.setYSpeed(0);
-						}
-						else if (_player.bbox().overlaps(curFan.bbox()))
-						{
-							_player.setYSpeed(-200);
-							_player.acceleration.y = 0;
-						}
-                    // right
-                    case 1:
-                        if (!overlapsWithAnyFan(_player.bbox()))
-						{
-							_player.setXSpeed(0);
-							_player.setYSpeed(0);
-						}
-                        else if(_player.bbox().overlaps(curFan.bbox()))
-						{
-							_player.setXSpeed(100);
-							_player.setYSpeed(-1);
-						}
-                    // down
-                    case 2:
-					 	if (!overlapsWithAnyFan(_player.bbox()))
-						{
-							_player.acceleration.y = _player.gravity;
-							_player.setXSpeed(0);
-							_player.setYSpeed(0);
-						}
-                        else if (_player.bbox().overlaps(curFan.bbox()))
-						{
-							_player.setYSpeed(200);
-							_player.acceleration.y = 0;
-						}
-                    // left
-                    case 3:
-                        if (!overlapsWithAnyFan(_player.bbox()))
-						{
-							_player.setXSpeed(0);
-							_player.setYSpeed(0);
-						}
-                        else if (_player.bbox().overlaps(curFan.bbox()))
-						{
-							_player.setXSpeed(-100);
-							_player.setYSpeed(-1);
-						}
-				}
-			}
-		}
-		if (!updated) {
-			_player.setXSpeed(0);
-			_player.setYSpeed(0);
+			var _playerPoint:FlxPoint = new FlxPoint(_player.x, _player.y);
+			var _fanPoint:FlxPoint = new FlxPoint(_fan.x, _fan.y);
+			_player.updateFanForce(_fan.getPower(), _fan.getDir(), _playerPoint.distanceTo(_fanPoint));
 		}
 	}
 

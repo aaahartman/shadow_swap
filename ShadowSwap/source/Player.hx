@@ -21,11 +21,12 @@ class Player extends FlxSprite
 	private var jump_duration:Float = -1;
 	private var in_air:Bool = false;
 	private var in_water:Bool = false;
+	private var fanXForce:Float = 0;
+	private var fanYForce:Float = 0;
 
     public function new(?X:Float=0, ?Y:Float=0)
     {
         super(X, Y);
-        //makeGraphic(16, 16, FlxColor.RED);
         loadGraphic(AssetPaths.White_spritesheet2__png, true, 32, 32);
         setFacingFlip(FlxObject.LEFT, true, false);
         setFacingFlip(FlxObject.RIGHT, false, false);
@@ -58,95 +59,49 @@ class Player extends FlxSprite
 	
 	override public function update(elapsed:Float):Void
 	{
-        var _jump:Bool = false;
- 		var _left:Bool = false;
- 		var _right:Bool = false;
-
-		if (in_water || y_speed < 0)
+		acceleration.x = 0;
+		acceleration.y = 0;
+		applyFanForce();
+		fanXForce = 0;
+		fanYForce = 0;
+		if (in_water)
 		{
-			// if in water, or player is affected by a fan (not in DOWN direction)
-			_jump = FlxG.keys.anyPressed([UP, W, SPACE]);
-		}
-		else
-		{
-			_jump = FlxG.keys.anyJustPressed([UP, W, SPACE]);
-		}
- 		
- 		_left = FlxG.keys.anyPressed([LEFT, A]);
- 		_right = FlxG.keys.anyPressed([RIGHT, D]);
-
- 		// acceleration.x = 0;
- 		in_air = !isTouching(FlxObject.FLOOR);
-
- 		if (_left && _right) 
- 		{
-      		_left = _right = false;
- 		}
-		if (_jump && in_water) 
-		{
-			if (velocity.y > swim_maximum_speed)
-				velocity.y -= swim_up_speed;
-			else
-				velocity.y = swim_maximum_speed;
-		}
-		else if (_jump && !in_air) 
-		{		
-			velocity.y = -jump_speed;
-		}
-
-		if (y_speed != 0)
-		{
-			velocity.y = y_speed;
-			if (_jump)
+			applyWaterForce();
+		} else {
+			applyAirDrag();
+			applyGravity();
+			if (isTouching(FlxObject.FLOOR))
 			{
-				velocity.y = -jump_speed;
+				applyFloorDrag();
+				if (FlxG.keys.anyPressed([UP, W, SPACE]))
+				{
+					facing = FlxObject.UP;
+					applyUpForce();
+				}
+				if (FlxG.keys.anyPressed([RIGHT, D]))
+				{
+					facing = FlxObject.RIGHT;
+					applyRightForce();
+				}
+				if (FlxG.keys.anyPressed([LEFT, A]))
+				{
+					facing = FlxObject.LEFT;
+					applyLeftForce();
+				}
 			}
-		}
-
-		if (!in_air) 
-		{
-			facing = FlxObject.DOWN;
-		}
-
-		velocity.x = x_speed;
-		if (_left) 
-		{
-			if (in_water)
+			else 
 			{
-		    	velocity.x -= speed / 2;
+				if (FlxG.keys.anyPressed([RIGHT, D]))
+				{
+					facing = FlxObject.RIGHT;
+					applySmallRightForce();
+				}
+				if (FlxG.keys.anyPressed([LEFT, A]))
+				{
+					facing = FlxObject.LEFT;
+					applySmallLeftForce();
+				}
 			}
-			else
-			{
-				velocity.x -= speed;
-			}
-		    facing = FlxObject.LEFT;
-		}
- 		
- 		if (_right) 
-		{
-			if (in_water)
-			{
-				velocity.x += speed / 2;
-			}
-			else
-			{
-				velocity.x += speed;
-			}
-			facing = FlxObject.RIGHT;
-		}
-
-		if (in_air) 
-		{
-			facing = FlxObject.UP;
-		}
-
-		if (in_water) 
-		{
-			acceleration.y = gravity / 6 - 1.75 * velocity.y / 6;
-		}
-		else 
-		{
-			acceleration.y = gravity - 1.75 * velocity.y;
 		}
 	
 		switch (facing) 
@@ -159,6 +114,72 @@ class Player extends FlxSprite
 				animation.play("move");
 		}
 	    super.update(elapsed);
+	}
+
+	public function updateFanForce(_force:Int, _dir:Int, _distance:Float):Void
+	{
+		switch (_dir) {
+			case 0:
+				fanYForce -= _force / Math.sqrt(_distance); 
+			case 1:
+				fanXForce +=  _force / Math.sqrt(_distance); 
+			case 2:
+				fanYForce += _force / Math.sqrt(_distance); 
+			case 3:
+				fanXForce -= _force / Math.sqrt(_distance); 
+		}
+	}
+
+	private function applyFanForce() {
+		acceleration.y += fanYForce;
+		acceleration.x += fanXForce;
+	}
+
+	private function applyGravity()
+	{
+		acceleration.y += 900;
+	}
+
+	private function applyFloorDrag()
+	{
+		acceleration.x -= 15 * velocity.x;
+	}
+
+	private function applyAirDrag()
+	{
+		acceleration.x -= 1.25 * velocity.x;
+		acceleration.y -= 1.25 * velocity.y;
+	}
+
+	private function applyRightForce()
+	{
+		acceleration.x += 4500;
+	}
+
+	private function applyLeftForce()
+	{
+		acceleration.x -= 4500;
+	}
+
+	private function applySmallRightForce()
+	{
+		acceleration.x += 500;
+	}
+
+	private function applySmallLeftForce()
+	{
+		acceleration.x -= 500;
+	}
+
+	private function applyWaterForce()
+	{
+		acceleration.x -= 20 * velocity.x;
+		acceleration.y -= 20 * velocity.y;
+	}
+
+	private function applyUpForce()
+	{
+		acceleration.y -= 27000; 
 	}
 
 	public function isInAir():Bool 

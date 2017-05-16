@@ -107,6 +107,7 @@
         <ValueDefinition xsi:type="BoolValueDefinition" Name="_on" Default="true" />
         <ValueDefinition xsi:type="BoolValueDefinition" Name="_rotation" Default="false" />
         <ValueDefinition xsi:type="IntValueDefinition" Name="_range" Default="10" Min="0" Max="100" ShowSlider="false" />
+        <ValueDefinition xsi:type="IntValueDefinition" Name="_power" Default="0" Min="0" Max="100000" ShowSlider="false" />
       </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>

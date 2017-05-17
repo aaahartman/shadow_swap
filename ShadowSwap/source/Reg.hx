@@ -50,7 +50,7 @@ class Reg
 
 	public static function getLevel(_levelIndex):Dynamic
 	{
-		return _levels[_levelIndex];
+		return _levels[_levelIndex - 1];
 	}
 
 	public static function numberOfLevels():Int

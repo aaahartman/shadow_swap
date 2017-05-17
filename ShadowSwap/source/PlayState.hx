@@ -36,7 +36,6 @@ class PlayState extends FlxState
 	private var _spikes:FlxTypedGroup<Spike>;
 	private var _water:FlxTypedGroup<Water>;
 
-	private var _levels:Array<Dynamic>;
 	private var _levelNum:Int;
 	private var _timers:Map<Int, FlxTimer>;
 	private var _timeInWater:FlxTimer;
@@ -76,7 +75,7 @@ class PlayState extends FlxState
 		flixel.FlxCamera.defaultZoom = 1;
 		FlxG.cameras.reset();
 		FlxG.camera.setSize((cast _mWalls.width), (cast _mWalls.height));
-		FlxG.camera.x = (FlxG.width - _mWalls.width) / 2;
+		//FlxG.camera.x = (FlxG.width - _mWalls.width) / 2;
 
 		// Create HUD
 		_hud = new HUD(_levelNum);
@@ -301,45 +300,48 @@ class PlayState extends FlxState
 				_countDownText.text = "";
 			}
 		}
-		_shadow.inWater(_shadow.overlaps(_water));
 
 		// Player / Button interaction
-		var button_iter:FlxTypedGroupIterator<Button> = _buttons.iterator();
-		while (button_iter.hasNext()) 
-		{
-			var curButton:Button = button_iter.next();
-			if (_player.overlaps(curButton)) 
-			{
-				_gates.forEachAlive(openGateIfID.bind(_, curButton.getId()), false);
-				curButton.buttonPressed();
-			} 
-			else 
-			{
-				curButton.buttonReleased();
-			}
-		}
+		_buttons.forEachAlive(checkActivation, false);
 
 		// Player / Glass Interaction
-		var glass_iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
-		while (glass_iter.hasNext()) 
-		{
-			var curGlass:Glass = glass_iter.next();
-			if (!curGlass.isOn()) 
-			{
-				FlxG.collide(curGlass, _shadow);
-			}
-		}
+		_glassWithSwitch.forEachAlive(checkOn, false);
+
 
 		// Player / Gate Interaction
-		var gate_iter:FlxTypedGroupIterator<Gate> = _gates.iterator();
-		while (gate_iter.hasNext()) 
+		_gates.forEachAlive(checkRaised, false);
+	}
+
+	private function checkRaised(_O:FlxObject):Void
+	{
+		var _gate:Gate = cast _O;
+		if (!_gate.isRaised()) 
 		{
-			var curGate:Gate = gate_iter.next();
-			if (!curGate.isRaised()) 
-			{
-				FlxG.collide(_player, curGate);
-				FlxG.collide(_shadow, curGate);
-			}
+			FlxG.collide(_player, _gate);
+			FlxG.collide(_shadow, _gate);
+		}
+	}
+
+	private function checkOn(_O:FlxObject):Void
+	{			
+		var _glass:Glass = cast _O;
+		if (!_glass.isOn()) 
+		{
+			FlxG.collide(_glass, _shadow);
+		}
+	}
+
+	private function checkActivation(_O:FlxObject):Void
+	{
+		var _button:Button = cast _O;
+		if (_player.overlaps(_button)) 
+		{
+			_gates.forEachAlive(openGateIfID.bind(_, _button.getId()), false);
+			_button.buttonPressed();
+		} 
+		else 
+		{
+			_button.buttonReleased();
 		}
 	}
 

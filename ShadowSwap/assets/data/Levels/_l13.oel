@@ -20,7 +20,7 @@
 2,3,3,3,2,1,3,3,3,3,3,3,3,3,3,3,3,3,3,2
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2</walls>
   <entities>
-    <fan id="0" x="480" y="576" _dir="2" _id="0" _on="True" _rotation="True" _range="11" _power="20000" />
+    <fan id="0" x="480" y="576" _dir="2" _id="0" _on="True" _rotation="True" _range="11" _power="70000" />
     <shadow id="1" x="576" y="576" />
     <player id="2" x="544" y="576" />
     <switch id="3" x="352" y="480" _id="0" _on="True" _fan="True" />

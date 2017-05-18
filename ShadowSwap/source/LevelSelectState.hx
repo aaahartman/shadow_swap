@@ -163,7 +163,7 @@ class LevelSelectState extends FlxState
 			add(_star);		
 		}
 
-		var _text:FlxText = new FlxText(FlxG.width / 2 - 80, 80, FlxG.width, "Shadow Swap", 25);
+		var _text:FlxText = new FlxText(FlxG.width / 2 - 80, 50, FlxG.width, "Shadow Swap", 25);
 		_text.systemFont = "Arial Black";
 
  		add(_text);

@@ -40,6 +40,6 @@ class Main extends Sprite
 	{
 		//addChild(new FlxGame(720, 720, SplashScreenState));
 		//addChild(new FlxGame(800, 736, SplashScreenState));
-		addChild(new FlxGame(800, 736, LevelSelectState));
+		addChild(new FlxGame(736, 640, LevelSelectState));
 	}
 }

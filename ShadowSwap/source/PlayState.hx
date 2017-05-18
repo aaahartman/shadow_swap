@@ -75,7 +75,7 @@ class PlayState extends FlxState
 		flixel.FlxCamera.defaultZoom = 1;
 		FlxG.cameras.reset();
 		FlxG.camera.setSize((cast _mWalls.width), (cast _mWalls.height));
-		//FlxG.camera.x = (FlxG.width - _mWalls.width) / 2;
+		FlxG.camera.x = (FlxG.width - _mWalls.width) / 2;
 
 		// Create HUD
 		_hud = new HUD(_levelNum);
@@ -132,7 +132,7 @@ class PlayState extends FlxState
 
 		super.create();
 
-		Main.LOGGER.logLevelStart(_levelNum, {"start level": _levelNum});
+		Main.LOGGER.logLevelStart(_levelNum, {"StartLevel": _levelNum});
 	}
 
 	private function placeEntities(entityName:String, entityData:Xml):Void
@@ -240,14 +240,14 @@ class PlayState extends FlxState
 	{
 		// If pressed "R", restart the game
 		if (FlxG.keys.justPressed.R) {
+			Main.LOGGER.logLevelAction(LoggingActions.CLICK_RESET, {Resetlevel: _levelNum});
 			FlxG.switchState(new PlayState());
-			Main.LOGGER.logLevelAction(LoggingActions.CLICK_RESET, {level: _levelNum});
 		}
 
 		// If pressed "M", return to level selection menu
 		if (FlxG.keys.justPressed.M) {
-			FlxG.switchState(new LevelSelectState());
 			Main.LOGGER.logLevelAction(LoggingActions.CLICK_LEVELSELECTION, {level: _levelNum});
+			FlxG.switchState(new LevelSelectState());
 		}
 
 		// If pressed "S", swap player and shadow
@@ -277,7 +277,7 @@ class PlayState extends FlxState
 		FlxG.collide(_player, _glassWithSwitch);
 		FlxG.overlap(_player, _key, collectKey);
 		FlxG.overlap(_player, _door, unlockDoor);
-		FlxG.overlap(_spikes, _player, killPlayer);
+		FlxG.overlap(_spikes, _player, spikeKillPlayer);
 
 
 		// Player / Water interaction
@@ -285,7 +285,6 @@ class PlayState extends FlxState
 			_player.inWater(true);
 			if (!_timerOn)
 			{
-
 				_timerOn = true;
 				_timeInWater.start(1, countDown, 11);
 			}
@@ -306,7 +305,6 @@ class PlayState extends FlxState
 
 		// Player / Glass Interaction
 		_glassWithSwitch.forEachAlive(checkOn, false);
-
 
 		// Player / Gate Interaction
 		_gates.forEachAlive(checkRaised, false);
@@ -353,17 +351,23 @@ class PlayState extends FlxState
 			_counter--;
 		else
 		{
-			killPlayer();
+			waterKillPlayer();
 			_countDownText.text = "";
 		}
 	}
 
-	// Kill player and restart the game.
-	private function killPlayer(S:FlxObject = null, P:FlxObject = null):Void
+	// Kill player by spike and restart the game.
+	private function spikeKillPlayer(S:FlxObject = null, P:FlxObject = null):Void
 	{
-			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {level: _levelNum});
+			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {"SpikeLevel" : _levelNum});
 			FlxG.switchState(new LevelExitState());
+	}
 
+	// Kill player by water and restart the game.
+	private function waterKillPlayer(S:FlxObject = null, P:FlxObject = null):Void
+	{
+			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {"WaterLevel" : _levelNum});
+			FlxG.switchState(new LevelExitState());
 	}
 
 	// Destroy Key object when it is collected.

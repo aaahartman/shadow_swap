@@ -16,6 +16,7 @@ class LevelExitState extends FlxState
 		var _numSwap:Int = Reg.getNumSwap();
 		var _minSwap:Int = Reg.getMinSwap(_level);
 
+
 		if (_success) 
 		{
 			Main.LOGGER.logLevelEnd({won: true});
@@ -24,7 +25,6 @@ class LevelExitState extends FlxState
 				Reg.unlockLevel(Reg.getCurrentLevel() + 1);
 			}
 		}
-
 
 		// Player can earn 1-3 stars upon completion of a level
 		var _star = new FlxSprite(50, 50);

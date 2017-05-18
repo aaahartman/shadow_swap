@@ -20,9 +20,9 @@ class Main extends Sprite
 					   2 = Family/Friend Release
 					   3 = Public Release
 		*/
-		var categoryId:Int = 1;
+		var categoryId:Int = 3;
 
-		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, 1, true);
+		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, 1, false);
 	
 		var userId:String = Main.LOGGER.getSavedUserId();
 		if (userId == null) 
@@ -39,6 +39,7 @@ class Main extends Sprite
 	private function onSessionReady(sessionRecieved:Bool):Void 
 	{
 		//addChild(new FlxGame(720, 720, SplashScreenState));
-		addChild(new FlxGame(800, 736, SplashScreenState));
+		//addChild(new FlxGame(800, 736, SplashScreenState));
+		addChild(new FlxGame(800, 736, LevelSelectState));
 	}
 }

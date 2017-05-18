@@ -165,7 +165,7 @@ class PlayState extends FlxState
 
 		super.create();
 
-		Main.LOGGER.logLevelStart(_levelNum);
+		Main.LOGGER.logLevelStart(_levelNum, {start level: _levelNum});
 	}
 
 	private function placeEntities(entityName:String, entityData:Xml):Void

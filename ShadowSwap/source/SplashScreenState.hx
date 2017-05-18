@@ -4,6 +4,7 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.ui.FlxButton;
 import flixel.text.FlxText;
+import flixel.FlxSprite;
 
 class SplashScreenState extends FlxState
 {
@@ -11,6 +12,10 @@ class SplashScreenState extends FlxState
 	{
 		Reg.updateCurrentLevel(1);
 		Reg.unlockLevel(1);
+
+		var _background = new FlxSprite();
+		_background.loadGraphic(AssetPaths.background__png);
+		_background.screenCenter();
 
 		var _text:FlxText = new FlxText(0, 0, 0, "SHADOW SWAP", 40);
 		_text.systemFont = "Arial Black";
@@ -21,6 +26,7 @@ class SplashScreenState extends FlxState
 		_btnPlay.loadGraphic(AssetPaths.Play__png, true, 90, 50);
 		_btnPlay.screenCenter();
 
+		add(_background);
  		add(_btnPlay);
  		add(_text);
 

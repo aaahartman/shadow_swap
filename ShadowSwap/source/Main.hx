@@ -22,7 +22,7 @@ class Main extends Sprite
 		*/
 		var categoryId:Int = 3;
 
-		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, 1, false);
+		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, 1, true);
 	
 		var userId:String = Main.LOGGER.getSavedUserId();
 		if (userId == null) 

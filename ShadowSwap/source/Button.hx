@@ -11,7 +11,6 @@ class Button extends FlxSprite
 	public function new(?X:Float = 0, ?Y:Float = 0, ?id:Int = 0)
 	{
 		super(X, Y);
-		//makeGraphic(16, 16, FlxColor.ORANGE);
 		loadGraphic(AssetPaths.Button__png, false, 32, 32);
 		height = 16;
 		immovable = true;
@@ -25,8 +24,11 @@ class Button extends FlxSprite
 
 	public function buttonPressed():Void 
 	{
-		pressed = true;
-		loadGraphic(AssetPaths.Button_Pressed__png, false, 32, 32);
+		if (!pressed)
+		{
+			pressed = true;
+			loadGraphic(AssetPaths.Button_Pressed__png, false, 32, 32);
+		}
 	}
 
 	public function buttonReleased():Void 

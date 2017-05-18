@@ -16,7 +16,6 @@ class Key extends FlxSprite
 
 	override public function kill():Void 
 	{
-		Reg.gotKey = true;
 		FlxTween.tween(this, { alpha: 0, y: y - 20 }, 1.5, { ease: FlxEase.circOut, onComplete: finishKill });
 	}
 

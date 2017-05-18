@@ -9,6 +9,7 @@ import flixel.text.FlxText;
 import flixel.group.FlxGroup;
 import flixel.util.FlxTimer;
 import flixel.math.FlxRect;
+import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 
@@ -35,7 +36,6 @@ class PlayState extends FlxState
 	private var _spikes:FlxTypedGroup<Spike>;
 	private var _water:FlxTypedGroup<Water>;
 
-	private var _levels:Array<Dynamic>;
 	private var _levelNum:Int;
 	private var _timers:Map<Int, FlxTimer>;
 	private var _timeInWater:FlxTimer;
@@ -43,53 +43,26 @@ class PlayState extends FlxState
 	private var _counter:Int;
 	private var _countDownText:FlxText;
 	private var _hint:Hint;
-	private var _winText:FlxText;
-	private var _loseText:FlxText;
+	private var _openGates:List<Gate>;
 
 	private var _numSwap:Int;
 
 	private var _hud:HUD;
-	//private var _nextButton:FlxButton;
 
 	override public function create():Void 
 	{
-		_levels = new Array();
-
-		// Initialize level tilemap paths
-		_levels[1] = AssetPaths._l1__oel;
-		_levels[2] = AssetPaths._l2__oel;
-		_levels[3] = AssetPaths._l3__oel;
-		_levels[4] = AssetPaths._l4__oel;
-		_levels[5] = AssetPaths._l5__oel;
-		_levels[6] = AssetPaths._l6__oel;
-		_levels[7] = AssetPaths._l7__oel;
-		_levels[8] = AssetPaths._l10__oel;
-		_levels[9] = AssetPaths._l11__oel;
-		_levels[10] = AssetPaths._l12__oel;
-		_levels[11] = AssetPaths._l13__oel;
-		_levels[12] = AssetPaths._l14__oel;
-		_levels[13] = AssetPaths._l17__oel;
-		_levels[14] = AssetPaths._l18__oel;
-		_levels[15] = AssetPaths._l19__oel;
-
-		// New levels to be completed!!
-		_levels[16] = AssetPaths._l19__oel;
-		_levels[17] = AssetPaths._l19__oel;
-		_levels[18] = AssetPaths._l19__oel;
-		_levels[19] = AssetPaths._l19__oel;
-		_levels[20] = AssetPaths._l19__oel;
-
-
+		FlxG.log.redirectTraces = true;
+		Reg.playerNewStart();
 		_timers = new Map<Int, FlxTimer>();
 		_levelNum = Reg.getCurrentLevel();
 
 		// Import tile map
-		_map = new FlxOgmoLoader(_levels[_levelNum]);
+		_map = new FlxOgmoLoader(Reg.getLevel(_levelNum));
 		_mWalls = _map.loadTilemap(AssetPaths.tiles__png, 32, 32, "walls");
 		_mWalls.follow();
   		_mWalls.setTileProperties(1, FlxObject.ANY); // ground
   		_mWalls.setTileProperties(2, FlxObject.ANY); // ground
-  		_mWalls.setTileProperties(3, FlxObject.NONE); // ground
+  		_mWalls.setTileProperties(3, FlxObject.NONE); // background
  		add(_mWalls);
 	
  		// Import tile map non-collidible layer
@@ -101,8 +74,8 @@ class PlayState extends FlxState
 		// Resize screen to fit tilemap at center
 		flixel.FlxCamera.defaultZoom = 1;
 		FlxG.cameras.reset();
-		FlxG.camera.setSize((cast _mWalls.width), 720);
-		FlxG.camera.x = (FlxG.width - _mWalls.width) / 2;
+		FlxG.camera.setSize((cast _mWalls.width), (cast _mWalls.height));
+		//FlxG.camera.x = (FlxG.width - _mWalls.width) / 2;
 
 		// Create HUD
 		_hud = new HUD(_levelNum);
@@ -114,10 +87,6 @@ class PlayState extends FlxState
 		_countDownText.systemFont = "Arial Black";
 
 		// Initialize winning and losing display
-		_loseText = new FlxText(_mWalls.width / 2 - 70, _mWalls.height / 2, 0, "", 25);
-		_loseText.systemFont = "Arial Black";
-		_winText = new FlxText(_mWalls.width / 2 - 70, _mWalls.height / 2, 0, "", 25);
-		_winText.systemFont = "Arial Black";
 
 		// Initialize all entities
 		_player = new Player();
@@ -134,10 +103,8 @@ class PlayState extends FlxState
 		_water = new FlxTypedGroup<Water>();
  		_map.loadEntities(placeEntities, "entities");
 		
-		// Initialize Got key to false
-		Reg.gotKey = false;
 		// Initialize current gates to empty
-		Reg.currentGates = new List<Gate>();
+		_openGates = new List<Gate>();
 
 		//Local saving of number of swaps, initialized to 0;
 		_numSwap = 0;
@@ -157,11 +124,11 @@ class PlayState extends FlxState
  		add(_player);
  		add(_shadow);
 		add(_countDownText);
-		add(_loseText);
-		//add(_nextButton);
-		add(_winText);
+
 		if (_hint != null)
+		{
 			add(_hint);
+		}
 
 		super.create();
 
@@ -251,6 +218,7 @@ class PlayState extends FlxState
 				if (entityName == "fan")
 				{
 	 				var dir:Int = Std.parseInt(entityData.get("_dir"));
+	 				var _power:Int = Std.parseInt(entityData.get("_power"));
 					var rotation:Bool = (entityData.get("_rotation").toLowerCase() == "true");
 					var range:Int;
 					if (entityData.get("_range") == null)
@@ -260,7 +228,7 @@ class PlayState extends FlxState
 					else{
 						range = Std.parseInt(entityData.get("_range"));
 					}
-					var fan:Fan = new Fan(x, y, id, dir, on, rotation, range);
+					var fan:Fan = new Fan(x, y, id, dir, on, rotation, range, _power);
 					_fans.add(fan);
 				}
 			}
@@ -332,45 +300,48 @@ class PlayState extends FlxState
 				_countDownText.text = "";
 			}
 		}
-		_shadow.inWater(_shadow.overlaps(_water));
 
 		// Player / Button interaction
-		var button_iter:FlxTypedGroupIterator<Button> = _buttons.iterator();
-		while (button_iter.hasNext()) 
-		{
-			var curButton:Button = button_iter.next();
-			if (_player.overlaps(curButton)) 
-			{
-				raiseGate(curButton);
-				curButton.buttonPressed();
-			} 
-			else 
-			{
-				curButton.buttonReleased();
-			}
-		}
+		_buttons.forEachAlive(checkActivation, false);
 
 		// Player / Glass Interaction
-		var glass_iter:FlxTypedGroupIterator<Glass> = _glassWithSwitch.iterator();
-		while (glass_iter.hasNext()) 
-		{
-			var curGlass:Glass = glass_iter.next();
-			if (!curGlass.isOn()) 
-			{
-				FlxG.collide(curGlass, _shadow);
-			}
-		}
+		_glassWithSwitch.forEachAlive(checkOn, false);
+
 
 		// Player / Gate Interaction
-		var gate_iter:FlxTypedGroupIterator<Gate> = _gates.iterator();
-		while (gate_iter.hasNext()) 
+		_gates.forEachAlive(checkRaised, false);
+	}
+
+	private function checkRaised(_O:FlxObject):Void
+	{
+		var _gate:Gate = cast _O;
+		if (!_gate.isRaised()) 
 		{
-			var curGate:Gate = gate_iter.next();
-			if (!curGate.isRaised()) 
-			{
-				FlxG.collide(_player, curGate);
-				FlxG.collide(_shadow, curGate);
-			}
+			FlxG.collide(_player, _gate);
+			FlxG.collide(_shadow, _gate);
+		}
+	}
+
+	private function checkOn(_O:FlxObject):Void
+	{			
+		var _glass:Glass = cast _O;
+		if (!_glass.isOn()) 
+		{
+			FlxG.collide(_glass, _shadow);
+		}
+	}
+
+	private function checkActivation(_O:FlxObject):Void
+	{
+		var _button:Button = cast _O;
+		if (_player.overlaps(_button)) 
+		{
+			_gates.forEachAlive(openGateIfID.bind(_, _button.getId()), false);
+			_button.buttonPressed();
+		} 
+		else 
+		{
+			_button.buttonReleased();
 		}
 	}
 
@@ -390,16 +361,15 @@ class PlayState extends FlxState
 	// Kill player and restart the game.
 	private function killPlayer(S:FlxObject = null, P:FlxObject = null):Void
 	{
-			_loseText.text = "YOU DIED.";
-			_player.kill();
-			haxe.Timer.delay(FlxG.switchState.bind(new PlayState()), 800);
-
 			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {level: _levelNum});
+			FlxG.switchState(new LevelExitState());
+
 	}
 
 	// Destroy Key object when it is collected.
 	private function collectKey(P:FlxObject, K:FlxObject):Void 
 	{
+		Reg.grabKey();
 		_hud.updateHUD();
 		K.kill();
 	}
@@ -407,54 +377,37 @@ class PlayState extends FlxState
 	// Check for key and handle player winning UI.
 	private function unlockDoor(P:FlxObject, D:FlxObject):Void 
 	{
-		if (Reg.gotKey)
+		if (Reg.playerHasKey())
 		{
+			Reg.logSuccessfulFinish();
 			_door.openDoor();
-			Main.LOGGER.logLevelEnd({won: true});
-
-			// update Registery's current number of swaps
 			Reg.setNumSwap(_numSwap);
-			
-			// If it's the last level, enter end credit
-			if (_levelNum == 15) {
-				FlxG.switchState(new EndCredit());
-			} 
-			// Activate "Next" button if it's not the last level
-			else if (_levelNum < 15) {
-				Reg.unlockLevel(Reg.getCurrentLevel() + 1);
-				FlxG.switchState(new FinishScreenState());
-			}
+			FlxG.switchState(new LevelExitState());
+
 		}
 	}
 
-	private function raiseGate(button:Button):Void 
+	private function openGateIfID(_O:FlxObject, _id:Int):Void
 	{
-		var id:Int = button.getId();
-		var itr:FlxTypedGroupIterator<Gate> = _gates.iterator();
-		var curGate:Gate = new Gate();
-
-		while(itr.hasNext()) 
+		var _gate:Gate = cast _O;
+		if (_gate.getId() == _id)
 		{
-			curGate = itr.next();
-			if (curGate.getId() == id)
+			if (_gate.isRaised()) 
 			{
-				if (curGate.isRaised()) 
-				{
-					_timers.get(id).reset();
-				}
-				else
-				{
-					curGate.raiseGate();
-					Reg.currentGates.add(curGate);
-					_timers.set(id, new FlxTimer().start(1.0, dropGate, 1));
-				}
+				_timers.get(_id).reset();
+			}
+			else
+			{
+				_gate.raiseGate();
+				_openGates.add(_gate);
+				_timers.set(_id, new FlxTimer().start(1.0, dropGate, 1));
 			}
 		}
 	}
 
 	private function dropGate(Timer:FlxTimer):Void 
 	{
-		Reg.currentGates.pop().dropGate();
+		_openGates.pop().dropGate();
 	}
 
 	private function onSwitch(S:FlxObject, P:FlxObject):Void 
@@ -533,7 +486,8 @@ class PlayState extends FlxState
 		var iter:Iterator<Fan> = _fans.iterator();
 		while(iter.hasNext())
 		{
-			if (iter.next().bbox().overlaps(bbox))
+			var curFan:Fan = iter.next();
+			if (curFan.isOn() && curFan.bbox().overlaps(bbox))
 			{
 				return true;
 			}
@@ -543,70 +497,17 @@ class PlayState extends FlxState
 
 	private function updateFans():Void
 	{
-		var itr:FlxTypedGroupIterator<Fan> = _fans.iterator();
-		while(itr.hasNext()) 
+		_fans.forEachAlive(applyFanForce, false);
+	}
+
+	private function applyFanForce(_O:FlxObject):Void
+	{
+		var _fan:Fan = cast _O;
+		if(_fan.isOn() && _fan.bbox().overlaps(_player.bbox()))
 		{
-			var curFan:Fan = itr.next();
-			if (curFan.isOn()) 
-			{
-				var size:Float = curFan.width;
-				var numBlocks:Float = 10;
-				switch (curFan.getDir())
-				{
-                    // up
-                    case 0:
-					 	if (!overlapsWithAnyFan(_player.bbox()))
-						{
-							_player.acceleration.y = _player.gravity;
-							_player.setXSpeed(0);
-							_player.setYSpeed(0);
-						}
-						else if (_player.bbox().overlaps(curFan.bbox()))
-						{
-                            // _player.velocity.y = -200;
-							_player.setYSpeed(-200);
-							_player.acceleration.y = 0;
-						}
-                    // right
-                    case 1:
-                        if (!overlapsWithAnyFan(_player.bbox()))
-						{
-							_player.setXSpeed(0);
-							_player.setYSpeed(0);
-						}
-                        else if(_player.bbox().overlaps(curFan.bbox()))
-						{
-							_player.setXSpeed(100);
-							_player.velocity.y = 0;
-						}
-                    // down
-                    case 2:
-					 	if (!overlapsWithAnyFan(_player.bbox()))
-						{
-							_player.acceleration.y = _player.gravity;
-							_player.setXSpeed(0);
-							_player.setYSpeed(0);
-						}
-                        else if (_player.bbox().overlaps(curFan.bbox()))
-						{
-							_player.setYSpeed(200);
-                            // _player.velocity.y = 200;
-							_player.acceleration.y = 0;
-						}
-                    // left
-                    case 3:
-                        if (!overlapsWithAnyFan(_player.bbox()))
-						{
-							_player.setXSpeed(0);
-							_player.setYSpeed(0);
-						}
-                        else if (_player.bbox().overlaps(curFan.bbox()))
-						{
-							_player.setXSpeed(-100);
-							_player.velocity.y = 0;
-						}
-				}
-			}
+			var _playerPoint:FlxPoint = new FlxPoint(_player.x, _player.y);
+			var _fanPoint:FlxPoint = new FlxPoint(_fan.x, _fan.y);
+			_player.updateFanForce(_fan.getPower(), _fan.getDir(), _playerPoint.distanceTo(_fanPoint));
 		}
 	}
 

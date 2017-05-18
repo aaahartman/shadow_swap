@@ -13,17 +13,50 @@ import flixel.util.FlxSave;
 
 class Reg
 {
-	public static var gotKey:Bool = false;
-	public static var currentGates:List<Gate> = new List<Gate>();
+	private static var key:Bool = false;
 
 	public static var _save:FlxSave;
 
-	private static var currentLevelNum:Int;
-	private static var numUnlockedLevels:Int;
+	private static var _currentLevelNum:Int = 1;
+	private static var _numUnlockedLevels:Int = 1;
 
 	private static var _minSwaps:Array<Int>;
 	private static var _starRecord:Array<Int>;
-	private static var _currentSwap:Int;
+	private static var _currentSwap:Int = 0;
+
+	private static var _finishedCurrentLevel:Bool = false;
+	private static var _levels:Array<Dynamic> = [
+						/* 1 */						AssetPaths._l1__oel,
+						/* 2 */						AssetPaths._l2__oel,
+						/* 3 */						AssetPaths._l3__oel,
+						/* 4 */						AssetPaths._l4__oel,
+						/* 5 */						AssetPaths._l5__oel,
+						/* 6 */						AssetPaths._l6__oel,
+						/* 7 */						AssetPaths._l7__oel,
+						/* 8 */						AssetPaths._l9__oel,
+						/* 9 */						AssetPaths._l10__oel,
+						/* 10 */					AssetPaths._l11__oel,
+						/* 11 */					AssetPaths._l12__oel,
+						/* 12 */					AssetPaths._l13__oel,
+						/* 13 */					AssetPaths._l14__oel,
+						/* 14 */					AssetPaths._l15__oel,
+						/* 15 */					AssetPaths.fan_playground__oel,
+						/* 16 */					AssetPaths._l17__oel,
+						/* 17 */					AssetPaths._l18__oel,
+						/* 18 */					AssetPaths._l19__oel,
+						/* 19 */					AssetPaths._l20__oel,
+						/* 20 */					AssetPaths.hard_lvl__oel
+												];
+
+	public static function getLevel(_levelIndex):Dynamic
+	{
+		return _levels[_levelIndex - 1];
+	}
+
+	public static function numberOfLevels():Int
+	{
+		return _levels.length;
+	}
 
 	public static function initSave():Void 
 	{
@@ -33,9 +66,9 @@ class Reg
 
 		// Initialize Playable Levels
 		if (Reg._save.data.level != null)
-			numUnlockedLevels = _save.data.level;
+			_numUnlockedLevels = _save.data.level;
 		else 
-			numUnlockedLevels = 1;
+			_numUnlockedLevels = 1;
 
 		// Initialize Personal Swap Record (Level 0 does not exist)
 
@@ -57,17 +90,42 @@ class Reg
 
 		// Initialize the minimun swaps of all levels
 		_minSwaps = new Array<Int>();
-		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 4, 6, 3, 1, 5, 6, 8, 10, 10];
+		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 0, 3, 7, 0, 2, 1, 6, 6, 0, 0, 8, 10, 10];
 
 		// *** UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
-		//numUnlockedLevels = 1;
+		 _numUnlockedLevels = 20;
+	}
+
+	public static function wasSuccessfulFinish():Bool
+	{
+		return _finishedCurrentLevel;
+	}
+
+	public static function logSuccessfulFinish():Void
+	{
+		_finishedCurrentLevel = true;
+	}
+
+	public static function playerNewStart():Void
+	{
+		_finishedCurrentLevel = false;
+	}
+
+	public static function playerHasKey():Bool
+	{
+		return key;
+	}
+
+	public static function grabKey():Void
+	{
+		key = true;	
 	}
 
 	// Save new player progression
 	public static function unlockLevel(levelNumToUnlock:Int):Void 
 	{
-		if (levelNumToUnlock > numUnlockedLevels) {
-			numUnlockedLevels = levelNumToUnlock;
+		if (levelNumToUnlock > _numUnlockedLevels) {
+			_numUnlockedLevels = levelNumToUnlock;
 			_save.data.level = levelNumToUnlock;
     		_save.flush();
     	}
@@ -75,22 +133,22 @@ class Reg
 
 	public static function getCurrentLevel():Int 
 	{
-		return currentLevelNum;
+		return _currentLevelNum;
 	}
 
 	public static function getNumUnlockedLevels():Int
 	{
-		return numUnlockedLevels;
+		return _numUnlockedLevels;
 	}
 
 	public static function islevelUnlocked(queryLevel:Int):Bool 
 	{
-		return queryLevel <= numUnlockedLevels;
+		return queryLevel <= _numUnlockedLevels;
 	}	
 
 	public static function updateCurrentLevel(newLevelNum:Int):Void
 	{
-		currentLevelNum = newLevelNum;
+		_currentLevelNum = newLevelNum;
 	}
 
 	public static function getNumSwap():Int
@@ -110,7 +168,8 @@ class Reg
 
 	public static function setStars(level:Int, newStars:Int):Void 
 	{
-		if (newStars > _starRecord[level]) {
+		if (newStars > _starRecord[level]) 
+		{
 			_starRecord[level] = newStars;
 			_save.data.stars[level] = newStars;
     		_save.flush();

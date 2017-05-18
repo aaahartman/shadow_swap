@@ -190,7 +190,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "233", company : "HaxeFlixel", file : "ShadowSwap", fps : 60, name : "ShadowSwap", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 736, parameters : "{}", resizable : false, stencilBuffer : true, title : "ShadowSwap", vsync : true, width : 800, x : null, y : null}]};
+	ApplicationMain.config = { build : "234", company : "HaxeFlixel", file : "ShadowSwap", fps : 60, name : "ShadowSwap", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 736, parameters : "{}", resizable : false, stencilBuffer : true, title : "ShadowSwap", vsync : true, width : 800, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -6455,7 +6455,10 @@ EndCredit.prototype = $extend(flixel_FlxState.prototype,{
 	}
 	,__class__: EndCredit
 });
-var Fan = function(X,Y,id,dir,on,rotation,range) {
+var Fan = function(X,Y,id,dir,on,rotation,range,power) {
+	if(power == null) {
+		power = 0;
+	}
 	if(range == null) {
 		range = 10;
 	}
@@ -6477,8 +6480,9 @@ var Fan = function(X,Y,id,dir,on,rotation,range) {
 	if(X == null) {
 		X = 0;
 	}
-	this._size = 32;
-	this._numBlocks = 10;
+	this._power = 0;
+	this._blockToPixel = 32;
+	this._range = 10;
 	this._rotation = false;
 	this._on = false;
 	this._dir = 0;
@@ -6496,14 +6500,18 @@ var Fan = function(X,Y,id,dir,on,rotation,range) {
 		this.loadGraphic("assets/images/Fan_off.png",false,32,32);
 	}
 	this._rotation = rotation;
-	this._numBlocks = range;
-	this.changeDirection();
+	this._range = range;
+	this._power = power;
+	this.updateBoundingBox();
 };
 $hxClasses["Fan"] = Fan;
 Fan.__name__ = ["Fan"];
 Fan.__super__ = flixel_FlxSprite;
 Fan.prototype = $extend(flixel_FlxSprite.prototype,{
-	getId: function() {
+	getPower: function() {
+		return this._power;
+	}
+	,getId: function() {
 		return this._id;
 	}
 	,getDir: function() {
@@ -6515,7 +6523,7 @@ Fan.prototype = $extend(flixel_FlxSprite.prototype,{
 	,toggle: function() {
 		if(this._rotation) {
 			this._dir = (this._dir + 1) % 4;
-			this.changeDirection();
+			this.updateBoundingBox();
 		} else {
 			this._on = !this._on;
 		}
@@ -6530,24 +6538,24 @@ Fan.prototype = $extend(flixel_FlxSprite.prototype,{
 	,bbox: function() {
 		return this._bbox;
 	}
-	,changeDirection: function() {
+	,updateBoundingBox: function() {
 		var _g = this._dir;
 		switch(_g) {
 		case 0:
 			this.set_angle(-90);
-			this._bbox = new flixel_math_FlxRect(this.x,this.y - this._size * this._numBlocks + this._size,this._size,this._size * this._numBlocks);
+			this._bbox = new flixel_math_FlxRect(this.x,this.y - this._blockToPixel * this._range + this._blockToPixel,this._blockToPixel,this._blockToPixel * this._range);
 			break;
 		case 1:
 			this.set_angle(0);
-			this._bbox = new flixel_math_FlxRect(this.x,this.y,this._size * this._numBlocks,this._size);
+			this._bbox = new flixel_math_FlxRect(this.x,this.y,this._blockToPixel * this._range,this._blockToPixel);
 			break;
 		case 2:
 			this.set_angle(90);
-			this._bbox = new flixel_math_FlxRect(this.x,this.y,this._size,this._size * this._numBlocks);
+			this._bbox = new flixel_math_FlxRect(this.x,this.y,this._blockToPixel,this._blockToPixel * this._range);
 			break;
 		case 3:
 			this.set_angle(180);
-			this._bbox = new flixel_math_FlxRect(this.x - this._size * this._numBlocks + this._size,this.y,this._size * this._numBlocks,this._size);
+			this._bbox = new flixel_math_FlxRect(this.x - this._blockToPixel * this._range + this._blockToPixel,this.y,this._blockToPixel * this._range,this._blockToPixel);
 			break;
 		}
 	}
@@ -6804,21 +6812,6 @@ HxOverrides.iter = function(a) {
 	}, next : function() {
 		return this.arr[this.cur++];
 	}};
-};
-var IntIterator = function(min,max) {
-	this.min = min;
-	this.max = max;
-};
-$hxClasses["IntIterator"] = IntIterator;
-IntIterator.__name__ = ["IntIterator"];
-IntIterator.prototype = {
-	hasNext: function() {
-		return this.min < this.max;
-	}
-	,next: function() {
-		return this.min++;
-	}
-	,__class__: IntIterator
 };
 var Key = function(X,Y) {
 	if(Y == null) {
@@ -7297,6 +7290,9 @@ PlayState.__name__ = ["PlayState"];
 PlayState.__super__ = flixel_FlxState;
 PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	create: function() {
+		var _this = flixel_FlxG.log;
+		haxe_Log.trace = $bind(_this,_this.processTraceData);
+		_this.redirectTraces = true;
 		Reg.playerNewStart();
 		this._timers = new haxe_ds_IntMap();
 		this._levelNum = Reg.getCurrentLevel();
@@ -7313,12 +7309,11 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.add(this._background);
 		flixel_FlxCamera.defaultZoom = 1;
 		flixel_FlxG.cameras.reset();
-		var _this = flixel_FlxG.camera;
+		var _this1 = flixel_FlxG.camera;
 		var Width = this._mWalls.get_width();
 		var Height = this._mWalls.get_height();
-		_this.set_width(Width);
-		_this.set_height(Height);
-		flixel_FlxG.camera.set_x((flixel_FlxG.width - this._mWalls.get_width()) / 2);
+		_this1.set_width(Width);
+		_this1.set_height(Height);
 		this._hud = new HUD(this._levelNum);
 		this._timeInWater = new flixel_util_FlxTimer();
 		this._counter = 10;
@@ -7408,6 +7403,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 				}
 				if(entityName == "fan") {
 					var dir = Std.parseInt(entityData.get("_dir"));
+					var _power = Std.parseInt(entityData.get("_power"));
 					var rotation = entityData.get("_rotation").toLowerCase() == "true";
 					var range;
 					if(entityData.get("_range") == null) {
@@ -7415,7 +7411,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 					} else {
 						range = Std.parseInt(entityData.get("_range"));
 					}
-					var fan1 = new Fan(x,y,id,dir,on,rotation,range);
+					var fan1 = new Fan(x,y,id,dir,on,rotation,range,_power);
 					this._fans.add(fan1);
 				}
 			}
@@ -7474,35 +7470,35 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 				this._countDownText.set_text("");
 			}
 		}
-		this._shadow.inWater(this._shadow.overlaps(this._water));
-		var button_iter = new flixel_group_FlxTypedGroupIterator(this._buttons.members,null);
-		while(button_iter.hasNext()) {
-			var curButton = button_iter.next();
-			if(this._player.overlaps(curButton)) {
-				this._gates.forEachAlive((function(a1,f) {
-					return function(_O) {
-						f[0](_O,a1[0]);
-					};
-				})([curButton.getId()],[$bind(this,this.openGateIfID)]),false);
-				curButton.buttonPressed();
-			} else {
-				curButton.buttonReleased();
-			}
+		this._buttons.forEachAlive($bind(this,this.checkActivation),false);
+		this._glassWithSwitch.forEachAlive($bind(this,this.checkOn),false);
+		this._gates.forEachAlive($bind(this,this.checkRaised),false);
+	}
+	,checkRaised: function(_O) {
+		var _gate = _O;
+		if(!_gate.isRaised()) {
+			flixel_FlxG.overlap(this._player,_gate,null,flixel_FlxObject.separate);
+			flixel_FlxG.overlap(this._shadow,_gate,null,flixel_FlxObject.separate);
 		}
-		var glass_iter = new flixel_group_FlxTypedGroupIterator(this._glassWithSwitch.members,null);
-		while(glass_iter.hasNext()) {
-			var curGlass = glass_iter.next();
-			if(!curGlass.isOn()) {
-				flixel_FlxG.overlap(curGlass,this._shadow,null,flixel_FlxObject.separate);
-			}
+	}
+	,checkOn: function(_O) {
+		var _glass = _O;
+		if(!_glass.isOn()) {
+			flixel_FlxG.overlap(_glass,this._shadow,null,flixel_FlxObject.separate);
 		}
-		var gate_iter = new flixel_group_FlxTypedGroupIterator(this._gates.members,null);
-		while(gate_iter.hasNext()) {
-			var curGate = gate_iter.next();
-			if(!curGate.isRaised()) {
-				flixel_FlxG.overlap(this._player,curGate,null,flixel_FlxObject.separate);
-				flixel_FlxG.overlap(this._shadow,curGate,null,flixel_FlxObject.separate);
-			}
+	}
+	,checkActivation: function(_O) {
+		var _button = _O;
+		if(this._player.overlaps(_button)) {
+			var tmp = this._gates;
+			var f = $bind(this,this.openGateIfID);
+			var a1 = _button.getId();
+			tmp.forEachAlive(function(_O1) {
+				f(_O1,a1);
+			},false);
+			_button.buttonPressed();
+		} else {
+			_button.buttonReleased();
 		}
 	}
 	,countDown: function(Timer) {
@@ -7625,108 +7621,30 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		return false;
 	}
 	,updateFans: function() {
-		var itr = new flixel_group_FlxTypedGroupIterator(this._fans.members,null);
-		var updated = false;
-		while(itr.hasNext()) {
-			var curFan = itr.next();
-			if(curFan.isOn()) {
-				updated = true;
-				var size = curFan.get_width();
-				var numBlocks = 10;
-				var _g = curFan.getDir();
-				switch(_g) {
-				case 0:
-					if(!this.overlapsWithAnyFan(this._player.bbox())) {
-						this._player.acceleration.set_y(this._player.gravity);
-						this._player.setXSpeed(0);
-						this._player.setYSpeed(0);
-					} else {
-						var _this = this._player.bbox();
-						var Rect = curFan.bbox();
-						var result = Rect.x + Rect.width > _this.x && Rect.x < _this.x + _this.width && Rect.y + Rect.height > _this.y && Rect.y < _this.y + _this.height;
-						if(Rect._weak) {
-							if(!Rect._inPool) {
-								Rect._inPool = true;
-								Rect._weak = false;
-								flixel_math_FlxRect._pool.putUnsafe(Rect);
-							}
-						}
-						if(result) {
-							this._player.setYSpeed(-200);
-							this._player.acceleration.set_y(0);
-						}
-					}
-					break;
-				case 1:
-					if(!this.overlapsWithAnyFan(this._player.bbox())) {
-						this._player.setXSpeed(0);
-						this._player.setYSpeed(0);
-					} else {
-						var _this1 = this._player.bbox();
-						var Rect1 = curFan.bbox();
-						var result1 = Rect1.x + Rect1.width > _this1.x && Rect1.x < _this1.x + _this1.width && Rect1.y + Rect1.height > _this1.y && Rect1.y < _this1.y + _this1.height;
-						if(Rect1._weak) {
-							if(!Rect1._inPool) {
-								Rect1._inPool = true;
-								Rect1._weak = false;
-								flixel_math_FlxRect._pool.putUnsafe(Rect1);
-							}
-						}
-						if(result1) {
-							this._player.setXSpeed(100);
-							this._player.setYSpeed(-1);
-						}
-					}
-					break;
-				case 2:
-					if(!this.overlapsWithAnyFan(this._player.bbox())) {
-						this._player.acceleration.set_y(this._player.gravity);
-						this._player.setXSpeed(0);
-						this._player.setYSpeed(0);
-					} else {
-						var _this2 = this._player.bbox();
-						var Rect2 = curFan.bbox();
-						var result2 = Rect2.x + Rect2.width > _this2.x && Rect2.x < _this2.x + _this2.width && Rect2.y + Rect2.height > _this2.y && Rect2.y < _this2.y + _this2.height;
-						if(Rect2._weak) {
-							if(!Rect2._inPool) {
-								Rect2._inPool = true;
-								Rect2._weak = false;
-								flixel_math_FlxRect._pool.putUnsafe(Rect2);
-							}
-						}
-						if(result2) {
-							this._player.setYSpeed(200);
-							this._player.acceleration.set_y(0);
-						}
-					}
-					break;
-				case 3:
-					if(!this.overlapsWithAnyFan(this._player.bbox())) {
-						this._player.setXSpeed(0);
-						this._player.setYSpeed(0);
-					} else {
-						var _this3 = this._player.bbox();
-						var Rect3 = curFan.bbox();
-						var result3 = Rect3.x + Rect3.width > _this3.x && Rect3.x < _this3.x + _this3.width && Rect3.y + Rect3.height > _this3.y && Rect3.y < _this3.y + _this3.height;
-						if(Rect3._weak) {
-							if(!Rect3._inPool) {
-								Rect3._inPool = true;
-								Rect3._weak = false;
-								flixel_math_FlxRect._pool.putUnsafe(Rect3);
-							}
-						}
-						if(result3) {
-							this._player.setXSpeed(-100);
-							this._player.setYSpeed(-1);
-						}
-					}
-					break;
+		this._fans.forEachAlive($bind(this,this.applyFanForce),false);
+	}
+	,applyFanForce: function(_O) {
+		var _fan = _O;
+		var tmp;
+		if(_fan.isOn()) {
+			var _this = _fan.bbox();
+			var Rect = this._player.bbox();
+			var result = Rect.x + Rect.width > _this.x && Rect.x < _this.x + _this.width && Rect.y + Rect.height > _this.y && Rect.y < _this.y + _this.height;
+			if(Rect._weak) {
+				if(!Rect._inPool) {
+					Rect._inPool = true;
+					Rect._weak = false;
+					flixel_math_FlxRect._pool.putUnsafe(Rect);
 				}
 			}
+			tmp = result;
+		} else {
+			tmp = false;
 		}
-		if(!updated) {
-			this._player.setXSpeed(0);
-			this._player.setYSpeed(0);
+		if(tmp) {
+			var _playerPoint = new flixel_math_FlxPoint(this._player.x,this._player.y);
+			var _fanPoint = new flixel_math_FlxPoint(_fan.x,_fan.y);
+			this._player.updateFanForce(_fan.getPower(),_fan.getDir(),_playerPoint.distanceTo(_fanPoint));
 		}
 	}
 	,__class__: PlayState
@@ -7738,16 +7656,16 @@ var Player = function(X,Y) {
 	if(X == null) {
 		X = 0;
 	}
-	this.in_water = false;
-	this.in_air = false;
-	this.jump_duration = -1;
-	this.swim_maximum_speed = -100;
-	this.swim_up_speed = 10;
-	this.jump_speed = 500;
-	this.gravity = 900;
-	this.y_speed = 0;
-	this.x_speed = 0;
-	this.speed = 175;
+	this._fanYForce = 0;
+	this._fanXForce = 0;
+	this._inWater = false;
+	this._floorDrag = 10;
+	this._airDrag = 2.5;
+	this._waterDrag = 20;
+	this._inAirFactor = 0.1;
+	this._gravity = 1500;
+	this._moveStrength = 3500;
+	this._upFactor = 10;
 	flixel_FlxSprite.call(this,X,Y);
 	this.loadGraphic("assets/images/White_spritesheet2.png",true,32,32);
 	this._facingFlip.set(1,{ x : true, y : false});
@@ -7755,7 +7673,6 @@ var Player = function(X,Y) {
 	this.animation.add("move",[0,1,2,3,4,5,6,7,8,9],14,true);
 	this.animation.add("jump",[4,5,6,7,8],6,false);
 	this.animation.add("idle",[0],0,false);
-	this.acceleration.set_y(this.gravity);
 };
 $hxClasses["Player"] = Player;
 Player.__name__ = ["Player"];
@@ -7764,87 +7681,53 @@ Player.prototype = $extend(flixel_FlxSprite.prototype,{
 	bbox: function() {
 		return new flixel_math_FlxRect(this.x | 0,this.y | 0,32,32);
 	}
-	,setXSpeed: function(speed) {
-		if(speed == null) {
-			speed = 0;
-		}
-		this.x_speed = speed;
-	}
-	,setYSpeed: function(speed) {
-		if(speed == null) {
-			speed = 0;
-		}
-		this.y_speed = speed;
-	}
 	,inWater: function(water) {
-		this.in_water = water;
+		this._inWater = water;
 	}
 	,update: function(elapsed) {
-		var _jump = false;
-		var _left = false;
-		var _right = false;
-		if(this.in_water || this.y_speed < 0) {
-			_jump = flixel_FlxG.keys.checkKeyArrayState([38,87,32],1);
-		} else {
-			_jump = flixel_FlxG.keys.checkKeyArrayState([38,87,32],2);
-		}
-		_left = flixel_FlxG.keys.checkKeyArrayState([37,65],1);
-		_right = flixel_FlxG.keys.checkKeyArrayState([39,68],1);
-		this.in_air = (this.touching & 4096) <= 0;
-		if(_left && _right) {
-			_right = false;
-			_left = _right;
-		}
-		if(_jump && this.in_water) {
-			if(this.velocity.y > this.swim_maximum_speed) {
-				var _g = this.velocity;
-				_g.set_y(_g.y - this.swim_up_speed);
-			} else {
-				this.velocity.set_y(this.swim_maximum_speed);
-			}
-		} else if(_jump && !this.in_air) {
-			this.velocity.set_y(-this.jump_speed);
-		}
-		if(this.y_speed != 0) {
-			this.velocity.set_y(this.y_speed);
-			if(_jump) {
-				this.velocity.set_y(-this.jump_speed);
-			}
-		}
-		if(!this.in_air) {
-			this.set_facing(4096);
-		}
-		this.velocity.set_x(this.x_speed);
-		if(_left) {
-			if(this.in_water) {
-				var _g1 = this.velocity;
-				_g1.set_x(_g1.x - this.speed / 2);
-			} else {
-				var _g2 = this.velocity;
-				_g2.set_x(_g2.x - this.speed);
-			}
-			this.set_facing(1);
-		}
-		if(_right) {
-			if(this.in_water) {
-				var _g3 = this.velocity;
-				_g3.set_x(_g3.x + this.speed / 2);
-			} else {
-				var _g4 = this.velocity;
-				_g4.set_x(_g4.x + this.speed);
-			}
-			this.set_facing(16);
-		}
-		if(this.in_air) {
+		this.acceleration.set_x(0);
+		this.acceleration.set_y(0);
+		this.applyVerticalForce(this._fanYForce);
+		this.applyHorizontalForce(this._fanXForce);
+		this._fanXForce = 0;
+		this._fanYForce = 0;
+		this.applyVerticalForce(this._gravity);
+		if(flixel_FlxG.keys.checkKeyArrayState([38,87,32],1)) {
 			this.set_facing(256);
+			if(this._inWater || (this.touching & 4096) > 0) {
+				this.applyVerticalForce(-this._moveStrength * this._upFactor);
+			} else {
+				this.applyVerticalForce(-this._moveStrength * this._inAirFactor);
+			}
 		}
-		if(this.in_water) {
-			this.acceleration.set_y(this.gravity / 6 - 1.75 * this.velocity.y / 6);
+		if(flixel_FlxG.keys.checkKeyArrayState([39,68],1)) {
+			this.set_facing(16);
+			if(this._inWater || (this.touching & 4096) > 0) {
+				this.applyHorizontalForce(this._moveStrength);
+			} else {
+				this.applyHorizontalForce(this._moveStrength * this._inAirFactor);
+			}
+		}
+		if(flixel_FlxG.keys.checkKeyArrayState([37,65],1)) {
+			this.set_facing(1);
+			if(this._inWater || (this.touching & 4096) > 0) {
+				this.applyHorizontalForce(-this._moveStrength);
+			} else {
+				this.applyHorizontalForce(-this._moveStrength * this._inAirFactor);
+			}
+		}
+		if(this._inWater) {
+			this.applyVerticalForce(-this._waterDrag * this.velocity.y);
+			this.applyHorizontalForce(-this._waterDrag * this.velocity.x);
 		} else {
-			this.acceleration.set_y(this.gravity - 1.75 * this.velocity.y);
+			this.applyVerticalForce(-this._airDrag * this.velocity.y);
+			this.applyHorizontalForce(-this._airDrag * this.velocity.x);
+			if((this.touching & 4096) > 0) {
+				this.applyHorizontalForce(-this._floorDrag * this.velocity.x);
+			}
 		}
-		var _g5 = this.facing;
-		switch(_g5) {
+		var _g = this.facing;
+		switch(_g) {
 		case 1:case 16:
 			this.animation.play("move");
 			break;
@@ -7857,8 +7740,29 @@ Player.prototype = $extend(flixel_FlxSprite.prototype,{
 		}
 		flixel_FlxSprite.prototype.update.call(this,elapsed);
 	}
-	,isInAir: function() {
-		return this.in_air;
+	,updateFanForce: function(_force,_dir,_distance) {
+		switch(_dir) {
+		case 0:
+			this._fanYForce -= _force / Math.sqrt(_distance);
+			break;
+		case 1:
+			this._fanXForce += _force / Math.sqrt(_distance);
+			break;
+		case 2:
+			this._fanYForce += _force / Math.sqrt(_distance);
+			break;
+		case 3:
+			this._fanXForce -= _force / Math.sqrt(_distance);
+			break;
+		}
+	}
+	,applyVerticalForce: function(_force) {
+		var _g = this.acceleration;
+		_g.set_y(_g.y + _force);
+	}
+	,applyHorizontalForce: function(_force) {
+		var _g = this.acceleration;
+		_g.set_x(_g.x + _force);
 	}
 	,kill: function() {
 		flixel_tweens_FlxTween.tween(this,{ alpha : 0, y : this.y - 20},2.0,{ ease : flixel_tweens_FlxEase.circOut, onComplete : $bind(this,this.finishKill)});
@@ -7996,7 +7900,7 @@ Reg._save = null;
 Reg._minSwaps = null;
 Reg._starRecord = null;
 Reg.getLevel = function(_levelIndex) {
-	return Reg._levels[_levelIndex];
+	return Reg._levels[_levelIndex - 1];
 };
 Reg.numberOfLevels = function() {
 	return Reg._levels.length;
@@ -8024,6 +7928,7 @@ Reg.initSave = function() {
 	}
 	Reg._minSwaps = [];
 	Reg._minSwaps = [0,1,1,3,5,5,2,0,3,7,0,2,1,6,6,0,0,8,10,10];
+	Reg._numUnlockedLevels = 20;
 };
 Reg.wasSuccessfulFinish = function() {
 	return Reg._finishedCurrentLevel;
@@ -8085,12 +7990,10 @@ var Shadow = function(X,Y) {
 	if(X == null) {
 		X = 0;
 	}
-	this.gravity = 900;
-	this.in_water = false;
+	this._gravity = 900;
 	flixel_FlxSprite.call(this,X,Y);
 	this.loadGraphic("assets/images/Shadow3.png",false,22,32);
 	this.set_alpha(0.8);
-	this.acceleration.set_y(this.gravity);
 };
 $hxClasses["Shadow"] = Shadow;
 Shadow.__name__ = ["Shadow"];
@@ -8098,16 +8001,13 @@ Shadow.__super__ = flixel_FlxSprite;
 Shadow.prototype = $extend(flixel_FlxSprite.prototype,{
 	update: function(elapsed) {
 		this.acceleration.set_x(0);
-		this.velocity.set_x(0);
-		if(this.in_water) {
-			this.acceleration.set_y(this.gravity / 6 - 1.75 * this.velocity.y / 6);
-		} else {
-			this.acceleration.set_y(this.gravity - 1.75 * this.velocity.y);
-		}
+		this.acceleration.set_y(0);
+		this.applyVerticalForce(this._gravity);
 		flixel_FlxSprite.prototype.update.call(this,elapsed);
 	}
-	,inWater: function(water) {
-		this.in_water = water;
+	,applyVerticalForce: function(_force) {
+		var _g = this.acceleration;
+		_g.set_y(_g.y + _force);
 	}
 	,__class__: Shadow
 });

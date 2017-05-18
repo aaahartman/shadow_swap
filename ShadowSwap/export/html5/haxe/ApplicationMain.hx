@@ -367,7 +367,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "233",
+			build: "234",
 			company: "HaxeFlixel",
 			file: "ShadowSwap",
 			fps: 60,

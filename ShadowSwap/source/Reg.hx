@@ -92,8 +92,8 @@ class Reg
 		_minSwaps = new Array<Int>();
 		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 0, 3, 7, 0, 2, 1, 6, 6, 0, 0, 8, 10, 10];
 
-		// *** UNCOMMENT THIS LINE FOR DEVELOPMENT AND DEBUG!!!
-		 _numUnlockedLevels = 20;
+		// *** UNCOMMENT THIS LINE TO RESET UNLOCKED TO 1
+		//_numUnlockedLevels = 1;
 	}
 
 	public static function wasSuccessfulFinish():Bool

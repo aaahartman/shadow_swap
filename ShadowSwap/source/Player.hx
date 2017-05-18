@@ -12,12 +12,12 @@ import flixel.tweens.*;
 class Player extends FlxSprite
 {
 	private var _upFactor:Float = 10;
-	private var _moveStrength:Float = 3500;
+	private var _moveStrength:Float = 3800;
 	private var _gravity:Float = 1500;
 	private var _inAirFactor:Float = 1 / 10;
 	private var _waterDrag:Float = 20;
 	private var _airDrag:Float = 2.5;
-	private var _floorDrag:Float = 10;
+	private var _floorDrag:Float = 15;
 
 	
 	private var _inWater:Bool = false;
@@ -31,7 +31,7 @@ class Player extends FlxSprite
         setFacingFlip(FlxObject.LEFT, true, false);
         setFacingFlip(FlxObject.RIGHT, false, false);
         animation.add("move", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 14, true);
-        animation.add("jump", [4, 5, 6, 7, 8], 6, false);
+        animation.add("jump", [4, 5, 6, 7, 8], 8, false);
         animation.add("idle", [0], 0, false);
     }
 
@@ -54,10 +54,18 @@ class Player extends FlxSprite
 		_fanXForce = 0;
 		_fanYForce = 0;
 		applyVerticalForce(_gravity);
-		
-		if (FlxG.keys.anyPressed([UP, W, SPACE]))
-		{
+
+
+		// Animation: make sure player do not jump on ground
+		if(!isTouching(FlxObject.FLOOR)) {
 			facing = FlxObject.UP;
+		} else {
+			facing = FlxObject.DOWN;
+		}
+
+		
+		if (FlxG.keys.anyJustPressed([UP, W, SPACE]))
+		{
 			if (_inWater || isTouching(FlxObject.FLOOR))
 			{
 				applyVerticalForce(-_moveStrength * _upFactor); 
@@ -70,7 +78,10 @@ class Player extends FlxSprite
 
 		if (FlxG.keys.anyPressed([RIGHT, D]))	
 		{
-			facing = FlxObject.RIGHT;
+			// Animation: Facing Right if on ground
+			if (isTouching(FlxObject.FLOOR))
+				facing = FlxObject.RIGHT;
+
 			if (_inWater || isTouching(FlxObject.FLOOR))
 			{
 				applyHorizontalForce(_moveStrength);
@@ -83,7 +94,10 @@ class Player extends FlxSprite
 
 		if (FlxG.keys.anyPressed([LEFT, A]))
 		{
-			facing = FlxObject.LEFT;			
+			// Animation: Facing Left if on ground
+			if (isTouching(FlxObject.FLOOR))
+				facing = FlxObject.LEFT;		
+
 			if (_inWater || isTouching(FlxObject.FLOOR))
 			{
 				applyHorizontalForce(-_moveStrength);
@@ -107,6 +121,7 @@ class Player extends FlxSprite
 			}
 		}
 	
+		// Animation: swtich animation
 		switch (facing) 
 		{
 			case FlxObject.UP:

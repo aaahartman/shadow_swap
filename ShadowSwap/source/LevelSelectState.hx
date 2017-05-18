@@ -35,8 +35,10 @@ class LevelSelectState extends FlxState
 
 			// Lock levels
 			if (i > unlocked) {
+				_btn.label.text = "";
+				_btn.loadGraphic(AssetPaths.levelButton1_locked__png, false);
 				_btn.active = false;
-				_btn.alpha = 0.5;
+				_btn.alpha = 0.7;
 			}
 
 			_btns.add(_btn);
@@ -68,8 +70,10 @@ class LevelSelectState extends FlxState
 			
 			// lock levels
 			if (i > unlocked) {
+				_btn.label.text = "";
+				_btn.loadGraphic(AssetPaths.levelButton2_locked__png, false);
 				_btn.active = false;
-				_btn.alpha = 0.5;
+				_btn.alpha = 0.7;
 			}
 
 			_btns.add(_btn);
@@ -101,8 +105,10 @@ class LevelSelectState extends FlxState
 
 			// lock levels
 			if (i > unlocked) {
+				_btn.label.text = "";
+				_btn.loadGraphic(AssetPaths.levelButton3_locked__png, false);
 				_btn.active = false;
-				_btn.alpha = 0.5;
+				_btn.alpha = 0.7;
 			}
 
 			_btns.add(_btn);
@@ -129,15 +135,15 @@ class LevelSelectState extends FlxState
 			_btn.onDown.callback = clickPlay.bind(i);
 			_btn.loadGraphic("assets/images/levelButton4.png", true, 70, 50);
 			_btn.label.systemFont = "Arial Black";
-			_btn.label.text = "Coming\nSoon";
-			_btn.label.size = 13;
-			//_btn.label.size = 28;
+			_btn.label.size = 28;
 			_btn.label.color = FlxColor.WHITE;
 
 			// lock levels
 			if (i > unlocked) {
+				_btn.label.text = "";
+				_btn.loadGraphic(AssetPaths.levelButton4_locked__png, false);
 				_btn.active = false;
-				_btn.alpha = 0.5;
+				_btn.alpha = 0.7;
 			}	
 
 			_btns.add(_btn);
@@ -157,7 +163,7 @@ class LevelSelectState extends FlxState
 			add(_star);		
 		}
 
-		var _text:FlxText = new FlxText(FlxG.width / 2 - 80, 80, FlxG.width, " Level Menu", 25);
+		var _text:FlxText = new FlxText(FlxG.width / 2 - 80, 80, FlxG.width, "Shadow Swap", 25);
 		_text.systemFont = "Arial Black";
 
  		add(_text);

@@ -132,8 +132,8 @@
     <water id="101" x="608" y="416" />
     <water id="102" x="640" y="416" />
     <water id="103" x="672" y="416" />
-    <fan id="184" x="32" y="512" _dir="0" _id="0" _on="True" _rotation="False" _range="3" _power="30000" />
-    <fan id="185" x="672" y="512" _dir="0" _id="0" _on="True" _rotation="False" _range="3" _power="30000" />
+    <fan id="184" x="32" y="512" _dir="0" _id="0" _on="True" _rotation="False" _range="3" _power="90000" />
+    <fan id="185" x="672" y="512" _dir="0" _id="0" _on="True" _rotation="False" _range="3" _power="90000" />
   </entities>
   <background tileset="tiles" exportMode="CSV">-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1

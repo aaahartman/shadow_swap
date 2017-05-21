@@ -15,7 +15,7 @@ class LevelSelectState extends FlxState
 	{
 		flixel.FlxCamera.defaultZoom = 1;
 		FlxG.cameras.reset();
-		FlxG.camera.setSize(800, 720);
+		FlxG.camera.setSize(736, 640);
 
 		// Create a group to hold all the buttons
 		var _btns:FlxTypedGroup<FlxButton> = new FlxTypedGroup<FlxButton>();
@@ -163,7 +163,7 @@ class LevelSelectState extends FlxState
 			add(_star);		
 		}
 
-		var _text:FlxText = new FlxText(FlxG.width / 2 - 80, 50, FlxG.width, "Shadow Swap", 25);
+		var _text:FlxText = new FlxText(FlxG.width / 2 - 90, 50, FlxG.width, "Shadow Swap", 25);
 		_text.systemFont = "Arial Black";
 
  		add(_text);

@@ -240,7 +240,7 @@ class PlayState extends FlxState
 	{
 		// If pressed "R", restart the game
 		if (FlxG.keys.justPressed.R) {
-			Main.LOGGER.logLevelAction(LoggingActions.CLICK_RESET, {Resetlevel: _levelNum});
+			Main.LOGGER.logLevelAction(LoggingActions.CLICK_RESET, {level: _levelNum});
 			FlxG.switchState(new PlayState());
 		}
 

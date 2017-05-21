@@ -65,11 +65,13 @@ class HUD extends FlxTypedGroup<FlxSprite>
 
 	private function resetState():Void 
 	{
+		Main.LOGGER.logLevelAction(LoggingActions.CLICK_RESET, {level: Reg.getCurrentLevel()});
 		FlxG.switchState(new PlayState());
 	}
 
 	private function levelState():Void 
 	{
+		Main.LOGGER.logLevelAction(LoggingActions.CLICK_LEVELSELECTION, {level: Reg.getCurrentLevel()});
 		FlxG.switchState(new LevelSelectState());
 	}
 

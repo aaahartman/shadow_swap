@@ -27,7 +27,7 @@
     <gate_vertical id="4" x="480" y="512" _id="4" />
     <button id="5" x="256" y="576" _id="4" />
     <switch id="6" x="544" y="576" _id="5" _on="True" _fan="True" />
-    <fan id="7" x="192" y="576" _dir="0" _id="5" _on="False" _rotation="False" _range="9" _power="15000" />
+    <fan id="7" x="192" y="576" _dir="0" _id="5" _on="False" _rotation="False" _range="9" _power="30000" />
     <key id="8" x="64" y="576" />
     <button id="9" x="608" y="576" _id="6" />
     <gate_horizontal id="10" x="32" y="384" _id="6" />

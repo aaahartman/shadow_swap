@@ -16,7 +16,7 @@
 2,3,3,3,3,3,3,3,3,3,3,3,2,2,3,3,3,3,3,3,3,3,2
 2,2,2,2,2,2,2,2,3,3,3,3,2,3,3,3,3,3,3,3,3,3,2
 2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2
-2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2
+2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,3,2
 2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2</walls>
   <entities>
@@ -41,29 +41,29 @@
     <switch id="23" x="32" y="352" _id="6" _on="True" _fan="True" />
     <fan id="24" x="32" y="320" _dir="1" _id="4" _on="False" _rotation="False" _range="10" _power="90000" />
     <fan id="25" x="32" y="288" _dir="1" _id="4" _on="False" _rotation="False" _range="10" _power="90000" />
-    <fan id="26" x="384" y="416" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
-    <fan id="27" x="384" y="384" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
-    <fan id="28" x="384" y="352" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
-    <fan id="29" x="384" y="320" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
-    <fan id="30" x="384" y="288" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
-    <fan id="31" x="384" y="256" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
-    <fan id="32" x="384" y="224" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
-    <fan id="33" x="384" y="192" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
-    <fan id="34" x="384" y="160" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
+    <fan id="26" x="384" y="416" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
+    <fan id="27" x="384" y="384" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
+    <fan id="28" x="384" y="352" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
+    <fan id="29" x="384" y="320" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
+    <fan id="30" x="384" y="288" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
+    <fan id="31" x="384" y="256" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
+    <fan id="32" x="384" y="224" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
+    <fan id="33" x="384" y="192" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
+    <fan id="34" x="384" y="160" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
     <switch id="35" x="32" y="256" _id="7" _on="True" _fan="True" />
     <key id="36" x="32" y="160" />
     <fan id="37" x="32" y="224" _dir="1" _id="4" _on="False" _rotation="False" _range="10" _power="90000" />
     <fan id="38" x="32" y="192" _dir="1" _id="4" _on="False" _rotation="False" _range="10" _power="90000" />
     <fan id="39" x="32" y="128" _dir="1" _id="4" _on="False" _rotation="False" _range="10" _power="90000" />
     <fan id="40" x="32" y="96" _dir="1" _id="4" _on="False" _rotation="False" _range="10" _power="90000" />
-    <fan id="41" x="384" y="128" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
-    <fan id="42" x="384" y="96" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="90000" />
-    <fan id="43" x="672" y="480" _dir="0" _id="6" _on="False" _rotation="False" _range="10" _power="90000" />
-    <fan id="44" x="640" y="480" _dir="0" _id="6" _on="False" _rotation="False" _range="10" _power="90000" />
-    <fan id="46" x="448" y="288" _dir="0" _id="7" _on="False" _rotation="False" _range="10" _power="90000" />
-    <fan id="47" x="512" y="288" _dir="0" _id="7" _on="False" _rotation="False" _range="10" _power="90000" />
-    <fan id="49" x="544" y="288" _dir="0" _id="7" _on="False" _rotation="False" _range="10" _power="90000" />
-    <fan id="50" x="480" y="288" _dir="0" _id="7" _on="False" _rotation="False" _range="10" _power="90000" />
+    <fan id="41" x="384" y="128" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
+    <fan id="42" x="384" y="96" _dir="3" _id="3" _on="False" _rotation="False" _range="15" _power="30000" />
+    <fan id="43" x="672" y="480" _dir="0" _id="6" _on="False" _rotation="False" _range="10" _power="30000" />
+    <fan id="44" x="640" y="480" _dir="0" _id="6" _on="False" _rotation="False" _range="10" _power="30000" />
+    <fan id="46" x="448" y="288" _dir="0" _id="7" _on="False" _rotation="False" _range="10" _power="30000" />
+    <fan id="47" x="512" y="288" _dir="0" _id="7" _on="False" _rotation="False" _range="10" _power="30000" />
+    <fan id="49" x="544" y="288" _dir="0" _id="7" _on="False" _rotation="False" _range="10" _power="30000" />
+    <fan id="50" x="480" y="288" _dir="0" _id="7" _on="False" _rotation="False" _range="10" _power="30000" />
     <door id="51" x="640" y="96" />
     <shadow id="8" x="32" y="576" />
     <player id="0" x="64" y="576" />

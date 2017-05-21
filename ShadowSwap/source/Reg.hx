@@ -90,10 +90,10 @@ class Reg
 
 		// Initialize the minimun swaps of all levels
 		_minSwaps = new Array<Int>();
-		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 0, 3, 7, 0, 2, 1, 6, 6, 0, 0, 8, 10, 10];
+		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 4, 3, 7, 12, 6, 1, 1, 6, 8, 3, 6, 11, 10, 2];
 
 		// *** UNCOMMENT THIS LINE TO RESET UNLOCKED TO 1
-		_numUnlockedLevels = 20;
+		// _numUnlockedLevels = 20;
 	}
 
 	public static function wasSuccessfulFinish():Bool
@@ -109,6 +109,11 @@ class Reg
 	public static function playerNewStart():Void
 	{
 		_finishedCurrentLevel = false;
+	}
+
+	public static function resetKey():Void
+	{
+		key = false;
 	}
 
 	public static function playerHasKey():Bool

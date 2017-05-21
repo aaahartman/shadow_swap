@@ -130,6 +130,8 @@ class PlayState extends FlxState
 			add(_hint);
 		}
 
+		Reg.resetKey();
+
 		super.create();
 
 		Main.LOGGER.logLevelStart(_levelNum, {"StartLevel": _levelNum});
@@ -387,7 +389,6 @@ class PlayState extends FlxState
 			_door.openDoor();
 			Reg.setNumSwap(_numSwap);
 			FlxG.switchState(new LevelExitState());
-
 		}
 	}
 
@@ -411,7 +412,11 @@ class PlayState extends FlxState
 
 	private function dropGate(Timer:FlxTimer):Void 
 	{
-		_openGates.pop().dropGate();
+		var gate:Gate = _openGates.pop();
+		if (gate != null)
+		{
+			gate.dropGate();
+		}
 	}
 
 	private function onSwitch(S:FlxObject, P:FlxObject):Void 

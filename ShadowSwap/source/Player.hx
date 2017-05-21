@@ -13,6 +13,7 @@ class Player extends FlxSprite
 {
 	private var _upFactor:Float = 10;
 	private var _moveStrength:Float = 3800;
+	private var _swimStrength:Float = 40;
 	private var _gravity:Float = 1500;
 	private var _inAirFactor:Float = 1 / 10;
 	private var _waterDrag:Float = 20;
@@ -54,8 +55,7 @@ class Player extends FlxSprite
 		_fanXForce = 0;
 		_fanYForce = 0;
 		applyVerticalForce(_gravity);
-
-
+		
 		// Animation: make sure player do not jump on ground
 		if(!isTouching(FlxObject.FLOOR)) {
 			facing = FlxObject.UP;
@@ -63,10 +63,10 @@ class Player extends FlxSprite
 			facing = FlxObject.DOWN;
 		}
 
-		
-		if (FlxG.keys.anyJustPressed([UP, W, SPACE]))
+		// water behavior will be handled below
+		if (!_inWater && FlxG.keys.anyJustPressed([UP, W, SPACE]))
 		{
-			if (_inWater || isTouching(FlxObject.FLOOR))
+			if (isTouching(FlxObject.FLOOR))
 			{
 				applyVerticalForce(-_moveStrength * _upFactor); 
 			}
@@ -110,7 +110,18 @@ class Player extends FlxSprite
 
 		if (_inWater)
 		{	
-			applyVerticalForce(-_waterDrag * velocity.y);
+			// swim up
+			if (FlxG.keys.anyPressed([UP, W, SPACE]))
+			{
+				if (-velocity.y < _gravity)
+				{
+					applyVerticalForce(-_swimStrength * _upFactor -_gravity); 
+				}
+			}
+			else
+			{
+				applyVerticalForce(-_waterDrag * velocity.y);
+			}
 			applyHorizontalForce(-_waterDrag * velocity.x);
 		} else {
 			applyVerticalForce(-_airDrag * velocity.y);

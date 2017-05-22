@@ -3,7 +3,7 @@
 
 // if (Reg._save.data.level != null)
 // 	_levelUnlocked = Reg.loadLevel();
-// else 
+// else
 // 	_levelUnlocked = 1;
 
 
@@ -40,7 +40,7 @@ class Reg
 						/* 12 */					AssetPaths._l13__oel,
 						/* 13 */					AssetPaths._l14__oel,
 						/* 14 */					AssetPaths._l15__oel,
-						/* 15 */					AssetPaths.fan_playground__oel,
+						/* 15 */					AssetPaths._l16__oel,
 						/* 16 */					AssetPaths._l17__oel,
 						/* 17 */					AssetPaths._l18__oel,
 						/* 18 */					AssetPaths._l19__oel,
@@ -58,7 +58,7 @@ class Reg
 		return _levels.length;
 	}
 
-	public static function initSave():Void 
+	public static function initSave():Void
 	{
 		// Initialize saving
 		_save = new FlxSave();
@@ -66,9 +66,13 @@ class Reg
 
 		// Initialize Playable Levels
 		if (Reg._save.data.level != null)
+		{
 			_numUnlockedLevels = _save.data.level;
-		else 
+		}
+		else
+		{
 			_numUnlockedLevels = 1;
+		}
 
 		// Initialize Personal Swap Record (Level 0 does not exist)
 
@@ -76,15 +80,19 @@ class Reg
 		//_save.data.stars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 		//_save.flush();
 
-		if (Reg._save.data.stars != null) {
+		if (Reg._save.data.stars != null)
+		{
 			_starRecord = _save.data.stars;
-		} else {
+		}
+		else
+		{
 			_starRecord = new Array<Int>();
 			for (i in 0...15)
+			{
 				_starRecord.push(0);
+			}
 			_save.data.stars = new Array();
 			_save.data.stars = _starRecord;
-
 			_save.flush();
 		}
 
@@ -93,7 +101,7 @@ class Reg
 		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 4, 3, 7, 12, 6, 1, 1, 6, 8, 3, 6, 11, 10, 2];
 
 		// *** UNCOMMENT THIS LINE TO RESET UNLOCKED TO 1
-		// _numUnlockedLevels = 20;
+		 _numUnlockedLevels = 20;
 	}
 
 	public static function wasSuccessfulFinish():Bool
@@ -123,11 +131,11 @@ class Reg
 
 	public static function grabKey():Void
 	{
-		key = true;	
+		key = true;
 	}
 
 	// Save new player progression
-	public static function unlockLevel(levelNumToUnlock:Int):Void 
+	public static function unlockLevel(levelNumToUnlock:Int):Void
 	{
 		if (levelNumToUnlock > _numUnlockedLevels) {
 			_numUnlockedLevels = levelNumToUnlock;
@@ -136,7 +144,7 @@ class Reg
     	}
 	}
 
-	public static function getCurrentLevel():Int 
+	public static function getCurrentLevel():Int
 	{
 		return _currentLevelNum;
 	}
@@ -146,10 +154,10 @@ class Reg
 		return _numUnlockedLevels;
 	}
 
-	public static function islevelUnlocked(queryLevel:Int):Bool 
+	public static function islevelUnlocked(queryLevel:Int):Bool
 	{
 		return queryLevel <= _numUnlockedLevels;
-	}	
+	}
 
 	public static function updateCurrentLevel(newLevelNum:Int):Void
 	{
@@ -171,9 +179,9 @@ class Reg
 		return _minSwaps[level];
 	}
 
-	public static function setStars(level:Int, newStars:Int):Void 
+	public static function setStars(level:Int, newStars:Int):Void
 	{
-		if (newStars > _starRecord[level]) 
+		if (newStars > _starRecord[level])
 		{
 			_starRecord[level] = newStars;
 			_save.data.stars[level] = newStars;
@@ -181,7 +189,7 @@ class Reg
     	}
 	}
 
-	public static function getStars(level:Int):Int 
+	public static function getStars(level:Int):Int
 	{
 		return _starRecord[level];
 	}

@@ -11,16 +11,16 @@ import flixel.tweens.*;
 
 class Player extends FlxSprite
 {
-	private var _upFactor:Float = 10;
+	private var _upFactor:Float = 11;
 	private var _moveStrength:Float = 3800;
 	private var _swimStrength:Float = 40;
-	private var _gravity:Float = 1500;
+	private var _gravity:Float = 1300;
 	private var _inAirFactor:Float = 1 / 10;
-	private var _waterDrag:Float = 20;
+	private var _waterDrag:Float = 25;
 	private var _airDrag:Float = 2.5;
 	private var _floorDrag:Float = 15;
 
-	
+
 	private var _inWater:Bool = false;
 	private var _fanXForce:Float = 0;
 	private var _fanYForce:Float = 0;
@@ -45,7 +45,7 @@ class Player extends FlxSprite
 	{
 		_inWater = water;
 	}
-	
+
 	override public function update(elapsed:Float):Void
 	{
 		acceleration.x = 0;
@@ -55,7 +55,7 @@ class Player extends FlxSprite
 		_fanXForce = 0;
 		_fanYForce = 0;
 		applyVerticalForce(_gravity);
-		
+
 		// Animation: make sure player do not jump on ground
 		if(!isTouching(FlxObject.FLOOR)) {
 			facing = FlxObject.UP;
@@ -68,7 +68,7 @@ class Player extends FlxSprite
 		{
 			if (isTouching(FlxObject.FLOOR))
 			{
-				applyVerticalForce(-_moveStrength * _upFactor); 
+				applyVerticalForce(-_moveStrength * _upFactor);
 			}
 			else
 			{
@@ -76,7 +76,7 @@ class Player extends FlxSprite
 			}
 		}
 
-		if (FlxG.keys.anyPressed([RIGHT, D]))	
+		if (FlxG.keys.anyPressed([RIGHT, D]))
 		{
 			// Animation: Facing Right if on ground
 			if (isTouching(FlxObject.FLOOR))
@@ -86,36 +86,36 @@ class Player extends FlxSprite
 			{
 				applyHorizontalForce(_moveStrength);
 			}
-			else 
+			else
 			{
 				applyHorizontalForce(_moveStrength * _inAirFactor);
 			}
-		}	
+		}
 
 		if (FlxG.keys.anyPressed([LEFT, A]))
 		{
 			// Animation: Facing Left if on ground
 			if (isTouching(FlxObject.FLOOR))
-				facing = FlxObject.LEFT;		
+				facing = FlxObject.LEFT;
 
 			if (_inWater || isTouching(FlxObject.FLOOR))
 			{
 				applyHorizontalForce(-_moveStrength);
 			}
-			else 
+			else
 			{
 				applyHorizontalForce(-_moveStrength * _inAirFactor);
 			}
 		}
 
 		if (_inWater)
-		{	
+		{
 			// swim up
 			if (FlxG.keys.anyPressed([UP, W, SPACE]))
 			{
 				if (-velocity.y < _gravity)
 				{
-					applyVerticalForce(-_swimStrength * _upFactor -_gravity); 
+					applyVerticalForce(-_swimStrength * _upFactor -_gravity);
 				}
 			}
 			else
@@ -131,9 +131,9 @@ class Player extends FlxSprite
 				applyHorizontalForce(-_floorDrag * velocity.x);
 			}
 		}
-	
+
 		// Animation: swtich animation
-		switch (facing) 
+		switch (facing)
 		{
 			case FlxObject.UP:
 				animation.play("jump");
@@ -149,13 +149,13 @@ class Player extends FlxSprite
 	{
 		switch (_dir) {
 			case 0:
-				_fanYForce -= _force / Math.sqrt(_distance); 
+				_fanYForce -= _force / Math.sqrt(_distance);
 			case 1:
-				_fanXForce +=  _force / Math.sqrt(_distance); 
+				_fanXForce +=  _force / Math.sqrt(_distance);
 			case 2:
-				_fanYForce += _force / Math.sqrt(_distance); 
+				_fanYForce += _force / Math.sqrt(_distance);
 			case 3:
-				_fanXForce -= _force / Math.sqrt(_distance); 
+				_fanXForce -= _force / Math.sqrt(_distance);
 		}
 	}
 
@@ -168,13 +168,13 @@ class Player extends FlxSprite
 	{
 		acceleration.x += _force;
 	}
-	
-	override public function kill():Void 
+
+	override public function kill():Void
 	{
 		FlxTween.tween(this, { alpha: 0, y: y - 20 }, 2.0, { ease: FlxEase.circOut, onComplete: finishKill});
 	}
 
-	private function finishKill(_):Void 
+	private function finishKill(_):Void
 	{
 		exists = false;
 	}

@@ -23,9 +23,9 @@ class Main extends Sprite
 		var categoryId:Int = 3;
 
 		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, 1, true);
-	
+
 		var userId:String = Main.LOGGER.getSavedUserId();
-		if (userId == null) 
+		if (userId == null)
 		{
 			userId = Main.LOGGER.generateUuid();
 			Main.LOGGER.setSavedUserId(userId);
@@ -36,10 +36,8 @@ class Main extends Sprite
 		Reg.initSave();
 	}
 
-	private function onSessionReady(sessionRecieved:Bool):Void 
+	private function onSessionReady(sessionRecieved:Bool):Void
 	{
-		//addChild(new FlxGame(720, 720, SplashScreenState));
-		//addChild(new FlxGame(800, 736, SplashScreenState));
 		addChild(new FlxGame(736, 640, LevelSelectState));
 	}
 }

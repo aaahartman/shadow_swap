@@ -37,15 +37,15 @@ class Reg
 						/* 9 */						AssetPaths._l10__oel,
 						/* 10 */					AssetPaths._l11__oel,
 						/* 11 */					AssetPaths._l12__oel,
-						/* 12 */					AssetPaths._l13__oel,
-						/* 13 */					AssetPaths._l14__oel,
+						/* 12 */					AssetPaths._l14__oel,
+						/* 13 */					AssetPaths._l13__oel,
 						/* 14 */					AssetPaths._l15__oel,
-						/* 15 */					AssetPaths.fan_playground__oel,
-						/* 16 */					AssetPaths._l17__oel,
-						/* 17 */					AssetPaths._l18__oel,
-						/* 18 */					AssetPaths._l19__oel,
-						/* 19 */					AssetPaths._l20__oel,
-						/* 20 */					AssetPaths.hard_lvl__oel
+						/* 15 */					AssetPaths.fan_backup__oel,
+						/* 16 */					AssetPaths._l16__oel,
+						/* 17 */					AssetPaths._l17__oel,
+						/* 18 */					AssetPaths._l18__oel,
+						/* 19 */					AssetPaths._l19__oel,
+						/* 20 */					AssetPaths._l20__oel
 												];
 
 	public static function getLevel(_levelIndex):Dynamic
@@ -90,7 +90,7 @@ class Reg
 
 		// Initialize the minimun swaps of all levels
 		_minSwaps = new Array<Int>();
-		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 0, 3, 7, 0, 2, 1, 6, 6, 0, 0, 8, 10, 10];
+		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 4, 3, 7, 12, 6, 1, 1, 6, 8, 3, 6, 11, 10, 2];
 
 		// *** UNCOMMENT THIS LINE TO RESET UNLOCKED TO 1
 		// _numUnlockedLevels = 20;

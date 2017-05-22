@@ -17,7 +17,7 @@ class LevelExitState extends FlxState
 		var _minSwap:Int = Reg.getMinSwap(_level);
 
 
-		if (_success) 
+		if (_success)
 		{
 			Main.LOGGER.logLevelEnd({won: true});
 			if (!Reg.islevelUnlocked(Reg.getCurrentLevel() + 1))
@@ -37,20 +37,20 @@ class LevelExitState extends FlxState
 		{
 			_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
 			Reg.setStars(_level, 3);
-		} 
-		else if (_numSwap <= _minSwap + 3) 
+		}
+		else if (_numSwap <= _minSwap + 3)
 		{
 			_star.loadGraphic(AssetPaths.Stars2__png, false, 70, 20);
 			Reg.setStars(_level, 2);
 		}
-		else 
+		else
 		{
 			_star.loadGraphic(AssetPaths.Stars1__png, false, 70, 20);
 			Reg.setStars(_level, 1);
 		}
-		if (!_success) 
+		if (!_success)
 		{
-			_star.alpha = 0.5;
+			_star.alpha = 0.2;
 		}
 		add(_star);
 
@@ -86,7 +86,7 @@ class LevelExitState extends FlxState
 		_nxtBtn.screenCenter();
 		_nxtBtn.x += 100;
 
-		if (!_success) 
+		if (!_success)
 		{
 			_nxtBtn.active = false;
 			_nxtBtn.alpha = 0.5;
@@ -130,11 +130,11 @@ class LevelExitState extends FlxState
 	}
 
 	private function nxt():Void
-	{	
+	{
 
 		if (Reg.getCurrentLevel() == Reg.numberOfLevels()) {
 			FlxG.switchState(new EndCredit());
-		} 
+		}
 
 		Reg.updateCurrentLevel(Reg.getCurrentLevel() + 1);
 		FlxG.switchState(new PlayState());
@@ -142,7 +142,7 @@ class LevelExitState extends FlxState
 	}
 
 	private function lvl():Void
-	{		
+	{
 	    FlxG.switchState(new LevelSelectState());
-	}	
+	}
 }

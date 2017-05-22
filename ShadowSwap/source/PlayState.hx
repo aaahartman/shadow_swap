@@ -412,7 +412,11 @@ class PlayState extends FlxState
 
 	private function dropGate(Timer:FlxTimer):Void 
 	{
-		_openGates.pop().dropGate();
+		var gate:Gate = _openGates.pop();
+		if (gate != null)
+		{
+			gate.dropGate();
+		}
 	}
 
 	private function onSwitch(S:FlxObject, P:FlxObject):Void 

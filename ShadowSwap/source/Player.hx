@@ -59,6 +59,10 @@ class Player extends FlxSprite
 		// Animation: make sure player do not jump on ground
 		if(!isTouching(FlxObject.FLOOR)) {
 			facing = FlxObject.UP;
+		} else if (velocity.x > 0) {
+			facing = FlxObject.RIGHT;
+		} else if (velocity.x < 0) {
+			facing = FlxObject.LEFT;
 		} else {
 			facing = FlxObject.DOWN;
 		}
@@ -79,8 +83,8 @@ class Player extends FlxSprite
 		if (FlxG.keys.anyPressed([RIGHT, D]))
 		{
 			// Animation: Facing Right if on ground
-			if (isTouching(FlxObject.FLOOR))
-				facing = FlxObject.RIGHT;
+			//if (isTouching(FlxObject.FLOOR))
+				//facing = FlxObject.RIGHT;
 
 			if (_inWater || isTouching(FlxObject.FLOOR))
 			{
@@ -95,8 +99,8 @@ class Player extends FlxSprite
 		if (FlxG.keys.anyPressed([LEFT, A]))
 		{
 			// Animation: Facing Left if on ground
-			if (isTouching(FlxObject.FLOOR))
-				facing = FlxObject.LEFT;
+			//if (isTouching(FlxObject.FLOOR))
+				//facing = FlxObject.LEFT;
 
 			if (_inWater || isTouching(FlxObject.FLOOR))
 			{

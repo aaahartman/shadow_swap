@@ -385,10 +385,17 @@ class PlayState extends FlxState
 	{
 		if (Reg.playerHasKey())
 		{
-			Reg.logSuccessfulFinish();
-			_door.openDoor();
-			Reg.setNumSwap(_numSwap);
-			FlxG.switchState(new LevelExitState());
+
+			// If the last level (20), switch to end credit
+			if (Reg.getCurrentLevel() == 20) {
+				FlxG.switchState(new EndCredit());
+			}
+			else {
+				Reg.logSuccessfulFinish();
+				_door.openDoor();
+				Reg.setNumSwap(_numSwap);
+				FlxG.switchState(new LevelExitState());
+			}
 		}
 	}
 

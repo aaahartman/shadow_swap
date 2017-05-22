@@ -93,7 +93,7 @@ class Reg
 		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 4, 3, 7, 12, 6, 1, 1, 6, 3, 8, 3, 6, 11, 10];
 
 		// *** UNCOMMENT THIS LINE TO RESET UNLOCKED TO 1
-		// _numUnlockedLevels = 20;
+		 _numUnlockedLevels = 20;
 	}
 
 	public static function wasSuccessfulFinish():Bool

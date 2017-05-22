@@ -54,6 +54,13 @@ class LevelExitState extends FlxState
 		}
 		add(_star);
 
+
+		// If the last level (20), switch to end credit
+		if (Reg.getCurrentLevel() == 20) {
+			FlxG.switchState(new EndCredit());
+		}
+
+
 		// Congratulation Text
 		var _text:FlxText = new FlxText(0, 0, 0, "Level " + Reg.getCurrentLevel() + " failed!", 40);
 		if (_success)

@@ -33,7 +33,12 @@ class LevelExitState extends FlxState
 		_star.screenCenter();
 		_star.y -= 100;
 		_star.x -= 35;
-		if (_numSwap <= _minSwap)
+		if (!_success)
+		{
+			_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+			//_star.alpha = 0.2;
+		}
+		else if (_numSwap <= _minSwap)
 		{
 			_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
 			Reg.setStars(_level, 3);
@@ -48,17 +53,7 @@ class LevelExitState extends FlxState
 			_star.loadGraphic(AssetPaths.Stars1__png, false, 70, 20);
 			Reg.setStars(_level, 1);
 		}
-		if (!_success)
-		{
-			_star.alpha = 0.2;
-		}
 		add(_star);
-
-
-		// If the last level (20), switch to end credit
-		if (Reg.getCurrentLevel() == 20) {
-			FlxG.switchState(new EndCredit());
-		}
 
 
 		// Congratulation Text

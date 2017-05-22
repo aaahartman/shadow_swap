@@ -63,7 +63,7 @@ class Player extends FlxSprite
 			facing = FlxObject.DOWN;
 		}
 
-		// water behavior will be handled below
+		// jump
 		if (!_inWater && FlxG.keys.anyJustPressed([UP, W, SPACE]))
 		{
 			if (isTouching(FlxObject.FLOOR))
@@ -123,6 +123,13 @@ class Player extends FlxSprite
 				applyVerticalForce(-_waterDrag * velocity.y);
 			}
 			applyHorizontalForce(-_waterDrag * velocity.x);
+
+			// facing direction in water
+			if(velocity.x > 0)
+				facing = FlxObject.RIGHT;
+			else
+				facing = FlxObject.LEFT;
+
 		} else {
 			applyVerticalForce(-_airDrag * velocity.y);
 			applyHorizontalForce(-_airDrag * velocity.x);

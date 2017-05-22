@@ -385,7 +385,6 @@ class PlayState extends FlxState
 	{
 		if (Reg.playerHasKey())
 		{
-
 			// If the last level (20), switch to end credit
 			if (Reg.getCurrentLevel() == 20) {
 				FlxG.switchState(new EndCredit());

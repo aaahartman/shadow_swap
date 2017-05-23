@@ -19,10 +19,12 @@ class Main extends Sprite
 		/* CategoryId: 1 = Debug
 					   2 = Family/Friend Release
 					   3 = Public Release
+					   5 = 5/22 Release
 		*/
-		var categoryId:Int = 3;
 
-		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, 1, true);
+		var categoryId:Int = 1;
+
+		Main.LOGGER = new CapstoneLogger(gameId, gameName, gameKey, categoryId, 1, false);
 
 		var userId:String = Main.LOGGER.getSavedUserId();
 		if (userId == null)

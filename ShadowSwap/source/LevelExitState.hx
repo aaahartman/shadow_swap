@@ -8,7 +8,6 @@ import flixel.text.FlxText;
 
 class LevelExitState extends FlxState
 {
-
 	override public function create():Void
 	{
 		var _success:Bool = Reg.wasSuccessfulFinish();
@@ -121,7 +120,8 @@ class LevelExitState extends FlxState
 		// If pressed "Enter", go to next level
 		if (FlxG.keys.justPressed.ENTER)
 		{
-			nxt();
+			if(Reg.wasSuccessfulFinish())
+				nxt();
 		}
 	}
 
@@ -133,14 +133,8 @@ class LevelExitState extends FlxState
 
 	private function nxt():Void
 	{
-
-		if (Reg.getCurrentLevel() == Reg.numberOfLevels()) {
-			FlxG.switchState(new EndCredit());
-		}
-
 		Reg.updateCurrentLevel(Reg.getCurrentLevel() + 1);
 		FlxG.switchState(new PlayState());
-
 	}
 
 	private function lvl():Void

@@ -141,6 +141,11 @@ class Reg
 		return _currentLevelNum;
 	}
 
+	public static function setCurrentLevel(level:Int):Void
+	{
+		_currentLevelNum = level;
+	}
+
 	public static function getNumUnlockedLevels():Int
 	{
 		return _numUnlockedLevels;

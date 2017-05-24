@@ -12,6 +12,9 @@ class Main extends Sprite
 	{
 		super();
 
+		// Initialize Save Object in Registry
+		Reg.initSave();
+
 		var gameId:Int = 1707;
 		var gameKey:String = "68d2c16258bd3ea03c65f901196531eb";
 		var gameName:String = "shadowswap";
@@ -20,6 +23,7 @@ class Main extends Sprite
 					   2 = Family/Friend Release
 					   3 = Public Release
 					   5 = 5/22 Release
+					   6 = 5/23 Release
 		*/
 
 		var categoryId:Int = 1;
@@ -33,13 +37,12 @@ class Main extends Sprite
 			Main.LOGGER.setSavedUserId(userId);
 		}
 		Main.LOGGER.startNewSession(userId, this.onSessionReady);
-
-		// Initialize Save Object in Registry
-		Reg.initSave();
 	}
 
 	private function onSessionReady(sessionRecieved:Bool):Void
 	{
-		addChild(new FlxGame(736, 640, LevelSelectState));
+		// Start the game with lv1 for now
+		Reg.setCurrentLevel(1);
+		addChild(new FlxGame(736, 640, PlayState));
 	}
 }

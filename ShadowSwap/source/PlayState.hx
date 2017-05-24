@@ -86,8 +86,6 @@ class PlayState extends FlxState
 		_countDownText = new FlxText(_mWalls.width / 2 - 32, _mWalls.height / 2, FlxG.width, "", 64);
 		_countDownText.systemFont = "Arial Black";
 
-		// Initialize winning and losing display
-
 		// Initialize all entities
 		_player = new Player();
 		_shadow = new Shadow();
@@ -128,6 +126,12 @@ class PlayState extends FlxState
 		if (_hint != null)
 		{
 			add(_hint);
+		}
+
+		if (Reg.getCurrentLevel() == 1) {
+			var _welcomeText = new FlxText(_mWalls.width / 2 - 200, 100, FlxG.width, "Welcome to Shadow Swap!", 25);
+			//_welcomeText.systemFont = "Arial Black";
+			add(_welcomeText);
 		}
 
 		Reg.resetKey();

@@ -42,10 +42,17 @@ class LevelExitState extends FlxState
 		{
 			_counter = _numSwap;
 		}
-		_swapText = new FlxText(0, 0, 0, "Swap Used: " + _counter, 20);
+
+		_swapText = new FlxText(0, 0, 0, "" + _counter, 30);
 		_swapText.systemFont = "Arial Black";
 		_swapText.screenCenter();
+		_swapText.x += 20;
 		_swapText.y -= 150;
+
+		var _swapSign =  new FlxSprite(_swapText.x - 40, _swapText.y + 19);
+		_swapSign.loadGraphic(AssetPaths.Hint_S__png, true, 32, 15);
+		_swapSign.scale.x = 1.5;
+		_swapSign.scale.y = 1.5;
 
 		// Player can earn 1-3 stars upon completion of a level
 		_star = new FlxSprite(50, 50);
@@ -113,6 +120,7 @@ class LevelExitState extends FlxState
   		add(_nxtBtn);
   		add(_replayBtn);
  		add(_text);
+		add(_swapSign);
  		add(_swapText);
 
 		super.create();
@@ -164,7 +172,7 @@ class LevelExitState extends FlxState
 
 		if (_counter > _loop) 
 		{
-		    _swapText.text = "Swap Used: " + _counter;
+		    _swapText.text = ": " + _counter;
 		    _counter --;
 		}
 		else
@@ -178,7 +186,7 @@ class LevelExitState extends FlxState
 					showTwoStars();
 				}
 				else {
-					_swapText.text = "Swap Used: " + _counter;
+					_swapText.text = ": " + _counter;
 				}
 			}
 			else if (_curStars == 2)
@@ -189,11 +197,11 @@ class LevelExitState extends FlxState
 				}
 				else 
 				{
-					_swapText.text = "Swap Used: " + _counter;
+					_swapText.text = ": " + _counter;
 				}
 			}
 			else if (_curStars == 3) {
-				_swapText.text = "Swap Used: " + _counter;
+				_swapText.text = ": " + _counter;
 				_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
 			}
 		}

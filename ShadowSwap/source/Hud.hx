@@ -17,6 +17,7 @@ class HUD extends FlxTypedGroup<FlxSprite>
 	private var textLevel:FlxText;
 	private var textKey:FlxText;
 	private var keySlot:FlxSprite;
+	private var swapSign:FlxSprite;
 	private var reset:FlxButton;
 	private var levelMenu:FlxButton;
 	private var swaps:Int;
@@ -41,13 +42,16 @@ class HUD extends FlxTypedGroup<FlxSprite>
 		keySlot = new FlxSprite(textLevel.width + 50 + textKey.width, 10);
 		keySlot.makeGraphic(8, 8, FlxColor.BLACK);
 
+		swapSign = new FlxSprite(textLevel.width + 125 + textKey.width + keySlot.width, 10);
+		swapSign.loadGraphic(AssetPaths.Hint_S__png, true, 32, 15);
+
 		// numebr of swaps
 		swaps = 0;
-		textSwaps = new FlxText(textLevel.width + 125 + textKey.width + keySlot.width, 0, 0, "" + swaps, 21);
+		textSwaps = new FlxText(textLevel.width + 160 + textKey.width + keySlot.width, 0, 0, "" + swaps, 21);
 		textSwaps.systemFont = "Arial Black";
 
 		// Reset Button
-		var offset = textLevel.width + 100 + textKey.width + keySlot.width + textSwaps.width + 100;
+		var offset = textLevel.width + 125 + textKey.width + keySlot.width + textSwaps.width + 100;
 		reset = new FlxButton(offset, 2, "", resetState);
 		reset.loadGraphic(AssetPaths.Reset__png, true, 50, 30);
 
@@ -59,6 +63,7 @@ class HUD extends FlxTypedGroup<FlxSprite>
 		add(textLevel);
 		add(textKey);
 		add(keySlot);
+		add(swapSign);
 		add(textSwaps);
 		add(reset);
 		add(levelMenu);

@@ -38,7 +38,7 @@
     <glass id="18" x="64" y="288" _id="1" _on="False" />
     <glass id="19" x="64" y="320" _id="1" _on="False" />
     <glass id="20" x="32" y="320" _id="1" _on="False" />
-    <switch id="3" x="352" y="128" _id="1" _on="False" _fan="False" />
+    <switch id="3" x="320" y="128" _id="1" _on="False" _fan="False" />
     <glass id="23" x="320" y="448" _id="2" _on="False" />
     <glass id="24" x="288" y="448" _id="2" _on="False" />
     <glass id="25" x="288" y="480" _id="2" _on="False" />

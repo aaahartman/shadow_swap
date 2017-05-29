@@ -43,7 +43,7 @@ class LevelExitState extends FlxState
 			_counter = _numSwap;
 		}
 
-		_swapText = new FlxText(0, 0, 0, "" + _counter, 30);
+		_swapText = new FlxText(0, 0, 0, ": " + _counter, 30);
 		_swapText.systemFont = "Arial Black";
 		_swapText.screenCenter();
 		_swapText.x += 20;
@@ -64,6 +64,7 @@ class LevelExitState extends FlxState
 		if (!_success)
 		{
 			_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+			_swapText.text = ": " + _numSwap;
 			//_star.alpha = 0.2;
 		}
 		else {

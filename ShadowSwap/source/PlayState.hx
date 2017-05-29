@@ -267,7 +267,7 @@ class PlayState extends FlxState
 
 			// update local number swaps
 			_numSwap++;
-
+			_hud.setSwap(_numSwap);
 			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_SWAP);
 		}
 

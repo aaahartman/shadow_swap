@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxState;
+import flixel.util.FlxTimer;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.ui.FlxButton;
@@ -8,13 +9,20 @@ import flixel.text.FlxText;
 
 class LevelExitState extends FlxState
 {
+	private var _star:FlxSprite;
+	private var _swapText:FlxText;
+	private var _numSwap:Int;
+	private var _minSwap:Int;
+	private var _counter:Int;
+	private var _loop:Int;
+	private var _curStars:Int;
+	private var _numStars:Int;
 	override public function create():Void
 	{
-		var _success:Bool = Reg.wasSuccessfulFinish();
 		var _level:Int = Reg.getCurrentLevel();
-		var _numSwap:Int = Reg.getNumSwap();
-		var _minSwap:Int = Reg.getMinSwap(_level);
-
+		var _success:Bool = Reg.wasSuccessfulFinish();
+		_numSwap = Reg.getNumSwap();
+		_minSwap = Reg.getMinSwap(_level);
 
 		if (_success)
 		{
@@ -25,8 +33,22 @@ class LevelExitState extends FlxState
 			}
 		}
 
+		// Number of Swaps Text
+		if (_success) 
+		{
+			_counter = _numSwap + 30;
+		}
+		else
+		{
+			_counter = _numSwap;
+		}
+		_swapText = new FlxText(0, 0, 0, "Swap Used: " + _counter, 20);
+		_swapText.systemFont = "Arial Black";
+		_swapText.screenCenter();
+		_swapText.y -= 150;
+
 		// Player can earn 1-3 stars upon completion of a level
-		var _star = new FlxSprite(50, 50);
+		_star = new FlxSprite(50, 50);
 		_star.scale.x = 2;
 		_star.scale.y = 2;
 		_star.screenCenter();
@@ -37,23 +59,23 @@ class LevelExitState extends FlxState
 			_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
 			//_star.alpha = 0.2;
 		}
-		else if (_numSwap <= _minSwap)
-		{
-			_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
-			Reg.setStars(_level, 3);
-		}
-		else if (_numSwap <= _minSwap + 3)
-		{
-			_star.loadGraphic(AssetPaths.Stars2__png, false, 70, 20);
-			Reg.setStars(_level, 2);
-		}
-		else
-		{
-			_star.loadGraphic(AssetPaths.Stars1__png, false, 70, 20);
-			Reg.setStars(_level, 1);
+		else {
+			if (_numSwap <= _minSwap)
+			{
+				_numStars = 3;
+			}	
+			else if (_numSwap <= _minSwap + 3)
+			{
+				_numStars = 2;
+			}
+			else
+			{
+				_numStars = 1;
+			}
+			Reg.setStars(_level, _numStars);
+			showOneStar();
 		}
 		add(_star);
-
 
 		// Congratulation Text
 		var _text:FlxText = new FlxText(0, 0, 0, "Level " + Reg.getCurrentLevel() + " failed!", 40);
@@ -64,12 +86,6 @@ class LevelExitState extends FlxState
 		_text.systemFont = "Arial Black";
 		_text.screenCenter();
 		_text.y -= 200;
-
-		// Number of Swaps Text
-		var _swapText:FlxText = new FlxText(0, 0, 0, "Swap Used: " + _numSwap, 20);
-		_swapText.systemFont = "Arial Black";
-		_swapText.screenCenter();
-		_swapText.y -= 150;
 
 		// Level Menu Button
 		var _lvlBtn:FlxButton = new FlxButton(0, 0, "", lvl);
@@ -140,5 +156,80 @@ class LevelExitState extends FlxState
 	private function lvl():Void
 	{
 	    FlxG.switchState(new LevelSelectState());
+	}
+
+	// count down function used for star animation & count down number of swaps
+	private function countDown(timer:FlxTimer):Void
+	{		    
+
+		if (_counter > _loop) 
+		{
+		    _swapText.text = "Swap Used: " + _counter;
+		    _counter --;
+		}
+		else
+		{
+			timer.cancel();
+			_curStars++;
+			if (_curStars == 1)
+			{
+				_star.loadGraphic(AssetPaths.Stars1__png, false, 70, 20);
+				if (_numStars > 1) {
+					showTwoStars();
+				}
+				else {
+					_swapText.text = "Swap Used: " + _counter;
+				}
+			}
+			else if (_curStars == 2)
+			{
+				_star.loadGraphic(AssetPaths.Stars2__png, false, 70, 20);
+				if (_numStars > 2) {
+					showThreeStars();
+				}
+				else 
+				{
+					_swapText.text = "Swap Used: " + _counter;
+				}
+			}
+			else if (_curStars == 3) {
+				_swapText.text = "Swap Used: " + _counter;
+				_star.loadGraphic(AssetPaths.Stars3__png, false, 70, 20);
+			}
+		}
+	}
+
+	private function showOneStar():Void
+	{
+		_star.loadGraphic(AssetPaths.Stars0__png, false, 70, 20);
+		_curStars = 0;
+		if (_minSwap + 3 > _numSwap)
+		{
+			_loop = _minSwap + 3;
+		}
+		else
+		{
+			_loop = _numSwap;
+		}
+		new FlxTimer().start(0.001, countDown, 0);
+	}
+
+	private function showTwoStars():Void
+	{
+		if (_minSwap > _numSwap)
+		{
+			_loop = _minSwap;
+		}
+		else
+		{
+			_loop = _numSwap;
+		}
+		new FlxTimer().start(0.1, countDown, 0);
+	}
+
+	private function showThreeStars():Void
+	{
+		_loop = _numSwap;
+		new FlxTimer().start(0.3, countDown, 0);
 	}
 }

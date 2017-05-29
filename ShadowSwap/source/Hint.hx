@@ -24,10 +24,10 @@ class Hint extends FlxSprite
 	public function SwapHint():Void 
 	{
 		//makeGraphic(32, 20, FlxColor.WHITE);
-		loadGraphic(AssetPaths.Hint_S__png, true, 32, 22);
-		scale.x = 1.5;
-		scale.y = 1.5;
-		animation.add("flash", [0, 1], 1, true);
+		loadGraphic(AssetPaths.Hint_S__png, true, 32, 15);
+		scale.x = 2;
+		scale.y = 2;
+		animation.add("flash", [0, 1], 2, true);
 		animation.play("flash");
 	}
 

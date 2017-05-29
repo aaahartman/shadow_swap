@@ -22,7 +22,6 @@
   <entities>
     <player id="0" x="64" y="128" />
     <shadow id="1" x="32" y="128" />
-    <gate_vertical id="2" x="288" y="64" _id="0" />
     <door id="4" x="608" y="96" />
     <gate_horizontal id="5" x="448" y="128" _id="4" />
     <glass id="6" x="32" y="448" _id="0" _on="True" />
@@ -35,7 +34,6 @@
     <button id="14" x="256" y="416" _id="1" />
     <button id="15" x="192" y="576" _id="3" />
     <gate_vertical id="16" x="256" y="512" _id="1" />
-    <button id="13" x="192" y="256" _id="0" />
     <glass id="17" x="32" y="288" _id="1" _on="False" />
     <glass id="18" x="64" y="288" _id="1" _on="False" />
     <glass id="19" x="64" y="320" _id="1" _on="False" />

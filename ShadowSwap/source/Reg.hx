@@ -34,8 +34,8 @@ class Reg
 						/* 6 */						AssetPaths._l6__oel,
 						/* 7 */						AssetPaths._l7__oel,
 						/* 8 */						AssetPaths._l9__oel,
-						/* 9 */						AssetPaths._l10__oel,
-						/* 10 */					AssetPaths._l11__oel,
+						/* 9 */						AssetPaths._l11__oel,
+						/* 10 */					AssetPaths._l10__oel,
 						/* 11 */					AssetPaths._l12__oel,
 						/* 12 */					AssetPaths._l14__oel,
 						/* 13 */					AssetPaths._l13__oel,
@@ -90,7 +90,7 @@ class Reg
 
 		// Initialize the minimun swaps of all levels
 		_minSwaps = new Array<Int>();
-		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 4, 3, 7, 12, 6, 1, 1, 6, 3, 8, 3, 6, 11, 10];
+		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 4, 3, 12, 5, 6, 1, 1, 6, 3, 8, 3, 6, 11, 10];
 
 		// *** UNCOMMENT THIS LINE TO RESET UNLOCKED TO 1
 		//_numUnlockedLevels = 20;

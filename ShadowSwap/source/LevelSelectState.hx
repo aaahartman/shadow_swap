@@ -8,6 +8,7 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 using flixel.util.FlxSpriteUtil;
 import flixel.group.FlxGroup;
+import flixel.FlxObject;
 
 class LevelSelectState extends FlxState
 {
@@ -163,10 +164,24 @@ class LevelSelectState extends FlxState
 			add(_star);		
 		}
 
-		var _text:FlxText = new FlxText(FlxG.width / 2 - 90, 50, FlxG.width, "Shadow Swap", 25);
+		var _text:FlxText = new FlxText(FlxG.width / 2 - 95, 70, FlxG.width, "Shadow Swap", 25);
 		_text.systemFont = "Arial Black";
 
+		var _shadow = new FlxSprite(FlxG.width / 2 + 62, 55);
+       	_shadow.loadGraphic(AssetPaths.Shadow3__png, false, 22, 32);
+       	_shadow.setFacingFlip(FlxObject.LEFT, true, false);
+       	_shadow.facing = FlxObject.LEFT;
+
+		var _credit:FlxText = new FlxText(0, 0, FlxG.width, "Created by: University of Washington Game Development Capstone Shadow Team 2017", 11);
+		_credit.systemFont = "Arial";
+		_credit.screenCenter();
+		_credit.y += 270;
+		_credit.x += 150;
+
+
+		add(_credit);
  		add(_text);
+ 		add(_shadow);
  		add(_btns);
 		super.create();
 	}

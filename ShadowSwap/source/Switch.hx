@@ -54,7 +54,7 @@ class Switch extends FlxSprite
 	public function toggleSwitch():Void
 	{
 		_on = !_on;
-		Main.LOGGER.logLevelAction(LoggingActions.SWITCH_TOGGLE, {on : _on});
+		// Main.LOGGER.logLevelAction(LoggingActions.SWITCH_TOGGLE, {on : _on});
 
 		if(_on) 
 		{

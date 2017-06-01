@@ -138,7 +138,7 @@ class PlayState extends FlxState
 
 		super.create();
 
-		Main.LOGGER.logLevelStart(_levelNum, {"StartLevel": _levelNum});
+		// Main.LOGGER.logLevelStart(_levelNum, {"StartLevel": _levelNum});
 	}
 
 	private function placeEntities(entityName:String, entityData:Xml):Void
@@ -246,13 +246,13 @@ class PlayState extends FlxState
 	{
 		// If pressed "R", restart the game
 		if (FlxG.keys.justPressed.R) {
-			Main.LOGGER.logLevelAction(LoggingActions.CLICK_RESET, {level: _levelNum});
+			// Main.LOGGER.logLevelAction(LoggingActions.CLICK_RESET, {level: _levelNum});
 			FlxG.switchState(new PlayState());
 		}
 
 		// If pressed "M", return to level selection menu
 		if (FlxG.keys.justPressed.M) {
-			Main.LOGGER.logLevelAction(LoggingActions.CLICK_LEVELSELECTION, {level: _levelNum});
+			// Main.LOGGER.logLevelAction(LoggingActions.CLICK_LEVELSELECTION, {level: _levelNum});
 			FlxG.switchState(new LevelSelectState());
 		}
 
@@ -269,7 +269,7 @@ class PlayState extends FlxState
 			_numSwap++;
 			_hud.setSwap(_numSwap);
 			Reg.setNumSwap(_numSwap);
-			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_SWAP);
+			// Main.LOGGER.logLevelAction(LoggingActions.PLAYER_SWAP);
 		}
 
 		super.update(elapsed);
@@ -366,14 +366,14 @@ class PlayState extends FlxState
 	// Kill player by spike and restart the game.
 	private function spikeKillPlayer(S:FlxObject = null, P:FlxObject = null):Void
 	{
-			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {"SpikeLevel" : _levelNum});
+			// Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {"SpikeLevel" : _levelNum});
 			FlxG.switchState(new LevelExitState());
 	}
 
 	// Kill player by water and restart the game.
 	private function waterKillPlayer(S:FlxObject = null, P:FlxObject = null):Void
 	{
-			Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {"WaterLevel" : _levelNum});
+			// Main.LOGGER.logLevelAction(LoggingActions.PLAYER_DIE, {"WaterLevel" : _levelNum});
 			FlxG.switchState(new LevelExitState());
 	}
 

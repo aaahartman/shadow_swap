@@ -26,7 +26,7 @@ class LevelExitState extends FlxState
 
 		if (_success)
 		{
-			Main.LOGGER.logLevelEnd({won: true});
+			// Main.LOGGER.logLevelEnd({won: true});
 			if (!Reg.islevelUnlocked(Reg.getCurrentLevel() + 1))
 			{
 				Reg.unlockLevel(Reg.getCurrentLevel() + 1);

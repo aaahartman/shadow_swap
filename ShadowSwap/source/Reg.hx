@@ -73,8 +73,8 @@ class Reg
 		// Initialize Personal Swap Record (Level 0 does not exist)
 
 		// *** Uncomment these two lines to reset all stars to 0
-		//_save.data.stars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-		//_save.flush();
+		// _save.data.stars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+		// _save.flush();
 
 		if (Reg._save.data.stars != null) {
 			_starRecord = _save.data.stars;
@@ -93,7 +93,7 @@ class Reg
 		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 4, 3, 12, 5, 6, 1, 1, 6, 3, 8, 3, 6, 11, 10];
 
 		// *** UNCOMMENT THIS LINE TO RESET UNLOCKED TO 1
-		//_numUnlockedLevels = 20;
+		// _numUnlockedLevels = 1;
 	}
 
 	public static function wasSuccessfulFinish():Bool

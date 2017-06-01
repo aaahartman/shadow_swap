@@ -14,6 +14,6 @@ class Main extends Sprite
 
 		// Start the game with lv1 for now
 		Reg.setCurrentLevel(1);
-		addChild(new FlxGame(736, 640, PlayState));
+		addChild(new FlxGame(736, 640, PlayState, 1, 60, 60, true, false));
 	}
 }

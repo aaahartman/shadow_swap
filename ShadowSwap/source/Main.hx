@@ -24,6 +24,8 @@ class Main extends Sprite
 					   3 = Public Release
 					   5 = 5/22 Release
 					   6 = 5/23 Release
+					   7 = 5/28 Release
+					   8 = 6/2 Release
 		*/
 
 		var categoryId:Int = 1;
@@ -41,8 +43,9 @@ class Main extends Sprite
 
 	private function onSessionReady(sessionRecieved:Bool):Void
 	{
-		// Start the game with lv1 for now
-		Reg.setCurrentLevel(1);
+		// Start the game at the highest level solved
+		var level = Reg.getNumUnlockedLevels();
+		Reg.setCurrentLevel(level);
 		addChild(new FlxGame(736, 640, PlayState));
 	}
 }

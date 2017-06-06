@@ -70,6 +70,9 @@ class Reg
 		else 
 			_numUnlockedLevels = 1;
 
+		if (_numUnlockedLevels > 20)
+			_numUnlockedLevels = 20;
+
 		// Initialize Personal Swap Record (Level 0 does not exist)
 
 		// *** Uncomment these two lines to reset all stars to 0
@@ -90,7 +93,7 @@ class Reg
 
 		// Initialize the minimun swaps of all levels
 		_minSwaps = new Array<Int>();
-		_minSwaps = [0, 1, 1, 3, 5, 5, 2, 4, 3, 12, 5, 6, 1, 1, 6, 3, 8, 3, 6, 11, 10];
+		_minSwaps = [0, 1, 1, 3, 4, 5, 2, 4, 3, 8, 5, 5, 1, 1, 6, 3, 8, 3, 6, 11, 10];
 
 		// *** UNCOMMENT THIS LINE TO RESET UNLOCKED TO 1
 		// _numUnlockedLevels = 1;

@@ -12,8 +12,9 @@ class Main extends Sprite
 		// Initialize Save Object in Registry
 		Reg.initSave();
 
-		// Start the game with lv1 for now
-		Reg.setCurrentLevel(1);
+		// Start the game at the highest level solved
+ +		var level = Reg.getNumUnlockedLevels();
+ +		Reg.setCurrentLevel(level);
 		addChild(new FlxGame(736, 640, PlayState, 1, 60, 60, true, false));
 	}
 }
